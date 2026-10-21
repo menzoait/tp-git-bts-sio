@@ -1,0 +1,60 @@
+DOSSIER LOGOS
+=============
+
+Par défaut, le site affiche les logos des 36 clubs et les photos des joueurs comme matchendirect.fr :
+ils sont chargés depuis internet (file.mackolikfeeds.com, le serveur d'images de matchendirect,
+puis img.uefa.com en secours). Il faut donc ouvrir index.html dans un vrai navigateur (Edge, Chrome,
+Firefox) connecté à internet : l'aperçu de Claude bloque les images venant d'internet.
+Ce dossier sert à REMPLACER un logo par ton propre fichier : s'il existe, il est utilisé en priorité.
+Si aucune image n'est disponible (hors ligne), l'écusson de couleur avec les initiales reste affiché.
+
+Règles
+------
+- Format : .png (fond transparent conseillé) ou .svg
+- Nom du fichier : exactement celui de la liste ci-dessous, en minuscules
+- Taille conseillée : 200 x 200 pixels ou plus, logo carré ou rond
+- Le dossier "logos" doit rester à côté de index.html
+
+Exemple : logos/psg.png
+
+Liste des 36 clubs et des noms de fichiers attendus
+---------------------------------------------------
+PSG                  -> psg.png
+FC Barcelone         -> barcelone.png
+Aston Villa          -> aston-villa.png
+VfB Stuttgart        -> vfb-stuttgart.png
+Liverpool            -> liverpool.png
+Sporting CP          -> sporting-cp.png
+Arsenal              -> arsenal.png
+Real Madrid          -> real-madrid.png
+Betis Séville        -> betis-seville.png
+Bayern Munich        -> bayern-munich.png
+Shakhtar Donetsk     -> shakhtar-donetsk.png
+Como                 -> como.png
+Manchester United    -> manchester-united.png
+Villarreal           -> villarreal.png
+Atlético Madrid      -> atletico-madrid.png
+Club Bruges          -> club-bruges.png
+Manchester City      -> manchester-city.png
+Dortmund             -> dortmund.png
+RC Lens              -> rc-lens.png
+AEK Athènes          -> aek-athenes.png
+RB Leipzig           -> rb-leipzig.png
+Sabah                -> sabah.png
+Feyenoord            -> feyenoord.png
+Bodø/Glimt           -> bodo-glimt.png
+AS Rome              -> as-rome.png
+PSV Eindhoven        -> psv-eindhoven.png
+Viking               -> viking.png
+Fenerbahçe           -> fenerbahce.png
+Inter                -> inter.png
+FC Porto             -> fc-porto.png
+Slavia Prague        -> slavia-prague.png
+Naples               -> naples.png
+LASK Linz            -> lask-linz.png
+Lille                -> lille.png
+Galatasaray          -> galatasaray.png
+Slovan Bratislava    -> slovan-bratislava.png
+
+Remarque : les logos de clubs sont des marques protégées. Pour un projet de cours ou
+personnel, garde-les pour un usage privé et ne publie pas le site en ligne sans autorisation.
