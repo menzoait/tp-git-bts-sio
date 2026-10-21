@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calculateur de sous-réseaux IP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+[hidden]{display:none!important}
+/* Layout : une colonne de 680px — saisie, résumé CIDR, tableau des valeurs, puis vue binaire des 32 bits (bleu = réseau, ambre = hôte) */
+:root{
+  --bg:#EDF0F3;
+  --surface:#FFFFFF;
+  --fg:#18202B;
+  --muted:#5A6676;
+  --line:#D3D9E1;
+  --net:#1C58BE;
+  --net-soft:#DFE8F8;
+  --host:#A85A06;
+  --host-soft:#F6E8D6;
+  --danger:#B42318;
+  --font-display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --font-body:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10141A; --surface:#171D25; --fg:#E3E8EF; --muted:#93A0B1; --line:#29323E;
+    --net:#7DA9FF; --net-soft:#1B2943; --host:#F2A54E; --host-soft:#3A2815; --danger:#FF8F85;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10141A; --surface:#171D25; --fg:#E3E8EF; --muted:#93A0B1; --line:#29323E;
+  --net:#7DA9FF; --net-soft:#1B2943; --host:#F2A54E; --host-soft:#3A2815; --danger:#FF8F85;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.5}
+
+.wrap{
+  max-width:680px;margin:0 auto;
+  padding-block:36px 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:28px;
+}
+
+/* En-tête */
+.eyebrow{margin:0;font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--net)}
+h1{margin:4px 0 0;font-family:var(--font-display);font-weight:700;font-size:clamp(30px,7vw,42px);line-height:1.05;letter-spacing:-.01em;text-wrap:balance}
+.lede{margin:10px 0 0;color:var(--muted);max-width:56ch}
+
+/* Saisie */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:22px}
+.field{display:flex;flex-direction:column;gap:8px}
+.lab{font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+#ip{
+  font-family:var(--font-mono);font-size:22px;padding:10px 12px;width:100%;
+  border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);
+}
+#ip:focus-visible{outline:2px solid var(--net);outline-offset:1px;border-color:var(--net)}
+#ip[aria-invalid="true"]{border-color:var(--danger)}
+.hint{margin:0;font-size:14px;color:var(--muted)}
+.hint code{font-family:var(--font-mono);font-size:13px;color:var(--fg)}
+.err{margin:0;font-size:14px;color:var(--danger)}
+
+.prefix-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.stepper{display:flex;align-items:center;gap:6px}
+.stepper button{
+  width:36px;height:36px;border-radius:8px;border:1px solid var(--line);
+  background:transparent;color:var(--fg);font-size:20px;line-height:1;cursor:pointer;
+}
+.stepper button:hover{border-color:var(--net);color:var(--net)}
+#prefixOut{font-family:var(--font-mono);font-size:22px;font-weight:600;color:var(--net);min-width:3.4ch;text-align:center}
+#prefix{width:100%;margin:0;accent-color:var(--net)}
+.presets{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  font-family:var(--font-mono);font-size:14px;padding:6px 10px;border-radius:6px;
+  border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer;
+}
+.chip:hover{border-color:var(--net)}
+.chip[aria-pressed="true"]{background:var(--net-soft);border-color:var(--net);color:var(--net)}
+button:focus-visible{outline:2px solid var(--net);outline-offset:2px}
+
+/* Résultats */
+.results{display:flex;flex-direction:column;gap:28px}
+.results.stale{opacity:.4}
+@media (prefers-reduced-motion: no-preference){ .results{transition:opacity .15s ease} }
+
+.summary{display:flex;flex-direction:column;gap:6px}
+.summary .lab{font-size:14px}
+.cidr{margin:0;font-family:var(--font-mono);font-weight:600;font-size:clamp(28px,8vw,44px);line-height:1.1;overflow-wrap:anywhere}
+.cidr span{color:var(--net)}
+.range{margin:0;color:var(--muted)}
+.range b{font-family:var(--font-mono);font-weight:500;color:var(--fg)}
+
+.kv-grid{
+  margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  column-gap:28px;border-top:1px solid var(--line);
+}
+.kv{padding:12px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:2px;min-width:0}
+.kv dt{font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.kv dd{margin:0;font-family:var(--font-mono);font-size:17px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+
+/* Vue binaire */
+.bits h2{margin:0;font-family:var(--font-display);font-weight:700;font-size:22px}
+.legend{margin:6px 0 0;display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sw.n{background:var(--net)}
+.sw.h{background:var(--host)}
+.brows{margin-top:16px;display:flex;flex-direction:column;gap:16px;overflow-x:auto}
+.brow{display:grid;grid-template-columns:9.5rem 1fr;align-items:start;gap:12px}
+@media (max-width:560px){ .brow{grid-template-columns:1fr;gap:6px} }
+.blabel{font-size:14px;color:var(--muted);padding-top:2px}
+.blabel small{display:block;font-size:12px}
+.octets{display:flex;flex-wrap:wrap;gap:6px 10px;min-width:0}
+.oct{display:flex;flex-direction:column;align-items:center;gap:3px}
+.b{display:flex;font-family:var(--font-mono);font-size:clamp(11px,3.2vw,15px)}
+.b i{font-style:normal;padding:2px 1px;min-width:calc(1ch + 2px);text-align:center}
+.b i:first-child{border-radius:3px 0 0 3px}
+.b i:last-child{border-radius:0 3px 3px 0}
+.b i.n{background:var(--net-soft);color:var(--net)}
+.b i.h{background:var(--host-soft);color:var(--host)}
+.b i.cut{box-shadow:inset 2px 0 0 var(--fg)}
+.d{font-family:var(--font-mono);font-size:12px;color:var(--muted)}
+
+.note{margin:0;padding-top:16px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);max-width:62ch}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <p class="eyebrow">IPv4 · notation CIDR</p>
+    <h1>Calculateur de sous-réseaux</h1>
+    <p class="lede">Saisis une adresse IP et choisis le préfixe. Le réseau, le broadcast et la plage d'hôtes se mettent à jour pendant que tu tapes.</p>
+  </header>
+
+  <section class="panel" aria-label="Saisie">
+    <div class="field">
+      <label class="lab" for="ip">Adresse IP</label>
+      <input id="ip" type="text" inputmode="decimal" autocomplete="off" autocapitalize="off" spellcheck="false" value="192.168.10.37" aria-describedby="hint err">
+      <p class="err" id="err" hidden>Adresse invalide. Écris 4 nombres de 0 à 255 séparés par des points, par exemple 192.168.1.10.</p>
+      <p class="hint" id="hint">Exemple chargé : <code>192.168.10.37</code> en /26. Tu peux aussi coller une notation complète comme <code>10.0.0.5/8</code>.</p>
+    </div>
+
+    <div class="field">
+      <div class="prefix-head">
+        <label class="lab" for="prefix">Préfixe</label>
+        <div class="stepper">
+          <button type="button" id="dec" aria-label="Diminuer le préfixe">−</button>
+          <output id="prefixOut" for="prefix">/26</output>
+          <button type="button" id="inc" aria-label="Augmenter le préfixe">+</button>
+        </div>
+      </div>
+      <input id="prefix" type="range" min="0" max="32" step="1" value="26">
+      <div class="presets" role="group" aria-label="Préfixes courants">
+        <button type="button" class="chip" data-p="8">/8</button>
+        <button type="button" class="chip" data-p="16">/16</button>
+        <button type="button" class="chip" data-p="24">/24</button>
+        <button type="button" class="chip" data-p="26">/26</button>
+        <button type="button" class="chip" data-p="28">/28</button>
+        <button type="button" class="chip" data-p="30">/30</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="results" id="results">
+    <section class="summary" aria-live="polite">
+      <span class="lab">Réseau</span>
+      <p class="cidr" id="cidr">192.168.10.0<span>/26</span></p>
+      <p class="range" id="range"></p>
+    </section>
+
+    <dl class="kv-grid">
+      <div class="kv"><dt>Masque de sous-réseau</dt><dd id="vMask"></dd></div>
+      <div class="kv"><dt>Masque inverse (wildcard)</dt><dd id="vWild"></dd></div>
+      <div class="kv"><dt>Adresse réseau</dt><dd id="vNet"></dd></div>
+      <div class="kv"><dt>Adresse de broadcast</dt><dd id="vBc"></dd></div>
+      <div class="kv"><dt>Première adresse utilisable</dt><dd id="vFirst"></dd></div>
+      <div class="kv"><dt>Dernière adresse utilisable</dt><dd id="vLast"></dd></div>
+      <div class="kv"><dt>Nombre d'adresses</dt><dd id="vTotal"></dd></div>
+      <div class="kv"><dt>Hôtes utilisables</dt><dd id="vUsable"></dd></div>
+      <div class="kv"><dt>Classe</dt><dd id="vClass"></dd></div>
+      <div class="kv"><dt>Type d'adresse</dt><dd id="vType"></dd></div>
+    </dl>
+
+    <section class="bits" aria-label="Vue binaire">
+      <h2>Vue binaire</h2>
+      <p class="legend">
+        <span><i class="sw n"></i><span id="nNet">26 bits réseau</span></span>
+        <span><i class="sw h"></i><span id="nHost">6 bits hôte</span></span>
+      </p>
+      <div class="brows">
+        <div class="brow"><span class="blabel">Adresse</span><div class="octets" id="bIp"></div></div>
+        <div class="brow"><span class="blabel">Masque</span><div class="octets" id="bMask"></div></div>
+        <div class="brow"><span class="blabel">Réseau<small>adresse ET masque</small></span><div class="octets" id="bNet"></div></div>
+      </div>
+    </section>
+  </div>
+
+  <p class="note">Un /31 compte 2 adresses utilisables (liaison point à point, RFC 3021). Un /32 désigne une seule machine.</p>
+</main>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var ipEl = $('ip'), pEl = $('prefix'), out = $('prefixOut'), err = $('err'), res = $('results');
+  var chips = document.querySelectorAll('.chip');
+
+  function parseIP(s){
+    var m = String(s).trim().replace(/,/g, '.').match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
+    if(!m) return null;
+    var o = m.slice(1).map(Number);
+    if(o.some(function(n){ return n > 255; })) return null;
+    return ((o[0] << 24) | (o[1] << 16) | (o[2] << 8) | o[3]) >>> 0;
+  }
+  function toIP(n){ return [n >>> 24, (n >>> 16) & 255, (n >>> 8) & 255, n & 255].join('.'); }
+  function maskFor(p){ return p === 0 ? 0 : (0xFFFFFFFF << (32 - p)) >>> 0; }
+  function fmt(n){ return n.toLocaleString('fr-FR'); }
+  function plural(n, word){ return n + ' ' + word + (n > 1 ? 's' : ''); }
+
+  var RANGES = [
+    ['0.0.0.0', 8, 'Réservée (0.0.0.0/8)'],
+    ['10.0.0.0', 8, 'Privée (RFC 1918)'],
+    ['100.64.0.0', 10, 'Partagée (CGNAT)'],
+    ['127.0.0.0', 8, 'Bouclage (loopback)'],
+    ['169.254.0.0', 16, 'Lien local (APIPA)'],
+    ['172.16.0.0', 12, 'Privée (RFC 1918)'],
+    ['192.168.0.0', 16, 'Privée (RFC 1918)'],
+    ['224.0.0.0', 4, 'Multicast'],
+    ['240.0.0.0', 4, 'Réservée']
+  ].map(function(r){ return [parseIP(r[0]), r[1], r[2]]; });
+
+  function typeOf(ip){
+    for(var i = 0; i < RANGES.length; i++){
+      if(((ip & maskFor(RANGES[i][1])) >>> 0) === RANGES[i][0]) return RANGES[i][2];
+    }
+    return 'Publique';
+  }
+  function classOf(ip){
+    var a = ip >>> 24;
+    if(a < 128) return 'A';
+    if(a < 192) return 'B';
+    if(a < 224) return 'C';
+    if(a < 240) return 'D (multicast)';
+    return 'E (expérimentale)';
+  }
+
+  function bitsHTML(n, p){
+    var html = '';
+    for(var o = 0; o < 4; o++){
+      var byte = (n >>> (24 - 8 * o)) & 255;
+      html += '<span class="oct"><span class="b">';
+      for(var i = 0; i < 8; i++){
+        var idx = o * 8 + i;
+        var cls = (idx < p ? 'n' : 'h') + (idx === p && p > 0 && p < 32 ? ' cut' : '');
+        html += '<i class="' + cls + '">' + ((byte >> (7 - i)) & 1) + '</i>';
+      }
+      html += '</span><span class="d">' + byte + '</span></span>';
+    }
+    return html;
+  }
+
+  function set(id, text){ $(id).textContent = text; }
+
+  function render(){
+    var p = Number(pEl.value);
+    out.textContent = '/' + p;
+    chips.forEach(function(c){ c.setAttribute('aria-pressed', String(Number(c.dataset.p) === p)); });
+
+    var ip = parseIP(ipEl.value.split('/')[0]);
+    var ok = ip !== null;
+    err.hidden = ok;
+    ipEl.setAttribute('aria-invalid', String(!ok));
+    res.classList.toggle('stale', !ok);
+    if(!ok) return;
+
+    var mask = maskFor(p);
+    var net = (ip & mask) >>> 0;
+    var bc = (net | ~mask) >>> 0;
+    var total = Math.pow(2, 32 - p);
+    var first, last, usable;
+    if(p === 32){ first = last = ip; usable = 1; }
+    else if(p === 31){ first = net; last = bc; usable = 2; }
+    else { first = net + 1; last = bc - 1; usable = total - 2; }
+
+    $('cidr').innerHTML = toIP(net) + '<span>/' + p + '</span>';
+    $('range').innerHTML = p === 32
+      ? 'Une seule machine : <b>' + toIP(ip) + '</b>'
+      : 'Hôtes de <b>' + toIP(first) + '</b> à <b>' + toIP(last) + '</b> · ' + fmt(usable) + ' utilisables';
+
+    set('vMask', toIP(mask));
+    set('vWild', toIP((~mask) >>> 0));
+    set('vNet', toIP(net));
+    set('vBc', toIP(bc));
+    set('vFirst', toIP(first));
+    set('vLast', toIP(last));
+    set('vTotal', fmt(total));
+    set('vUsable', fmt(usable));
+    set('vClass', classOf(ip));
+    set('vType', typeOf(ip));
+
+    set('nNet', plural(p, 'bit') + ' réseau');
+    set('nHost', plural(32 - p, 'bit') + ' hôte');
+    $('bIp').innerHTML = bitsHTML(ip, p);
+    $('bMask').innerHTML = bitsHTML(mask, p);
+    $('bNet').innerHTML = bitsHTML(net, p);
+  }
+
+  function setPrefix(p){
+    p = Math.max(0, Math.min(32, p));
+    pEl.value = p;
+    if(ipEl.value.indexOf('/') !== -1){
+      ipEl.value = ipEl.value.split('/')[0] + '/' + p;
+    }
+    render();
+  }
+
+  ipEl.addEventListener('input', function(){
+    if(ipEl.value.indexOf(',') !== -1){
+      var pos = ipEl.selectionStart;
+      ipEl.value = ipEl.value.replace(/,/g, '.');
+      try { ipEl.setSelectionRange(pos, pos); } catch(e){}
+    }
+    var parts = ipEl.value.split('/');
+    if(parts.length === 2 && /^\s*\d{1,2}\s*$/.test(parts[1])){
+      var pp = parseInt(parts[1], 10);
+      if(pp >= 0 && pp <= 32) pEl.value = pp;
+    }
+    render();
+  });
+  pEl.addEventListener('input', function(){ setPrefix(Number(pEl.value)); });
+  $('dec').addEventListener('click', function(){ setPrefix(Number(pEl.value) - 1); });
+  $('inc').addEventListener('click', function(){ setPrefix(Number(pEl.value) + 1); });
+  chips.forEach(function(c){ c.addEventListener('click', function(){ setPrefix(Number(c.dataset.p)); }); });
+
+  render();
+})();
+</script>
+</body>
+</html>
