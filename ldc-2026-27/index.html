@@ -434,7 +434,6 @@ body::before{content:"";position:fixed;inset:0;z-index:100;pointer-events:none;o
 @media(max-width:820px){.vedette{grid-template-columns:1fr;padding:24px}}
 .v-texte{position:relative;z-index:2;animation:glisse .7s cubic-bezier(.2,.9,.2,1) both}
 @keyframes glisse{from{opacity:0;transform:translateX(-40px)}}
-.geant{position:absolute;left:-8px;top:-34px;z-index:-1;font:900 clamp(72px,13vw,200px)/.9 'Big Shoulders Display',sans-serif;text-transform:uppercase;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.16);white-space:nowrap;pointer-events:none}
 .v-texte h3{font-size:clamp(36px,5.4vw,70px);margin:22px 0 10px}
 .v-texte p{max-width:44ch;color:var(--argent);font-size:18px}
 .v-stats{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
@@ -469,7 +468,7 @@ footer{line-height:1.8}
 #toast.on{display:block}
 
 .hero-grid{align-items:center}
-.geant{top:-8px}
+
 @media(max-width:620px){.hero{padding:84px 16px 100px}.affiche{padding:18px}.eqa .crest{width:56px;height:56px;font-size:16px}.compte b{font-size:30px}.v-texte p{font-size:16px}.vedette{min-height:0}.v-photo{width:70%}.vn .tw,.vn .tw .ph{width:46px;height:46px}}
 
 /* ===== Fiches des clubs ===== */
@@ -1353,7 +1352,7 @@ function vedette(i){
   clearTimeout(vT); sp = i; const [nom,club,role,txt,buts,mj] = SPOT[i];
   const st = [[String(buts),'buts'],[(buts/mj).toFixed(2).replace('.',','),'buts par match']];
   $('#vedette-box').style.setProperty('--c', clubColor(club));
-  $('#v-texte').innerHTML = `<span class="badge">${esc(role)} · ${esc(club)}</span><span class="geant" aria-hidden="true">${esc(nom.split(' ').slice(-1)[0])}</span><h3>${esc(nom)}</h3><p>${esc(txt)}</p><div class="v-stats">${st.map(x => `<div><b>${esc(x[0])}</b><small>${esc(x[1])}</small></div>`).join('')}</div><p class="v-note">Après ${mj} journées · ratio = buts ÷ matchs du club</p>`;
+  $('#v-texte').innerHTML = `<span class="badge">${esc(role)} · ${esc(club)}</span><h3>${esc(nom)}</h3><p>${esc(txt)}</p><div class="v-stats">${st.map(x => `<div><b>${esc(x[0])}</b><small>${esc(x[1])}</small></div>`).join('')}</div><p class="v-note">Après ${mj} journées · ratio = buts ÷ matchs du club</p>`;
   $('#v-photo').innerHTML = `<div class="portrait"><span class="ph" style="--c:${clubColor(club)}" data-q="${esc((FULL[nom]||nom)+' '+(EN[club]||club)+' footballer')}" data-nom="${esc(FULL[nom]||nom)}"${attrU([nom,FULL[nom]||nom],club)}><img alt="${esc(nom)}"><em></em></span><span class="v-crest">${crest(club,1)}</span></div>`;
   hydrate($('#v-photo'));
   $('#v-nav').innerHTML = SPOT.map((x,k) => `<button class="vn${k===i?' on':''}" data-k="${k}" aria-label="${esc(x[0])}">${tete(x[0],x[1])}</button>`).join(''); hydrate($('#v-nav'));
