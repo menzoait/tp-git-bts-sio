@@ -524,6 +524,8 @@ footer{line-height:1.8}
 .nav-live{display:inline-flex;align-items:center;gap:7px;color:#fff!important;font-weight:700!important}
 .nav-live i{width:8px;height:8px;border-radius:50%;background:var(--rouge)}
 .nav-live.on i{animation:pouls 1.4s infinite}
+/* « En direct » n'existe à l'écran que pendant un match (classe actif posée par rendreDirect) */
+#direct:not(.actif),.nav-live:not(.actif){display:none!important}
 @keyframes pouls{0%{box-shadow:0 0 0 0 rgba(255,93,115,.75)}70%{box-shadow:0 0 0 9px rgba(255,93,115,0)}100%{box-shadow:0 0 0 0 rgba(255,93,115,0)}}
 @keyframes clig{50%{opacity:.25}}
 #direct-titre .rec{display:none;margin-left:14px;padding:5px 14px;border-radius:99px;background:var(--rouge);color:#fff;font:800 15px Figtree,sans-serif;letter-spacing:.12em;vertical-align:middle;animation:clig 1.4s infinite}
@@ -655,7 +657,7 @@ footer{line-height:1.8}
     <h2 id="direct-titre">En direct<span class="rec">Live</span></h2>
     <p class="sous" id="direct-info">Chargement des scores en direct…</p>
     <div class="matchs" id="direct-liste"></div>
-    <p class="note">Les matchs apparaissent ici dès le coup d'envoi : score, minute, buteurs et cartons actualisés toutes les 30 secondes (source : ESPN). Clique sur un match pour voir ses statistiques, les compositions et les temps forts. Le direct fonctionne quand le site est ouvert dans un navigateur connecté à internet.</p>
+    <p class="note">Cette rubrique n'apparaît que pendant les matchs, dès la seconde du coup d'envoi : score, minute, buteurs et cartons actualisés toutes les 30 secondes (source : ESPN). Clique sur un match pour voir ses statistiques, les compositions et les temps forts. Le direct fonctionne quand le site est ouvert dans un navigateur connecté à internet.</p>
   </section>
 
   <section id="vedette">
@@ -1458,11 +1460,14 @@ function lireMatch(e){
   return {id:String(e.id), date, jour, j:JOURS[jour]||0, d, x, sd:+H.score||0, sx:+A.score||0, etat:ty.state||'pre', nom:ty.name||'', clock:st.displayClock||'', fini:!!ty.completed,
     buts:ev.filter(z => z.but), rouges:ev.filter(z => z.rouge)};
 }
+/* coup d'envoi passé depuis moins de 20 min, ESPN pas encore à jour : le match est déjà montré « en direct » */
+function engage(m){ return m.etat==='pre' && !/POSTPON|CANCEL|DELAY/.test(m.nom) && m.date <= Date.now() && Date.now() - m.date < 20*6e4; }
 function statut(m){
   if(/POSTPON/.test(m.nom)) return {cls:'rep', txt:'Reporté'};
   if(/CANCEL|ABANDON|FORFEIT/.test(m.nom)) return {cls:'rep', txt:'Annulé'};
   if(m.etat==='in') return /HALF_?TIME/.test(m.nom) ? {cls:'mt', txt:'Mi-temps'} : {cls:'live', txt:minute(m.clock) || 'En cours'};
   if(m.etat==='post') return {cls:'fin', txt:'Terminé'};
+  if(engage(m)) return {cls:'live', txt:'Coup d\'envoi'};
   return {cls:'avant', txt:heure(m.date)};
 }
 const pastille = s => `<span class="dm-st ${s.cls}">${s.cls==='live'?'<i></i>':''}${esc(s.txt)}</span>`;
@@ -1471,7 +1476,7 @@ const butsDe = (m, c) => m.buts.filter(b => b.c===c).map(b => `<span>⚽ ${esc(c
   + m.rouges.filter(r => r.c===c).map(r => `<span class="rg">🟥 ${esc(court(r.n))} ${esc(r.m)}</span>`).join('');
 
 function carteDirect(m){
-  const s = statut(m), pre = m.etat==='pre' || s.cls==='rep', D = nomM(m.d), X = nomM(m.x);
+  const s = statut(m), pre = (m.etat==='pre' && !engage(m)) || s.cls==='rep', D = nomM(m.d), X = nomM(m.x);
   const p = pre && J3.find(r => r[0]===D && r[1]===X && r[2]!=null);
   const bas = pre
     ? `<span class="date">${esc(jourCourt(m.date))} · ${heure(m.date)}${p?` · ${p[2]}% / ${p[3]}% / ${p[4]}%`:''}</span>${p?`<div class="proba" role="img" aria-label="Probabilités ${p[2]}, ${p[3]}, ${p[4]} pour cent"><i style="width:${p[2]}%"></i><i style="width:${p[3]}%"></i><i style="width:${p[4]}%"></i></div>`:''}`
@@ -1491,7 +1496,7 @@ function journeeCible(){
 
 function rendreDirect(){
   const J = DIRECT.cible.j, tous = Object.values(DIRECT.matchs), auj = dateParis(new Date());
-  const L = tous.filter(m => m.etat==='in').sort((a,b) => a.date-b.date || nomM(a.d).localeCompare(nomM(b.d),'fr'));
+  const L = tous.filter(m => m.etat==='in' || engage(m)).sort((a,b) => a.date-b.date || nomM(a.d).localeCompare(nomM(b.d),'fr'));
   const avant = tous.filter(m => m.etat==='pre' && !/POSTPON|CANCEL/.test(m.nom) && m.date > Date.now()-3*36e5).sort((a,b) => a.date-b.date);
   const finisAuj = tous.filter(m => m.etat==='post' && m.jour===auj);
   $('#direct-liste').innerHTML = L.map(carteDirect).join('');
@@ -1508,6 +1513,7 @@ function rendreDirect(){
   $('#direct').classList.toggle('instantane', !!DIRECT.snap);
   $('#direct-titre').classList.toggle('on', L.length > 0);
   document.querySelector('.nav-live').classList.toggle('on', L.length > 0);
+  $('#direct').classList.toggle('actif', L.length > 0); document.querySelector('.nav-live').classList.toggle('actif', L.length > 0);
 }
 function directIndispo(){
   $('#direct-info').innerHTML = 'Le direct a besoin d\'internet : ouvre <code>index.html</code> dans Edge ou Chrome, connecté à internet (l\'aperçu de Claude le bloque). Le programme des prochains matchs est dans « Matchs », onglet « À venir ».';
@@ -1534,7 +1540,7 @@ function appliquerResultats(){
 }
 function rendreOnglets(){
   const ks = [...new Set([...Object.keys(JD), ...Object.keys(JR)])].map(k => +k.slice(1)).sort((a,b) => b-a), b = (v,t) => `<button data-v="${v}" aria-pressed="false">${t}</button>`;
-  $('#onglets-matchs').innerHTML = ks.map(n => b('j'+n, 'Journée '+n+((JD['j'+n]||[]).some(m => m.etat==='in') ? ' · en direct' : ''))).join('') + b('j2','Journée 2') + b('j1','Journée 1') + b('av','À venir');
+  $('#onglets-matchs').innerHTML = ks.map(n => b('j'+n, 'Journée '+n+((JD['j'+n]||[]).some(m => m.etat==='in' || engage(m)) ? ' · en direct' : ''))).join('') + b('j2','Journée 2') + b('j1','Journée 1') + b('av','À venir');
   const v = DIRECT.vue && $(`#onglets-matchs [data-v="${DIRECT.vue}"]`) ? DIRECT.vue : ks.length ? 'j'+ks[0] : 'j2';
   afficherMatchs(v);
 }
@@ -1617,8 +1623,14 @@ async function boucle(){
     buts.forEach(alerteBut);
     if(termines.length){ chargerClassement().catch(() => {}); setTimeout(() => chargerClassement().catch(() => {}), 180e3); }
     const L = Object.values(DIRECT.matchs).filter(m => m.j===cible.j);
-    const proche = L.filter(m => m.etat==='pre' && !/POSTPON|CANCEL/.test(m.nom)).map(m => m.date - Date.now()).sort((a,b) => a-b)[0];
-    delai = L.some(m => m.etat==='in') || (proche != null && proche < 15*6e4) ? 30e3 : proche != null && proche < 3*36e5 ? 120e3 : 600e3;
+    const ecarts = L.filter(m => m.etat==='pre' && !/POSTPON|CANCEL/.test(m.nom)).map(m => m.date - Date.now());
+    const proche = ecarts.filter(x => x > 0).sort((a,b) => a-b)[0];
+    delai = L.some(engage) ? 10e3 : L.some(m => m.etat==='in') || (proche != null && proche < 15*6e4) ? 30e3 : proche != null && proche < 3*36e5 ? 120e3 : 600e3;
+    clearTimeout(DIRECT.tko);
+    if(proche != null && proche < 6*36e5){   /* à la seconde du coup d'envoi : on affiche « En direct » sans attendre ESPN, puis on relit les scores */
+      DIRECT.tko = setTimeout(rendreDirect, proche + 50);
+      delai = Math.min(delai, proche + 1e3);
+    }
   } catch(e) {
     DIRECT.essais++;
     if(!DIRECT.ok && !DIRECT.snap && !(snapOK() && modeInstantane())) directIndispo();
