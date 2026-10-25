@@ -676,14 +676,14 @@ footer{line-height:1.8}
     <p class="sous">Le onze des joueurs les plus en vue de la phase de ligue : un par poste, tous clubs confondus.</p>
     <div class="moment cache">
       <div>
-        <span class="badge">Onze idéal · après 2 journées</span>
+        <span class="badge">Onze idéal · après 3 journées</span>
         <h3>Les meilleurs de chaque équipe</h3>
         <ol class="xi" id="xi"></ol>
       </div>
       <div class="scene demi" id="scene-moment"></div>
     </div>
     <div class="banc cache"><h4>Aussi dans le coup</h4><div class="chips" id="banc-moment"></div>
-      <p class="note">Sélection éditoriale faite à partir des buts, passes et résultats disponibles (stats individuelles arrêtées après la J1). Ce n'est pas l'équipe type officielle de l'UEFA.</p></div>
+      <p class="note">Sélection refaite après chaque journée à partir des feuilles de match ESPN de tous les matchs joués : buts, passes décisives, clean sheets, arrêts et résultats de l'équipe. Mise à jour du 25 octobre 2026, après la journée 3. Ce n'est pas l'équipe type officielle de l'UEFA.</p></div>
   </section>
 
   <section id="une">
@@ -731,7 +731,7 @@ footer{line-height:1.8}
 
   <section id="stats">
     <h2>Meilleurs buteurs et passeurs</h2>
-    <p class="sous">Buteurs : chiffres du 21 octobre 2026, après la journée 3. Passeurs : chiffres UEFA du 14 octobre 2026, après la journée 2.</p>
+    <p class="sous">Buteurs : chiffres ESPN du 25 octobre 2026, après la journée 3. Passeurs : chiffres UEFA du 14 octobre 2026, après la journée 2.</p>
     <div class="duo">
       <div class="liste"><h3>Buteurs</h3><ul id="buteurs"></ul></div>
       <div class="liste"><h3>Passeurs</h3><ul id="passeurs"></ul></div>
@@ -862,10 +862,11 @@ const CLASSEMENT = [
 /* [joueur, club, nombre] */
 const BUTEURS = [
   ["Ermedin Demirović","VfB Stuttgart",4],["Serhou Guirassy","Dortmund",4],["Erling Haaland","Manchester City",4],
-  ["Harry Kane","Bayern Munich",4],["Nicolò Tresoldi","Club Bruges",4],["Bradley Barcola","Liverpool",3],
-  ["Ousmane Dembélé","PSG",3],["Ferran Torres","PSG",3],["Phil Foden","Manchester City",3],
-  ["Nicolas Jackson","Aston Villa",3],["Alexis Mac Allister","Liverpool",3],["Donyell Malen","AS Rome",3],
-  ["Kylian Mbappé","Real Madrid",3]
+  ["Harry Kane","Bayern Munich",4],["Luis Suárez","Sporting CP",4],["Nicolò Tresoldi","Club Bruges",4],
+  ["Bradley Barcola","Liverpool",3],["Ross Barkley","Aston Villa",3],["Ousmane Dembélé","PSG",3],
+  ["Anastasios Douvikas","Como",3],["Phil Foden","Manchester City",3],["Nicolas Jackson","Aston Villa",3],
+  ["Alexis Mac Allister","Liverpool",3],["Donyell Malen","AS Rome",3],["Kylian Mbappé","Real Madrid",3],
+  ["Ferran Torres","PSG",3]
 ];
 const PASSEURS = [
   ["Lamine Yamal","FC Barcelone",4],["Ousmane Dembélé","PSG",3]
@@ -1227,19 +1228,19 @@ addEventListener('scroll', () => { $('#progres').style.width = scrollY/(document
 
 /* ====== ÉQUIPE DU MOMENT : [nom, club, poste, raison, nom complet] ====== */
 const MOMENT = [
- ["Haikin","Bodø/Glimt","G","Clean sheet face à Dortmund (1-0)","Nikita Haikin"],
- ["Pau Torres","Aston Villa","D","2 passes décisives, Villa à 6 points","Pau Torres"],
- ["Bartra","Betis Séville","D","2 buts pour un défenseur","Marc Bartra"],
- ["Konaté","Real Madrid","D","Titulaire, Real à 6 points","Ibrahima Konaté"],
- ["Rüdiger","Real Madrid","D","Titulaire du 4-3 à Rome","Antonio Rüdiger"],
- ["Vitinha","PSG","M","Moteur du PSG : 10 buts en 2 matchs","Vitinha"],
- ["Nico Paz","Como","M","2 passes décisives","Nico Paz"],
- ["Olise","Bayern Munich","M","2 buts","Michael Olise"],
- ["Demirović","VfB Stuttgart","A","Triplé contre Viking","Ermedin Demirović"],
- ["Dembélé","PSG","A","2 buts et 2 passes","Ousmane Dembélé"],
- ["Yamal","Barcelone","A","2 passes décisives","Lamine Yamal"]
+ ["Raya","Arsenal","G","2 clean sheets, Arsenal invaincu","David Raya"],
+ ["Tsimikas","Liverpool","D","3 passes décisives, Liverpool 3 sur 3","Kostas Tsimikas"],
+ ["Pau Torres","Aston Villa","D","2 passes décisives, Villa 3 sur 3","Pau Torres"],
+ ["Bartra","Betis Séville","D","2 buts, Betis 3 sur 3","Marc Bartra"],
+ ["Araújo","Liverpool","D","2 buts et 1 passe décisive","Ronald Araújo"],
+ ["Nico Paz","Como","M","2 buts et 3 passes, doublé contre Man United","Nico Paz"],
+ ["Barkley","Aston Villa","M","3 buts et 1 passe, Villa 3 sur 3","Ross Barkley"],
+ ["Foden","Manchester City","M","3 buts et 1 passe, triplé contre l'AEK","Phil Foden"],
+ ["Dembélé","PSG","A","3 buts et 3 passes, PSG 3 sur 3","Ousmane Dembélé"],
+ ["Kane","Bayern Munich","A","4 buts et 2 passes décisives","Harry Kane"],
+ ["Yamal","Barcelone","A","2 buts et 4 passes décisives","Lamine Yamal"]
 ];
-const BANC = [["Ferran Torres","PSG","triplé contre Bratislava"],["Erling Haaland","Manchester City","2 buts"],["Raphinha","Barcelone","2 buts"],["Serhou Guirassy","Dortmund","2 buts"],["Deniz Undav","VfB Stuttgart","2 passes"]];
+const BANC = [["Kylian Mbappé","Real Madrid","3 buts, 1 passe, Real 3 sur 3"],["Luis Suárez","Sporting CP","4 buts"],["Serhou Guirassy","Dortmund","4 buts"],["Erling Haaland","Manchester City","4 buts en 2 matchs"],["Isco","Betis Séville","2 buts et 1 passe"],["Thibaut Courtois","Real Madrid","16 arrêts, 3 victoires"]];
 { const l = {G:[],D:[],M:[],A:[]};
   MOMENT.forEach(m => l[m[2]].push({n:m[0],c:m[1],q:m[4],col:clubColor(m[1])}));
   $('#scene-moment').innerHTML = scene([{l,col:'#1a2a9c'}],true); hydrate($('#scene-moment')); }
