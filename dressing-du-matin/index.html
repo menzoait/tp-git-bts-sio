@@ -737,7 +737,7 @@ function garmentSvg(it) {
   return `<svg class="garment" viewBox="0 0 100 100" aria-hidden="true"><path d="${s.d}" fill="${c1}" fill-rule="${s.rule || "nonzero"}" stroke="var(--garment-line)" stroke-width="1.6" stroke-linejoin="round"/>${s.x ? `<path d="${s.x}" fill="none" stroke="${c2 || "var(--garment-line)"}" stroke-width="${c2 ? 2.4 : 1.6}" stroke-linecap="round" stroke-linejoin="round"/>` : ""}</svg>`;
 }
 function itemVisual(it) {
-  if (it && it.photo) return `<img class="ph ${it.cutout ? "cutout" : "flat"}" src="/_blob/${encodeURIComponent(it.photo)}" alt="" data-id="${esc(it.id)}" loading="lazy" decoding="async">`;
+  if (it && it.photo) return `<img class="ph ${it.cutout ? "cutout" : "flat"}" src="${esc(photoSrc(it.photo))}" alt="" data-id="${esc(it.id)}" loading="lazy" decoding="async">`;
   return garmentSvg(it || {});
 }
 const tintOf = (it) => colorHex(((it && it.colors) || [])[0] === "imprime" ? ((it.colors || [])[1] || "gris") : ((it && it.colors) || [])[0]);
@@ -2176,15 +2176,15 @@ function renderSettings() {
       <div class="seg" role="radiogroup" aria-labelledby="s-cold-l">${[["frileux", "Frileux"], ["normal", "Normal"], ["chaud", "Jamais froid"]].map(([k, l]) => `<button class="seg-b" role="radio" id="sc-${k}" aria-checked="${s.cold === k}" data-action="set-cold" data-v="${k}">${l}</button>`).join("")}</div></div>
     <div class="set-row"><div><h2 class="set-t" id="s-ai-l">Styliste IA</h2><p class="set-d">Remplit les fiches et explique les tenues, avec ton compte Claude.</p></div>
       <button class="switch bare" id="s-ai" data-action="set-ai" aria-pressed="${s.ai !== false && !!S.caps.sample}" aria-labelledby="s-ai-l"${S.caps.sample ? "" : " disabled"}><span class="knob"></span></button></div>
-    ${S.capsReady && !S.caps.sample ? `<p class="hint">Le styliste IA n’est pas disponible dans cette vue : ouvre l’appli dans Claude.</p>` : ""}
+    ${S.capsReady && !S.caps.sample ? `<p class="hint">${S.local ? "Le styliste IA fonctionne seulement dans la version Claude de l’appli." : "Le styliste IA n’est pas disponible dans cette vue : ouvre l’appli dans Claude."}</p>` : ""}
     <div class="set-row"><div><h2 class="set-t" id="s-tr-l">Tendances de la saison</h2><p class="set-d">Favorise les looks de la saison.</p></div>
       <button class="switch bare" id="s-tr" data-action="set-trends" aria-pressed="${s.trends !== false}" aria-labelledby="s-tr-l"><span class="knob"></span></button></div>
     <div class="set-row"><div><h2 class="set-t" id="s-mi-l">Pièces de saison qui me manquent</h2><p class="set-d">Les affiche dans les tendances.</p></div>
       <button class="switch bare" id="s-mi" data-action="set-missing" aria-pressed="${!!s.missing}" aria-labelledby="s-mi-l"><span class="knob"></span></button></div>
-    <label class="set-row col" for="s-city"><span class="set-t">Ville</span><span class="set-d">Pour la météo automatique.</span><input class="in" id="s-city" value="${esc(s.city || "")}" placeholder="ex. Cergy" autocomplete="address-level2"></label>
+    ${S.local ? "" : `<label class="set-row col" for="s-city"><span class="set-t">Ville</span><span class="set-d">Pour la météo automatique.</span><input class="in" id="s-city" value="${esc(s.city || "")}" placeholder="ex. Cergy" autocomplete="address-level2"></label>`}
   </div>
   <div class="card set">
-    <div><h2 class="set-t">Tes données</h2><p class="set-d">Enregistrées sur ton compte Claude, modifiables par toi seul. Ta silhouette reste sur cet appareil.</p></div>
+    <div><h2 class="set-t">Tes données</h2><p class="set-d">${S.local ? "Enregistrées dans ce navigateur, sur cet appareil. Rien n’est envoyé en ligne." : "Enregistrées sur ton compte Claude, modifiables par toi seul. Ta silhouette reste sur cet appareil."}</p></div>
     <div class="row-btns"><button class="btn ghost" id="s-export" data-action="export"${S.caps.downloads ? "" : " disabled"}>Exporter (JSON)</button>
       ${S.confirmAll ? `<span class="confirm"><span>Tout supprimer, sans retour possible ?</span><button class="btn danger sm" data-action="delete-all-yes"${S.deleting ? " disabled" : ""}>${S.deleting ? "Suppression…" : "Oui, tout supprimer"}</button><button class="btn ghost sm" data-action="delete-all-no">Annuler</button></span>` : `<button class="btn ghost danger-t" data-action="delete-all">Tout supprimer</button>`}</div>
   </div>
@@ -2239,7 +2239,7 @@ function photoBlockHtml() {
   }
   if (d.it.photo) return `<div class="ph-edit"><div class="ph-stage">${itemVisual({...d.it, id: d.id})}</div><div class="ph-ctrl"><button class="btn ghost sm" id="ph-change" data-action="pick-photo">${ICON.camera} Changer la photo</button></div></div>`;
   const noAssets = S.capsReady && !S.caps.assets;
-  return `<button class="ph-drop" id="ph-drop" data-action="pick-photo">${ICON.camera}<strong>Prendre ou choisir une photo</strong><span>Sur un fond uni, le détourage est plus net.</span></button>${noAssets ? `<p class="hint">Les photos ne peuvent pas être enregistrées dans cette vue : ouvre l’appli dans Claude pour les garder. La fiche reste possible sans photo.</p>` : ""}`;
+  return `<button class="ph-drop" id="ph-drop" data-action="pick-photo">${ICON.camera}<strong>Prendre ou choisir une photo</strong><span>Sur un fond uni, le détourage est plus net.</span></button>${noAssets ? `<p class="hint">Les photos ne peuvent pas être enregistrées dans ce navigateur. La fiche reste possible sans photo.</p>` : ""}`;
 }
 function captureBlockHtml() {
   const d = S.draft, p = d.photo;
@@ -3272,11 +3272,101 @@ renderSettings();
 showTab("today");
 renderLook(false);
 
+/* ---------------- Version autonome, hors de Claude : tout reste dans ce navigateur ---------------- */
+const EXAMPLES = [{"id": "ex-01", "name": "T-shirt blanc", "cat": "haut", "sub": "t-shirt", "colors": ["blanc"], "material": "coton", "styles": ["casual", "minimaliste", "streetwear"], "warmth": 1, "rainOk": false}, {"id": "ex-02", "name": "Chemise Oxford bleu clair", "cat": "haut", "sub": "chemise", "colors": ["bleu-clair"], "material": "coton", "styles": ["smartcasual", "classique", "business"], "warmth": 2, "rainOk": false}, {"id": "ex-03", "name": "Pull col rond marine", "cat": "haut", "sub": "pull", "colors": ["marine"], "material": "laine", "styles": ["classique", "smartcasual", "casual"], "warmth": 3, "rainOk": false}, {"id": "ex-04", "name": "Hoodie gris chiné", "cat": "haut", "sub": "hoodie", "colors": ["gris"], "material": "molleton", "styles": ["streetwear", "casual", "sportswear"], "warmth": 2, "rainOk": false}, {"id": "ex-05", "name": "Jean droit brut", "cat": "bas", "sub": "jean", "colors": ["denim"], "material": "denim", "styles": ["casual", "streetwear", "smartcasual", "rock"], "warmth": 2, "rainOk": false}, {"id": "ex-06", "name": "Chino beige", "cat": "bas", "sub": "chino", "colors": ["beige"], "material": "coton", "styles": ["smartcasual", "classique", "casual"], "warmth": 2, "rainOk": false}, {"id": "ex-07", "name": "Jogging noir", "cat": "bas", "sub": "jogging", "colors": ["noir"], "material": "molleton", "styles": ["sportswear", "streetwear"], "warmth": 2, "rainOk": false}, {"id": "ex-08", "name": "Baskets blanches", "cat": "chaussures", "sub": "baskets", "colors": ["blanc"], "material": "cuir", "styles": ["casual", "streetwear", "minimaliste", "sportswear"], "warmth": 1, "rainOk": false}, {"id": "ex-09", "name": "Derbies marron", "cat": "chaussures", "sub": "derbies", "colors": ["marron"], "material": "cuir", "styles": ["classique", "smartcasual", "business"], "warmth": 2, "rainOk": false}, {"id": "ex-10", "name": "Boots noires en cuir", "cat": "chaussures", "sub": "boots", "colors": ["noir"], "material": "cuir", "styles": ["rock", "casual", "smartcasual"], "warmth": 2, "rainOk": true}, {"id": "ex-11", "name": "Veste en jean", "cat": "veste", "sub": "veste en jean", "colors": ["denim"], "material": "denim", "styles": ["casual", "streetwear", "vintage"], "warmth": 1, "rainOk": false}, {"id": "ex-12", "name": "Manteau camel", "cat": "veste", "sub": "manteau", "colors": ["camel"], "material": "laine", "styles": ["classique", "smartcasual", "chic", "minimaliste"], "warmth": 3, "rainOk": false}, {"id": "ex-13", "name": "Imperméable kaki", "cat": "veste", "sub": "imperméable", "colors": ["kaki"], "material": "coton enduit", "styles": ["casual", "minimaliste", "smartcasual"], "warmth": 1, "rainOk": true}, {"id": "ex-14", "name": "Blazer noir", "cat": "veste", "sub": "blazer", "colors": ["noir"], "material": "laine", "styles": ["chic", "business", "smartcasual"], "warmth": 2, "rainOk": false}, {"id": "ex-15", "name": "Écharpe grise", "cat": "accessoire", "sub": "écharpe", "colors": ["gris"], "material": "laine", "styles": [], "warmth": 3, "rainOk": false}, {"id": "ex-16", "name": "Montre bracelet cuir", "cat": "accessoire", "sub": "montre", "colors": ["marron"], "material": "cuir", "styles": ["classique", "smartcasual", "casual", "business"], "warmth": 1, "rainOk": false}];
+const TRENDS_DEFAULT = {"season": "Automne-hiver 2026-2027", "updatedAt": "2026-10-25", "colors": ["rouge", "bleu-clair", "orange", "violet", "rose", "marron", "camel", "kaki"], "styles": ["classique", "rock", "sportswear", "vintage", "smartcasual"], "pieces": ["veste en cuir", "manteau", "trench", "doudoune", "bomber", "jogging", "gilet", "chemise", "cargo", "boots", "derbies", "bonnet"], "tips": ["Le rouge franc prend le relais du marron et du bordeaux : une seule pièce rouge (pull, bonnet, chaussures) suffit à réveiller une tenue neutre.", "Bleu ciel, mandarine, aubergine et magenta reviennent partout sur les défilés : une pièce de couleur à la fois, avec du marron, du gris ou du denim autour.", "Le jogging sort de la salle de sport : en ensemble assorti, avec un manteau long ou une veste en cuir par-dessus pour mélanger chic et décontracté.", "La veste en cuir est la pièce forte : coupe carrée un peu ample, ou cuir patiné façon rock dandy avec une silhouette longue et fine.", "Carreaux en grand format (tartan, prince-de-Galles) sur chemise ou manteau, et matières à relief : grosse maille, laine bouclée, mouton retourné.", "On superpose : col roulé sous une surchemise, cardigan sous le manteau, puis bonnet, chapka ou cache-cou pour finir."], "sources": [{"title": "Numéro · tendances homme AH 2026-2027", "url": "https://numero.com/mode/fashion-week/les-tendances-fashion-week-homme-automne-hiver-2026-2027/"}, {"title": "Comme un camion · mode masculine AH 2026-2027", "url": "https://www.commeuncamion.com/2026/09/29/tendances-mode-masculine-automne-hiver-2026-2027/"}, {"title": "ELLE Belgique · couleurs AH 2026", "url": "https://www.elle.be/fr/477394-couleurs-tendance-podiums-automne-hiver-2026.html"}, {"title": "FashionUnited · ce qui va cartonner en boutique", "url": "https://fashionunited.fr/actualite/mode/tendances-ce-qui-va-cartonner-en-boutiques-pour-lautomne-hiver-2026/2026080442582"}]};
+const PHOTO_URLS = new Map();
+function photoSrc(id) { return PHOTO_URLS.get(id) || (S.local ? "data:," : "/_blob/" + encodeURIComponent(id)); }
+function localDb() {
+  const KEY = "dm:data:v1";
+  let data = null, persist = true;
+  try { const raw = localStorage.getItem(KEY); data = raw ? JSON.parse(raw) : null; } catch (e) { persist = false; data = null; }
+  if (!data || typeof data !== "object") {
+    data = {};
+    const at = new Date().toISOString();
+    for (const e of EXAMPLES) { const {id, ...rest} = e; data["items/" + id] = {...rest, brand: "", ref: "", status: "ok", fav: false, photo: null, cutout: false, example: true, lastWorn: null, createdAt: at}; }
+  }
+  const cur = data["trends/current"];
+  if (!cur || String(cur.updatedAt || "") < TRENDS_DEFAULT.updatedAt) data["trends/current"] = TRENDS_DEFAULT;
+  const save = () => { if (!persist) return; try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) { throw {code: "quota_exceeded"}; } };
+  try { save(); } catch (e) { persist = false; }
+  const listeners = new Set();
+  const clone = (v) => (v === undefined ? undefined : JSON.parse(JSON.stringify(v)));
+  const snapDoc = (path) => ({id: path.split("/").pop(), exists: path in data, data: () => clone(data[path])});
+  let pending = false;
+  const fire = () => { if (pending) return; pending = true; setTimeout(() => { pending = false; for (const l of [...listeners]) { try { l(); } catch (e) { /* un écran en erreur ne bloque pas les autres */ } } }, 0); };
+  const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  const write = (path, next) => { const had = path in data, prev = data[path]; if (next === undefined) delete data[path]; else data[path] = next; try { save(); } catch (e) { if (had) data[path] = prev; else delete data[path]; throw e; } fire(); };
+  function query(coll, ord, lim) {
+    const snapQ = () => {
+      const depth = coll.split("/").length + 1;
+      let docs = Object.keys(data).filter((k) => k.startsWith(coll + "/") && k.split("/").length === depth).map(snapDoc);
+      if (ord) docs.sort((a, b) => { const x = a.data()[ord[0]], y = b.data()[ord[0]]; return (x > y ? 1 : x < y ? -1 : 0) * (ord[1] === "desc" ? -1 : 1); });
+      if (lim) docs = docs.slice(0, lim);
+      return {docs, size: docs.length, empty: !docs.length};
+    };
+    return {
+      orderBy: (f, dir) => query(coll, [f, dir || "asc"], lim),
+      limit: (n) => query(coll, ord, n),
+      get: async () => snapQ(),
+      onSnapshot(next) { const l = () => next(snapQ()); listeners.add(l); setTimeout(l, 0); return () => listeners.delete(l); },
+      doc: (id) => docRef(coll + "/" + (id || newId())),
+    };
+  }
+  function docRef(path) {
+    return {
+      id: path.split("/").pop(), path,
+      get: async () => snapDoc(path),
+      set: async (v) => write(path, clone(v)),
+      update: async (v) => { if (!(path in data)) throw {code: "not_found"}; write(path, {...data[path], ...clone(v)}); },
+      delete: async () => write(path, undefined),
+      onSnapshot(next) { const l = () => next(snapDoc(path)); listeners.add(l); setTimeout(l, 0); return () => listeners.delete(l); },
+    };
+  }
+  window.addEventListener("storage", (e) => { if (e.key !== KEY || !e.newValue) return; try { data = JSON.parse(e.newValue); fire(); } catch (er) { /* donnée illisible : on garde la version en mémoire */ } });
+  return {db: {doc: docRef, collection: (c) => query(c)}, persist};
+}
+async function localAssets() {
+  if (!window.indexedDB) return null;
+  const idb = await new Promise((res, rej) => { const r = indexedDB.open("dressing-du-matin", 1); r.onupgradeneeded = () => r.result.createObjectStore("photos"); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+  const run = (mode, fn) => new Promise((res, rej) => { const t = idb.transaction("photos", mode); fn(t.objectStore("photos")); t.oncomplete = () => res(); t.onerror = () => rej(t.error); t.onabort = () => rej(t.error); });
+  await run("readonly", (st) => { const c = st.openCursor(); c.onsuccess = () => { const cur = c.result; if (!cur) return; if (cur.value instanceof Blob) PHOTO_URLS.set(String(cur.key), URL.createObjectURL(cur.value)); cur.continue(); }; });
+  return {
+    async upload(blob) {
+      const id = "p" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+      try { await run("readwrite", (st) => st.put(blob, id)); } catch (e) { throw {code: e && e.name === "QuotaExceededError" ? "quota_or_state" : "unavailable"}; }
+      PHOTO_URLS.set(id, URL.createObjectURL(blob));
+      return {id, url: PHOTO_URLS.get(id)};
+    },
+    async delete(id) {
+      await run("readwrite", (st) => st.delete(id));
+      const u = PHOTO_URLS.get(id);
+      if (u) URL.revokeObjectURL(u);
+      PHOTO_URLS.delete(id);
+    },
+  };
+}
+const localDownloads = {
+  async save({filename, data}) {
+    const blob = data instanceof Blob ? data : new Blob([data], {type: "application/json"});
+    const url = URL.createObjectURL(blob), a = document.createElement("a");
+    a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    return {status: "saved"};
+  },
+};
+
 (async function boot() {
   const C = window.claude;
   if (!C || typeof C.use !== "function") {
+    S.local = true;
+    const L = localDb();
+    S.caps.db = L.db;
+    try { S.caps.assets = await localAssets(); } catch (e) { S.caps.assets = null; }
+    S.caps.downloads = localDownloads;
     S.capsReady = true;
-    setBanner("Ouvre cette appli dans Claude, connecté à ton compte, pour enregistrer ta garde-robe. Ici, rien n’est sauvegardé.");
+    if (!L.persist) setBanner("Ce navigateur n’autorise pas l’enregistrement : ta garde-robe sera perdue en fermant la page.");
+    subscribe();
     renderSettings(); renderWardrobe(); renderLook(false);
     return;
   }
