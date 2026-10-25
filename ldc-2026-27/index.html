@@ -351,8 +351,18 @@ td .crest.logo{width:28px;height:28px}
 .pf .mini{position:absolute;top:36px;left:calc(50% + 10px);z-index:2}
 .pf .mini .crest{width:22px;height:22px;font-size:7.5px;border-width:1.5px}
 .clubs-band{overflow:hidden;padding:20px 0;background:linear-gradient(180deg,#0a1140,var(--nuit));border-bottom:1px solid var(--ligne)}
-.piste2{display:flex;width:max-content;animation:defile 80s linear infinite reverse}
-.clubs-band:hover .piste2{animation-play-state:paused}
+/* bandeau des clubs : défilement manuel (glisser au doigt ou à la souris, flèches) */
+.cb-zone{position:relative}
+.piste2{display:flex;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:6px 64px;cursor:grab;user-select:none;-webkit-user-select:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 56px,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,transparent,#000 56px,#000 calc(100% - 56px),transparent)}
+.piste2::-webkit-scrollbar{display:none}
+.piste2.tire{cursor:grabbing;scroll-snap-type:none}
+.piste2 .cb{scroll-snap-align:center;flex:none}
+.piste2 img{-webkit-user-drag:none;pointer-events:none}
+.cb-fl{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:42px;height:42px;border-radius:50%;border:1px solid var(--ligne);background:rgba(12,20,80,.92);color:#fff;font:700 24px/1 Figtree,sans-serif;cursor:pointer;display:grid;place-items:center;transition:.2s}
+.cb-fl:hover{background:var(--or);color:#1a1300}
+.cb-fl:disabled{opacity:.25;cursor:default;background:rgba(12,20,80,.92);color:#fff}
+.cb-fl.g{left:12px}.cb-fl.d{right:12px}
+@media(hover:none){.cb-fl{display:none}.piste2{padding:6px 24px;-webkit-mask-image:none;mask-image:none}}
 .cb{display:flex;align-items:center;gap:12px;padding-right:44px;white-space:nowrap;font-weight:700}
 .cb em{font-style:normal;font-size:14px;color:var(--acier)}
 .match::after{height:4px;opacity:1;background:linear-gradient(90deg,var(--a,#f5c84c),var(--b,#f5c84c))}
@@ -651,7 +661,7 @@ footer{line-height:1.8}
 </div>
 
 <div class="ticker" aria-hidden="true"><div class="piste" id="piste"></div></div>
-<div class="clubs-band"><p class="band-hint">Clique sur un club : entraîneur, effectif, buts et chances de qualification</p><div class="piste2" id="piste2"></div></div>
+<div class="clubs-band"><p class="band-hint">Fais défiler les clubs et choisis-en un : entraîneur, effectif, buts et chances de qualification</p><div class="cb-zone"><button class="cb-fl g" type="button" data-sens="g" aria-label="Clubs précédents">‹</button><div class="piste2" id="piste2" role="list"></div><button class="cb-fl d" type="button" data-sens="d" aria-label="Clubs suivants">›</button></div></div>
 <main>
   <section id="direct">
     <h2 id="direct-titre">En direct<span class="rec">Live</span></h2>
@@ -1335,9 +1345,19 @@ function fiche(nom){
 
 /* Bandeau des clubs (cliquable) */
 { const mk = (c,dup) => `<span class="cb" data-club="${esc(c[0])}"${dup?' aria-hidden="true"':' role="button" tabindex="0"'}>${crest(c[0],1)}<em>${esc(c[0])}</em></span>`;
-  $('#piste2').innerHTML = CLASSEMENT.map(c => mk(c,0)).join('') + CLASSEMENT.map(c => mk(c,1)).join('');
+  $('#piste2').innerHTML = CLASSEMENT.map(c => mk(c,0)).join('');
   $('#piste2').addEventListener('click', ev => { const c = ev.target.closest('.cb'); if(c) fiche(c.dataset.club); });
-  $('#piste2').addEventListener('keydown', ev => { if((ev.key==='Enter'||ev.key===' ') && ev.target.dataset && ev.target.dataset.club){ ev.preventDefault(); fiche(ev.target.dataset.club); } }); }
+  $('#piste2').addEventListener('keydown', ev => { if((ev.key==='Enter'||ev.key===' ') && ev.target.dataset && ev.target.dataset.club){ ev.preventDefault(); fiche(ev.target.dataset.club); } });
+  /* défilement manuel : au doigt (natif), à la souris en faisant glisser, ou avec les flèches */
+  const p = $('#piste2'); let x0 = 0, s0 = 0, tire = false, bouge = false;
+  p.addEventListener('pointerdown', ev => { if(ev.pointerType !== 'mouse' || ev.button !== 0) return; tire = true; bouge = false; x0 = ev.clientX; s0 = p.scrollLeft; });
+  addEventListener('pointermove', ev => { if(!tire) return; const dx = ev.clientX - x0; if(!bouge && Math.abs(dx) > 6){ bouge = true; p.classList.add('tire'); } if(bouge) p.scrollLeft = s0 - dx; });
+  addEventListener('pointerup', () => { if(!tire) return; tire = false; p.classList.remove('tire'); });
+  p.addEventListener('click', ev => { if(bouge){ ev.stopPropagation(); ev.preventDefault(); bouge = false; } }, true);   /* un glisser n'ouvre pas de fiche */
+  const fl = document.querySelectorAll('.cb-fl');
+  fl.forEach(b => b.addEventListener('click', () => p.scrollBy({left: (b.dataset.sens === 'd' ? 1 : -1) * p.clientWidth * 0.7, behavior: 'smooth'})));
+  const majFl = () => { fl[0].disabled = p.scrollLeft < 4; fl[1].disabled = p.scrollLeft + p.clientWidth > p.scrollWidth - 4; };
+  p.addEventListener('scroll', majFl, {passive: true}); addEventListener('resize', majFl); majFl(); }
 
 /* Têtes dans les listes */
 ['#buteurs','#passeurs','#xi','#banc-moment'].forEach(id => hydrate($(id)));
