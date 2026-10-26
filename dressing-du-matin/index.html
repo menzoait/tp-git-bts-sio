@@ -13,415 +13,366 @@ img{max-width:100%}
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Jost:ital,wght@0,300..700;1,300..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Hanken+Grotesk:wght@400..700&display=swap">
 <style>
 :root{
-  /* Layout : une colonne façon appli (580px max) sur une façade de boutique la nuit. « Aujourd’hui » s’ouvre sur la vitrine en arc : enseigne dorée peinte sur la vitre, mannequin 3D sous un spot, sur un socle laqué. Les pièces du look pendent d’une tringle en laiton comme des étiquettes. Dessous, le comptoir : la journée, puis la vitrine de la saison. Barre d’onglets en verre fumé. Un seul thème, sombre, assumé. */
-  color-scheme:dark;
-  --facade:#0B0F1A;        /* façade bleu nuit */
-  --velvet:#121929;        /* velours des surfaces */
-  --velvet-hi:#192136;
-  --well:#090D16;          /* creux : champs, réglages */
-  --board:#141B2C;
-  --brass:#C9A462;         /* laiton */
-  --brass-hi:#EDD6A2;
-  --brass-lo:#8A6A38;
-  --ivory:#F2EADB;         /* texte */
-  --mist:#A9A396;
-  --stock:#EEE5D3;         /* carton des étiquettes */
-  --stock-deep:#E2D7C1;
-  --stock-ink:#2B2317;
-  --stock-brass:#7A5C2C;
-  --tile:#E8E6E1;          /* fond studio des photos produit */
+  /* Layout : une colonne façon appli de mode (580px max), blanche, sans décor. « Aujourd’hui » s’ouvre sur le studio : le mannequin en pied sur fond gris clair, la marque en haut, le look en légende. Dessous, les pièces en fiches produit, l’avis du styliste, le bouton d’action, puis la journée et les tendances, séparées par des filets. Un seul thème, clair. */
+  color-scheme:light;
+  --paper:#FFFFFF;
+  --studio:#EFEEEA;
+  --tile:#EDECE8;
   --tile-ink:rgba(32,28,22,.42);
-  --spot:255,229,182;      /* lumière du spot */
-  --line:rgba(201,164,98,.2);
-  --line-strong:rgba(201,164,98,.44);
-  --good:#8FCFAA;
-  --warn:#E8C070;
-  --warn-soft:rgba(232,192,112,.16);
-  --bad:#F0907F;
-  --on-bad:#1B0E0B;
-  --garment-line:rgba(242,234,219,.42);
-  --gild:linear-gradient(180deg,#F8E8BE 0%,#DDBB7C 36%,#A27A3F 52%,#E5C88C 66%,#BD955A 100%);
-  --brass-fill:linear-gradient(180deg,#F2DCAA 0%,#CDA866 48%,#A27B3C 100%);
-  --on-brass:#20170A;
-  --glass:rgba(9,13,22,.86);
-  --shadow:0 26px 52px -30px rgba(0,0,0,.95);
+  --ink:#151515;
+  --ink-2:#55544F;
+  --ink-3:#9A9893;
+  --rule:#E3E1DC;
+  --rule-2:#CFCDC7;
+  --good:#2F6B4F;
+  --warn:#8E5F12;
+  --bad:#B3261E;
+  --garment-line:rgba(32,28,22,.42);
   --font-display:"Bodoni Moda","Bodoni 72",Didot,"Times New Roman",serif;
-  --font-body:"Jost",Futura,"Century Gothic","Avenir Next",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --r-sm:10px;--r:16px;--r-lg:22px;
+  --font-body:"Hanken Grotesk","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;background:var(--facade)}
-body{background-color:var(--facade);background-image:radial-gradient(130% 46% at 50% 0%,rgba(201,164,98,.06),transparent 62%),repeating-linear-gradient(90deg,rgba(255,255,255,.016) 0 1px,transparent 1px 28px);color:var(--ivory);font-family:var(--font-body);font-size:15.5px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
+html{-webkit-text-size-adjust:100%;background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
 body.locked{overflow:hidden}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer;background:none;border:0;padding:0;-webkit-tap-highlight-color:transparent}
 button:disabled{cursor:default}
-:focus-visible{outline:2px solid var(--brass-hi);outline-offset:2px;border-radius:10px}
-a{color:var(--brass-hi)}
+:focus-visible{outline:1.5px solid var(--ink);outline-offset:3px}
+a{color:var(--ink)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.i{width:20px;height:20px;flex:none}
-.wrap{max-width:580px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px calc(118px + env(safe-area-inset-bottom,0px))}
-.tab{display:flex;flex-direction:column;gap:20px}
-.intro{display:flex;flex-direction:column;gap:6px;padding-top:10px}
+.i{width:20px;height:20px;flex:none;stroke-width:1.4}
+.wrap{max-width:580px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px calc(104px + env(safe-area-inset-bottom,0px))}
+.tab{display:flex;flex-direction:column;gap:28px}
+.intro{display:flex;flex-direction:column;gap:6px;padding-top:6px}
 .intro > div{display:flex;flex-direction:column;gap:6px;min-width:0}
 .intro .eyebrow{order:2}
 .intro.row{flex-direction:row;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.intro.row .display{font-size:clamp(40px,11.5vw,60px)}
-.eyebrow{font-size:14px;color:var(--mist);margin:0;letter-spacing:.02em}
-.display{width:fit-content;max-width:100%;margin:0;padding-bottom:.08em;font-family:var(--font-display);font-style:italic;font-weight:600;font-size:clamp(44px,12.5vw,62px);line-height:1.02;letter-spacing:-.01em;text-wrap:balance;background:var(--gild);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 1.5px 0 rgba(44,28,6,.95))}
-.display em{font-style:inherit}
-.h{font-size:13.5px;font-weight:500;color:var(--brass);margin:0;letter-spacing:.02em}
-.opt{font-weight:400;font-size:12.5px;margin-left:4px;color:var(--mist)}
-.muted{color:var(--mist)}
-.banner{padding:12px 16px;border-radius:var(--r);background:var(--velvet);border:1px solid var(--line-strong);font-size:14px;margin:0 0 4px}
-.card{background:linear-gradient(180deg,var(--velvet-hi),var(--velvet) 160px);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px 20px;box-shadow:var(--shadow)}
-.label-tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;line-height:1;padding:6px 10px;border-radius:999px;border:1px solid var(--line-strong);color:var(--brass-hi);white-space:nowrap;letter-spacing:.02em}
-.label-tag .i{width:13px;height:13px}
-.label-tag.quiet{border-color:var(--line);color:var(--mist)}
-.label-tag.hot{background:var(--stock);border-color:var(--stock);color:var(--stock-ink)}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0}
+.display{margin:0;font-family:var(--font-display);font-weight:500;font-size:34px;line-height:1;letter-spacing:.04em;text-transform:uppercase;font-variation-settings:"opsz" 40}
+.display em{font-style:normal}
+.h{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin:0}
+.opt{font-weight:400;letter-spacing:.04em;color:var(--ink-3);margin-left:6px}
+.muted{color:var(--ink-3)}
+.banner{padding:12px 14px;background:var(--studio);font-size:13.5px;margin:0}
+.card{background:none;border:0;border-top:1px solid var(--rule);padding:28px 0 0}
+.label-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;line-height:1;letter-spacing:.08em;text-transform:uppercase;padding:6px 8px;border:1px solid var(--rule-2);color:var(--ink);white-space:nowrap}
+.label-tag .i{width:12px;height:12px}
+.label-tag.quiet{color:var(--ink-3);border-color:var(--rule)}
+.label-tag.hot{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 
-/* La vitrine : fenêtre en arc cerclée de laiton, velours au fond, spot, socle */
-.cover{--iss:#17213C;position:relative;isolation:isolate;overflow:hidden;color:var(--ivory);background-color:var(--iss);background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.3) 0,rgba(255,255,255,.045) 19px,rgba(0,0,0,.06) 36px,rgba(0,0,0,.3) 58px);transition:background-color .9s ease;height:clamp(590px,84vh,780px);margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px))) calc(-1 * max(16px,env(safe-area-inset-right,0px)));margin-top:calc(-18px - env(safe-area-inset-top,0px))}
-.cover[data-issue="1"]{--iss:#11302A}
-.cover[data-issue="2"]{--iss:#3B1523}
-.cover.sm{height:clamp(560px,76vh,700px)}
-.cover::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(70% 52% at 50% 40%,rgba(var(--spot),.15),transparent 70%),radial-gradient(120% 60% at 50% 112%,rgba(0,0,0,.72),transparent 62%),linear-gradient(90deg,rgba(0,0,0,.5),transparent 24%,transparent 76%,rgba(0,0,0,.5))}
-.cover::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");background-size:180px 180px}
-.v-light{position:absolute;inset:0;z-index:1;pointer-events:none;filter:blur(12px);animation:lights-on 1.5s ease-out .15s both}
-.v-light::before{content:"";position:absolute;left:50%;top:6%;width:150%;height:78%;transform:translateX(-50%);clip-path:polygon(45% 0,55% 0,76% 100%,24% 100%);background:linear-gradient(180deg,rgba(var(--spot),.36),rgba(var(--spot),.1) 64%,rgba(var(--spot),0))}
-.v-light::after{content:"";position:absolute;left:50%;bottom:14.5%;width:80%;height:13%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(var(--spot),.34),rgba(var(--spot),0))}
-.cover.lit .v-light{animation:none}
-@keyframes lights-on{0%{opacity:0}24%{opacity:.55}32%{opacity:.12}52%{opacity:1}}
-.v-glass{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(112deg,transparent 20%,rgba(255,255,255,.07) 27%,rgba(255,255,255,.02) 33%,transparent 36%,transparent 60%,rgba(255,255,255,.04) 64%,transparent 69%)}
-.v-glass::before{content:"";position:absolute;top:calc(env(safe-area-inset-top,0px) + 44px);left:12px;right:12px;bottom:12px;border:1.5px solid var(--brass);border-radius:50% 50% 18px 18px / 150px 150px 18px 18px;box-shadow:0 0 0 5px #0E1320,0 0 0 6px var(--line-strong),0 0 0 100vmax var(--facade),inset 0 0 0 1px rgba(0,0,0,.6),inset 0 22px 44px -12px rgba(0,0,0,.7)}
-.cover-meta{position:absolute;z-index:5;top:calc(env(safe-area-inset-top,0px) + 14px);left:22px;right:22px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:12.5px;letter-spacing:.04em;color:var(--brass)}
-.cover-meta > span:last-child{text-align:right}
-.masthead{position:absolute;z-index:4;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 92px);margin:0;padding-left:.17em;text-align:center;font-family:var(--font-display);font-style:normal;font-weight:600;font-variation-settings:"opsz" 96;font-size:40px;line-height:1;letter-spacing:.17em;text-transform:uppercase;white-space:nowrap;pointer-events:none;user-select:none;-webkit-user-select:none;filter:drop-shadow(0 1.5px 0 rgba(52,33,8,.95)) drop-shadow(0 6px 16px rgba(0,0,0,.6))}
-.masthead .ml{display:inline-block;color:transparent;background-image:linear-gradient(105deg,transparent 42%,rgba(255,250,236,.95) 50%,transparent 58%),var(--gild);background-size:300% 100%,100% 100%;background-position:120% 0,0 0;background-repeat:no-repeat;-webkit-background-clip:text;background-clip:text;animation:mast-in 1s cubic-bezier(.2,.75,.15,1) both,gleam 1.5s ease-in-out both;animation-delay:calc(var(--d,0) * 60ms + 250ms),calc(var(--d,0) * 70ms + 1150ms)}
+/* Le studio : le mannequin en pied sur fond gris clair */
+.cover{--iss:var(--studio);position:relative;isolation:isolate;overflow:hidden;color:var(--ink);background:linear-gradient(180deg,#F4F3F0 0%,var(--studio) 58%,#E6E4DF 100%);height:clamp(560px,80vh,760px);margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px))) calc(-1 * max(16px,env(safe-area-inset-right,0px)));margin-top:calc(-18px - env(safe-area-inset-top,0px))}
+.cover.sm{height:clamp(540px,72vh,680px)}
+.cover::before{content:"";position:absolute;left:0;right:0;bottom:0;height:24%;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.035))}
+.cover-meta{position:absolute;z-index:5;top:calc(env(safe-area-inset-top,0px) + 52px);left:18px;right:18px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.masthead{position:absolute;z-index:4;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 18px);margin:0;padding-left:.32em;text-align:center;font-family:var(--font-display);font-weight:500;font-size:22px;line-height:1;letter-spacing:.32em;text-transform:uppercase;color:var(--ink);font-variation-settings:"opsz" 30;white-space:nowrap;pointer-events:none;user-select:none;-webkit-user-select:none}
+.masthead .ml{display:inline-block;animation:mast-in .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--d,0) * 35ms + 80ms)}
 .masthead.shown .ml{animation:none}
-@keyframes mast-in{from{transform:translateY(.3em);opacity:0}}
-@keyframes gleam{from{background-position:120% 0,0 0}to{background-position:-30% 0,0 0}}
-.v-sub{position:absolute;z-index:4;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 92px + var(--mh,40px) + 10px);margin:0;display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--font-display);font-style:italic;font-size:17px;line-height:1.2;color:var(--brass-hi);pointer-events:none;animation:fade-in .9s ease .9s both}
-.v-sub::before,.v-sub::after{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--brass))}
-.v-sub::after{transform:scaleX(-1)}
-.cover.lit .v-sub{animation:none}
-@keyframes fade-in{from{opacity:0}}
+@keyframes mast-in{from{opacity:0;transform:translateY(4px)}}
 .stage-host{position:absolute;inset:0;z-index:2}
 .stage-host canvas{position:absolute;inset:0;display:block;width:100%;height:100%;cursor:grab;touch-action:pan-y}
 .stage-host canvas:active{cursor:grabbing}
-.cover-lines{position:absolute;z-index:5;left:28px;bottom:172px;display:flex;flex-direction:column;gap:10px;max-width:36%;pointer-events:none;text-shadow:0 1px 14px rgba(0,0,0,.6)}
+.cover-lines{position:absolute;z-index:5;left:18px;bottom:76px;display:flex;flex-direction:column;gap:4px;max-width:48%;pointer-events:none}
 .cl-look{margin:0;display:flex;flex-direction:column;gap:2px}
-.cl-n{font-family:var(--font-display);font-style:italic;font-weight:500;font-size:36px;line-height:.95;letter-spacing:-.01em}
-.cl-of{font-size:12.5px;color:var(--mist)}
-.cl-occ{margin:0;font-size:13.5px;line-height:1.3}
-.cl-occ em{display:block;font-family:var(--font-display);font-style:italic;font-weight:500;font-size:20px;line-height:1.15;color:var(--brass-hi)}
-.cl-wx{position:absolute;z-index:5;right:24px;bottom:166px;display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding:8px 10px;border-radius:12px;color:var(--ivory);text-align:right;text-shadow:0 1px 14px rgba(0,0,0,.6)}
-.cl-row{display:flex;align-items:baseline;gap:7px}
-.cl-row b{font-family:var(--font-display);font-weight:500;font-size:30px;line-height:1;letter-spacing:-.01em;font-variant-numeric:lining-nums}
-.cl-row small{font-size:12px;color:var(--mist)}
-.cl-ic{display:flex;gap:6px;margin-top:4px;color:var(--brass-hi)}
-.cl-ic .i{width:18px;height:18px}
-.body-lines{gap:2px;bottom:172px}
-.body-lines .cl-of{margin-top:6px}
-.sticker{position:absolute;z-index:5;right:26px;top:calc(env(safe-area-inset-top,0px) + 92px + var(--mh,40px) + 58px);width:84px;height:84px;margin:0;border-radius:50%;display:grid;place-items:center;padding:12px;text-align:center;background:radial-gradient(circle at 34% 28%,#F7E4B4,#C9A462 52%,#8A6A38 100%);color:var(--on-brass);font-family:var(--font-display);font-style:italic;font-weight:600;font-size:14.5px;line-height:1.05;transform:rotate(-10deg);box-shadow:0 14px 26px -10px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.35);animation:pop .55s cubic-bezier(.2,1.5,.4,1) both;pointer-events:none}
-.sticker::before{content:"";position:absolute;inset:5px;border-radius:50%;border:1px dashed rgba(32,23,10,.45)}
-@keyframes pop{from{transform:rotate(-40deg) scale(.4);opacity:0}}
-.cover .glass{background:rgba(8,11,19,.6);border:1px solid var(--line-strong);color:var(--ivory);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2)}
-.cover :focus-visible{outline-color:var(--brass-hi)}
-.stage-bottom{position:absolute;left:26px;right:26px;bottom:28px;z-index:6;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.pager{display:inline-flex;align-items:center;gap:2px;border-radius:999px;padding:4px}
-.pg{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--brass-hi)}
+.cl-n{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.cl-of{font-size:12px;color:var(--ink-2)}
+.cl-occ{margin:0;font-size:13px;color:var(--ink-2);line-height:1.35}
+.cl-occ em{font-style:normal;display:block;color:var(--ink-2)}
+.cl-wx{position:absolute;z-index:5;right:18px;top:calc(env(safe-area-inset-top,0px) + 50px);display:flex;flex-direction:column;align-items:flex-end;gap:1px;padding:0;color:var(--ink);text-align:right}
+.cl-row{display:flex;align-items:baseline;gap:6px}
+.cl-row b{font-size:15px;font-weight:500;font-variant-numeric:tabular-nums}
+.cl-row small{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.cl-ic{display:flex;gap:6px;margin-top:2px;color:var(--ink-2)}
+.cl-ic .i{width:16px;height:16px}
+.body-lines{gap:2px;bottom:76px}
+.body-lines .cl-row b{font-size:20px}
+.body-lines .cl-of{margin-top:4px}
+.sticker{position:absolute;z-index:5;left:18px;top:calc(env(safe-area-inset-top,0px) + 74px);margin:0;padding:5px 8px;background:var(--ink);color:var(--paper);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;pointer-events:none}
+.cover .glass{background:rgba(255,255,255,.72);border:1px solid var(--rule-2);color:var(--ink);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.stage-bottom{position:absolute;left:18px;right:18px;bottom:18px;z-index:6;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pager{display:inline-flex;align-items:center;gap:0;padding:0}
+.pg{width:40px;height:40px;display:grid;place-items:center;color:var(--ink)}
 .pg:disabled{opacity:.3}
-.pager-n{font-size:13px;font-weight:500;min-width:42px;text-align:center;font-variant-numeric:tabular-nums}
+.pager-n{font-size:12px;font-weight:600;letter-spacing:.08em;min-width:44px;text-align:center;font-variant-numeric:tabular-nums}
 .tools{display:inline-flex;align-items:center;gap:6px}
-.viewseg{display:inline-flex;border-radius:999px;padding:4px;gap:2px}
-.viewseg button{min-height:40px;padding:0 14px;border-radius:999px;font-size:13px;font-weight:500;color:var(--mist)}
-.viewseg button[aria-checked="true"]{background:var(--brass-fill);color:var(--on-brass)}
-.round{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:var(--brass-hi)}
-.round[aria-pressed="true"]{background:var(--brass-fill);color:var(--on-brass);border-color:transparent}
-.drag-hint{position:absolute;left:0;right:0;bottom:92px;margin:0;text-align:center;font-size:12.5px;color:var(--mist);z-index:5;pointer-events:none}
-.flat-host{position:absolute;top:calc(env(safe-area-inset-top,0px) + 92px + var(--mh,40px) + 46px);bottom:160px;left:30px;right:30px;z-index:2;display:flex;align-items:center;justify-content:center}
-.cover.is-flat .cl-occ{display:none}
-.flat-host .board{height:100%;width:auto;max-width:100%;padding:12px;background:rgba(8,11,19,.45);background-image:none;border:1px solid var(--line);border-radius:18px}
+.viewseg{display:inline-flex;padding:0;gap:0}
+.viewseg button{min-height:40px;padding:0 12px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.viewseg button[aria-checked="true"]{color:var(--ink);text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.round{width:40px;height:40px;display:grid;place-items:center;color:var(--ink)}
+.round[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.drag-hint{display:none}
+.flat-host{position:absolute;top:calc(env(safe-area-inset-top,0px) + 104px);bottom:136px;left:30px;right:30px;z-index:2;display:flex;align-items:center;justify-content:center}
+.cover.is-flat .cl-occ{display:block}
+.flat-host .board{height:100%;width:auto;max-width:100%;padding:10px;background:none;border:0}
 .stage-msg{position:absolute;inset:0;z-index:7;display:grid;place-items:center;padding:30px}
-.stage-msg .box{max-width:320px;display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px;border-radius:var(--r-lg);text-align:center}
-.cover .stage-msg .box.glass{background:rgba(8,11,19,.78)}
+.stage-msg .box{max-width:320px;display:flex;flex-direction:column;align-items:center;gap:14px;padding:26px 22px;text-align:center}
+.cover .stage-msg .box.glass{background:rgba(255,255,255,.9)}
 .stage-msg .box p{margin:0}
-.stage-msg .big{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:30px;line-height:1.05;background:var(--gild);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stage-msg .big{font-family:var(--font-display);font-weight:500;font-size:24px;line-height:1.1;letter-spacing:.06em;text-transform:uppercase}
 .stage-msg .row{display:flex;gap:8px}
-.stage-msg .muted{font-size:13px;color:var(--mist)}
-@media (min-width:600px){.cover{margin-inline:0;margin-top:0;border-radius:var(--r-lg)}}
+.stage-msg .muted{font-size:12.5px;color:var(--ink-3)}
+@media (min-width:600px){.cover{margin-inline:0;margin-top:0}}
 
-/* Les pièces du look : étiquettes suspendues à une tringle */
-.card.look-panel{display:flex;flex-direction:column;gap:20px;padding:0;background:none;border:0;box-shadow:none}
+/* Le look : les pièces en fiches produit */
+.card.look-panel{display:flex;flex-direction:column;gap:22px;padding:0;border:0}
 .lp-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-.rail{position:relative;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px))) calc(-1 * max(16px,env(safe-area-inset-right,0px)))}
-.rail::before{content:"";position:absolute;z-index:2;top:12px;left:10px;right:10px;height:5px;border-radius:5px;background:linear-gradient(180deg,#F3DFAE,#C49E5C 55%,#7C5E2F);box-shadow:0 4px 8px rgba(0,0,0,.6);pointer-events:none}
-.rail::after{content:"";position:absolute;z-index:1;top:0;left:10px;right:10px;height:14px;background:linear-gradient(var(--brass-lo),var(--brass)) 12% 0/3px 100% no-repeat,linear-gradient(var(--brass-lo),var(--brass)) 88% 0/3px 100% no-repeat;pointer-events:none}
-.strip{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:32px max(16px,env(safe-area-inset-right,0px)) 18px max(16px,env(safe-area-inset-left,0px));scroll-padding-inline:16px;scrollbar-width:none}
+.rail{margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px))) calc(-1 * max(16px,env(safe-area-inset-right,0px)))}
+.strip{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 max(16px,env(safe-area-inset-right,0px)) 2px max(16px,env(safe-area-inset-left,0px));scroll-padding-inline:16px;scrollbar-width:none}
 .strip::-webkit-scrollbar{display:none}
-.pc{--garment-line:rgba(43,35,23,.5);--sway:0deg;position:relative;flex:0 0 136px;scroll-snap-align:start;display:flex;flex-direction:column;gap:6px;padding:22px 10px 12px;text-align:left;min-width:0;color:var(--stock-ink);background:linear-gradient(135deg,transparent 12px,var(--stock) 12.5px) top left/51% 40px no-repeat,linear-gradient(225deg,transparent 12px,var(--stock) 12.5px) top right/51% 40px no-repeat,linear-gradient(var(--stock),var(--stock)) bottom/100% calc(100% - 40px) no-repeat;border-radius:0 0 6px 6px;filter:drop-shadow(0 12px 14px rgba(0,0,0,.5));transform-origin:50% -18px;transform:rotate(var(--sway));transition:transform .35s cubic-bezier(.3,1.4,.5,1)}
-.pc:nth-child(odd){--sway:-1.6deg}
-.pc:nth-child(even){--sway:1.3deg}
-.pc:active{--sway:0deg}
-.pc::before{content:"";position:absolute;top:8px;left:50%;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:var(--facade);box-shadow:0 0 0 2px var(--brass)}
-.pc::after{content:"";position:absolute;bottom:calc(100% - 12px);left:50%;width:1.5px;height:36px;margin-left:-.75px;background:linear-gradient(var(--brass-lo),var(--brass-hi))}
-.pc-vis{position:relative;aspect-ratio:1/1.05;max-width:100%;border-radius:3px;display:grid;place-items:center;padding:2px;background:var(--stock-deep);background:color-mix(in srgb,var(--tint,#9AA0A8) 30%,var(--stock-deep))}
-.pc-vis > img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:contain}
-.pc-vis > img.ph.flat{inset:0;width:100%;height:100%;object-fit:cover}
-.pc-vis .sw-ic{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--stock-ink);color:var(--stock);padding:0}
+.pc{--garment-line:var(--tile-ink);position:relative;flex:0 0 142px;scroll-snap-align:start;display:flex;flex-direction:column;gap:8px;padding:0;text-align:left;min-width:0;color:var(--ink)}
+.pc-vis{position:relative;display:block;width:100%;aspect-ratio:3/4;max-width:100%;background:var(--tile)}
+.pc-vis > img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.pc-vis > img.ph.cutout{inset:12%;width:76%;height:76%}
+.pc-vis > img.ph.flat{object-fit:cover}
+.pc-vis .sw-ic{position:absolute;top:6px;right:6px;width:26px;height:26px;display:grid;place-items:center;background:var(--paper);color:var(--ink);padding:0}
 .pc-vis .sw-ic .i{width:14px;height:14px}
-.pc-slot{font-size:10.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--stock-brass);padding-top:2px;border-top:1px dashed rgba(43,35,23,.25)}
-.pc-name{font-family:var(--font-display);font-weight:600;font-size:15px;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.quote{position:relative;margin:0;padding:22px 22px 20px;border-radius:6px;background:var(--velvet);border:1px solid var(--line-strong);box-shadow:inset 0 0 0 5px var(--velvet),inset 0 0 0 6px var(--line);font-family:var(--font-display);font-style:italic;font-weight:500;font-size:21px;line-height:1.38;text-wrap:pretty}
-.quote::before{content:"«\00a0";color:var(--brass)}
-.quote::after{content:"\00a0»";color:var(--brass)}
-.look-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.look-actions .btn.primary{flex:1 1 150px}
+.pc-slot{order:2;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.pc-name{order:1;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.quote{margin:0;font-size:15px;line-height:1.6;color:var(--ink-2);text-wrap:pretty}
+.look-actions{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}
+.look-actions .btn.primary{flex:1 1 160px}
 .rate{display:flex;gap:6px}
-.note{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:12px 16px;border-radius:var(--r);background:var(--velvet);border:1px solid var(--line-strong);font-size:14px}
+.note{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:12px 14px;background:var(--studio);font-size:13.5px}
 .note p{margin:0;flex:1 1 220px;min-width:0}
-.ai-status{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--mist)}
+.ai-status{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--ink-3)}
 .ai-status > span:not(.label-tag){flex:1 1 160px;min-width:0}
-.stitching{flex-basis:100%;height:2px;border-radius:2px;background:repeating-linear-gradient(90deg,var(--brass) 0 8px,transparent 8px 14px);background-size:28px 2px;animation:stitch .9s linear infinite}
-@keyframes stitch{to{background-position:28px 0}}
+.stitching{flex-basis:100%;height:1px;background:linear-gradient(90deg,var(--ink) 0 30%,transparent 30%);background-size:200% 1px;animation:load 1.2s linear infinite}
+@keyframes load{from{background-position:100% 0}to{background-position:-100% 0}}
 
-/* Le comptoir : la journée */
+/* La journée */
 .day{display:flex;flex-direction:column;gap:22px;scroll-margin-top:12px}
 .day-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
-.day-t{margin:0;font-family:var(--font-display);font-style:italic;font-weight:500;font-size:32px;line-height:1;letter-spacing:-.01em}
+.day-t{margin:0;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
 .temps{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .temp{display:flex;flex-direction:column;gap:6px;min-width:0}
-.temp-label{font-size:13px;color:var(--mist)}
-.stepper{display:flex;align-items:center;justify-content:space-between;gap:4px;background:var(--well);border:1px solid var(--line);border-radius:999px;padding:5px}
-.step{width:40px;height:40px;border-radius:50%;font-size:22px;line-height:1;color:var(--on-brass);background:radial-gradient(circle at 34% 28%,#F6E2B2,#C9A462 55%,#86663A);box-shadow:0 2px 6px rgba(0,0,0,.6),inset 0 -1px 0 rgba(0,0,0,.3);flex:none}
-.step:active{transform:scale(.94)}
-.deg{font-family:var(--font-display);font-size:34px;font-weight:500;font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.01em;white-space:nowrap;line-height:1}
-.deg small{font-family:var(--font-body);font-size:13px;color:var(--mist);margin-left:2px;letter-spacing:0}
+.temp-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.stepper{display:flex;align-items:center;justify-content:space-between;gap:4px;border:1px solid var(--rule-2);padding:3px}
+.step{width:40px;height:40px;font-size:20px;line-height:1;color:var(--ink);flex:none}
+.step:active{background:var(--studio)}
+.deg{font-size:22px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1}
+.deg small{font-size:12px;color:var(--ink-3);margin-left:2px}
 .wx-toggles{display:flex;gap:8px;flex-wrap:wrap}
-.toggle{display:inline-flex;align-items:center;gap:6px;padding:9px 15px;border-radius:999px;border:1px solid var(--line-strong);font-size:14px;color:var(--ivory)}
-.toggle .i{width:16px;height:16px;color:var(--brass)}
-.toggle[aria-pressed="true"]{background:var(--brass-fill);border-color:transparent;color:var(--on-brass)}
-.toggle[aria-pressed="true"] .i{color:inherit}
-.advice{margin:0;font-size:14.5px}
-.advice::before{content:"";display:inline-block;width:7px;height:7px;background:var(--brass);transform:rotate(45deg);margin-right:10px;vertical-align:2px}
-.group{display:flex;flex-direction:column;gap:9px;min-width:0}
-.chips{display:flex;flex-wrap:wrap;gap:7px}
-.chips.scroll{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;margin-inline:-20px;padding-inline:20px;scroll-padding-inline:20px}
+.toggle{display:inline-flex;align-items:center;gap:7px;padding:0 14px;min-height:38px;border:1px solid var(--rule-2);font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.toggle .i{width:15px;height:15px}
+.toggle[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.advice{margin:0;font-size:13.5px;color:var(--ink-2)}
+.group{display:flex;flex-direction:column;gap:10px;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips.scroll{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));scroll-padding-inline:16px}
 .chips.scroll::-webkit-scrollbar{display:none}
-.chip{flex:none;padding:9px 15px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;font-size:14px;white-space:nowrap;color:var(--ivory);transition:background .15s,color .15s,border-color .15s}
-.chip[aria-checked="true"],.chip[aria-pressed="true"]{background:var(--brass-fill);border-color:transparent;color:var(--on-brass);font-weight:500}
-.chip .n{font-size:11.5px;font-weight:500;opacity:.7;margin-left:5px;font-variant-numeric:tabular-nums}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:999px;font-weight:500;font-size:15px;letter-spacing:.01em;border:1px solid transparent;white-space:nowrap;transition:transform .12s}
-.btn:active:not(:disabled){transform:scale(.98)}
-.btn.primary{background:var(--brass-fill);color:var(--on-brass);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -1px 0 rgba(0,0,0,.25),0 12px 26px -14px rgba(201,164,98,.8)}
-.btn:disabled{opacity:.5}
-.btn.big{min-height:56px;font-size:16px}
+.chip{flex:none;padding:0 14px;min-height:38px;border:1px solid var(--rule-2);background:var(--paper);font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;color:var(--ink);transition:background .15s,color .15s,border-color .15s}
+.chip[aria-checked="true"],.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.chip .n{font-weight:500;opacity:.6;margin-left:6px;font-variant-numeric:tabular-nums}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:1px solid transparent;white-space:nowrap;transition:opacity .15s}
+.btn:active:not(:disabled){opacity:.8}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn:disabled{opacity:.4}
+.btn.big{min-height:52px}
 .btn.wide{width:100%}
-.btn.ghost{background:transparent;border-color:var(--line-strong);color:var(--ivory)}
-.btn.ghost .i{color:var(--brass)}
-.btn.sm{min-height:36px;padding:0 14px;font-size:13px}
-.btn.danger{background:var(--bad);color:var(--on-bad)}
-.danger-t{color:var(--bad)!important}
+.btn.ghost{background:var(--paper);border-color:var(--ink);color:var(--ink)}
+.btn.sm{min-height:36px;padding:0 12px;font-size:11px}
+.btn.danger{background:var(--bad);color:#fff}
+.danger-t{color:var(--bad)!important;border-color:var(--bad)!important}
 .btn-row{display:grid;grid-template-columns:1fr auto;gap:8px}
-.icon-btn{width:46px;height:46px;border-radius:50%;display:inline-grid;place-items:center;border:1px solid var(--line-strong);background:transparent;color:var(--brass-hi);flex:none}
-.icon-btn[aria-pressed="true"]{background:var(--brass-fill);border-color:transparent;color:var(--on-brass)}
+.icon-btn{width:48px;height:48px;display:inline-grid;place-items:center;border:1px solid var(--rule-2);background:var(--paper);color:var(--ink);flex:none}
+.icon-btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 .icon-btn[aria-pressed="true"] .fillable{fill:currentColor}
-.imposed-card{display:flex;align-items:center;gap:12px;padding:8px;border-radius:18px;background:var(--well);border:1px solid var(--line)}
-.imposed-card .grow{flex:1;min-width:0;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.thumb{width:48px;height:48px;flex:none;border-radius:13px;background:var(--velvet-hi);display:grid;place-items:center;padding:5px;overflow:hidden}
+.imposed-card{display:flex;align-items:center;gap:12px;padding:8px;border:1px solid var(--rule)}
+.imposed-card .grow{flex:1;min-width:0;font-size:12px;letter-spacing:.05em;text-transform:uppercase;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.thumb{width:44px;height:58px;flex:none;background:var(--tile);display:grid;place-items:center;overflow:hidden}
 .thumb > *{max-width:100%;max-height:100%}
 
-/* Plateau « à plat » */
-.board{position:relative;display:grid;grid-template-columns:1fr 1.25fr .72fr;grid-template-rows:1fr 1fr .85fr;gap:6px;padding:14px;aspect-ratio:1/1.02;width:100%;max-width:100%;border-radius:var(--r);background-color:var(--board);background-image:radial-gradient(80% 60% at 50% 0%,rgba(var(--spot),.1),transparent 70%)}
-.board.mini{padding:6px;gap:2px;border-radius:14px}
+/* Vue à plat */
+.board{position:relative;display:grid;grid-template-columns:1fr 1.25fr .72fr;grid-template-rows:1fr 1fr .85fr;gap:6px;padding:14px;aspect-ratio:1/1.02;width:100%;max-width:100%;background:var(--tile)}
+.board.mini{padding:6px;gap:2px}
 .cell{min-width:0;min-height:0;display:flex;align-items:center;justify-content:center}
 .cell > *{max-width:100%;max-height:100%}
 .ph{display:block;max-width:100%;max-height:100%;object-fit:contain}
-.ph.cutout{filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
-.ph.flat{border-radius:10px;width:100%;height:100%;object-fit:cover}
+.ph.cutout{filter:drop-shadow(0 8px 10px rgba(0,0,0,.16))}
+.ph.flat{width:100%;height:100%;object-fit:cover}
 .garment{display:block;width:100%;height:100%;object-fit:contain}
 
-/* Garde-robe : un catalogue, chaque pièce sur un fond clair de studio */
-.ward-filters{display:flex;gap:22px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+/* Garde-robe : un catalogue */
+.ward-filters{display:flex;gap:22px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;border-bottom:1px solid var(--rule)}
 .ward-filters::-webkit-scrollbar{display:none}
-.wf{flex:none;padding:6px 0;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mist);border-bottom:1px solid transparent;transition:color .15s,border-color .15s}
-.wf[aria-pressed="true"]{color:var(--ivory);border-bottom-color:var(--ivory)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 10px}
+.wf{flex:none;padding:8px 0 10px;margin-bottom:-1px;font-size:11.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid transparent;transition:color .15s,border-color .15s}
+.wf[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 8px}
 @media (min-width:520px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .icard{position:relative;display:flex;flex-direction:column;gap:9px;padding:0;text-align:left;min-width:0}
-.ic-vis{--garment-line:var(--tile-ink);position:relative;display:block;width:100%;aspect-ratio:3/4;max-width:100%;border-radius:2px;background:var(--tile);overflow:hidden;transition:opacity .15s}
+.ic-vis{--garment-line:var(--tile-ink);position:relative;display:block;width:100%;aspect-ratio:3/4;max-width:100%;background:var(--tile);overflow:hidden;transition:opacity .15s}
 .ic-vis > img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:contain}
-.ic-vis > img.ph.cutout{inset:12%;width:76%;height:76%;filter:drop-shadow(0 10px 12px rgba(0,0,0,.18))}
-.ic-vis > img.ph.flat{object-fit:cover;border-radius:0}
+.ic-vis > img.ph.cutout{inset:12%;width:76%;height:76%}
+.ic-vis > img.ph.flat{object-fit:cover}
 .icard:active .ic-vis{opacity:.85}
-.icard.is-sale .ic-vis{opacity:.5}
-.ic-cap{display:flex;flex-direction:column;gap:7px;min-width:0;padding-inline:1px}
-.ic-name{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.icard.is-sale .ic-vis{opacity:.45}
+.ic-cap{display:flex;flex-direction:column;gap:7px;min-width:0}
+.ic-name{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ic-meta{display:flex;align-items:center;gap:10px;min-width:0}
 .sq{display:inline-flex;gap:4px}
-.sq i{width:9px;height:9px;background:var(--c);box-shadow:0 0 0 1px rgba(242,234,219,.22)}
+.sq i{width:9px;height:9px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
 .ic-flag{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--warn)}
-.cdots{display:inline-flex;flex:none;padding-right:3px}
-.cdot{width:12px;height:12px;border-radius:50%;background:var(--c);border:1px solid var(--garment-line);margin-right:-3px}
-.badge{font-size:10.5px;font-weight:500;line-height:1;padding:5px 7px;border-radius:3px;background:var(--stock);color:var(--stock-ink);letter-spacing:.06em;text-transform:uppercase}
-.empty{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:20px;border-radius:var(--r-lg);background:var(--well);border:1px dashed var(--line-strong);color:var(--mist)}
+.cdots{display:inline-flex;flex:none;gap:3px}
+.cdot{width:9px;height:9px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.badge{font-size:10.5px;font-weight:600;line-height:1;padding:5px 7px;background:var(--ink);color:var(--paper);letter-spacing:.08em;text-transform:uppercase}
+.empty{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:22px 0;color:var(--ink-2);border-top:1px solid var(--rule)}
 .empty p{margin:0;max-width:44ch}
 
 /* Historique */
-.hist{display:flex;flex-direction:column;gap:12px}
-.hcard{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;padding:16px;border-radius:var(--r-lg);background:var(--velvet);border:1px solid var(--line)}
-.hdate{display:flex;flex-direction:column;align-items:center;gap:3px;padding-top:2px}
-.hdate .d{font-family:var(--font-display);font-size:34px;line-height:1;font-weight:600;font-variant-numeric:lining-nums;background:var(--gild);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hdate .m{font-size:11.5px;color:var(--brass)}
+.hist{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.hcard{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;padding:18px 0;border-bottom:1px solid var(--rule)}
+.hdate{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding-top:2px}
+.hdate .d{font-family:var(--font-display);font-size:30px;line-height:.9;font-weight:500;font-variant-numeric:lining-nums}
+.hdate .m{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 .hc-main{min-width:0;display:flex;flex-direction:column;gap:10px}
-.hc-day{margin:0;font-size:14.5px;line-height:1.35}
-.hc-st{display:block;font-weight:500;color:var(--brass-hi)}
-.hc-ctx{color:var(--mist);font-size:13px}
+.hc-day{margin:0;font-size:13.5px;line-height:1.4}
+.hc-st{display:block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.hc-ctx{color:var(--ink-2)}
 .hc-pieces{display:flex;gap:6px;flex-wrap:wrap}
-.hc-pc{--garment-line:var(--tile-ink);position:relative;width:50px;aspect-ratio:3/4;border-radius:2px;background:var(--tile);overflow:hidden}
+.hc-pc{--garment-line:var(--tile-ink);position:relative;width:52px;aspect-ratio:3/4;background:var(--tile);overflow:hidden}
 .hc-pc > img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .hc-pc > img.ph.cutout{inset:10%;width:80%;height:80%}
 .hc-pc > img.ph.flat{object-fit:cover}
 .hc-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .hc-actions .icon-btn{width:38px;height:38px}
-.hc-actions .icon-btn .i{width:18px;height:18px}
+.hc-actions .icon-btn .i{width:17px;height:17px}
 
 /* Silhouette */
-.bform{display:flex;flex-direction:column;gap:22px}
-.sl{display:flex;flex-direction:column;gap:4px}
+.bform{display:flex;flex-direction:column;gap:24px}
+.sl{display:flex;flex-direction:column;gap:6px}
 .sl-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.sl-top label{font-weight:500;font-size:14.5px}
-.sl-top output{font-family:var(--font-display);font-size:21px;font-weight:500;color:var(--brass-hi);font-variant-numeric:lining-nums tabular-nums}
-.sl input[type="range"]{width:100%;height:30px;accent-color:var(--brass)}
-.sl-ends{display:flex;justify-content:space-between;font-size:12px;color:var(--mist)}
-.fine{border-top:1px solid var(--line);padding-top:14px}
-.fine summary{cursor:pointer;font-weight:500;font-size:14.5px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.sl-top label{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.sl-top output{font-size:15px;font-weight:500;font-variant-numeric:tabular-nums}
+.sl input[type="range"]{width:100%;height:28px;accent-color:var(--ink)}
+.sl-ends{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.fine{border-top:1px solid var(--rule);padding-top:16px}
+.fine summary{cursor:pointer;font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;list-style:none;display:flex;justify-content:space-between;align-items:center}
 .fine summary::-webkit-details-marker{display:none}
-.fine summary::after{content:"+";font-size:20px;color:var(--brass)}
+.fine summary::after{content:"+";font-size:18px;font-weight:400}
 .fine[open] summary::after{content:"−"}
-.fine[open] summary{margin-bottom:14px}
+.fine[open] summary{margin-bottom:16px}
 .fine .sl + .sl{margin-top:16px}
 .swatch-row{display:flex;gap:10px;flex-wrap:wrap}
-.swb{width:40px;height:40px;border-radius:50%;background:var(--c);border:3px solid var(--velvet);box-shadow:0 0 0 1px var(--line-strong)}
-.swb[aria-checked="true"]{box-shadow:0 0 0 2px var(--brass-hi)}
-.privacy{display:flex;gap:10px;align-items:flex-start;margin:0;padding:12px 16px;border-radius:var(--r);background:var(--well);border:1px solid var(--line);font-size:13.5px}
-.privacy .i{color:var(--brass);margin-top:1px}
+.swb{width:36px;height:36px;border-radius:50%;background:var(--c);border:3px solid var(--paper);box-shadow:0 0 0 1px var(--rule-2)}
+.swb[aria-checked="true"]{box-shadow:0 0 0 1.5px var(--ink)}
+.privacy{display:flex;gap:10px;align-items:flex-start;margin:0;padding:12px 14px;background:var(--studio);font-size:13px;color:var(--ink-2)}
+.privacy .i{color:var(--ink);margin-top:1px;width:17px;height:17px}
 
 /* Réglages, fiches et formulaires */
-.set{display:flex;flex-direction:column;gap:18px}
+.set{display:flex;flex-direction:column;gap:20px}
 .set-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .set-row.col{flex-direction:column;align-items:stretch;gap:6px}
 .set-row > div{flex:1 1 220px;min-width:0}
-.set-t{margin:0;font-size:15.5px;font-weight:500}
-.set-d{margin:2px 0 0;font-size:13px;color:var(--mist)}
+.set-t{margin:0;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.set-d{margin:3px 0 0;font-size:13px;color:var(--ink-2)}
 .row-btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.foot-note{margin:0;font-size:13px;color:var(--mist)}
-.confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px}
-.scrim{position:fixed;inset:0;background:rgba(3,5,10,.66);z-index:40;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
-.sheet{position:fixed;left:0;right:0;bottom:0;z-index:41;max-height:92vh;max-height:92dvh;display:flex;flex-direction:column;background:linear-gradient(180deg,var(--velvet-hi),var(--velvet) 180px);border:1px solid var(--line-strong);border-bottom:0;border-radius:28px 28px 0 0;box-shadow:0 -14px 50px rgba(0,0,0,.7);max-width:620px;margin:0 auto;padding-bottom:env(safe-area-inset-bottom,0px)}
-.sheet::before{content:"";flex:none;align-self:center;width:42px;height:4px;border-radius:4px;background:var(--brass-lo);margin-top:9px}
+.foot-note{margin:0;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13.5px}
+.scrim{position:fixed;inset:0;background:rgba(20,20,20,.36);z-index:40}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:41;max-height:92vh;max-height:92dvh;display:flex;flex-direction:column;background:var(--paper);max-width:620px;margin:0 auto;padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -10px 40px rgba(0,0,0,.12)}
+.sheet::before{content:"";flex:none;align-self:center;width:36px;height:3px;background:var(--rule-2);margin-top:8px}
 .sheet-head,.sheet-body,.sheet-foot{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
-.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:8px 12px;border-bottom:1px solid var(--line)}
-.sheet-head h2{margin:0;font-family:var(--font-display);font-style:italic;font-size:28px;font-weight:500;line-height:1.05;letter-spacing:-.01em;min-width:0;overflow-wrap:anywhere}
-.sheet-body{overflow-y:auto;padding-block:16px 18px;display:flex;flex-direction:column;gap:18px;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
-.sheet-foot{padding-block:12px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
-.form{display:flex;flex-direction:column;gap:18px}
-.field{display:flex;flex-direction:column;gap:6px;min-width:0}
-.field > .fl{font-size:13.5px;font-weight:500;color:var(--brass)}
-.field small{font-weight:400;color:var(--mist)}
-.in{width:100%;min-height:46px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:var(--well);font-size:16px;color:var(--ivory)}
-.in::placeholder{color:rgba(169,163,150,.6)}
-.in:focus{border-color:var(--brass);outline:none}
-select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--brass) 50%),linear-gradient(135deg,var(--brass) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:36px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.seg{display:flex;background:var(--well);border:1px solid var(--line);padding:4px;border-radius:999px;gap:4px}
-.seg.wrapping{flex-wrap:wrap;border-radius:22px}
-.seg-b{flex:1 1 auto;min-height:40px;padding:0 12px;border-radius:999px;font-size:14px;white-space:nowrap;color:var(--mist)}
-.seg-b[aria-checked="true"]{background:var(--velvet-hi);box-shadow:inset 0 0 0 1px var(--line-strong);color:var(--brass-hi);font-weight:500}
-.seg-b .i{width:16px;height:16px;vertical-align:-3px;margin-right:4px}
-.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:7px}
-.sw{position:relative;display:flex;align-items:center;gap:7px;padding:7px 10px 7px 7px;border-radius:999px;border:1px solid var(--line);font-size:13px;text-align:left;min-width:0}
-.sw[aria-pressed="true"]{border-color:var(--brass);background:rgba(201,164,98,.12)}
-.sw-dot{width:20px;height:20px;border-radius:50%;flex:none;background:var(--c);border:1px solid var(--garment-line)}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px 14px;border-bottom:1px solid var(--rule)}
+.sheet-head h2{margin:0;font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;line-height:1.3;min-width:0;overflow-wrap:anywhere}
+.sheet-head .icon-btn{width:40px;height:40px;border:0}
+.sheet-body{overflow-y:auto;padding-block:18px 18px;display:flex;flex-direction:column;gap:20px;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.sheet-foot{padding-block:12px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:10px}
+.form{display:flex;flex-direction:column;gap:20px}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.field > .fl{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.field small{font-weight:400;letter-spacing:.04em;color:var(--ink-3)}
+.in{width:100%;min-height:46px;padding:10px 0;border:0;border-bottom:1px solid var(--rule-2);background:transparent;font-size:16px;color:var(--ink);border-radius:0}
+.in::placeholder{color:var(--ink-3)}
+.in:focus{border-bottom-color:var(--ink);outline:none}
+select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 10px) 50%,calc(100% - 5px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:24px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.seg{display:flex;border:1px solid var(--rule-2);padding:3px;gap:3px}
+.seg.wrapping{flex-wrap:wrap}
+.seg-b{flex:1 1 auto;min-height:38px;padding:0 10px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;color:var(--ink-3)}
+.seg-b[aria-checked="true"]{background:var(--ink);color:var(--paper)}
+.seg-b .i{width:15px;height:15px;vertical-align:-3px;margin-right:5px}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:6px}
+.sw{position:relative;display:flex;align-items:center;gap:8px;padding:8px 10px 8px 8px;border:1px solid var(--rule);font-size:12px;text-align:left;min-width:0}
+.sw[aria-pressed="true"]{border-color:var(--ink)}
+.sw-dot{width:16px;height:16px;flex:none;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.14)}
 .sw-dot.pat{background:repeating-linear-gradient(45deg,#C2302A 0 4px,#E2BE3A 4px 8px,#2F67C8 8px 12px)}
 .sw-l{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sw-n{position:absolute;top:-7px;right:-5px;width:19px;height:19px;border-radius:50%;background:var(--brass-fill);color:var(--on-brass);font-size:11px;font-weight:600;display:grid;place-items:center}
+.sw-n{position:absolute;top:-7px;right:-5px;width:18px;height:18px;background:var(--ink);color:var(--paper);font-size:10.5px;font-weight:600;display:grid;place-items:center}
 .switches{display:flex;flex-wrap:wrap;gap:8px}
-.switch{display:inline-flex;align-items:center;gap:10px;padding:7px 14px 7px 7px;border-radius:999px;border:1px solid var(--line);font-size:14px}
+.switch{display:inline-flex;align-items:center;gap:10px;padding:8px 12px 8px 8px;border:1px solid var(--rule);font-size:12px;letter-spacing:.04em}
 .switch.bare{padding:4px;border:0;background:none}
-.knob{width:40px;height:24px;border-radius:999px;background:var(--well);box-shadow:inset 0 0 0 1px var(--line-strong);position:relative;flex:none;transition:background .15s}
-.knob::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--mist);box-shadow:0 1px 3px rgba(0,0,0,.5);transition:transform .15s,background .15s}
-.switch[aria-pressed="true"] .knob{background:var(--brass-fill);box-shadow:none}
-.switch[aria-pressed="true"] .knob::after{transform:translateX(16px);background:var(--ivory)}
-.switch:disabled{opacity:.5}
-.ph-drop{width:100%;display:flex;flex-direction:column;align-items:center;gap:7px;padding:28px 18px;border:1.5px dashed var(--line-strong);border-radius:20px;background:var(--well);text-align:center}
-.ph-drop .i{width:32px;height:32px;color:var(--brass)}
-.ph-drop span{font-size:13px;color:var(--mist);max-width:36ch}
+.knob{width:38px;height:22px;border-radius:11px;background:var(--rule-2);position:relative;flex:none;transition:background .15s}
+.knob::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--paper);box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .15s}
+.switch[aria-pressed="true"] .knob{background:var(--ink)}
+.switch[aria-pressed="true"] .knob::after{transform:translateX(16px)}
+.switch:disabled{opacity:.4}
+.ph-drop{width:100%;display:flex;flex-direction:column;align-items:center;gap:8px;padding:30px 18px;border:1px dashed var(--rule-2);background:var(--paper);text-align:center}
+.ph-drop strong{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.ph-drop .i{width:28px;height:28px;color:var(--ink)}
+.ph-drop span{font-size:13px;color:var(--ink-2);max-width:36ch}
 .ph-edit{display:flex;flex-direction:column;gap:12px}
-.ph-stage{border-radius:20px;background-color:var(--well);background-image:radial-gradient(80% 60% at 50% 0%,rgba(var(--spot),.14),transparent 70%);border:1px solid var(--line);display:grid;place-items:center;padding:14px;min-height:200px}
+.ph-stage{background:var(--tile);display:grid;place-items:center;padding:14px;min-height:200px}
 .ph-stage canvas,.ph-stage img{display:block;max-width:100%;max-height:260px;width:auto;height:auto}
-.ph-stage canvas.cut,.ph-stage img.cutout{filter:drop-shadow(0 6px 10px rgba(0,0,0,.4))}
-.ph-stage .garment{width:200px;height:200px}
+.ph-stage canvas.cut,.ph-stage img.cutout{filter:drop-shadow(0 8px 10px rgba(0,0,0,.16))}
+.ph-stage .garment{width:200px;height:260px}
 .ph-ctrl{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.range{display:flex;flex-direction:column;gap:4px;flex:1 1 200px;font-size:13px;color:var(--mist)}
-.range input{width:100%;accent-color:var(--brass)}
-.confirm-q{margin:0;font-family:var(--font-display);font-style:italic;font-size:22px}
-.crop{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;padding:12px 14px;border-radius:var(--r);background:var(--well);border:1px solid var(--line)}
+.range{display:flex;flex-direction:column;gap:4px;flex:1 1 200px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.range input{width:100%;accent-color:var(--ink)}
+.confirm-q{margin:0;font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.crop{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;padding:12px 0;border-top:1px solid var(--rule)}
 .crop[hidden]{display:none}
 .crop .range{flex:none}
-.hint{margin:0;font-size:13px;color:var(--mist)}
-.ai-line{margin:0;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px}
+.hint{margin:0;font-size:12.5px;color:var(--ink-2)}
+.ai-line{margin:0;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px}
 .ai-line:empty{display:none}
 .pick-group{display:flex;flex-direction:column;gap:8px}
-.pick-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:12px 8px}
-.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;pointer-events:none;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
-.tabbar-in{pointer-events:auto;max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;padding:6px;border-radius:28px;background:var(--glass);border:1px solid var(--line-strong);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);box-shadow:0 20px 44px -16px rgba(0,0,0,.9)}
-.tabbtn{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 0 7px;border-radius:22px;font-size:10.5px;color:var(--mist);font-weight:500;letter-spacing:.02em;min-width:0;transition:color .2s}
+.pick-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:22px 8px}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--rule);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:max(8px,env(safe-area-inset-left,0px));padding-right:max(8px,env(safe-area-inset-right,0px))}
+.tabbar-in{max-width:580px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.tabbtn{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0 9px;font-size:9.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);min-width:0;transition:color .15s}
 .tabbtn span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;padding-inline:2px}
-.tabbtn .i{width:22px;height:22px}
-.tabbtn[aria-current="page"]{color:var(--brass-hi);background:radial-gradient(70% 90% at 50% 0%,rgba(var(--spot),.2),transparent 72%)}
-.tabbtn[aria-current="page"]::after{content:"";position:absolute;top:0;left:50%;width:20px;height:2px;margin-left:-10px;border-radius:2px;background:var(--brass-hi);box-shadow:0 0 10px rgba(var(--spot),.9)}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(100px + env(safe-area-inset-bottom,0px));z-index:50;background:var(--stock);color:var(--stock-ink);padding:11px 18px;border-radius:999px;font-size:14px;font-weight:500;width:max-content;max-width:calc(100% - 32px);box-shadow:0 18px 40px -14px rgba(0,0,0,.9)}
+.tabbtn .i{width:21px;height:21px}
+.tabbtn[aria-current="page"]{color:var(--ink)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:50;background:var(--ink);color:var(--paper);padding:12px 18px;font-size:13px;width:max-content;max-width:calc(100% - 32px)}
 
-/* La vitrine de la saison, goûts, ajout par référence */
-.trends,.taste{display:flex;flex-direction:column;gap:18px}
-.tr-title{margin:0;font-family:var(--font-display);font-style:italic;font-weight:500;font-size:32px;line-height:1;letter-spacing:-.01em}
-.tr-head{display:flex;flex-direction:column;gap:6px}
-.tr-lead{margin:0;font-size:14px;color:var(--mist);max-width:46ch}
-.tr-mine{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin-inline:-20px;padding-inline:20px;scroll-padding-inline:20px}
+/* Tendances, goûts, ajout par référence */
+.trends,.taste{display:flex;flex-direction:column;gap:20px}
+.tr-title{margin:0;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.tr-head{display:flex;flex-direction:column;gap:8px}
+.tr-lead{margin:0;font-size:13.5px;color:var(--ink-2);max-width:46ch}
+.tr-mine{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));scroll-padding-inline:16px}
 .tr-mine::-webkit-scrollbar{display:none}
-.tr-pc{flex:0 0 96px;display:flex;flex-direction:column;gap:7px;text-align:left;min-width:0}
+.tr-pc{flex:0 0 104px;display:flex;flex-direction:column;gap:7px;text-align:left;min-width:0}
 .tr-pc .ic-vis{padding:0}
-.tr-tip{margin:0;font-family:var(--font-display);font-style:italic;font-size:18px;line-height:1.42;text-wrap:pretty}
-.tr-have{position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--ivory);color:var(--facade);font-size:11px;font-weight:600;line-height:1}
-.tr-more summary{font-size:14px;color:var(--brass-hi)}
+.tr-tip{margin:0;font-family:var(--font-display);font-size:19px;line-height:1.4;text-wrap:pretty}
+.tr-have{position:absolute;top:5px;right:5px;width:17px;height:17px;display:grid;place-items:center;background:var(--paper);color:var(--ink);font-size:10px;font-weight:700;line-height:1}
+.tr-more summary{font-size:11.5px}
 .tr-more[open]{display:flex;flex-direction:column;gap:14px}
 .tr-more[open] summary{margin-bottom:0}
 .tr-colors{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 8px}
-.tr-col{position:relative;display:flex;flex-direction:column;align-items:stretch;gap:7px;font-size:12.5px;color:var(--ivory);min-width:0;text-align:left}
-.tr-col .dot{width:100%;height:58px;border-radius:4px 4px 0 0;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/10px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/10px 100%}
+.tr-col{position:relative;display:flex;flex-direction:column;align-items:stretch;gap:7px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);min-width:0;text-align:left}
+.tr-col .dot{width:100%;height:56px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
 .chip.static{cursor:default}
 .chip.own{border-color:var(--good);color:var(--good);background:transparent}
 .chip.own::before{content:"✓ "}
 .tr-tips{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
-.tr-tips li{position:relative;padding-left:22px;font-size:14.5px;line-height:1.55}
-.tr-tips li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;background:var(--brass);transform:rotate(45deg)}
-.tr-foot{margin:0;font-size:12px;color:var(--mist);overflow-wrap:anywhere}
-.tr-foot a{color:var(--brass-hi);text-underline-offset:2px}
+.tr-tips li{position:relative;padding-left:18px;font-size:13.5px;line-height:1.55;color:var(--ink-2)}
+.tr-tips li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:1px;background:var(--ink)}
+.tr-foot{margin:0;font-size:11.5px;color:var(--ink-3);overflow-wrap:anywhere}
+.tr-foot a{color:var(--ink-2);text-underline-offset:2px}
 .ref-box{display:flex;flex-direction:column;gap:12px}
-.ref-result{display:grid;grid-template-columns:104px 1fr;gap:14px;align-items:start;padding:12px;border-radius:var(--r);background:var(--well);border:1px solid var(--line)}
-.ref-vis{aspect-ratio:1;max-width:100%;border-radius:4px;display:grid;place-items:center;background:var(--tile)}
-.ref-vis{position:relative}
-.ref-vis > img{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);object-fit:contain}
+.ref-result{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:start;padding:12px 0;border-top:1px solid var(--rule)}
+.ref-vis{position:relative;aspect-ratio:3/4;max-width:100%;background:var(--tile)}
+.ref-vis > img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .ref-text{display:flex;flex-direction:column;gap:6px;min-width:0}
-.ref-name{margin:0;font-family:var(--font-display);font-weight:600;font-size:17px}
-.ref-q{margin:4px 0 0;font-family:var(--font-display);font-style:italic;font-size:22px}
+.ref-name{margin:0;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.ref-q{margin:4px 0 0;font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
 .ok{margin:0;font-size:13px;color:var(--good)}
-@media (max-width:360px){.grid{grid-template-columns:1fr 1fr}.viewseg button{padding:0 10px}.ref-result{grid-template-columns:80px 1fr}.tr-colors{grid-template-columns:repeat(3,minmax(0,1fr))}.cl-n{font-size:34px}.pc{flex-basis:124px}}
+@media (max-width:360px){.hcard{grid-template-columns:38px 1fr}.viewseg button{padding:0 9px}.ref-result{grid-template-columns:80px 1fr}.tr-colors{grid-template-columns:repeat(3,minmax(0,1fr))}.pc{flex-basis:128px}}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -431,19 +382,16 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
 
   <section id="tab-today" class="tab" aria-labelledby="t-today">
     <div class="cover" id="stage" data-issue="0">
-      <div class="v-light" aria-hidden="true"></div>
-      <div class="v-glass" aria-hidden="true"></div>
       <div class="cover-meta"><span id="today-date">Aujourd’hui</span><span id="issue-n"></span></div>
       <h1 class="masthead" id="t-today"><span class="mh-l" aria-hidden="true"><span class="ml" style="--d:0">D</span><span class="ml" style="--d:1">r</span><span class="ml" style="--d:2">e</span><span class="ml" style="--d:3">s</span><span class="ml" style="--d:4">s</span><span class="ml" style="--d:5">i</span><span class="ml" style="--d:6">n</span><span class="ml" style="--d:7">g</span></span><span class="sr">Dressing du matin : qu’est-ce que je mets ?</span></h1>
-      <p class="v-sub" aria-hidden="true">du matin</p>
-      <div class="stage-host" id="stage-host" data-k="0.96" data-c="0.56"></div>
+      <div class="stage-host" id="stage-host" data-k="0.71" data-c="0.43"></div>
       <div class="flat-host" id="flat-host" hidden></div>
       <div class="cover-lines">
         <p class="cl-look" aria-live="polite"><span class="cl-n" id="look-n">Look 1</span></p>
         <p class="cl-occ" id="cover-occ"></p>
       </div>
       <button class="cl-wx" id="wx-pill" data-action="goto-day"></button>
-      <p class="sticker" id="sticker" hidden>Dans la tendance</p>
+      <p class="sticker" id="sticker" hidden>Tendance</p>
       <div class="stage-bottom">
         <div class="pager glass" role="group" aria-label="Choisir le look">
           <button class="pg" id="pg-prev" data-action="look" data-d="-1" aria-label="Look précédent"></button>
@@ -527,12 +475,9 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
 
   <section id="tab-body" class="tab" aria-labelledby="t-body" hidden>
     <div class="cover sm" id="stage2" data-issue="1">
-      <div class="v-light" aria-hidden="true"></div>
-      <div class="v-glass" aria-hidden="true"></div>
       <div class="cover-meta"><span>Ton mannequin</span></div>
       <h1 class="masthead" id="t-body"><span class="mh-l" aria-hidden="true"><span class="ml" style="--d:0">S</span><span class="ml" style="--d:1">i</span><span class="ml" style="--d:2">l</span><span class="ml" style="--d:3">h</span><span class="ml" style="--d:4">o</span><span class="ml" style="--d:5">u</span><span class="ml" style="--d:6">e</span><span class="ml" style="--d:7">t</span><span class="ml" style="--d:8">t</span><span class="ml" style="--d:9">e</span></span><span class="sr">Silhouette</span></h1>
-      <p class="v-sub" aria-hidden="true">sur mesure</p>
-      <div class="stage-host" id="stage-host-2" data-k="0.96" data-c="0.56"></div>
+      <div class="stage-host" id="stage-host-2" data-k="0.72" data-c="0.44"></div>
       <div class="cover-lines body-lines" id="body-lines" aria-hidden="true"></div>
       <div class="stage-bottom" style="justify-content:flex-end">
         <button class="round glass" id="spin2" data-action="spin" aria-pressed="false" aria-label="Rotation automatique"></button>
@@ -554,7 +499,7 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
 
   <section id="tab-settings" class="tab" aria-labelledby="t-set" hidden>
     <div class="intro">
-      <p class="eyebrow">Version 5</p>
+      <p class="eyebrow">Version 6</p>
       <h1 class="display" id="t-set"><em>Réglages</em></h1>
     </div>
     <div id="settings" class="tab" style="gap:14px"></div>
@@ -1321,414 +1266,471 @@ const tintOf = (it) => colorHex(((it && it.colors) || [])[0] === "imprime" ? ((i
    Atelier 3D : petit moteur WebGL qui construit le mannequin
    et habille les pièces (formes génériques aux couleurs du vêtement)
    ================================================================ */
+/* Mannequin et vêtements en champs de distance, maillés par « surface nets ». Tourne dans un worker. */
+function DM_MESHER(scope, inWorker) {
+  const sqrt = Math.sqrt, abs = Math.abs, max = Math.max, min = Math.min, cos = Math.cos;
+  const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+  function smin(a, b, k) { const h = max(k - abs(a - b), 0) / k; return min(a, b) - h * h * k * 0.25; }
+  function smax(a, b, k) { const h = max(k - abs(a - b), 0) / k; return max(a, b) + h * h * k * 0.25; }
+  function ellD(x, y, z, rx, ry, rz) {
+    const a = x / rx, b = y / ry, c = z / rz;
+    const k0 = sqrt(a * a + b * b + c * c);
+    const a1 = a / rx, b1 = b / ry, c1 = c / rz;
+    const k1 = sqrt(a1 * a1 + b1 * b1 + c1 * c1);
+    return k1 < 1e-12 ? -min(rx, min(ry, rz)) : (k0 * (k0 - 1)) / k1;
+  }
+  const E = (c, r) => ({cx: c[0], cy: c[1], cz: c[2], rx: r[0], ry: r[1], rz: r[2]});
+  const ell = (e, x, y, z) => ellD(x - e.cx, y - e.cy, z - e.cz, e.rx, e.ry, e.rz);
+  function mkCone(a, b, r1, r2) {
+    const bax = b[0] - a[0], bay = b[1] - a[1], baz = b[2] - a[2];
+    const l2 = bax * bax + bay * bay + baz * baz, rr = r1 - r2;
+    return {ax: a[0], ay: a[1], az: a[2], bax, bay, baz, l2, rr, a2: l2 - rr * rr, il2: 1 / l2, r1, r2};
+  }
+  function cone(c, px, py, pz) {
+    const pax = px - c.ax, pay = py - c.ay, paz = pz - c.az;
+    const y = pax * c.bax + pay * c.bay + paz * c.baz, z = y - c.l2;
+    const qx = pax * c.l2 - c.bax * y, qy = pay * c.l2 - c.bay * y, qz = paz * c.l2 - c.baz * y;
+    const x2 = qx * qx + qy * qy + qz * qz, y2 = y * y * c.l2, z2 = z * z * c.l2;
+    const k = Math.sign(c.rr) * c.rr * c.rr * x2;
+    if (Math.sign(z) * c.a2 * z2 > k) return sqrt(x2 + z2) * c.il2 - c.r2;
+    if (Math.sign(y) * c.a2 * y2 < k) return sqrt(x2 + y2) * c.il2 - c.r1;
+    return (sqrt(x2 * c.a2 * c.il2) + y * c.rr) * c.il2 - c.r1;
+  }
+  function torus(x, y, z, cx, cy, cz, R, r) { const qx = sqrt((x - cx) * (x - cx) + (z - cz) * (z - cz)) - R; const qy = y - cy; return sqrt(qx * qx + qy * qy) - r; }
+  function rbox(x, y, z, cx, cy, cz, hx, hy, hz, r) {
+    const qx = abs(x - cx) - hx + r, qy = abs(y - cy) - hy + r, qz = abs(z - cz) - hz + r;
+    const ox = max(qx, 0), oy = max(qy, 0), oz = max(qz, 0);
+    return sqrt(ox * ox + oy * oy + oz * oz) + min(max(qx, max(qy, qz)), 0) - r;
+  }
+  const lerp3 = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+
+  /* ---------- le corps ---------- */
+  function makeBody(B) {
+    const f = B.sex === "f";
+    const H = clamp(B.h, 1.3, 2.15), s = H / 1.78;
+    const bmi = B.w / (H * H);
+    const g = clamp(1 + (bmi - (f ? 21.5 : 22.5)) * 0.03 + B.build * 0.13, 0.78, 1.75);
+    const gl = Math.pow(g, 0.85), gn = Math.pow(g, 0.6);
+    const belly = max(0, bmi - 25) * 0.011;
+    const sh = 1 + 0.07 * B.sh, hp = 1 + 0.08 * B.hp;
+    const P = (x, y, z) => [x * s, y * s, z * s];
+    const R = (x, y, z) => [x * s, y * s, z * s];
+    const D = {s, H, f, g};
+    D.head = E(P(0, 1.668, 0.004), R(f ? 0.073 : 0.078, f ? 0.104 : 0.108, f ? 0.09 : 0.094));
+    D.jaw = E(P(0, 1.603, 0.024), R(f ? 0.05 : 0.056, f ? 0.048 : 0.052, f ? 0.062 : 0.068));
+    D.nose = E(P(0, 1.642, 0.086), R(0.011, 0.022, 0.014));
+    D.neck = mkCone(P(0, 1.462, -0.008), P(0, 1.6, -0.002), (f ? 0.047 : 0.057) * s * gn, (f ? 0.042 : 0.05) * s * gn);
+    D.traps = E(P(0, 1.466, -0.022), R((f ? 0.1 : 0.125) * sh, 0.045, 0.068 * g));
+    D.chest = E(P(0, 1.318, 0), R((f ? 0.132 : 0.155) * sh * g, f ? 0.15 : 0.165, (f ? 0.094 : 0.108) * g));
+    D.pec = f ? E(P(0.056, 1.246, 0.072), R(0.058 * gn, 0.055 * gn, 0.052 * gn)) : E(P(0.062, 1.338, 0.06), R(0.068 * g, 0.058, 0.04 * g));
+    D.abd = E(P(0, 1.12, 0.012 + belly * 0.5), R((f ? 0.114 : 0.134) * g, f ? 0.12 : 0.13, (f ? 0.088 : 0.098) * g + belly));
+    D.pelvis = E(P(0, 0.958, 0), R((f ? 0.176 : 0.158) * hp * Math.pow(g, 0.8), f ? 0.112 : 0.108, (f ? 0.118 : 0.112) * g));
+    D.glute = f ? E(P(0.074 * hp, 0.895, -0.058), R(0.092 * g, 0.1, 0.082 * g)) : E(P(0.068 * hp, 0.9, -0.054), R(0.083 * g, 0.098, 0.074 * g));
+    const Sx = (f ? 0.162 : 0.185) * sh, Ex = (f ? 0.236 : 0.262) * sh, Wx = (f ? 0.272 : 0.3) * sh;
+    D.S = P(Sx, 1.445, -0.012); D.El = P(Ex, 1.165, -0.02); D.W = P(Wx, 0.925, 0.002);
+    D.delt = E(P(Sx + 0.002, 1.43, -0.006), R((f ? 0.044 : 0.05) * gl, f ? 0.062 : 0.068, (f ? 0.048 : 0.054) * gl));
+    D.upper = mkCone(D.S, D.El, (f ? 0.042 : 0.047) * s * gl, (f ? 0.032 : 0.036) * s * gl);
+    D.bic = E(P((Sx + Ex) / 2 + 0.003, 1.31, 0.008), R((f ? 0.034 : 0.04) * gl, 0.09, (f ? 0.034 : 0.04) * gl));
+    D.fore = mkCone(D.El, D.W, (f ? 0.032 : 0.037) * s * gl, (f ? 0.022 : 0.025) * s * gl);
+    D.foreM = E(P(Ex + 0.009, 1.1, -0.008), R((f ? 0.031 : 0.036) * gl, 0.085, (f ? 0.031 : 0.036) * gl));
+    D.hand = E(P(Wx + 0.017, 0.832, 0.012), R(f ? 0.019 : 0.021, f ? 0.08 : 0.086, f ? 0.04 : 0.044));
+    D.thumb = mkCone(P(Wx + 0.003, 0.882, 0.032), P(Wx + 0.008, 0.828, 0.056), 0.012 * s, 0.01 * s);
+    D.Hj = P(0.088 * hp, 0.915, 0); D.K = P(0.102, 0.5, 0.008); D.A = P(0.112, 0.085, -0.012);
+    D.thigh = mkCone(D.Hj, D.K, (f ? 0.095 : 0.09) * s * gl, (f ? 0.05 : 0.051) * s * gl);
+    D.quad = E(P(0.093, 0.72, 0.024), R((f ? 0.07 : 0.068) * gl, 0.16, (f ? 0.064 : 0.064) * gl));
+    D.knee = E(P(0.103, 0.5, 0.036), R(0.035, 0.04, 0.026));
+    D.calf = mkCone(D.K, D.A, (f ? 0.045 : 0.048) * s * gl, (f ? 0.028 : 0.031) * s * gl);
+    D.calfM = E(P(0.108, 0.37, -0.026), R((f ? 0.045 : 0.049) * gl, 0.11, (f ? 0.046 : 0.05) * gl));
+    D.foot = E(P(0.118, 0.036, 0.048), R(f ? 0.038 : 0.042, 0.034, f ? 0.112 : 0.122));
+    D.heel = E(P(0.114, 0.042, -0.03), R(f ? 0.032 : 0.036, 0.036, 0.04));
+    D.waistY = 1.03 * s; D.hipY = 0.88 * s; D.kneeY = 0.5 * s; D.ankleY = 0.1 * s;
+    const k = (v) => v * s;
+    const kT1 = k(0.08), kT2 = k(0.07), kT3 = k(0.06), kT4 = k(0.03), kT5 = k(0.05), kN = k(0.045), kH = k(0.03), kHj = k(0.04), kHn = k(0.012);
+    const kA1 = k(0.05), kA2 = k(0.03), kA3 = k(0.02), kA4 = k(0.03), kA5 = k(0.012), kAr = k(0.055);
+    const kL1 = k(0.03), kL2 = k(0.02), kL3 = k(0.025), kL4 = k(0.03), kF = k(0.02), kLeg = k(0.05);
+    D.torso = (x, y, z) => {
+      const ax = abs(x);
+      let d = ell(D.chest, x, y, z);
+      d = smin(d, ell(D.abd, x, y, z), kT1);
+      d = smin(d, ell(D.pelvis, x, y, z), kT2);
+      d = smin(d, ell(D.traps, x, y, z), kT3);
+      d = smin(d, ell(D.pec, ax, y, z), kT4);
+      d = smin(d, ell(D.glute, ax, y, z), kT5);
+      return d;
+    };
+    D.headD = (x, y, z) => { let h = ell(D.head, x, y, z); h = smin(h, ell(D.jaw, x, y, z), kHj); return smin(h, ell(D.nose, x, y, z), kHn); };
+    D.arm = (ax, y, z) => {
+      let a = cone(D.upper, ax, y, z);
+      a = smin(a, ell(D.delt, ax, y, z), kA1);
+      a = smin(a, ell(D.bic, ax, y, z), kA2);
+      a = smin(a, cone(D.fore, ax, y, z), kA3);
+      a = smin(a, ell(D.foreM, ax, y, z), kA4);
+      let h = ell(D.hand, ax, y, z);
+      h = smin(h, cone(D.thumb, ax, y, z), kA5);
+      return smin(a, h, kA3);
+    };
+    D.leg = (ax, y, z) => {
+      let l = cone(D.thigh, ax, y, z);
+      l = smin(l, ell(D.quad, ax, y, z), kL1);
+      l = smin(l, ell(D.knee, ax, y, z), kL2);
+      l = smin(l, cone(D.calf, ax, y, z), kL3);
+      l = smin(l, ell(D.calfM, ax, y, z), kL4);
+      let ft = ell(D.foot, ax, y, z);
+      ft = smin(ft, ell(D.heel, ax, y, z), kF);
+      return smin(l, ft, kF);
+    };
+    const yHead = 1.38 * s, yLegTop = 1.06 * s, armX = 0.1 * s, armY = 0.7 * s;
+    D.sd = (x, y, z) => {
+      const ax = abs(x);
+      let d = D.torso(x, y, z);
+      if (y > yHead) { d = smin(d, cone(D.neck, x, y, z), kN); d = smin(d, D.headD(x, y, z), kH); }
+      if (ax > armX && y > armY) d = smin(d, D.arm(ax, y, z), kAr);
+      if (y < yLegTop) d = smin(d, D.leg(ax, y, z), kLeg);
+      return smax(d, -y, 0.004);
+    };
+    return D;
+  }
+
+  /* ---------- vêtements ---------- */
+  function makeSleeve(D, tEnd, off, ease0) {
+    let ease = ease0;
+    const s = D.s;
+    ease *= 0.55;
+    const rS = D.upper.r1 + off + ease * 0.45, rE = D.upper.r2 + off + ease * 0.8;
+    const parts = [];
+    if (tEnd <= 1) {
+      const e = lerp3(D.S, D.El, tEnd);
+      parts.push(mkCone(D.S, e, rS, rS + (rE - rS) * tEnd + ease * 0.2));
+    } else {
+      parts.push(mkCone(D.S, D.El, rS, rE));
+      const t = min(tEnd - 1, 1.05), e = lerp3(D.El, D.W, t);
+      parts.push(mkCone(D.El, e, rE, D.fore.r1 + (D.fore.r2 - D.fore.r1) * t + off + ease * 0.7));
+    }
+    const delt = E([D.delt.cx, D.delt.cy, D.delt.cz], [D.delt.rx + off + ease * 0.3, D.delt.ry + off, D.delt.rz + off + ease * 0.3]);
+    const kk = 0.03 * s, kb = 0.015 * s, full = tEnd > 1;
+    const yCut = lerp3(D.S, D.El, min(tEnd, 1))[1];
+    return (ax, y, z) => {
+      let d = ell(delt, ax, y, z);
+      let b = cone(D.upper, ax, y, z);
+      if (full) { b = smin(b, ell(D.bic, ax, y, z), kb); b = smin(b, cone(D.fore, ax, y, z), kb); b = smin(b, ell(D.foreM, ax, y, z), kb); }
+      else b = smax(b, yCut - y, 0.006 * s);
+      d = smin(d, b - off * 1.1, kb);
+      for (const c of parts) d = smin(d, cone(c, ax, y, z), kk);
+      return d;
+    };
+  }
+  /* tombé du vêtement : un cylindre elliptique qui part de la poitrine */
+  function drape(D, yTop, yBot, rx, rz, flare, zc, rxB, rzB) {
+    const span = max(1e-3, yTop - yBot), kk = 0.03 * D.s;
+    if (rxB == null) rxB = rx;
+    if (rzB == null) rzB = rz;
+    return (x, y, z) => {
+      const t = clamp((yTop - y) / span, 0, 1), tt = t * t * (3 - 2 * t);
+      const ex = rx + (rxB - rx) * tt + flare * t, ez = rz + (rzB - rz) * tt + flare * 0.75 * t;
+      const zz = z - zc;
+      const e = (sqrt((x / ex) * (x / ex) + (zz / ez) * (zz / ez)) - 1) * min(ex, ez);
+      return smax(smax(e, y - yTop, kk), yBot - y, 0.006);
+    };
+  }
+  function topGarment(D, o) {
+    const s = D.s, off = o.off * s, ease = (o.ease || 0) * s;
+    const sleeve = o.sleeve > 0 ? makeSleeve(D, o.sleeve, off + (o.layer || 0) * s * 0.6, ease) : null;
+    const hem = o.hem * s;
+    const lay = (o.layer || 0) * s;
+    const rxT = D.chest.rx * (o.dx || 1.0) + ease * 0.5 + lay * 0.6, rzT = D.chest.rz * (o.dz || 1.06) + ease + lay;
+    const lowHem = hem < 0.98 * s;
+    const rxB = max(rxT * 0.96, (lowHem ? D.pelvis.rx + 0.016 * s : D.abd.rx + 0.01 * s) + ease * 0.6 + lay), rzB = max(rzT * 0.96, (lowHem ? D.pelvis.rz + 0.03 * s : D.abd.rz + 0.012 * s) + ease * 0.6 + lay);
+    const dr = drape(D, D.chest.cy - 0.02 * s, hem, rxT, rzT, (o.flare || 0) * s, 0.004 * s, rxB, rzB);
+    const offT = off + lay * 0.7;
+    const quilt = o.quilt ? o.quilt * s : 0, qp = 0.082 * s;
+    const kk = 0.04 * s, ks = 0.03 * s;
+    const hole = o.armhole ? E([D.S[0] - 0.004 * s, D.S[1] + 0.012 * s, D.S[2]], [0.075 * s, 0.11 * s, 0.075 * s]) : null;
+    const neckLow = o.neckDrop ? o.neckDrop * s : 0;
+    const folds = o.flare ? 0.004 * s : 0;
+    return (x, y, z) => {
+      const ax = abs(x);
+      let d = smin(D.torso(x, y, z) - offT, dr(x, y, z) - off, kk);
+      if (sleeve) d = smin(d, sleeve(ax, y, z), ks);
+      if (hole) d = smax(d, -ell(hole, ax, y, z), 0.01 * s);
+      if (neckLow) d = smax(d, -ellD(x, y - (D.traps.cy + 0.03 * s), z - 0.06 * s, 0.07 * s, neckLow, 0.09 * s), 0.008 * s);
+      if (quilt) d -= quilt * (0.5 + 0.5 * cos((y / qp) * 6.2832));
+      if (folds && y < D.waistY) d += folds * Math.sin(Math.atan2(z, x) * 9) * min(1, (D.waistY - y) / (0.3 * s));
+      return smax(d, hem - y, 0.012 * s);
+    };
+  }
+  function legsGarment(D, o) {
+    const s = D.s, off = o.off * s, ease = (o.ease || 0) * s;
+    const top = (o.waist || 1.03) * s, hem = o.hem * s;
+    const A = [D.A[0] + (o.spread || 0) * s, max(hem, 0.04 * s), D.A[2]];
+    const tube = mkCone([D.Hj[0], D.Hj[1] - 0.02 * s, D.Hj[2]], A, D.thigh.r1 + off + ease, (o.r2 || 0.05) * s + off);
+    const pel = E([D.pelvis.cx, D.pelvis.cy, D.pelvis.cz], [D.pelvis.rx + off + ease * 0.5, D.pelvis.ry, D.pelvis.rz + off + ease * 0.5]);
+    const glu = E([D.glute.cx, D.glute.cy, D.glute.cz], [D.glute.rx + off, D.glute.ry + off, D.glute.rz + off]);
+    const kk = 0.05 * s, kg = 0.04 * s;
+    const skinny = !!o.skinny, cargo = !!o.cargo;
+    const pocket = E([D.thigh.ax + 0.07 * s, 0.66 * s, 0.01 * s], [0.03 * s, 0.07 * s, 0.06 * s]);
+    return (x, y, z) => {
+      const ax = abs(x);
+      let d = smin(ell(pel, x, y, z), ell(glu, ax, y, z), kg);
+      const leg = skinny ? D.leg(ax, y, z) - off : smin(cone(tube, ax, y, z), D.leg(ax, y, z) - off * 1.2, 0.02 * s);
+      d = smin(d, leg, kk);
+      if (cargo) d = smin(d, ell(pocket, ax, y, z), 0.01 * s);
+      d = smax(d, y - top, 0.006 * s);
+      return smax(d, hem - y, 0.01 * s);
+    };
+  }
+  function skirtGarment(D, o) {
+    const s = D.s, off = o.off * s;
+    const dr = drape(D, (o.waist || 1.03) * s, o.hem * s, D.pelvis.rx * 1.02 + off, D.pelvis.rz * 1.08 + off, (o.flare || 0.08) * s, -0.004 * s);
+    const kk = 0.03 * s;
+    const fo = 0.005 * s, wy = (o.waist || 1.03) * s;
+    return (x, y, z) => { let d = smin(D.torso(x, y, z) - off, dr(x, y, z), kk); if (y < wy) d += fo * Math.sin(Math.atan2(z, x) * 11) * min(1, (wy - y) / (0.25 * s)); return smax(d, y - wy, 0.006 * s); };
+  }
+  function shoeGarment(D, o) {
+    const s = D.s, off = (o.off || 0.012) * s;
+    const shaft = o.shaft ? mkCone([D.A[0], D.A[1] - 0.02 * s, D.A[2]], [D.A[0], (0.1 + o.shaft) * s, D.A[2] - 0.004 * s], 0.05 * s, (o.shaftR || 0.05) * s) : null;
+    const kk = 0.02 * s;
+    const sole = o.sole || 0;
+    return (x, y, z) => {
+      const ax = abs(x);
+      let ft = smin(ell(D.foot, ax, y, z), ell(D.heel, ax, y, z), kk) - off;
+      if (shaft) ft = smin(ft, cone(shaft, ax, y, z), kk);
+      if (sole) ft = smin(ft, rbox(ax, y, z, D.foot.cx, 0.009 * s, D.foot.cz - 0.004 * s, D.foot.rx + 0.012 * s, 0.011 * s, D.foot.rz + 0.012 * s, 0.008 * s), 0.006 * s);
+      return smax(ft, -y, 0.002);
+    };
+  }
+  const YR = {tee: [0.84, 1.53], tank: [0.84, 1.53], shirt: [0.8, 1.53], sweat: [0.82, 1.53], knit: [0.82, 1.53], hoodie: [0.82, 1.53], dress: [0.5, 1.53], jumpsuit: [0, 1.53], jeans: [0, 1.06], chino: [0, 1.06], trousers: [0, 1.06], cargo: [0, 1.06], jogger: [0, 1.06], legging: [0, 1.06], shorts: [0.58, 1.06], skirt: [0.52, 1.06], blazer: [0.76, 1.54], jacket: [0.86, 1.54], coat: [0.44, 1.55], puffer: [0.8, 1.56], sneaker: [0, 0.16], shoe: [0, 0.14], heel: [0, 0.14], boot: [0, 0.3], tallboot: [0, 0.5], sandal: [0, 0.12], beanie: [1.55, 1.82], cap: [1.58, 1.82], hat: [1.6, 1.86], scarf: [1.1, 1.53], bag: [0.82, 1.5], belt: [0.99, 1.07], watch: [0.9, 0.98], glove: [0.72, 0.92]};
+  const KIND = {
+    tee: {L: 2, fn: (D) => topGarment(D, {off: 0.006, ease: 0.008, sleeve: 0.42, hem: 0.87})},
+    tank: {L: 2, fn: (D) => topGarment(D, {off: 0.005, ease: 0.004, sleeve: 0, hem: 0.87, armhole: true, neckDrop: 0.06})},
+    shirt: {L: 2, fn: (D) => topGarment(D, {off: 0.006, ease: 0.014, sleeve: 1.97, hem: 0.84}), collar: true},
+    sweat: {L: 2, fn: (D) => topGarment(D, {off: 0.012, ease: 0.016, sleeve: 1.97, hem: 0.86}), pat: 2},
+    knit: {L: 2, fn: (D) => topGarment(D, {off: 0.013, ease: 0.014, sleeve: 1.97, hem: 0.86}), pat: 2},
+    hoodie: {L: 2, fn: (D) => topGarment(D, {off: 0.014, ease: 0.016, sleeve: 1.97, hem: 0.86}), hood: true},
+    dress: {L: 2, fn: (D) => { const t = topGarment(D, {off: 0.007, ease: 0.004, sleeve: 0, hem: 1.0, armhole: true, neckDrop: 0.05}); const k = skirtGarment(D, {off: 0.007, hem: 0.56, flare: 0.075, waist: 1.08}); return (x, y, z) => min(t(x, y, z), k(x, y, z)); }},
+    jumpsuit: {L: 2, fn: (D) => { const t = topGarment(D, {off: 0.008, ease: 0.01, sleeve: 0, hem: 1.0, armhole: true}); const p = legsGarment(D, {off: 0.009, ease: 0.012, hem: 0.1, r2: 0.06, waist: 1.05}); return (x, y, z) => smin(t(x, y, z), p(x, y, z), 0.03 * D.s); }},
+    jeans: {L: 1, fn: (D) => legsGarment(D, {off: 0.008, ease: 0.006, hem: 0.1, r2: 0.05}), pat: 3},
+    chino: {L: 1, fn: (D) => legsGarment(D, {off: 0.008, ease: 0.008, hem: 0.1, r2: 0.05})},
+    trousers: {L: 1, fn: (D) => legsGarment(D, {off: 0.008, ease: 0.014, hem: 0.06, r2: 0.072})},
+    cargo: {L: 1, fn: (D) => legsGarment(D, {off: 0.009, ease: 0.016, hem: 0.1, r2: 0.06, cargo: true})},
+    jogger: {L: 1, fn: (D) => legsGarment(D, {off: 0.01, ease: 0.016, hem: 0.12, r2: 0.045})},
+    legging: {L: 1, fn: (D) => legsGarment(D, {off: 0.003, hem: 0.09, skinny: true})},
+    shorts: {L: 1, fn: (D) => legsGarment(D, {off: 0.008, ease: 0.012, hem: 0.62, r2: 0.075})},
+    skirt: {L: 1, fn: (D) => skirtGarment(D, {off: 0.006, hem: 0.58, flare: 0.09})},
+    blazer: {L: 3, fn: (D) => topGarment(D, {layer: 0.012, off: 0.014, ease: 0.016, sleeve: 1.94, hem: 0.8, dx: 1.0}), collar: true},
+    jacket: {L: 3, fn: (D) => topGarment(D, {layer: 0.012, off: 0.015, ease: 0.018, sleeve: 1.94, hem: 0.9}), collar: true},
+    coat: {L: 3, fn: (D) => topGarment(D, {layer: 0.014, off: 0.018, ease: 0.02, sleeve: 1.98, hem: 0.48, flare: 0.05, dx: 1.0}), collar: true},
+    puffer: {L: 3, fn: (D) => topGarment(D, {layer: 0.014, off: 0.022, ease: 0.026, sleeve: 1.96, hem: 0.86, quilt: 0.006}), collar: true},
+    sneaker: {L: 4, fn: (D) => shoeGarment(D, {off: 0.013, sole: 1}), sole: [0.95, 0.94, 0.92]},
+    shoe: {L: 4, fn: (D) => shoeGarment(D, {off: 0.009, sole: 1}), sole: [0.16, 0.14, 0.13]},
+    heel: {L: 4, fn: (D) => shoeGarment(D, {off: 0.006}), sole: [0.16, 0.14, 0.13]},
+    boot: {L: 4, fn: (D) => shoeGarment(D, {off: 0.012, sole: 1, shaft: 0.12, shaftR: 0.052}), sole: [0.16, 0.14, 0.13]},
+    tallboot: {L: 4, fn: (D) => shoeGarment(D, {off: 0.012, sole: 1, shaft: 0.32, shaftR: 0.058}), sole: [0.16, 0.14, 0.13]},
+    sandal: {L: 4, fn: (D) => shoeGarment(D, {off: 0.004, sole: 1}), sole: [0.16, 0.14, 0.13]},
+    beanie: {L: 5, fn: (D) => { const s = D.s; return (x, y, z) => smax(ell(D.head, x, y, z) - 0.013 * s, D.head.cy - 0.004 * s - y + 0.25 * max(0, -z), 0.008 * s); }, pat: 2},
+    cap: {L: 5, fn: (D) => { const s = D.s; const brim = E([0, D.head.cy + 0.012 * s, D.head.cz + 0.085 * s], [0.07 * s, 0.006 * s, 0.07 * s]); return (x, y, z) => min(smax(ell(D.head, x, y, z) - 0.009 * s, D.head.cy + 0.01 * s - y, 0.006 * s), smax(ell(brim, x, y, z), -(z - D.head.cz - 0.04 * s), 0.004 * s)); }},
+    hat: {L: 5, fn: (D) => { const s = D.s, cy = D.head.cy; return (x, y, z) => { const rr = sqrt(x * x + (z - D.head.cz) * (z - D.head.cz)); const crown = smax(rr - 0.088 * s, abs(y - (cy + 0.085 * s)) - 0.07 * s, 0.01 * s); const brim = smax(rr - 0.18 * s, abs(y - (cy + 0.025 * s)) - 0.004 * s, 0.003 * s); return min(crown, brim); }; }},
+    scarf: {L: 6, fn: (D) => { const s = D.s; const hang = mkCone([0.035 * s, 1.44 * s, 0.09 * s], [0.06 * s, 1.16 * s, 0.13 * s], 0.032 * s, 0.03 * s); return (x, y, z) => min(torus(x, y, z, 0, 1.47 * s, -0.004 * s, 0.07 * s, 0.03 * s), cone(hang, x, y, z)); }, pat: 2},
+    bag: {L: 6, fn: (D) => { const s = D.s, bx = D.W[0] + 0.03 * s; const strap = mkCone([bx - 0.02 * s, 1.0 * s, 0.01 * s], [D.S[0] - 0.02 * s, 1.47 * s, -0.01 * s], 0.008 * s, 0.008 * s); return (x, y, z) => min(rbox(x, y, z, bx, 0.92 * s, 0.03 * s, 0.07 * s, 0.085 * s, 0.03 * s, 0.012 * s), cone(strap, x, y, z)); }},
+    belt: {L: 6, fn: (D) => { const s = D.s, wy = 1.025 * s; return (x, y, z) => smax(ell(D.pelvis, x, y + 0.07 * s, z) - 0.02 * s, abs(y - wy) - 0.016 * s, 0.003 * s); }},
+    watch: {L: 6, fn: (D) => { const s = D.s, w = D.W; return (x, y, z) => torus(abs(x), y, z, w[0], w[1] + 0.02 * s, w[2], 0.028 * s, 0.009 * s); }},
+    glove: {L: 6, fn: (D) => { const s = D.s; return (x, y, z) => { const ax = abs(x); return smin(ell(D.hand, ax, y, z), cone(D.thumb, ax, y, z), 0.012 * s) - 0.006 * s; }; }},
+  };
+  function hairFn(D, kind) {
+    const s = D.s, h = D.head;
+    if (kind === "courts") return (x, y, z) => smax(ell(h, x, y, z) - 0.008 * s, h.cy - 0.01 * s - y + 0.55 * max(0, z - 0.02 * s), 0.01 * s);
+    if (kind === "longs") { const back = E([0, h.cy - 0.06 * s, h.cz - 0.05 * s], [0.085 * s, 0.13 * s, 0.06 * s]); return (x, y, z) => min(smax(ell(h, x, y, z) - 0.01 * s, h.cy - 0.012 * s - y + 0.5 * max(0, z - 0.02 * s), 0.01 * s), smax(ell(back, x, y, z), z - (h.cz - 0.01 * s), 0.02 * s)); }
+    if (kind === "chignon") { const bun = E([0, h.cy + 0.06 * s, h.cz - 0.09 * s], [0.04 * s, 0.04 * s, 0.04 * s]); return (x, y, z) => min(smax(ell(h, x, y, z) - 0.006 * s, h.cy - 0.005 * s - y + 0.55 * max(0, z - 0.02 * s), 0.01 * s), ell(bun, x, y, z)); }
+    return null;
+  }
+
+  /* ---------- maillage ---------- */
+  function build(job) {
+    const D = makeBody(job.body);
+    const s = D.s;
+    const layers = [{sd: D.sd, col: job.body.skin, mat: 0, L: 0, y0: -1, y1: 9}];
+    const hf = hairFn(D, job.body.hair);
+    if (hf) layers.push({sd: hf, col: job.body.hairColor, mat: 10, L: 5, y0: 1.4 * s, y1: 1.9 * s});
+    for (const it of job.items) {
+      const K = KIND[it.kind];
+      if (!K) continue;
+      const fn = K.fn(D);
+      const yr = YR[it.kind] || [0, 2];
+      layers.push({sd: fn, col: it.color, col2: it.color2, mat: it.mat != null ? it.mat : K.pat || 1, L: K.L, sole: K.sole ? (it.kind === "sneaker" && it.color[0] > 0.8 && it.color[1] > 0.8 ? [0.9, 0.89, 0.86] : K.sole) : null, kind: it.kind, y0: yr[0] * s - 0.02, y1: yr[1] * s + 0.02});
+      if (K.collar) { const ny = D.traps.cy + 0.012 * s; layers.push({sd: (x, y, z) => smax(torus(x, y, z, 0, ny, -0.006 * s, 0.07 * s, 0.014 * s), -(z + 0.02 * s), 0.01 * s), col: it.color, mat: it.mat != null ? it.mat : 1, L: K.L + 0.5, y0: 1.4 * s, y1: 1.56 * s}); }
+      if (K.hood) { const hood = E([0, D.traps.cy + 0.02 * s, -0.085 * s], [0.115 * s, 0.075 * s, 0.05 * s]); layers.push({sd: (x, y, z) => ell(hood, x, y, z), col: it.color, mat: 1, L: K.L + 0.5, y0: 1.38 * s, y1: 1.62 * s}); }
+    }
+    const nl = layers.length;
+    const sd = (x, y, z) => { let d = layers[0].sd(x, y, z); for (let k = 1; k < nl; k++) { const Ly = layers[k]; const gap = y > Ly.y1 ? y - Ly.y1 : y < Ly.y0 ? Ly.y0 - y : 0; if (gap >= d) continue; const v = Ly.sd(x, y, z); if (v < d) d = v; } return d; };
+    const lsd = (Ly, x, y, z) => { const gap = y > Ly.y1 ? y - Ly.y1 : y < Ly.y0 ? Ly.y0 - y : 0; return gap > 0.01 ? 1e3 + gap : Ly.sd(x, y, z); };
+    const c = (job.draft ? 0.016 : 0.01) * s;
+    const x0 = -0.42 * s, y0 = -0.012, z0 = -0.22 * s;
+    const nx = Math.ceil((0.84 * s) / c) + 1, ny = Math.ceil((1.86 * s + 0.02) / c) + 1, nz = Math.ceil((0.46 * s) / c) + 1;
+    const nxy = nx * ny, N = nxy * nz;
+    const val = new Float32Array(N);
+    /* grille grossière exacte, fine seulement près de la surface */
+    const st = 3, cx = Math.ceil(nx / st) + 1, cy = Math.ceil(ny / st) + 1, cz = Math.ceil(nz / st) + 1;
+    const coarse = new Float32Array(cx * cy * cz);
+    for (let k = 0; k < cz; k++) for (let j = 0; j < cy; j++) for (let i = 0; i < cx; i++) coarse[i + cx * (j + cy * k)] = sd(x0 + i * st * c, y0 + j * st * c, z0 + k * st * c);
+    const near = 3.4 * c;
+    for (let k = 0; k < nz; k++) {
+      const kc = Math.round(k / st), z = z0 + k * c;
+      for (let j = 0; j < ny; j++) {
+        const jc = Math.round(j / st), y = y0 + j * c;
+        for (let i = 0; i < nx; i++) {
+          const ic = Math.round(i / st);
+          const cv = coarse[ic + cx * (jc + cy * kc)];
+          val[i + nx * j + nxy * k] = abs(cv) > near ? cv : sd(x0 + i * c, y, z);
+        }
+      }
+    }
+    /* sommets : un par cellule traversée */
+    const cid = new Int32Array(N).fill(-1);
+    let pos = new Float32Array(1 << 16), nv = 0;
+    const corner = [0, 1, nx, nx + 1, nxy, nxy + 1, nxy + nx, nxy + nx + 1];
+    const cofs = [[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0], [0, 0, 1], [1, 0, 1], [0, 1, 1], [1, 1, 1]];
+    const edges = [[0, 1], [2, 3], [4, 5], [6, 7], [0, 2], [1, 3], [4, 6], [5, 7], [0, 4], [1, 5], [2, 6], [3, 7]];
+    const cv8 = new Float64Array(8);
+    for (let k = 0; k < nz - 1; k++) for (let j = 0; j < ny - 1; j++) for (let i = 0; i < nx - 1; i++) {
+      const base = i + nx * j + nxy * k;
+      let mask = 0;
+      for (let q = 0; q < 8; q++) { const v = val[base + corner[q]]; cv8[q] = v; if (v < 0) mask |= 1 << q; }
+      if (mask === 0 || mask === 255) continue;
+      let sx = 0, sy = 0, sz = 0, cnt = 0;
+      for (const [a, b] of edges) {
+        const va = cv8[a], vb = cv8[b];
+        if ((va < 0) === (vb < 0)) continue;
+        const t = va / (va - vb), oa = cofs[a], ob = cofs[b];
+        sx += oa[0] + (ob[0] - oa[0]) * t; sy += oa[1] + (ob[1] - oa[1]) * t; sz += oa[2] + (ob[2] - oa[2]) * t; cnt++;
+      }
+      if (nv * 3 + 3 > pos.length) { const np = new Float32Array(pos.length * 2); np.set(pos); pos = np; }
+      pos[nv * 3] = x0 + (i + sx / cnt) * c; pos[nv * 3 + 1] = y0 + (j + sy / cnt) * c; pos[nv * 3 + 2] = z0 + (k + sz / cnt) * c;
+      cid[base] = nv++;
+    }
+    /* faces : un quadrilatère par arête traversée */
+    let idx = new Uint32Array(1 << 17), ni = 0;
+    const quad = (a, b, cc, d) => {
+      if (a < 0 || b < 0 || cc < 0 || d < 0) return;
+      if (ni + 6 > idx.length) { const n2 = new Uint32Array(idx.length * 2); n2.set(idx); idx = n2; }
+      idx[ni++] = a; idx[ni++] = b; idx[ni++] = cc; idx[ni++] = a; idx[ni++] = cc; idx[ni++] = d;
+    };
+    for (let k = 1; k < nz - 1; k++) for (let j = 1; j < ny - 1; j++) for (let i = 1; i < nx - 1; i++) {
+      const base = i + nx * j + nxy * k, v0 = val[base] < 0;
+      if (v0 !== (val[base + 1] < 0)) quad(cid[base - nx - nxy], cid[base - nxy], cid[base], cid[base - nx]);
+      if (v0 !== (val[base + nx] < 0)) quad(cid[base - 1 - nxy], cid[base - nxy], cid[base], cid[base - 1]);
+      if (v0 !== (val[base + nxy] < 0)) quad(cid[base - 1 - nx], cid[base - nx], cid[base], cid[base - 1]);
+    }
+    /* affinage, normales, occlusion, matière */
+    const nrm = new Float32Array(nv * 3), col = new Float32Array(nv * 3), ao = new Float32Array(nv), mat = new Float32Array(nv);
+    const e = 0.0015 * s;
+    for (let q = 0; q < nv; q++) {
+      let x = pos[q * 3], y = pos[q * 3 + 1], z = pos[q * 3 + 2];
+      const d0 = sd(x, y, z);
+      const a1 = sd(x + e, y - e, z - e), a2 = sd(x - e, y - e, z + e), a3 = sd(x - e, y + e, z - e), a4 = sd(x + e, y + e, z + e);
+      const gx = a1 - a2 - a3 + a4, gy = -a1 - a2 + a3 + a4, gz = -a1 + a2 - a3 + a4;
+      const gl = sqrt(gx * gx + gy * gy + gz * gz) || 1;
+      nrm[q * 3] = gx / gl; nrm[q * 3 + 1] = gy / gl; nrm[q * 3 + 2] = gz / gl;
+      x -= (gx / gl) * d0; y -= (gy / gl) * d0; z -= (gz / gl) * d0;
+      pos[q * 3] = x; pos[q * 3 + 1] = y; pos[q * 3 + 2] = z;
+      const nX = nrm[q * 3], nY = nrm[q * 3 + 1], nZ = nrm[q * 3 + 2];
+      let occ = 0, sca = 1;
+      for (let a = 1; a <= 3; a++) { const hh = 0.016 * a * s; const dd = sd(x + nX * hh, y + nY * hh, z + nZ * hh); occ += (hh - dd) * sca; sca *= 0.7; }
+      ao[q] = clamp(1 - 7 * occ / s, 0.25, 1);
+      /* la couche la plus proche donne la couleur ; à égalité, la plus extérieure ; fondu aux lisières */
+      let best = 0, bd = 1e9, sec = -1, sd2 = 1e9;
+      for (let k = 0; k < nl; k++) {
+        const v = abs(lsd(layers[k], x, y, z));
+        if (v < bd - 1e-4 || (v < bd + 1e-4 && layers[k].L > layers[best].L)) { if (bd < sd2) { sec = best; sd2 = bd; } bd = min(bd, v); best = k; }
+        else if (v < sd2) { sec = k; sd2 = v; }
+      }
+      const Lr = layers[best];
+      let cc = Lr.col, mm = Lr.mat;
+      if (Lr.sole && y < 0.024 * s) { cc = Lr.sole; mm = 7; }
+      let w = 1;
+      if (sec >= 0 && sec !== best && sd2 < 0.0025 * s) w = 0.5 + 0.5 * clamp((sd2 - bd) / (0.0025 * s), 0, 1);
+      const c2 = sec >= 0 ? layers[sec].col : cc;
+      col[q * 3] = c2[0] + (cc[0] - c2[0]) * w; col[q * 3 + 1] = c2[1] + (cc[1] - c2[1]) * w; col[q * 3 + 2] = c2[2] + (cc[2] - c2[2]) * w;
+      mat[q] = mm;
+    }
+    return {pos: pos.slice(0, nv * 3), nrm, col, ao, mat, idx: idx.slice(0, ni), H: D.H, nv, ni};
+  }
+  scope.build = build;
+  if (inWorker) {
+    scope.onmessage = (ev) => {
+      try {
+        const r = build(ev.data.job);
+        r.id = ev.data.id;
+        scope.postMessage(r, [r.pos.buffer, r.nrm.buffer, r.col.buffer, r.ao.buffer, r.mat.buffer, r.idx.buffer]);
+      } catch (e) { scope.postMessage({id: ev.data.id, error: String(e && e.message || e)}); }
+    };
+  }
+}
+/* ---------------- Atelier : mannequin de vitrine en 3D (WebGL, maillage calculé à part) ---------------- */
 const Atelier = (() => {
-  const api = {ok: false, attach() {}, show() {}, setSpin() {}, isSpinning: () => false};
+  const api = {ok: false, attach() {}, show() {}, setSpin() {}, isSpinning: () => false, redraw() {}};
   const canvas = document.createElement("canvas");
   canvas.setAttribute("aria-hidden", "true");
   let gl = null;
   try { gl = canvas.getContext("webgl", {antialias: true, alpha: true, premultipliedAlpha: true}) || canvas.getContext("experimental-webgl"); } catch (e) { gl = null; }
   if (!gl) return api;
+  const U32 = !!gl.getExtension("OES_element_index_uint");
 
-  /* vecteurs */
-  const v = (x, y, z) => ({x, y, z});
-  const vadd = (a, b) => v(a.x + b.x, a.y + b.y, a.z + b.z);
-  const vsub = (a, b) => v(a.x - b.x, a.y - b.y, a.z - b.z);
-  const vlerp = (a, b, t) => v(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, a.z + (b.z - a.z) * t);
-  const vlen = (a) => Math.hypot(a.x, a.y, a.z);
-  const vnorm = (a) => { const l = vlen(a) || 1; return v(a.x / l, a.y / l, a.z / l); };
-  const vcross = (a, b) => v(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
-  const X = v(1, 0, 0), Y = v(0, 1, 0), Z = v(0, 0, 1);
-
-  /* géométries (sommets en mètres, repère du mannequin) */
-  function computeNormals(g) {
-    const p = g.p, n = new Float32Array(p.length), I = g.i;
-    for (let k = 0; k < I.length; k += 3) {
-      const a = I[k] * 3, b = I[k + 1] * 3, c = I[k + 2] * 3;
-      const ux = p[b] - p[a], uy = p[b + 1] - p[a + 1], uz = p[b + 2] - p[a + 2];
-      const wx = p[c] - p[a], wy = p[c + 1] - p[a + 1], wz = p[c + 2] - p[a + 2];
-      const nx = uy * wz - uz * wy, ny = uz * wx - ux * wz, nz = ux * wy - uy * wx;
-      n[a] += nx; n[a + 1] += ny; n[a + 2] += nz; n[b] += nx; n[b + 1] += ny; n[b + 2] += nz; n[c] += nx; n[c + 1] += ny; n[c + 2] += nz;
-    }
-    for (let k = 0; k < n.length; k += 3) { const l = Math.hypot(n[k], n[k + 1], n[k + 2]) || 1; n[k] /= l; n[k + 1] /= l; n[k + 2] /= l; }
-    g.n = n;
-    return g;
-  }
-  function lathe(prof, segs, zK, t0, tl) {
-    const g = {p: [], i: []};
-    const full = tl === undefined || tl >= Math.PI * 2 - 1e-6;
-    const start = t0 || 0, len = full ? Math.PI * 2 : tl;
-    const cols = full ? segs : segs + 1;
-    for (const [r, y] of prof) for (let j = 0; j < cols; j++) { const th = start + (len * j) / segs; g.p.push(r * Math.sin(th), y, r * Math.cos(th) * zK); }
-    for (let k = 0; k < prof.length - 1; k++) for (let j = 0; j < segs; j++) {
-      const a = k * cols + j, b = k * cols + (full ? (j + 1) % cols : j + 1), c = a + cols, d = b + cols;
-      g.i.push(a, c, b, b, c, d);
-    }
-    return computeNormals(g);
-  }
-  function ellipsoid(c, rx, ry, rz, seg, o) {
-    seg = seg || 24; o = o || {};
-    const g = {p: [], i: []}, rings = Math.max(6, Math.round(seg * 0.6)), vMax = o.vMax || Math.PI;
-    const ca = Math.cos(o.rotX || 0), sa = Math.sin(o.rotX || 0);
-    for (let k = 0; k <= rings; k++) {
-      const vv = (vMax * k) / rings, sv = Math.sin(vv), cv = Math.cos(vv);
-      for (let j = 0; j < seg; j++) {
-        const u = (2 * Math.PI * j) / seg;
-        const x = rx * sv * Math.sin(u), y0 = ry * cv, z0 = rz * sv * Math.cos(u);
-        const y = y0 * ca - z0 * sa, z = y0 * sa + z0 * ca;
-        g.p.push(c.x + x, c.y + y, c.z + z);
-      }
-    }
-    for (let k = 0; k < rings; k++) for (let j = 0; j < seg; j++) { const a = k * seg + j, b = k * seg + ((j + 1) % seg), cc = a + seg, d = b + seg; g.i.push(a, cc, b, b, cc, d); }
-    return computeNormals(g);
-  }
-  const ball = (c, r, seg) => ellipsoid(c, r, r, r, seg || 18);
-  function tube(a, b, ra, rb, seg) {
-    seg = seg || 20;
-    const w = vnorm(vsub(b, a));
-    const helper = Math.abs(w.y) < 0.9 ? Y : X;
-    const u = vnorm(vcross(helper, w)), q = vcross(w, u);
-    const g = {p: [], i: []};
-    for (let k = 0; k < 2; k++) {
-      const c = k ? b : a, r = k ? rb : ra;
-      for (let j = 0; j < seg; j++) { const t = (2 * Math.PI * j) / seg, ct = Math.cos(t), st = Math.sin(t); g.p.push(c.x + (u.x * ct + q.x * st) * r, c.y + (u.y * ct + q.y * st) * r, c.z + (u.z * ct + q.z * st) * r); }
-    }
-    for (let j = 0; j < seg; j++) { const j2 = (j + 1) % seg; g.i.push(j, seg + j, j2, j2, seg + j, seg + j2); }
-    const ia = g.p.length / 3;
-    g.p.push(a.x, a.y, a.z, b.x, b.y, b.z);
-    for (let j = 0; j < seg; j++) { const j2 = (j + 1) % seg; g.i.push(ia, j2, j, ia + 1, seg + j, seg + j2); }
-    return computeNormals(g);
-  }
-  function torus(c, Rx, Ry, r, U, V, W, seg, tseg) {
-    seg = seg || 36; tseg = tseg || 10;
-    const g = {p: [], i: []};
-    for (let i = 0; i < seg; i++) {
-      const th = (2 * Math.PI * i) / seg, ct = Math.cos(th), st = Math.sin(th);
-      for (let j = 0; j < tseg; j++) {
-        const ph = (2 * Math.PI * j) / tseg, cp = Math.cos(ph), sp = Math.sin(ph);
-        const x = (Rx + r * cp) * ct, y = (Ry + r * cp) * st, z = r * sp;
-        g.p.push(c.x + U.x * x + V.x * y + W.x * z, c.y + U.y * x + V.y * y + W.y * z, c.z + U.z * x + V.z * y + W.z * z);
-      }
-    }
-    for (let i = 0; i < seg; i++) for (let j = 0; j < tseg; j++) { const a = i * tseg + j, b = ((i + 1) % seg) * tseg + j, cc = i * tseg + ((j + 1) % tseg), d = ((i + 1) % seg) * tseg + ((j + 1) % tseg); g.i.push(a, b, cc, cc, b, d); }
-    return computeNormals(g);
-  }
-  const ringAt = (y, R, zK, r, cz) => torus(v(0, y, cz || 0), R, R * zK, r, X, Z, Y, 40, 8);
-  function box(c, sx, sy, sz, rz) {
-    const g = {p: [], i: []}, cr = Math.cos(rz || 0), sr = Math.sin(rz || 0);
-    const P = (x, y, z) => [c.x + x * cr - y * sr, c.y + x * sr + y * cr, c.z + z];
-    const hx = sx / 2, hy = sy / 2, hz = sz / 2;
-    const faces = [
-      [[-hx, -hy, hz], [hx, -hy, hz], [hx, hy, hz], [-hx, hy, hz]], [[hx, -hy, -hz], [-hx, -hy, -hz], [-hx, hy, -hz], [hx, hy, -hz]],
-      [[-hx, hy, hz], [hx, hy, hz], [hx, hy, -hz], [-hx, hy, -hz]], [[-hx, -hy, -hz], [hx, -hy, -hz], [hx, -hy, hz], [-hx, -hy, hz]],
-      [[hx, -hy, hz], [hx, -hy, -hz], [hx, hy, -hz], [hx, hy, hz]], [[-hx, -hy, -hz], [-hx, -hy, hz], [-hx, hy, hz], [-hx, hy, -hz]],
-    ];
-    for (const f of faces) { const b0 = g.p.length / 3; for (const q of f) g.p.push(...P(q[0], q[1], q[2])); g.i.push(b0, b0 + 1, b0 + 2, b0, b0 + 2, b0 + 3); }
-    return computeNormals(g);
+  /* calcul du maillage : dans un worker si possible, sinon ici, en différé */
+  let worker = null, inline = null, jobId = 0;
+  const pending = new Map();
+  try {
+    const src = "(" + DM_MESHER.toString() + ")(self, true);";
+    worker = new Worker(URL.createObjectURL(new Blob([src], {type: "text/javascript"})));
+    worker.onmessage = (ev) => { const cb = pending.get(ev.data.id); pending.delete(ev.data.id); if (cb) cb(ev.data); };
+    worker.onerror = () => { worker = null; for (const [id, cb] of pending) { pending.delete(id); cb(null); } };
+  } catch (e) { worker = null; }
+  function compute(job, cb) {
+    const id = ++jobId;
+    if (worker) { pending.set(id, cb); worker.postMessage({id, job}); return; }
+    if (!inline) { inline = {}; DM_MESHER(inline, false); }
+    setTimeout(() => { let r = null; try { r = inline.build(job); } catch (e) { r = null; } cb(r); }, 16);
   }
 
-  /* morphologie */
-  const PROF = {
-    f: [[0.462, 0.084], [0.49, 0.104], [0.525, 0.113], [0.565, 0.1], [0.612, 0.08], [0.655, 0.087], [0.705, 0.1], [0.74, 0.099], [0.775, 0.092], [0.8, 0.074], [0.818, 0.05], [0.832, 0.028]],
-    h: [[0.462, 0.088], [0.49, 0.1], [0.525, 0.104], [0.565, 0.097], [0.612, 0.091], [0.655, 0.097], [0.705, 0.106], [0.745, 0.109], [0.78, 0.104], [0.803, 0.08], [0.82, 0.052], [0.834, 0.03]],
-  };
-  function model(p, spread) {
-    const F = p.sex === "f";
-    const H = clamp(p.height || 175, 140, 210) / 100;
-    const bmi = clamp(p.weight || 70, 35, 180) / (H * H);
-    const build = clamp(p.build || 0, -1, 1);
-    const g = clamp(Math.pow(bmi / 22, 0.5), 0.82, 1.5) * (1 + 0.14 * build);
-    const belly = clamp(Math.pow(bmi / 22, 1.05), 0.85, 2.0) * (1 + 0.2 * build);
-    const prof = PROF[F ? "f" : "h"];
-    const base = (y) => {
-      if (y <= prof[0][0]) return prof[0][1];
-      const last = prof[prof.length - 1];
-      if (y >= last[0]) return last[1];
-      for (let i = 0; i < prof.length - 1; i++) {
-        const [y1, p1] = prof[i], [y2, p2] = prof[i + 1];
-        if (y >= y1 && y <= y2) {
-          const p0 = (prof[i - 1] || prof[i])[1], p3 = (prof[i + 2] || prof[i + 1])[1], t = (y - y1) / (y2 - y1);
-          return 0.5 * (2 * p1 + (p2 - p0) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t + (3 * p1 - p0 - 3 * p2 + p3) * t * t * t);
-        }
-      }
-      return last[1];
-    };
-    const hipsK = clamp(p.hips || 0, -1, 1);
-    const r = (y) => {
-      const wW = Math.exp(-(((y - 0.612) / 0.05) ** 2)), hW = Math.exp(-(((y - 0.525) / 0.055) ** 2));
-      let k = g * (1 + (belly / g - 1) * 0.8 * wW) * (1 + 0.12 * hipsK * hW);
-      if (y > 0.795) k = 1 + (k - 1) * clamp((0.834 - y) / 0.04, 0, 1);
-      return base(y) * k * H;
-    };
-    const sh = (F ? 0.102 : 0.117) * (1 + 0.1 * clamp(p.shoulders || 0, -1, 1)) * (0.88 + 0.12 * g) * H;
-    const hipX = 0.046 * Math.sqrt(g) * H;
-    const thigh = [(F ? 0.063 : 0.06) * g * H, 0.037 * Math.pow(g, 0.7) * H];
-    const calf = [0.038 * Math.pow(g, 0.7) * H, 0.021 * Math.pow(g, 0.5) * H];
-    const upper = [0.031 * Math.pow(g, 0.8) * H, 0.024 * Math.pow(g, 0.7) * H];
-    const fore = [0.024 * Math.pow(g, 0.7) * H, 0.0165 * Math.pow(g, 0.5) * H];
-    const sp = (spread || 0) * H;
-    const wristX = Math.max(sh + 0.05 * H + 0.04 * (g - 1) * H, r(0.525) + 0.036 * H) + sp;
-    const elbowX = (sh + wristX) / 2 + 0.006 * H + sp * 0.3;
-    const B = {
-      F, H, g, r, sh, hipX, thigh, calf, upper, fore, wristX,
-      zK: (F ? 0.74 : 0.7) * (1 + 0.12 * (belly - 1)),
-      neckR: 0.027 * Math.pow(g, 0.4) * H,
-      head: {y: 0.932 * H, rx: 0.057 * H, ry: 0.07 * H, rz: 0.064 * H},
-      leg: (s) => ({hip: v(s * hipX, 0.475 * H, 0), knee: v(s * hipX * 0.9, 0.285 * H, 0.004 * H), ankle: v(s * hipX * 0.85, 0.048 * H, -0.004 * H)}),
-      arm: (s) => ({sh: v(s * sh, 0.802 * H, -0.005 * H), elbow: v(s * elbowX, 0.625 * H, -0.012 * H), wrist: v(s * wristX, 0.478 * H, 0.004 * H)}),
-      foot: (s) => ({c: v(s * hipX * 0.85, 0.024 * H, 0.03 * H), rx: 0.033 * H, ry: 0.024 * H, rz: 0.075 * H}),
-    };
-    B.legExt = (y) => {
-      if (y >= 0.475) return hipX + thigh[0];
-      if (y >= 0.285) { const t = (0.475 - y) / 0.19; return hipX * (1 - 0.1 * t) + thigh[0] + (thigh[1] - thigh[0]) * t; }
-      const t = clamp((0.285 - y) / 0.237, 0, 1);
-      return hipX * (0.9 - 0.05 * t) + calf[0] + (calf[1] - calf[0]) * t;
-    };
-    return B;
-  }
-  /* coque de torse (vêtement ou corps), y en fraction de la taille */
-  function shell(B, y0, y1, off, o) {
-    o = o || {};
-    const pts = [], n = Math.max(6, Math.round((y1 - y0) / 0.006));
-    for (let i = 0; i <= n; i++) {
-      const y = y0 + ((y1 - y0) * i) / n;
-      let rr;
-      if (o.body || y >= 0.475) rr = B.r(Math.max(y, 0.462));
-      else rr = Math.max(B.r(0.475), B.legExt(y) * 1.04) + (0.475 - y) * B.H * (o.flare === undefined ? 0.28 : o.flare);
-      if (o.quilt) rr += 0.007 * B.H * Math.abs(Math.sin(((y - y0) / 0.055) * Math.PI));
-      pts.push([rr + off * B.H, y * B.H]);
-    }
-    return lathe(pts, 48, o.zK || (y0 < 0.47 && !o.body ? Math.max(B.zK, 0.86) : B.zK));
-  }
-
-  /* matières */
-  const hexRgb = (h) => { const n = parseInt(String(h).replace("#", ""), 16); return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]; };
-  const shade = (rgb, k) => rgb.map((c) => clamp(c * (1 + k), 0, 1));
-  const KNIT = ["pull", "gilet", "sweat", "hoodie", "bonnet", "écharpe"];
-  function matOf(it) {
-    const cols = it.colors || [];
-    const k0 = cols[0] || "gris";
-    const print = k0 === "imprime";
-    const c = hexRgb(colorHex(print ? cols[1] || "blanc" : k0));
-    const c2 = print ? hexRgb(colorHex(cols[2] || "rouge")) : hexRgb(colorHex(cols[1] || k0));
-    const mat = String(it.material || "").toLowerCase();
-    const denim = !print && (k0 === "denim" || /denim|jean/.test(mat) || it.sub === "jean" || it.sub === "veste en jean");
-    const pat = print ? 3 : denim ? 1 : KNIT.includes(it.sub) ? 2 : 0;
-    const gloss = /cuir|vernis|satin/.test(mat) || it.sub === "veste en cuir" ? 0.75 : it.sub === "imperméable" || it.sub === "doudoune" || it.sub === "trench" ? 0.4 : 0.08;
-    return {c, c2, pat, gloss};
-  }
-  function detailOf(it, fallbackHex) {
-    const cols = it.colors || [];
-    return {c: cols[1] && cols[1] !== "imprime" ? hexRgb(colorHex(cols[1])) : hexRgb(fallbackHex), c2: [0, 0, 0], pat: 0, gloss: 0.2};
-  }
-
-  /* habillage d’une pièce */
-  function dressItem(B, it) {
-    const H = B.H, out = [], m = matOf(it);
-    const add = (geo, mm) => out.push({geo, m: mm || m});
-    const shape = SHAPE_OF[it.sub] || (it.cat === "accessoire" ? "ring" : "tee");
-    const sleeves = (off, upTo, foreTo) => {
-      for (const s of [-1, 1]) {
-        const A = B.arm(s), o = off * H, rs = B.upper[0] + o;
-        add(ellipsoid(A.sh, rs * 1.02, rs * 0.9, rs, 20));
-        add(tube(A.sh, vlerp(A.sh, A.elbow, upTo), B.upper[0] + o, lerp(B.upper[0], B.upper[1], upTo) + o));
-        if (foreTo > 0) {
-          const re = B.upper[1] + o;
-          add(ball(A.elbow, re * 0.985, 16));
-          add(tube(A.elbow, vlerp(A.elbow, A.wrist, foreTo), B.fore[0] + o, lerp(B.fore[0], B.fore[1], foreTo) + o * 1.15));
-        }
-      }
-    };
-    const legs = (off, thighTo, calfTo, mode) => {
-      for (const s of [-1, 1]) {
-        const L = B.leg(s), o = off * H, r0 = B.thigh[0] + o;
-        add(ball(L.hip, r0, 20));
-        const rk = lerp(B.thigh[0], B.thigh[1], thighTo) + o;
-        add(tube(L.hip, vlerp(L.hip, L.knee, thighTo), r0, rk));
-        if (calfTo > 0) {
-          add(ball(L.knee, rk * 0.985, 16));
-          const top = Math.max(rk * 0.98, B.calf[0] + o);
-          const bot = mode === "straight" ? Math.max(top * 0.86, B.calf[1] + o) : lerp(B.calf[0], B.calf[1], calfTo) + o;
-          add(tube(L.knee, vlerp(L.knee, L.ankle, calfTo), top, bot));
-          if (mode === "cuff") add(torus(vlerp(L.knee, L.ankle, calfTo), bot, bot, 0.006 * H, X, Z, Y, 24, 8));
-        }
-      }
-    };
-    const collar = (y, off) => add(ringAt(y * H, B.neckR + off * H, 1, 0.007 * H), detailOf(it, colorHex((it.colors || [])[0])));
-    const hemRib = (y, off) => add(ringAt(y * H, B.r(y) + off * H, B.zK, 0.006 * H));
-    const feet = (k, mm) => { for (const s of [-1, 1]) { const f = B.foot(s); add(ellipsoid(f.c, f.rx * k[0], f.ry * k[1], f.rz * k[2], 22), mm); } };
-    const soles = (mm, thick) => { for (const s of [-1, 1]) { const f = B.foot(s); add(ellipsoid(v(f.c.x, f.c.y - f.ry * 0.55, f.c.z + 0.002 * H), f.rx * 1.22, f.ry * (thick || 0.42), f.rz * 1.13, 22), mm); } };
-    switch (shape) {
-      case "tank": add(shell(B, 0.495, 0.8, 0.01)); break;
-      case "tee": add(shell(B, 0.495, 0.834, 0.012)); sleeves(0.012, 0.38, 0); collar(0.828, 0.006); break;
-      case "shirt": add(shell(B, 0.488, 0.834, 0.013)); sleeves(0.013, 1, 0.96); collar(0.83, 0.012); break;
-      case "knit": add(shell(B, 0.49, 0.836, 0.016)); sleeves(0.016, 1, 0.96); hemRib(0.492, 0.016); collar(0.832, 0.01); break;
-      case "hoodie":
-        add(shell(B, 0.49, 0.836, 0.017)); sleeves(0.017, 1, 0.96); hemRib(0.492, 0.017);
-        add(ellipsoid(v(0, 0.836 * H, -0.05 * H), 0.075 * H, 0.04 * H, 0.05 * H, 24));
-        break;
-      case "pants": {
-        add(shell(B, 0.462, 0.625, 0.007, {body: true}));
-        const mode = it.sub === "jogging" ? "cuff" : it.sub === "legging" ? "taper" : "straight";
-        legs(it.sub === "legging" ? 0.003 : it.sub === "cargo" ? 0.016 : 0.011, 1, 0.97, mode);
-        break;
-      }
-      case "shorts": add(shell(B, 0.462, 0.625, 0.008, {body: true})); legs(0.014, 0.5, 0); break;
-      case "skirt": add(shell(B, 0.36, 0.625, 0.008, {flare: 0.3})); break;
-      case "dress": add(shell(B, 0.33, 0.834, 0.011, {flare: 0.26})); sleeves(0.012, 0.3, 0); break;
-      case "jumpsuit": add(shell(B, 0.462, 0.834, 0.012, {body: true})); legs(0.012, 1, 0.97, "straight"); sleeves(0.012, 0.35, 0); break;
-      case "jacket": {
-        if (it.sub === "ensemble") { add(shell(B, 0.462, 0.625, 0.007, {body: true})); legs(0.011, 1, 0.97, "straight"); }
-        const hem = it.sub === "bomber" ? 0.5 : 0.455;
-        add(shell(B, hem, 0.84, 0.028));
-        sleeves(0.022, 1, 0.94);
-        if (it.sub === "bomber") hemRib(0.502, 0.028);
-        collar(0.838, 0.032);
-        break;
-      }
-      case "coat": add(shell(B, 0.3, 0.842, 0.034, {flare: 0.2})); sleeves(0.024, 1, 0.94); collar(0.84, 0.038); break;
-      case "puffer": add(shell(B, 0.46, 0.85, 0.046, {quilt: true})); sleeves(0.034, 1, 0.92); collar(0.848, 0.05); break;
-      case "sneaker": feet([1.18, 1.25, 1.1]); soles(detailOf(it, "#F2F1EC")); break;
-      case "shoe": feet([1.12, 1.15, 1.07]); soles(detailOf(it, "#2A2420"), 0.3); break;
-      case "heel":
-        feet([1.1, 1.12, 1.05]); soles(detailOf(it, "#1E1A18"), 0.25);
-        for (const s of [-1, 1]) { const f = B.foot(s); add(tube(v(f.c.x, 0, f.c.z - f.rz * 0.72), v(f.c.x, f.ry * 1.3, f.c.z - f.rz * 0.72), 0.008 * H, 0.012 * H, 12)); }
-        break;
-      case "boot": {
-        feet([1.16, 1.22, 1.08]); soles(detailOf(it, "#1E1A18"), 0.32);
-        const topY = it.sub === "bottes" ? 0.3 : 0.13;
-        for (const s of [-1, 1]) {
-          const L = B.leg(s), a = v(L.ankle.x, 0.035 * B.H, L.ankle.z), t = (0.285 - topY) / 0.237;
-          const b = vlerp(L.knee, L.ankle, clamp(t, 0, 1));
-          add(tube(a, b, B.calf[1] + 0.014 * H, lerp(B.calf[0], B.calf[1], clamp(t, 0, 1)) + 0.014 * H));
-        }
-        break;
-      }
-      case "sandal":
-        soles(m, 0.3);
-        for (const s of [-1, 1]) { const f = B.foot(s); add(torus(v(f.c.x, f.c.y + 0.004 * H, f.c.z + f.rz * 0.25), f.rx * 1.05, f.ry * 1.1, 0.004 * H, X, Y, Z, 24, 6)); }
-        break;
-      case "bag": {
-        const x = B.wristX + 0.07 * H, y = 0.5 * H;
-        add(box(v(x, y, 0.01 * H), 0.05 * H, 0.13 * H, 0.16 * H, 0));
-        add(tube(v(B.sh * 0.7, 0.81 * H, 0), v(x, y + 0.065 * H, 0.01 * H), 0.004 * H, 0.004 * H, 8));
-        break;
-      }
-      case "belt": add(ringAt(0.606 * H, B.r(0.606) + 0.009 * H, B.zK, 0.008 * H)); add(box(v(0, 0.606 * H, (B.r(0.606) + 0.016 * H) * B.zK), 0.03 * H, 0.022 * H, 0.006 * H, 0), detailOf(it, "#B9A57A")); break;
-      case "watch": {
-        const A = B.arm(-1), c = vlerp(A.elbow, A.wrist, 0.86), w = vnorm(vsub(A.wrist, A.elbow));
-        const u = vnorm(vcross(Y, w)), q = vcross(w, u), R = lerp(B.fore[0], B.fore[1], 0.86) + 0.005 * H;
-        add(torus(c, R, R, 0.005 * H, u, q, w, 28, 8));
-        add(ellipsoid(vadd(c, v(0, 0, R + 0.002 * H)), 0.012 * H, 0.012 * H, 0.004 * H, 16), detailOf(it, "#E9E6DF"));
-        break;
-      }
-      case "ring": add(torus(v(0, 0.802 * H, 0.016 * H), B.neckR + 0.024 * H, (B.neckR + 0.024 * H) * 0.9, 0.0028 * H, X, vnorm(v(0, -0.45, 1)), vnorm(v(0, 1, 0.45)), 40, 6)); break;
-      case "glasses": {
-        const hd = B.head, z = hd.rz * 0.93, y = hd.y + 0.008 * H;
-        for (const s of [-1, 1]) {
-          add(torus(v(s * 0.022 * H, y, z), 0.016 * H, 0.013 * H, 0.0028 * H, X, Y, Z, 24, 6));
-          add(ellipsoid(v(s * 0.022 * H, y, z - 0.001 * H), 0.015 * H, 0.012 * H, 0.002 * H, 16), {c: [0.08, 0.09, 0.11], c2: [0, 0, 0], pat: 0, gloss: 0.9});
-        }
-        break;
-      }
-      case "cap": case "beanie": case "hat": {
-        const hd = B.head;
-        const k = shape === "beanie" ? 1.1 : 1.07;
-        add(ellipsoid(v(0, hd.y + 0.006 * H, -0.003 * H), hd.rx * k, hd.ry * 1.06, hd.rz * k, 30, {vMax: Math.PI * (shape === "beanie" ? 0.56 : 0.5), rotX: -0.18}));
-        if (shape === "beanie") add(torus(v(0, hd.y - 0.005 * H, -0.006 * H), hd.rx * 1.1, hd.rz * 1.08, 0.008 * H, X, Z, Y, 36, 8));
-        if (shape === "cap") {
-          const g = lathe([[0.001, hd.y + 0.012 * H], [hd.rx * 1.3, hd.y + 0.004 * H]], 24, 1, -Math.PI / 2.4, Math.PI / 1.2);
-          for (let i = 2; i < g.p.length; i += 3) g.p[i] += hd.rz * 0.45;
-          add(computeNormals(g));
-        }
-        if (shape === "hat") add(lathe([[0.001, hd.y + 0.026 * H], [hd.rx * 2, hd.y + 0.02 * H]], 40, 1));
-        break;
-      }
-      case "scarf": {
-        const R = B.neckR + 0.02 * H;
-        add(torus(v(0, 0.815 * H, 0.004 * H), R, R * 0.95, 0.016 * H, X, Z, Y, 36, 10));
-        const zf = B.r(0.74) * B.zK + 0.04 * H;
-        add(box(v(0.03 * H, 0.735 * H, zf), 0.055 * H, 0.15 * H, 0.014 * H, 0.06));
-        break;
-      }
-      case "glove": for (const s of [-1, 1]) { const A = B.arm(s); add(ellipsoid(vadd(A.wrist, v(s * 0.004 * H, -0.044 * H, 0)), 0.022 * H, 0.04 * H, 0.014 * H, 18)); } break;
-      default: add(shell(B, 0.495, 0.834, 0.012)); break;
-    }
-    return out.filter((x) => x.geo);
-  }
-
-  /* corps, cheveux */
-  function bodyParts(B, p) {
-    const H = B.H, out = [];
-    const skin = {c: hexRgb(p.skin || "#D7DBE1"), c2: [0, 0, 0], pat: 0, gloss: p.skin === "#D7DBE1" ? 0.35 : 0.18};
-    const add = (geo, m) => out.push({geo, m: m || skin});
-    add(shell(B, 0.462, 0.834, 0, {body: true}));
-    add(tube(v(0, 0.812 * H, 0), v(0, 0.885 * H, 0.004 * H), B.neckR * 1.08, B.neckR, 18));
-    const hd = B.head;
-    add(ellipsoid(v(0, hd.y, 0.004 * H), hd.rx, hd.ry, hd.rz, 32));
-    for (const s of [-1, 1]) {
-      const L = B.leg(s), A = B.arm(s), f = B.foot(s);
-      add(ball(L.hip, B.thigh[0], 22));
-      add(tube(L.hip, L.knee, B.thigh[0], B.thigh[1]));
-      add(ball(L.knee, B.thigh[1], 16));
-      add(tube(L.knee, L.ankle, B.calf[0], B.calf[1]));
-      add(ball(L.ankle, B.calf[1], 14));
-      add(ellipsoid(f.c, f.rx, f.ry, f.rz, 20));
-      add(ball(A.sh, B.upper[0] * 1.06, 20));
-      add(tube(A.sh, A.elbow, B.upper[0], B.upper[1]));
-      add(ball(A.elbow, B.upper[1], 14));
-      add(tube(A.elbow, A.wrist, B.fore[0], B.fore[1]));
-      add(ellipsoid(vadd(A.wrist, v(s * 0.004 * H, -0.042 * H, 0)), 0.019 * H, 0.037 * H, 0.011 * H, 16));
-    }
-    if (p.hair && p.hair !== "aucun") {
-      const hm = {c: hexRgb(p.hairColor || "#3A2A20"), c2: [0, 0, 0], pat: 0, gloss: 0.3};
-      add(ellipsoid(v(0, hd.y + 0.004 * H, -0.004 * H), hd.rx * 1.07, hd.ry * 1.05, hd.rz * 1.08, 32, {vMax: Math.PI * 0.56, rotX: -0.34}), hm);
-      if (p.hair === "longs") {
-        const top = hd.y + 0.005 * H, bottom = 0.775 * H;
-        const g = lathe([[hd.rx * 1.05, top], [hd.rx * 1.12, (top + bottom) / 2], [hd.rx * 1.3, bottom]], 24, 0.95, Math.PI / 2, Math.PI);
-        for (let i = 2; i < g.p.length; i += 3) g.p[i] -= 0.006 * H;
-        add(computeNormals(g), hm);
-      }
-      if (p.hair === "chignon") add(ball(v(0, hd.y + hd.ry * 0.55, -hd.rz * 0.85), hd.rx * 0.42, 20), hm);
-    }
-    return out;
-  }
-
-  /* socle de vitrine : laque nuit et filets de laiton */
-  function plinthParts(H) {
-    const R = 0.21 * H, h = 0.045 * H;
-    const lacquer = {c: [0.075, 0.085, 0.12], c2: [0, 0, 0], pat: 0, gloss: 0.75};
-    const brass = {c: [0.8, 0.64, 0.38], c2: [0, 0, 0], pat: 0, gloss: 0.9};
-    const ringAt = (y, r) => torus(v(0, y, 0), R, R, r, X, Z, Y, 64, 8);
-    return [
-      {geo: lathe([[R, -h], [R, -0.004 * H]], 64, 1), m: lacquer},
-      {geo: lathe([[0.001, 0], [R * 0.999, 0]], 64, 1), m: lacquer},
-      {geo: ringAt(-0.003 * H, 0.0045 * H), m: brass},
-      {geo: ringAt(-h + 0.004 * H, 0.0035 * H), m: brass},
-    ];
-  }
-
-  /* GPU */
-  const VS = `attribute vec3 aP;attribute vec3 aN;uniform vec2 uR;uniform mat4 uVP;varying vec3 vN;varying vec3 vP;varying vec3 vW;
+  const VS = `attribute vec3 aP;attribute vec3 aN;attribute vec3 aC;attribute float aA;attribute float aM;
+uniform mat4 uVP;uniform vec2 uR;
+varying vec3 vN;varying vec3 vP;varying vec3 vW;varying vec3 vC;varying float vA;varying float vM;
 vec3 rot(vec3 q){return vec3(uR.x*q.x+uR.y*q.z,q.y,-uR.y*q.x+uR.x*q.z);}
-void main(){vP=aP;vN=rot(aN);vW=rot(aP);gl_Position=uVP*vec4(vW,1.0);}`;
-  const FS = `precision mediump float;varying vec3 vN;varying vec3 vP;varying vec3 vW;
-uniform vec3 uC;uniform vec3 uC2;uniform float uPat;uniform float uGloss;uniform float uAlpha;uniform vec3 uEye;
-float hash(vec3 p){return fract(sin(dot(p,vec3(12.9898,78.233,37.719)))*43758.5453);}
+void main(){vP=aP;vN=rot(aN);vW=rot(aP);vC=aC;vA=aA;vM=aM;gl_Position=uVP*vec4(vW,1.0);}`;
+  const FS = `#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+varying vec3 vN;varying vec3 vP;varying vec3 vW;varying vec3 vC;varying float vA;varying float vM;
+uniform vec3 uEye;uniform vec2 uSh;uniform vec2 uF;uniform float uAlpha;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 void main(){
- if(uPat>8.5){float d=length(vP.xz)/uC.x;float a=uAlpha*(1.0-smoothstep(0.0,1.0,d));a*=a;gl_FragColor=vec4(0.0,0.0,0.0,a);return;}
- vec3 base=pow(uC,vec3(2.2));
- if(uPat>0.5&&uPat<1.5){float t=fract((vP.y+vP.x*0.7+vP.z*0.7)*260.0);base*=0.9+0.16*smoothstep(0.3,0.7,t);base*=0.93+0.12*hash(floor(vP*700.0));}
- else if(uPat>1.5&&uPat<2.5){float ang=atan(vP.z,vP.x);float t=fract(ang*30.0/6.2831853);base*=0.88+0.14*smoothstep(0.15,0.5,abs(t-0.5)*2.0);}
- else if(uPat>2.5&&uPat<3.5){vec2 q=fract(vec2(atan(vP.z,vP.x)*2.6,vP.y*15.0))-0.5;if(length(q)<0.2)base=pow(uC2,vec3(2.2));}
- vec3 V=normalize(uEye-vW);vec3 n=normalize(vN);if(dot(n,V)<0.0)n=-n;
- vec3 amb=mix(vec3(0.12,0.13,0.19),vec3(0.62,0.57,0.52),0.5+0.5*n.y);
- float spot=0.62+0.55*smoothstep(-0.1,1.9,vW.y);
- vec3 L1=normalize(vec3(0.7,3.0,1.9));vec3 L2=normalize(vec3(-1.9,1.3,-2.6));vec3 L3=normalize(vec3(-1.5,0.5,2.0));
+ if(vM>98.5){
+  vec2 q=vP.xz/uSh;float a=exp(-dot(q,q)*2.6)*0.30;
+  vec2 f1=(vec2(abs(vP.x),vP.z)-uF)/vec2(0.055,0.13);a+=exp(-dot(f1,f1)*1.6)*0.32;
+  gl_FragColor=vec4(0.0,0.0,0.0,a*uAlpha);return;}
+ vec3 n=normalize(vN);vec3 V=normalize(uEye-vW);if(dot(n,V)<0.0)n=-n;
+ vec3 c=vC;float gl=0.06;float m=vM;
+ if(m<0.5){gl=0.32;}
+ else if(m<1.5){c*=0.97+0.05*hash(floor(vP.xy*900.0));}
+ else if(m<2.5){float a=atan(vP.z,vP.x);float r=0.5+0.5*sin(a*140.0);c*=0.86+0.14*smoothstep(0.15,0.85,r);c*=0.96+0.06*hash(floor(vP.xy*600.0));}
+ else if(m<3.5){float t=sin((vP.y+0.7*vP.x+0.7*vP.z)*1300.0);c*=0.92+0.08*t;c*=0.88+0.22*hash(floor(vP.xy*800.0));c=mix(c,c*1.25,0.35*smoothstep(0.55,0.75,vP.y)*(1.0-smoothstep(0.75,0.95,vP.y)));}
+ else if(m<4.5){gl=0.55;}
+ else if(m<5.5){gl=0.32;}
+ else if(m<6.5){c*=0.94+0.08*hash(floor(vP.xy*500.0));gl=0.04;}
+ else if(m<7.5){gl=0.12;}
+ else if(m<8.5){vec2 g=floor(vec2(atan(vP.z,vP.x)*16.0,vP.y*30.0));float ch=mod(g.x+g.y,2.0);c=mix(c,c*0.45+0.5,ch*0.55);}
+ else{gl=0.22;c*=0.94+0.08*hash(floor(vP.xy*1200.0));}
+ vec3 al=pow(clamp(c,0.0,1.0),vec3(2.2));
+ vec3 L1=normalize(vec3(-0.55,0.85,0.85));vec3 L2=normalize(vec3(0.9,0.25,0.55));vec3 L3=normalize(vec3(0.25,0.55,-1.0));
  float d1=max(dot(n,L1),0.0);float d2=max(dot(n,L2),0.0);float d3=max(dot(n,L3),0.0);
- vec3 col=base*(amb*0.6+vec3(1.0,0.87,0.68)*d1*1.08*spot+vec3(0.56,0.68,1.0)*d2*0.5+vec3(1.0,0.94,0.86)*d3*0.2);
- vec3 Hh=normalize(L1+V);col+=vec3(1.0,0.9,0.72)*pow(max(dot(n,Hh),0.0),mix(10.0,80.0,uGloss))*mix(0.03,0.55,uGloss)*spot;
- float fr=pow(1.0-max(dot(n,V),0.0),3.0);col+=base*fr*0.28+vec3(0.5,0.62,1.0)*fr*0.1;
- gl_FragColor=vec4(pow(col,vec3(1.0/2.2))*uAlpha,uAlpha);
+ float ao=vA;
+ vec3 amb=mix(vec3(0.5,0.48,0.46),vec3(0.98,0.98,1.0),0.5+0.5*n.y);
+ vec3 col=al*(amb*0.48*ao+vec3(1.0,0.97,0.93)*d1*0.72*(0.55+0.45*ao)+vec3(0.88,0.92,1.0)*d2*0.22*ao+vec3(1.0)*d3*0.22);
+ vec3 H=normalize(L1+V);float sp=pow(max(dot(n,H),0.0),mix(10.0,70.0,gl))*gl*0.9;
+ col+=vec3(1.0,0.97,0.93)*sp*ao;
+ col+=al*pow(1.0-max(dot(n,V),0.0),3.0)*0.22*ao;
+ col=col/(1.0+0.18*col)*1.1;
+ gl_FragColor=vec4(pow(clamp(col,0.0,1.0),vec3(1.0/2.2))*uAlpha,uAlpha);
 }`;
   function compile(type, src) { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
   let prog, loc;
@@ -1739,46 +1741,66 @@ void main(){
     gl.linkProgram(prog);
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
     loc = {};
-    for (const a of ["aP", "aN"]) loc[a] = gl.getAttribLocation(prog, a);
-    for (const u of ["uR", "uVP", "uC", "uC2", "uPat", "uGloss", "uAlpha", "uEye"]) loc[u] = gl.getUniformLocation(prog, u);
+    for (const a of ["aP", "aN", "aC", "aA", "aM"]) loc[a] = gl.getAttribLocation(prog, a);
+    for (const u of ["uVP", "uR", "uEye", "uSh", "uF", "uAlpha"]) loc[u] = gl.getUniformLocation(prog, u);
   }
   try { setup(); } catch (e) { return api; }
 
-  function upload(item) {
-    const g = item.geo;
-    const pb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, pb); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(g.p), gl.STATIC_DRAW);
-    const nb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, nb); gl.bufferData(gl.ARRAY_BUFFER, g.n, gl.STATIC_DRAW);
-    const ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(g.i), gl.STATIC_DRAW);
-    return {pb, nb, ib, count: g.i.length, m: item.m};
+  /* tampons GPU */
+  let mesh = null, floor = null;
+  function upload(r) {
+    const nv = r.nv;
+    const inter = new Float32Array(nv * 11);
+    for (let q = 0; q < nv; q++) {
+      const o = q * 11, p = q * 3;
+      inter[o] = r.pos[p]; inter[o + 1] = r.pos[p + 1]; inter[o + 2] = r.pos[p + 2];
+      inter[o + 3] = r.nrm[p]; inter[o + 4] = r.nrm[p + 1]; inter[o + 5] = r.nrm[p + 2];
+      inter[o + 6] = r.col[p]; inter[o + 7] = r.col[p + 1]; inter[o + 8] = r.col[p + 2];
+      inter[o + 9] = r.ao[q]; inter[o + 10] = r.mat[q];
+    }
+    let data = inter, count = r.ni, indexed = true, ib = null;
+    if (!U32 && nv > 65535) {
+      data = new Float32Array(r.ni * 11);
+      for (let k = 0; k < r.ni; k++) data.set(inter.subarray(r.idx[k] * 11, r.idx[k] * 11 + 11), k * 11);
+      indexed = false;
+    }
+    const vb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, vb); gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+    if (indexed) { ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, U32 ? r.idx : new Uint16Array(r.idx), gl.STATIC_DRAW); }
+    return {vb, ib, count, indexed, H: r.H};
   }
-  const free = (list) => { for (const x of list) { gl.deleteBuffer(x.pb); gl.deleteBuffer(x.nb); gl.deleteBuffer(x.ib); } };
-  let bodyMeshes = [], clothMeshes = [], shadowMesh = null;
-  function makeShadow(R) {
-    if (shadowMesh) free([shadowMesh]);
-    shadowMesh = upload({geo: computeNormals({p: [-R, 0.001, -R, R, 0.001, -R, R, 0.001, R, -R, 0.001, R], i: [0, 1, 2, 0, 2, 3]}), m: {c: [R, 0, 0], c2: [0, 0, 0], pat: 9, gloss: 0}});
+  function freeMesh(m) { if (!m) return; gl.deleteBuffer(m.vb); if (m.ib) gl.deleteBuffer(m.ib); }
+  function makeFloor(R) {
+    const d = new Float32Array([-R, 0.001, -R, 0, 1, 0, 0, 0, 0, 1, 99, R, 0.001, -R, 0, 1, 0, 0, 0, 0, 1, 99, R, 0.001, R, 0, 1, 0, 0, 0, 0, 1, 99, -R, 0.001, -R, 0, 1, 0, 0, 0, 0, 1, 99, R, 0.001, R, 0, 1, 0, 0, 0, 0, 1, 99, -R, 0.001, R, 0, 1, 0, 0, 0, 0, 1, 99]);
+    if (floor) gl.deleteBuffer(floor.vb);
+    const vb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, vb); gl.bufferData(gl.ARRAY_BUFFER, d, gl.STATIC_DRAW);
+    floor = {vb, count: 6, R};
   }
 
-  /* matrices */
+  /* vecteurs et matrices */
+  const v = (x, y, z) => ({x, y, z});
+  const vsub = (a, b) => v(a.x - b.x, a.y - b.y, a.z - b.z);
+  const vnorm = (a) => { const l = Math.hypot(a.x, a.y, a.z) || 1; return v(a.x / l, a.y / l, a.z / l); };
+  const vcross = (a, b) => v(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
   function persp(fovy, asp, n, f) { const t = 1 / Math.tan(fovy / 2), nf = 1 / (n - f); return [t / asp, 0, 0, 0, 0, t, 0, 0, 0, 0, (f + n) * nf, -1, 0, 0, 2 * f * n * nf, 0]; }
   function lookAt(e, c, up) {
     const z = vnorm(vsub(e, c)), x = vnorm(vcross(up, z)), y = vcross(z, x);
     return [x.x, y.x, z.x, 0, x.y, y.y, z.y, 0, x.z, y.z, z.z, 0, -(x.x * e.x + x.y * e.y + x.z * e.z), -(y.x * e.x + y.y * e.y + y.z * e.z), -(z.x * e.x + z.y * e.y + z.z * e.z), 1];
   }
   function mul(a, b) { const o = new Array(16); for (let c = 0; c < 4; c++) for (let r = 0; r < 4; r++) { let s = 0; for (let k = 0; k < 4; k++) s += a[k * 4 + r] * b[c * 4 + k]; o[c * 4 + r] = s; } return o; }
+  const clampN = (x, a, b) => Math.max(a, Math.min(b, x));
 
-  /* état de la scène */
-  let host = null, ro = null, raf = 0, rotY = 0.45, vel = 0, drag = null, spin = false, anim = null;
-  let curB = null, bodyKey = "", clothKey = "", lookSig = "", eye = v(0, 1, 4), VP = null, lost = false, lastOpts = null;
+  /* scène */
+  let host = null, ro = null, raf = 0, rotY = 0.35, vel = 0, drag = null, spin = false, anim = null, fade = null;
+  let Hh = 1.75, eye = v(0, 1, 4), VP = null, lost = false, lastOpts = null, alpha = 0;
   function fit() {
-    const w = Math.max(1, canvas.width), h = Math.max(1, canvas.height), asp = w / h;
-    const Hh = curB ? curB.H : 1.75, fov = (27 * Math.PI) / 180;
-    const k = host && host.dataset.k ? clamp(Number(host.dataset.k) || 0.74, 0.55, 1.1) : 0.74;
+    const w = Math.max(1, canvas.width), h = Math.max(1, canvas.height), asp = w / h, fov = (24 * Math.PI) / 180;
+    const k = host && host.dataset.k ? clampN(Number(host.dataset.k) || 0.62, 0.45, 1.2) : 0.62;
     let d = (Hh * k) / Math.tan(fov / 2);
     const hf = 2 * Math.atan(Math.tan(fov / 2) * asp);
-    d = Math.max(d, 0.56 / Math.tan(hf / 2));
-    const c = host && host.dataset.c ? clamp(Number(host.dataset.c) || 0.5, 0.3, 0.7) : 0.5;
-    eye = v(0, Hh * (c + 0.04), d);
-    VP = mul(persp(fov, asp, 0.05, 30), lookAt(eye, v(0, Hh * c, 0), Y));
+    d = Math.max(d, (0.5 * Hh / 1.78) / Math.tan(hf / 2));
+    const c = host && host.dataset.c ? clampN(Number(host.dataset.c) || 0.5, 0.3, 0.7) : 0.5;
+    eye = v(0, Hh * (c + 0.06), d);
+    VP = mul(persp(fov, asp, 0.05, 40), lookAt(eye, v(0, Hh * c, 0), v(0, 1, 0)));
   }
   function resize() {
     if (!host) return;
@@ -1787,38 +1809,46 @@ void main(){
     if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
     fit();
   }
-  function drawList(list) {
-    for (const x of list) {
-      gl.bindBuffer(gl.ARRAY_BUFFER, x.pb); gl.vertexAttribPointer(loc.aP, 3, gl.FLOAT, false, 0, 0);
-      gl.bindBuffer(gl.ARRAY_BUFFER, x.nb); gl.vertexAttribPointer(loc.aN, 3, gl.FLOAT, false, 0, 0);
-      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, x.ib);
-      gl.uniform3fv(loc.uC, x.m.c); gl.uniform3fv(loc.uC2, x.m.c2 || [0, 0, 0]);
-      gl.uniform1f(loc.uPat, x.m.pat || 0); gl.uniform1f(loc.uGloss, x.m.gloss || 0); gl.uniform1f(loc.uAlpha, x.m.pat === 9 ? 0.55 : 1);
-      gl.drawElements(gl.TRIANGLES, x.count, gl.UNSIGNED_SHORT, 0);
-    }
+  function bindVB(vb) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, vb);
+    const st = 44;
+    gl.vertexAttribPointer(loc.aP, 3, gl.FLOAT, false, st, 0);
+    gl.vertexAttribPointer(loc.aN, 3, gl.FLOAT, false, st, 12);
+    gl.vertexAttribPointer(loc.aC, 3, gl.FLOAT, false, st, 24);
+    gl.vertexAttribPointer(loc.aA, 1, gl.FLOAT, false, st, 36);
+    gl.vertexAttribPointer(loc.aM, 1, gl.FLOAT, false, st, 40);
   }
   function draw() {
     if (!VP || lost) return;
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    if (!mesh) return;
     gl.useProgram(prog);
-    gl.enableVertexAttribArray(loc.aP); gl.enableVertexAttribArray(loc.aN);
+    for (const a of ["aP", "aN", "aC", "aA", "aM"]) gl.enableVertexAttribArray(loc[a]);
     gl.uniformMatrix4fv(loc.uVP, false, new Float32Array(VP));
     gl.uniform2f(loc.uR, Math.cos(rotY), Math.sin(rotY));
     gl.uniform3f(loc.uEye, eye.x, eye.y, eye.z);
+    const s = Hh / 1.78;
+    gl.uniform2f(loc.uSh, 0.42 * s, 0.32 * s);
+    gl.uniform2f(loc.uF, 0.118 * s, 0.03 * s);
+    gl.uniform1f(loc.uAlpha, alpha);
     gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.enable(gl.DEPTH_TEST); gl.disable(gl.CULL_FACE);
-    if (shadowMesh) { gl.depthMask(false); drawList([shadowMesh]); gl.depthMask(true); }
-    drawList(bodyMeshes); drawList(clothMeshes);
+    if (floor) { gl.depthMask(false); bindVB(floor.vb); gl.drawArrays(gl.TRIANGLES, 0, floor.count); gl.depthMask(true); }
+    bindVB(mesh.vb);
+    if (mesh.indexed) { gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, mesh.ib); gl.drawElements(gl.TRIANGLES, mesh.count, U32 ? gl.UNSIGNED_INT : gl.UNSIGNED_SHORT, 0); }
+    else gl.drawArrays(gl.TRIANGLES, 0, mesh.count);
   }
+  const reduce = () => { try { return matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } };
   function frame(now) {
     raf = 0;
     if (!host || !host.isConnected || host.offsetParent === null || canvas.style.visibility === "hidden") return;
     let more = false;
-    if (anim) { const t = Math.min(1, (now - anim.t0) / 700), e = 1 - Math.pow(1 - t, 3); rotY = anim.from + (anim.to - anim.from) * e; if (t < 1) more = true; else anim = null; }
+    if (fade) { const t = Math.min(1, (now - fade.t0) / 380); alpha = fade.from + (1 - fade.from) * t; if (t < 1) more = true; else fade = null; }
+    if (anim) { const t = Math.min(1, (now - anim.t0) / 750), e = 1 - Math.pow(1 - t, 3); rotY = anim.from + (anim.to - anim.from) * e; if (t < 1) more = true; else anim = null; }
     else if (!drag) {
-      if (spin) { rotY += 0.009; more = true; }
+      if (spin) { rotY += 0.008; more = true; }
       else if (Math.abs(vel) > 0.0005) { rotY += vel; vel *= 0.93; more = true; }
     }
     draw();
@@ -1831,42 +1861,86 @@ void main(){
   canvas.addEventListener("pointerup", endDrag);
   canvas.addEventListener("pointercancel", endDrag);
   canvas.addEventListener("webglcontextlost", (e) => { e.preventDefault(); lost = true; });
-  canvas.addEventListener("webglcontextrestored", () => { lost = false; try { setup(); } catch (er) { return; } bodyMeshes = []; clothMeshes = []; shadowMesh = null; bodyKey = ""; clothKey = ""; if (lastOpts) show(lastOpts); });
+  canvas.addEventListener("webglcontextrestored", () => { lost = false; try { setup(); } catch (er) { return; } mesh = null; floor = null; have = null; if (lastOpts) show(lastOpts); });
 
-  function spreadFor(items) {
-    let s = 0;
-    for (const it of items) {
-      const sh = SHAPE_OF[it.sub];
-      if (sh === "puffer") s = Math.max(s, 0.05); else if (sh === "coat") s = Math.max(s, 0.035); else if (sh === "jacket") s = Math.max(s, 0.024); else if (sh === "knit" || sh === "hoodie") s = Math.max(s, 0.008);
-    }
-    return s;
-  }
+  /* vêtements : type de volume et matière */
+  const KIND_OF = {
+    "t-shirt": "tee", "polo": "tee", "débardeur": "tank", "top": "tank", "chemise": "shirt", "blouse": "shirt", "sweat": "sweat", "hoodie": "hoodie", "pull": "knit", "gilet": "knit",
+    "jean": "jeans", "chino": "chino", "pantalon de tailleur": "trousers", "cargo": "cargo", "jogging": "jogger", "legging": "legging", "short": "shorts", "jupe": "skirt",
+    "robe": "dress", "combinaison": "jumpsuit", "ensemble": "blazer",
+    "blazer": "blazer", "veste en jean": "jacket", "bomber": "jacket", "veste en cuir": "jacket", "trench": "coat", "manteau": "coat", "imperméable": "coat", "doudoune": "puffer",
+    "baskets": "sneaker", "boots": "boot", "bottes": "tallboot", "mocassins": "shoe", "derbies": "shoe", "escarpins": "heel", "talons": "heel", "sandales": "sandal",
+    "sac": "bag", "ceinture": "belt", "montre": "watch", "casquette": "cap", "bonnet": "beanie", "chapeau": "hat", "écharpe": "scarf", "gants": "glove",
+  };
+  const FALL = {haut: "tee", bas: "jeans", piece: "dress", veste: "jacket", chaussures: "sneaker"};
   const LAYER = {bottom: 0, piece: 1, top: 2, shoes: 3, outer: 4, acc: 5};
+  const rgb01 = (h) => { const n = parseInt(String(h || "#9AA0A8").replace("#", ""), 16) || 0; return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]; };
+  function matId(it, kind) {
+    const m = String(it.material || "").toLowerCase();
+    if ((it.colors || [])[0] === "imprime") return 8;
+    if (/cuir|leather|simili/.test(m) || it.sub === "veste en cuir" || ["shoe", "boot", "tallboot", "heel", "belt", "bag"].includes(kind) && !/toile|coton|textile/.test(m)) return 4;
+    if (/denim|jean/.test(m) || ["jean", "veste en jean"].includes(it.sub)) return 3;
+    if (kind === "puffer") return 5;
+    if (/laine|maille|tricot|cachemire/.test(m) || ["knit", "beanie", "scarf"].includes(kind)) return kind === "coat" ? 6 : 2;
+    if (kind === "coat") return 6;
+    return 1;
+  }
+  function jobFor(o) {
+    const b = o.body || {};
+    const items = [];
+    const list = (o.items || []).slice().sort((a, c) => (LAYER[o.slotOf(a)] || 0) - (LAYER[o.slotOf(c)] || 0));
+    for (const it of list) {
+      const kind = KIND_OF[it.sub] || FALL[it.cat];
+      if (!kind) continue;
+      const cols = it.colors || [];
+      const hex = cols[0] === "imprime" ? (cols[1] && cols[1] !== "imprime" ? colorHex(cols[1]) : "#2F4A7A") : colorHex(cols[0]);
+      const entry = {kind, color: rgb01(hex), mat: matId(it, kind)};
+      items.push(entry);
+      if (it.sub === "ensemble") items.push({kind: "trousers", color: entry.color, mat: entry.mat});
+    }
+    return {
+      body: {sex: b.sex === "f" ? "f" : "h", h: (Number(b.height) || 175) / 100, w: Number(b.weight) || 70, build: Number(b.build) || 0, sh: Number(b.shoulders) || 0, hp: Number(b.hips) || 0, skin: rgb01(b.skin || "#E8E6E1"), hair: b.hair || "aucun", hairColor: rgb01(b.hairColor || "#3A2A20")},
+      items,
+    };
+  }
+
+  /* file d'attente : brouillon pendant qu'on règle, version fine ensuite */
+  let have = null, want = null, busy = false, lastReq = 0, lookSig = "", hqTimer = 0;
+  function pump() {
+    if (busy || !want) return;
+    const rapid = performance.now() - lastReq < 380;
+    const draft = rapid || !have;
+    if (have && have.key === want.key && (!have.draft || draft)) { if (!have.draft) want = null; return; }
+    const job = {...want.job, draft: draft && !!have};
+    const key = want.key, animate = want.animate, sig = want.sig;
+    busy = true;
+    compute(job, (r) => {
+      busy = false;
+      if (r && !r.error && r.nv > 0) {
+        const m = upload(r);
+        freeMesh(mesh);
+        mesh = m;
+        if (Math.abs(m.H - Hh) > 1e-4 || !floor) { Hh = m.H; makeFloor(0.9 * (Hh / 1.78)); fit(); }
+        have = {key, draft: job.draft};
+        if (alpha < 1 && !fade) fade = {t0: performance.now(), from: alpha};
+        if (animate && sig !== lookSig && !reduce()) anim = {t0: performance.now(), from: rotY - 1.4, to: rotY};
+        lookSig = sig;
+        kick();
+      }
+      if (want && want.key === key && !job.draft) want = null;
+      clearTimeout(hqTimer);
+      if (want) hqTimer = setTimeout(pump, job.draft ? 400 : 0);
+    });
+  }
   function show(o) {
     lastOpts = o;
     canvas.style.visibility = o.visible ? "visible" : "hidden";
     if (!o.visible) return;
-    const items = (o.items || []).slice().sort((a, b) => (LAYER[o.slotOf(a)] || 0) - (LAYER[o.slotOf(b)] || 0));
-    const spread = spreadFor(items);
-    const bk = JSON.stringify([o.body, spread]);
-    if (bk !== bodyKey) {
-      bodyKey = bk; clothKey = "";
-      curB = model(o.body, spread);
-      free(bodyMeshes);
-      bodyMeshes = bodyParts(curB, o.body).concat(plinthParts(curB.H)).map(upload);
-      makeShadow(0.42 * curB.H);
-      fit();
-    }
-    const sig = items.map((it) => it.id).join(",");
-    const ck = items.map((it) => [it.id, it.sub, (it.colors || []).join("."), it.material || ""].join(":")).join(",");
-    if (ck !== clothKey) {
-      clothKey = ck;
-      free(clothMeshes);
-      clothMeshes = [];
-      for (const it of items) for (const part of dressItem(curB, it)) clothMeshes.push(upload(part));
-      if (o.animate && sig !== lookSig && !reduceMotion()) anim = {t0: performance.now(), from: rotY - 1.6, to: rotY};
-      lookSig = sig;
-    }
+    const job = jobFor(o);
+    const key = JSON.stringify(job);
+    const sig = job.items.map((i) => i.kind + i.color.join(",")).join("|");
+    if (!want || want.key !== key) { if (!(have && have.key === key && !have.draft)) { want = {key, job, animate: !!o.animate, sig}; lastReq = performance.now(); } }
+    pump();
     kick();
   }
   function attach(el) {
@@ -2443,15 +2517,9 @@ function dayOfYear(iso) {
 /* Le titre de couverture remplit toute la largeur, quelle que soit la police chargée */
 function fitMastheads() {
   for (const el of document.querySelectorAll(".masthead")) {
-    const cover = el.closest(".cover"), letters = el.querySelector(".mh-l");
-    if (!cover || !letters || !cover.offsetParent) continue;
-    const target = Math.min(cover.clientWidth * 0.66, 380);
-    const fs = parseFloat(getComputedStyle(el).fontSize) || 40;
-    const w = letters.getBoundingClientRect().width;
-    if (!w || target <= 0) continue;
-    const nf = clamp((fs * target) / w, 24, 64);
-    if (Math.abs(nf - fs) > 0.5) el.style.fontSize = nf.toFixed(1) + "px";
-    cover.style.setProperty("--mh", nf.toFixed(1) + "px");
+    const cover = el.closest(".cover");
+    if (!cover) continue;
+    cover.style.setProperty("--mh", (parseFloat(getComputedStyle(el).fontSize) || 22).toFixed(1) + "px");
   }
 }
 window.addEventListener("resize", () => fitMastheads());
@@ -2591,7 +2659,7 @@ function renderTrends() {
   let upd = "";
   try { if (T.updatedAt) upd = new Intl.DateTimeFormat("fr-FR", {day: "numeric", month: "long", year: "numeric"}).format(new Date(T.updatedAt)); } catch (e) { upd = ""; }
   el.innerHTML = `
-    <div class="tr-head"><h2 class="tr-title">Tendances</h2><p class="tr-lead">Ce qui se porte en ${esc(season.charAt(0).toLowerCase() + season.slice(1))}. Les looks qui suivent la tendance portent le badge « Dans la tendance ».</p></div>
+    <div class="tr-head"><h2 class="tr-title">Tendances</h2><p class="tr-lead">Ce qui se porte en ${esc(season.charAt(0).toLowerCase() + season.slice(1))}. Les looks qui la suivent portent le badge « Tendance ».</p></div>
     ${mine.length ? `<div class="group"><h3 class="h">Déjà dans ta garde-robe</h3><div class="tr-mine">${mine.map((it) => `<button class="tr-pc" id="tp-${esc(it.id)}" data-action="impose-go" data-id="${esc(it.id)}" aria-label="${esc(it.name)} : construire un look autour"><span class="ic-vis">${itemVisual(it)}</span><span class="ic-name" aria-hidden="true">${esc(it.name)}</span></button>`).join("")}</div><p class="hint">Touche une pièce : un look se construit autour.</p></div>` : ""}
     ${T.colors.length ? `<div class="group"><h3 class="h">Les couleurs</h3><div class="tr-colors" role="list">${T.colors.map((k) => `<span class="tr-col" role="listitem"><span class="dot" style="--c:${colorHex(k)}"></span>${esc(COL[k].label)}${ownedCols.has(k) ? `<span class="tr-have" aria-hidden="true">✓</span><span class="sr"> (tu en as)</span>` : ""}</span>`).join("")}</div></div>` : ""}
     ${T.tips[0] ? `<p class="tr-tip">${esc(T.tips[0])}</p>` : ""}
@@ -2763,7 +2831,7 @@ function renderSettings() {
     <div class="row-btns"><button class="btn ghost" id="s-export" data-action="export"${S.caps.downloads ? "" : " disabled"}>Exporter (JSON)</button>
       ${S.confirmAll ? `<span class="confirm"><span>Tout supprimer, sans retour possible ?</span><button class="btn danger sm" data-action="delete-all-yes"${S.deleting ? " disabled" : ""}>${S.deleting ? "Suppression…" : "Oui, tout supprimer"}</button><button class="btn ghost sm" data-action="delete-all-no">Annuler</button></span>` : `<button class="btn ghost danger-t" data-action="delete-all">Tout supprimer</button>`}</div>
   </div>
-  <p class="foot-note">Dressing du matin, version 5.</p>`;
+  <p class="foot-note">Dressing du matin, version 6</p>`;
 }
 
 /* ---------------- Feuilles (bottom sheet) ---------------- */
