@@ -435,8 +435,8 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
 .pick-group{display:flex;flex-direction:column;gap:8px}
 .pick-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:22px 8px}
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--rule);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:max(8px,env(safe-area-inset-left,0px));padding-right:max(8px,env(safe-area-inset-right,0px))}
-.tabbar-in{max-width:580px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
-.tabbtn{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0 9px;font-size:9.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);min-width:0;transition:color .15s}
+.tabbar-in{max-width:580px;margin:0 auto;display:grid;grid-template-columns:repeat(6,minmax(0,1fr))}
+.tabbtn{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0 9px;font-size:10.5px;font-weight:500;letter-spacing:0;color:var(--ink-3);min-width:0;transition:color .15s}
 .tabbtn span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;padding-inline:2px}
 .tabbtn .i{width:21px;height:21px}
 .tabbtn[aria-current="page"]{color:var(--ink)}
@@ -475,6 +475,52 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
 .ref-name{margin:0;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
 .ref-q{margin:4px 0 0;font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
 .ok{margin:0;font-size:13px;color:var(--good)}
+/* Boutiques : sélection de vraies pièces, envies, essayage dans la cabine */
+.shop-head{display:flex;flex-direction:column;gap:6px;padding:16px;background:var(--studio)}
+.sh-name{margin:0;font-family:var(--font-display);font-weight:500;font-size:26px;line-height:1.05;letter-spacing:.04em;text-transform:uppercase;font-variation-settings:"opsz" 40}
+.sh-line{margin:0;font-size:13.5px;color:var(--ink-2)}
+.sh-site{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-underline-offset:3px}
+.sh-site .i{width:14px;height:14px}
+.shop-tools{display:flex;flex-direction:column;gap:12px}
+.shop-card .ic-cap{gap:4px}
+.sc-shop{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.sc-price{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:2px}
+.approx{font-weight:500;color:var(--ink-3);margin-right:4px;font-size:.85em;letter-spacing:.02em}
+.wish-dot{position:absolute;top:6px;right:6px;width:26px;height:26px;display:grid;place-items:center;background:var(--paper);color:var(--ink)}
+.wish-dot .i{width:14px;height:14px}
+.wish-dot .fillable,.btn.on .fillable,.btn[aria-pressed="true"] .fillable{fill:currentColor}
+.shop-note{margin:0;font-size:11.5px;line-height:1.55;color:var(--ink-3)}
+.wish-sum{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.ws-total{font-family:var(--font-display);font-size:26px;font-weight:500;line-height:1}
+.ws-total .approx{font-family:var(--font-body);font-size:12px}
+.sp-hero{--garment-line:var(--tile-ink);position:relative;height:min(34vh,290px);flex:none;background:var(--tile);margin:-18px calc(-1 * max(18px,env(safe-area-inset-right,0px))) 0 calc(-1 * max(18px,env(safe-area-inset-left,0px)));display:flex;align-items:center;justify-content:center;overflow:hidden}
+.sp-hero > img{height:86%;width:auto;max-width:86%;object-fit:contain}
+.sp-top{display:flex;flex-direction:column;gap:6px}
+.sp-name{margin:0;font-family:var(--font-display);font-weight:500;font-size:24px;line-height:1.15;font-variation-settings:"opsz" 30;text-wrap:balance}
+.sp-price{margin:0;font-size:16px;font-weight:600;font-variant-numeric:tabular-nums}
+.sp-facts{display:grid;grid-template-columns:max-content 1fr;gap:8px 16px;margin:0;font-size:13.5px}
+.sp-facts dt{font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding-top:2px}
+.sp-facts dd{margin:0;color:var(--ink-2)}
+.sp-actions{display:flex;flex-direction:column;gap:8px}
+a.btn{text-decoration:none}
+.sp-actions .btn .i,.try-btns .btn .i{width:18px;height:18px}
+.sp-bought{align-self:center;border:0;text-decoration:underline;text-underline-offset:3px;min-height:42px;white-space:normal;text-align:center}
+.sp-own{display:flex;align-items:center;justify-content:center;gap:8px;margin:0;min-height:42px;font-size:12.5px;color:var(--good)}
+.sp-own .i{width:16px;height:16px}
+.try-card{display:flex;flex-direction:column;gap:10px;padding:16px;background:var(--studio)}
+.try-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.try-shop{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.try-shop .approx{text-transform:none}
+.try-name{margin:0;font-family:var(--font-display);font-size:22px;line-height:1.15;font-weight:500;text-wrap:balance}
+.try-btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:4px}
+.try-btns .btn.primary{grid-column:1 / -1}
+.try-btns .btn{padding:0 10px;min-width:0;overflow:hidden;text-overflow:ellipsis}
+
+.shop-intro{align-items:flex-end}
+.shop-intro .btn{gap:6px}
+.shop-intro .btn .i{width:15px;height:15px}
+.shop-intro .btn.on .fillable{fill:currentColor}
+@media (max-width:370px){.tabbtn{font-size:10px}}
 @media (max-width:360px){.hcard{grid-template-columns:38px 1fr}.viewseg button{padding:0 9px}.ref-result{grid-template-columns:80px 1fr}.tr-colors{grid-template-columns:repeat(3,minmax(0,1fr))}.pc{flex-basis:128px}}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -587,6 +633,11 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
     <div id="ward-grid"></div>
   </section>
 
+  <section id="tab-shop" class="tab" aria-labelledby="t-shop" hidden>
+    <div class="intro row shop-intro" id="shop-intro"><div><p class="eyebrow">Sélection de vraies pièces</p><h1 class="display" id="t-shop">Bou<em>tiques</em></h1></div></div>
+    <div id="shop-body" class="tab" style="gap:22px"></div>
+  </section>
+
   <section id="tab-body" class="tab" aria-labelledby="t-body" hidden>
     <div class="cover sm" id="stage2" data-issue="1">
       <div class="cover-meta"><span>Ton mannequin</span></div>
@@ -613,7 +664,7 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
 
   <section id="tab-settings" class="tab" aria-labelledby="t-set" hidden>
     <div class="intro">
-      <p class="eyebrow">Version 6</p>
+      <p class="eyebrow">Version 8</p>
       <h1 class="display" id="t-set"><em>Réglages</em></h1>
     </div>
     <div id="settings" class="tab" style="gap:14px"></div>
@@ -710,6 +761,70 @@ const HAIRS = [["aucun", "Sans"], ["courts", "Courts"], ["longs", "Longs"], ["ch
 const HAIR_COLORS = [["Noir", "#1D1A19"], ["Brun", "#3A2A20"], ["Châtain", "#6A4A2E"], ["Blond", "#C6A469"], ["Roux", "#9A4822"], ["Gris", "#A7A7A4"]];
 const BODY_DEFAULT = {sex: null, height: 175, weight: 70, build: 0, shoulders: 0, hips: 0, skin: "#D7DBE1", hair: "aucun", hairColor: "#3A2A20"};
 
+/* ---------------- Boutiques : vraies pièces, prix relevés sur les sites des marques ---------------- */
+/* link : « fiche » = page du produit, « rayon » = rayon de la boutique (modèles renouvelés souvent), « recherche » = recherche du site sur ce modèle.
+   approx : prix indicatif (page produit non consultée). Les coloris servent à l’essayage sur le mannequin. */
+const SHOP_DATE = "2026-10-26";
+const SHOPS = [
+  {key: "uniqlo", name: "Uniqlo", line: "Basiques japonais, mailles fines et doudounes légères.", site: "https://www.uniqlo.com/fr/fr/"},
+  {key: "zara", name: "Zara", line: "Les coupes du moment, renouvelées chaque semaine.", site: "https://www.zara.com/fr/fr/"},
+  {key: "decathlon", name: "Decathlon", line: "Sport et plein air à petit prix.", site: "https://www.decathlon.fr/"},
+  {key: "levis", name: "Levi’s", line: "Le jean et la veste en jean depuis 1873.", site: "https://www.levi.com/FR/fr_FR/"},
+  {key: "drmartens", name: "Dr. Martens", line: "Boots et derbies en cuir à surpiqûres jaunes.", site: "https://www.drmartens.com/fr/fr/"},
+  {key: "nike", name: "Nike", line: "Sneakers et sportswear.", site: "https://www.nike.com/fr/"},
+  {key: "adidas", name: "Adidas", line: "Les classiques à trois bandes.", site: "https://www.adidas.fr/"},
+  {key: "carhartt", name: "Carhartt", line: "Vêtements de travail en coutil, faits pour durer.", site: "https://www.carhartt.com/fr-fr"},
+];
+const UQ = "https://www.uniqlo.com/fr/fr/products/";
+const ZR = "https://www.zara.com/fr/fr/";
+const CATALOG = [
+  /* Uniqlo */
+  {id: "uq-supima", shop: "uniqlo", sex: "h", name: "T-shirt 100 % coton Supima", price: 19.9, url: UQ + "E455365-000/00", link: "fiche", cat: "haut", sub: "t-shirt", colors: ["blanc"], alt: ["noir", "marine", "gris"], material: "coton Supima", styles: ["casual", "minimaliste", "streetwear"], warmth: 1},
+  {id: "uq-merino", shop: "uniqlo", sex: "h", name: "Pull 100 % laine mérinos", price: 39.9, url: UQ + "E450535-000/00", link: "fiche", cat: "haut", sub: "pull", colors: ["kaki"], alt: ["marine", "gris", "bordeaux"], material: "laine mérinos", styles: ["smartcasual", "classique", "minimaliste"], warmth: 2},
+  {id: "uq-cardigan", shop: "uniqlo", sex: "h", name: "Cardigan col V 100 % laine mérinos", price: 49.9, url: UQ + "E450540-000/00", link: "fiche", cat: "haut", sub: "gilet", colors: ["noir"], alt: ["marine", "beige"], material: "laine mérinos", styles: ["classique", "smartcasual", "minimaliste"], warmth: 2},
+  {id: "uq-cashmere", shop: "uniqlo", sex: "h", name: "Pull 100 % cachemire", price: 99.9, url: UQ + "E450543-000/00", link: "fiche", cat: "haut", sub: "pull", colors: ["marine"], alt: ["camel", "gris", "blanc"], material: "cachemire", styles: ["classique", "chic", "minimaliste"], warmth: 2},
+  {id: "uq-fairisle", shop: "uniqlo", sex: "h", name: "Pull 100 % laine Fair Isle", price: 49.9, url: UQ + "E486087-000/00", link: "fiche", cat: "haut", sub: "pull", colors: ["imprime", "noir"], material: "laine", styles: ["vintage", "casual", "classique"], warmth: 3},
+  {id: "uq-flannel", shop: "uniqlo", sex: "h", name: "Chemise en flanelle à carreaux", price: 39.9, url: UQ + "E486615-000/00", link: "fiche", cat: "haut", sub: "chemise", colors: ["imprime", "bleu"], material: "coton flanelle", styles: ["casual", "vintage", "rock"], warmth: 2},
+  {id: "uq-oxford-f", shop: "uniqlo", sex: "f", name: "Chemise Oxford coupe boxy", price: 34.9, url: UQ + "E484928-000/00", link: "fiche", cat: "haut", sub: "chemise", colors: ["blanc"], alt: ["bleu-clair"], material: "coton", styles: ["smartcasual", "classique", "minimaliste"], warmth: 1},
+  {id: "uq-linen-f", shop: "uniqlo", sex: "f", name: "Chemise 100 % lin premium", price: 49.9, url: UQ + "E475647-000/00", link: "fiche", cat: "haut", sub: "chemise", colors: ["beige"], alt: ["blanc"], material: "lin", styles: ["minimaliste", "casual", "boheme"], warmth: 1},
+  {id: "uq-robe-f", shop: "uniqlo", sex: "f", name: "Robe en maille doublée sans manches", price: 39.9, url: UQ + "E488186-000/00", link: "fiche", cat: "piece", sub: "robe", colors: ["marron"], alt: ["noir"], material: "maille", styles: ["chic", "minimaliste", "smartcasual"], warmth: 2},
+  {id: "uq-puffer-f", shop: "uniqlo", sex: "f", name: "Doudoune PUFFERTECH", price: 69.9, url: UQ + "E487408-000/00", link: "fiche", cat: "veste", sub: "doudoune", colors: ["noir"], alt: ["beige", "marine"], material: "polyester", styles: ["casual", "minimaliste", "sportswear"], warmth: 3},
+  {id: "uq-bag", shop: "uniqlo", sex: "u", name: "Mini-sac rond à bandoulière", price: 14.9, url: UQ + "E481610-000/00", link: "fiche", cat: "accessoire", sub: "sac", colors: ["noir"], alt: ["kaki", "beige"], material: "toile de nylon", styles: ["casual", "minimaliste", "streetwear"], warmth: 1},
+  {id: "uq-beanie", shop: "uniqlo", sex: "u", name: "Bonnet HEATTECH côtelé", price: 14.9, url: UQ + "E486191-000/00", link: "fiche", cat: "accessoire", sub: "bonnet", colors: ["noir"], alt: ["gris", "bordeaux"], material: "maille", styles: ["casual", "minimaliste", "streetwear"], warmth: 3},
+  /* Zara : les modèles changent vite, le lien ouvre le rayon */
+  {id: "zr-blazer", shop: "zara", sex: "f", name: "Blazer à épaulettes", price: 65.95, url: ZR + "femme-blazers-l1055.html", link: "rayon", cat: "veste", sub: "blazer", colors: ["noir"], alt: ["beige", "marine"], material: "tissu fluide", styles: ["chic", "business", "smartcasual"], warmth: 2},
+  {id: "zr-pull", shop: "zara", sex: "f", name: "Pull oversize 100 % laine", price: 59.95, url: ZR + "femme-maille-pulls-l1165.html", link: "rayon", cat: "haut", sub: "pull", colors: ["beige"], alt: ["gris", "noir"], material: "laine", styles: ["casual", "minimaliste", "smartcasual"], warmth: 3},
+  {id: "zr-trench", shop: "zara", sex: "f", name: "Trench à ceinture water repellent", price: 89.95, url: ZR + "femme-vetements-d-exterieur-trench-l1202.html", link: "rayon", cat: "veste", sub: "trench", colors: ["beige"], alt: ["noir"], material: "coton mélangé", styles: ["classique", "chic", "smartcasual"], warmth: 2, rainOk: true},
+  {id: "zr-coat", shop: "zara", sex: "h", name: "Manteau regular fit avec laine", price: 99.95, url: ZR + "homme-vetements-d-exterieur-l715.html", link: "rayon", cat: "veste", sub: "manteau", colors: ["camel"], alt: ["noir", "gris"], material: "laine mélangée", styles: ["classique", "smartcasual", "business"], warmth: 3},
+  {id: "zr-croise", shop: "zara", sex: "h", name: "Manteau croisé en mélange de laine", price: 149, url: ZR + "homme-vetements-d-exterieur-l715.html", link: "rayon", cat: "veste", sub: "manteau", colors: ["marine"], alt: ["noir", "gris"], material: "laine mélangée", styles: ["business", "classique", "chic"], warmth: 3},
+  {id: "zr-parka", shop: "zara", sex: "h", name: "Parka technique à capuche water repellent", price: 99.95, url: ZR + "homme-vetements-d-exterieur-l715.html", link: "rayon", cat: "veste", sub: "imperméable", colors: ["kaki"], alt: ["noir"], material: "polyester", styles: ["casual", "streetwear", "sportswear"], warmth: 2, rainOk: true},
+  {id: "zr-suede", shop: "zara", sex: "h", name: "Manteau relaxed fit en croûte de cuir", price: 239, url: ZR + "homme-vetements-d-exterieur-l715.html", link: "rayon", cat: "veste", sub: "manteau", colors: ["marron"], alt: ["noir"], material: "croûte de cuir", styles: ["rock", "vintage", "smartcasual"], warmth: 2},
+  /* Decathlon */
+  {id: "dc-mt100", shop: "decathlon", sex: "h", name: "Doudoune de trek en duvet recyclé MT100", price: 59.99, url: "https://www.decathlon.fr/p/doudoune-de-trek-avec-90-percent-duvet-recycle-3degc-homme-mt100-noir/356260/c1m8901459", link: "fiche", cat: "veste", sub: "doudoune", colors: ["noir"], material: "duvet recyclé", styles: ["sportswear", "casual"], warmth: 3},
+  {id: "dc-hoodie", shop: "decathlon", sex: "h", name: "Sweat à capuche oversize Elementals", price: 29.99, url: "https://www.decathlon.fr/p/sweat-a-capuche-oversize-homme-elementals-vert-fonce/387941/c328m9038183", link: "fiche", cat: "haut", sub: "hoodie", colors: ["vert"], material: "coton", styles: ["sportswear", "streetwear", "casual"], warmth: 2},
+  {id: "dc-parka-f", shop: "decathlon", sex: "f", name: "Parka de randonnée imperméable NH500", price: 49.99, url: "https://www.decathlon.fr/p/parka-de-randonnee-10degc-impermeable-femme-nh500-vert/340342/c377c241m8928779", link: "fiche", cat: "veste", sub: "imperméable", colors: ["kaki"], material: "polyester", styles: ["sportswear", "casual"], warmth: 3, rainOk: true},
+  {id: "dc-yoga-f", shop: "decathlon", sex: "f", name: "Pantalon de yoga taille haute en coton doux", price: 19.99, url: "https://www.decathlon.fr/p/pantalon-de-yoga-coton-doux-taille-haute-femme-noir-ultra/353135/c378m8872652", link: "fiche", cat: "bas", sub: "legging", colors: ["noir"], material: "coton", styles: ["sportswear", "casual"], warmth: 1},
+  /* Levi’s */
+  {id: "lv-501", shop: "levis", sex: "h", name: "Jean 501® Original", price: 110, url: "https://www.levi.com/FR/fr_FR/vetements/vetements-homme-levis/jean-levis-501-original/p/005010114", link: "fiche", cat: "bas", sub: "jean", colors: ["denim"], material: "denim 100 % coton", styles: ["casual", "streetwear", "vintage", "rock"], warmth: 2},
+  {id: "lv-trucker", shop: "levis", sex: "h", name: "Veste Trucker", price: 130, url: "https://www.levi.com/FR/fr_FR/vtements/vtements-homme-levis/vestes-en-jeans-sherpas/veste-trucker/p/723340791", link: "fiche", cat: "veste", sub: "veste en jean", colors: ["denim"], material: "denim 100 % coton", styles: ["casual", "vintage", "rock", "streetwear"], warmth: 2},
+  {id: "lv-ribcage", shop: "levis", sex: "f", name: "Jean Ribcage droit", price: 130, url: "https://www.levi.com/FR/fr_FR/vetements/femme/jeans/droits/jean-ribcage-longueur-normale/p/790780044", link: "fiche", cat: "bas", sub: "jean", colors: ["denim"], material: "denim", styles: ["casual", "vintage", "streetwear"], warmth: 2},
+  /* Dr. Martens */
+  {id: "dm-1460", shop: "drmartens", sex: "u", name: "Boots 1460 en cuir Smooth", price: 200, url: "https://www.drmartens.com/fr/fr/boots-1460-en-cuir-smooth-a-lacets-noir/p/11822006", link: "fiche", cat: "chaussures", sub: "boots", colors: ["noir"], alt: ["bordeaux"], material: "cuir", styles: ["rock", "vintage", "casual", "streetwear"], warmth: 3, rainOk: true},
+  {id: "dm-1461", shop: "drmartens", sex: "u", name: "Chaussures 1461 en cuir Smooth", price: 180, approx: true, url: "https://www.drmartens.com/fr/fr/chaussures-1461-en-cuir-smooth-noir/p/11837002", link: "fiche", cat: "chaussures", sub: "derbies", colors: ["noir"], material: "cuir", styles: ["rock", "smartcasual", "vintage", "classique"], warmth: 2},
+  /* Nike et Adidas : le lien ouvre la recherche du site sur le modèle */
+  {id: "nk-af1", shop: "nike", sex: "u", name: "Air Force 1 ’07", price: 130, approx: true, url: "https://www.nike.com/fr/w?q=air%20force%201%2007", link: "recherche", cat: "chaussures", sub: "baskets", colors: ["blanc"], alt: ["noir"], material: "cuir", styles: ["casual", "streetwear", "sportswear"], warmth: 2},
+  {id: "nk-club", shop: "nike", sex: "u", name: "Sweat à capuche Club Fleece", price: 65, approx: true, url: "https://www.nike.com/fr/w?q=club%20fleece%20sweat%20a%20capuche", link: "recherche", cat: "haut", sub: "hoodie", colors: ["gris"], alt: ["noir", "marine"], material: "molleton de coton", styles: ["sportswear", "streetwear", "casual"], warmth: 2},
+  {id: "nk-tech", shop: "nike", sex: "h", name: "Pantalon de jogging Tech Fleece", price: 110, approx: true, url: "https://www.nike.com/fr/w?q=tech%20fleece%20pantalon", link: "recherche", cat: "bas", sub: "jogging", colors: ["noir"], alt: ["gris"], material: "molleton technique", styles: ["sportswear", "streetwear"], warmth: 2},
+  {id: "ad-samba", shop: "adidas", sex: "u", name: "Samba OG", price: 120, approx: true, url: "https://www.adidas.fr/search?q=samba%20og", link: "recherche", cat: "chaussures", sub: "baskets", colors: ["noir"], alt: ["blanc"], material: "cuir", styles: ["casual", "streetwear", "vintage"], warmth: 2},
+  {id: "ad-stan", shop: "adidas", sex: "u", name: "Stan Smith", price: 110, approx: true, url: "https://www.adidas.fr/search?q=stan%20smith", link: "recherche", cat: "chaussures", sub: "baskets", colors: ["blanc"], material: "cuir", styles: ["casual", "minimaliste", "smartcasual"], warmth: 2},
+  /* Carhartt */
+  {id: "ch-activejac", shop: "carhartt", sex: "h", name: "Veste Active Jac en coutil délavé", price: 169.99, url: "https://www.carhartt.com/fr-fr/p/loose-fit-washed-duck-insulated-active-jac/104053", link: "fiche", cat: "veste", sub: "bomber", colors: ["marron"], alt: ["noir"], material: "coutil de coton", styles: ["streetwear", "casual", "rock"], warmth: 3},
+  {id: "ch-double", shop: "carhartt", sex: "h", name: "Pantalon double devant Rugged Flex", price: 74.99, url: "https://www.carhartt.com/fr-fr/p/relaxed-fit-rugged-flex-garment-dyed-duck-double-front-utility-pant/106595", link: "fiche", cat: "bas", sub: "cargo", colors: ["beige"], alt: ["kaki"], material: "coutil de coton", styles: ["streetwear", "casual", "vintage"], warmth: 2},
+  {id: "ch-beanie", shop: "carhartt", sex: "u", name: "Bonnet à revers en maille", price: 17.99, url: "https://www.carhartt.com/fr-fr/p/knit-cuffed-beanie/A18-019OS", link: "fiche", cat: "accessoire", sub: "bonnet", colors: ["noir"], alt: ["marine"], material: "maille acrylique", styles: ["streetwear", "casual"], warmth: 3},
+];
+const SHOP = Object.fromEntries(SHOPS.map((s) => [s.key, s]));
+const CAT_BY_ID = new Map(CATALOG.map((p) => [p.id, p]));
+
 /* ---------------- Utilitaires ---------------- */
 const $ = (s, el = document) => el.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
@@ -766,6 +881,8 @@ const ICON = {
   search: svgI('<circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/>'),
   locate: svgI('<path d="M20.5 3.5 3.5 10.6l7 2.9 2.9 7Z"/>'),
   pin: svgI('<path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/>'),
+  bag: svgI('<path d="M5.5 8h13l-1 12.5h-11Z"/><path d="M9 10.5V7a3 3 0 0 1 6 0v3.5"/>'),
+  ext: svgI('<path d="M13.5 4.5h6v6M19.5 4.5 11 13M17 14.5v5H4.5V7h5"/>'),
 };
 
 /* ---------------- Silhouettes 2D (sans photo) ---------------- */
@@ -3157,7 +3274,7 @@ void main(){
 /* ---------------- État ---------------- */
 const S = {
   caps: {db: null, assets: null, sample: null, downloads: null}, capsReady: false,
-  ready: {items: false},
+  ready: {items: false, wishes: false},
   items: new Map(), outfits: [], settings: {cold: "normal", ai: true, city: "", trends: true, missing: false}, trends: null,
   W: null, wLabel: "", wEdited: false, lastWDoc: null,
   day: today(), tab: "today",
@@ -3169,7 +3286,9 @@ const S = {
   wardFilter: "all", showSale: false, histFilter: "all", histConfirm: null,
   confirmEx: false, confirmAll: false, deleting: false, busyBulk: false,
   sheet: null, draft: null, swap: null, lastFocus: null,
+  wishes: new Map(), guest: null, shopSel: null, shopBusy: false,
 };
+S.shopF = {view: "shops", shop: "all", cat: "all", sex: ["f", "h", "all"].includes(store.get("shopSex", "")) ? store.get("shopSex", "") : S.body.sex || "all"};
 if (S.view !== "3d" && S.view !== "flat") S.view = "3d";
 function seasonWeather() { const [am, pm] = SEASON[new Date().getMonth()]; return {am, pm, rain: false, wind: false}; }
 S.W = seasonWeather();
@@ -3747,8 +3866,9 @@ function generate(sel, ctx, jitter) {
   const ideal = outerIdeal(ctx);
   if (ideal > 0 && !pools.outer.length) for (const p of pools.top) p.sc += ((Number(p.it.warmth) || 2) - 2) * 1.0;
   let imposedSlot = null;
-  if (sel.imposed && S.items.has(sel.imposed)) {
-    const it = S.items.get(sel.imposed);
+  const imp = sel.guest || (sel.imposed && S.items.get(sel.imposed));
+  if (imp) {
+    const it = imp;
     imposedSlot = slotOf(it);
     pools[imposedSlot] = [{it, sc: 4, imposed: true}];
     if (imposedSlot === "piece") { pools.top = []; pools.bottom = []; }
@@ -3764,6 +3884,7 @@ function generate(sel, ctx, jitter) {
   if (imposedSlot === "outer") outerOpts = outs;
   else if (ideal > 0) outerOpts = outs.length ? outs : [null];
   else outerOpts = ctx.rain ? [null, ...outs] : [null];
+  if (sel.guest && (imposedSlot === "top" || imposedSlot === "piece")) { if (ideal > 0 && outs.length) notes.push("Essayage sans veste, pour bien voir la pièce : prévois-en une en sortant."); outerOpts = [null]; }
   if (ideal > 0 && !outs.length) notes.push(`Il te manque ${ideal === 3 ? "un manteau chaud" : ideal === 2 ? "une veste chaude ou un manteau" : "une veste légère"} adapté à cette météo et à ce style.`);
   if (!pools.shoes.length) notes.push("Aucune paire de chaussures ne convient à ce style ou à cette météo.");
   const bases = [];
@@ -3876,10 +3997,11 @@ function computeLooks(jitter) {
   S.aiCtl = null;
   S.gen++;
   const ctx = makeCtx();
-  const sel = {occ: S.occ, style: S.sty, imposed: S.imposed};
+  const sel = {occ: S.occ, style: S.sty, imposed: S.imposed, guest: S.guest};
   const res = generateAll(sel, ctx, jitter);
   S.ctx = ctx; S.sel = sel; S.pools = res.pools; S.notes = res.notes; S.cands = res.cands;
   S.looks = res.looks.map((L) => ({...L, acc: (L.acc || []).slice(), why: explainRules(L, ctx), ai: false, rating: 0, fav: false}));
+  if (!S.looks.length && S.guest) { S.looks = [soloLook(S.guest)]; S.notes = ["Ta garde-robe ne permet pas encore de compléter un look autour de cette pièce : voici la pièce seule."]; }
   S.lookIdx = 0;
   S.aiState = "idle";
 }
@@ -3914,10 +4036,10 @@ function stylistContext() {
   return lines.length ? "\n" + lines.join("\n") : "";
 }
 function stylistPrompt(ctx, sel, cands) {
-  const imposed = sel.imposed && S.items.get(sel.imposed);
+  const imposed = sel.guest || (sel.imposed && S.items.get(sel.imposed));
   return `Tu es styliste. Aide-moi à choisir ma tenue de ce matin.
 Météo (températures ressenties) : ${ctx.am} °C le matin, ${ctx.pm} °C l'après-midi${ctx.rain ? ", pluie" : ""}${ctx.wind ? ", vent fort" : ""}.
-Occasion : ${OCC[sel.occ].label}. Style voulu : ${STY[sel.style].label}.${imposed ? ` Pièce imposée : ${imposed.name}.` : ""}${stylistContext()}
+Occasion : ${OCC[sel.occ].label}. Style voulu : ${STY[sel.style].label}.${imposed ? (imposed.guest ? ` Pièce à essayer, repérée chez ${imposed.brand} et pas encore achetée : ${imposed.name} (${imposed.sub}, ${(imposed.colors || []).map(colorLabel).join(" et ")}).` : ` Pièce imposée : ${imposed.name}.`) : ""}${stylistContext()}
 Voici ${cands.length} tenues candidates, toutes déjà compatibles avec la météo :
 ${cands.map((L, k) => `c${k + 1} : ${[...mainParts(L), ...(L.acc || [])].map((p) => itemLine(p.it)).join(" + ")}`).join("\n")}
 Choisis les 3 meilleures, de la meilleure à la moins bonne, selon l'accord des couleurs, la cohérence avec le style et l'occasion, et l'adaptation à la météo.
@@ -3977,7 +4099,7 @@ async function askStylist() {
 }
 
 /* ---------------- Rendu : cabine et fiche du look ---------------- */
-const TABS = [["today", "Aujourd’hui", "today"], ["wardrobe", "Garde-robe", "hanger"], ["body", "Silhouette", "body"], ["history", "Historique", "history"], ["settings", "Réglages", "settings"]];
+const TABS = [["today", "Aujourd’hui", "today"], ["wardrobe", "Garde-robe", "hanger"], ["shop", "Boutiques", "bag"], ["body", "Silhouette", "body"], ["history", "Historique", "history"], ["settings", "Réglages", "settings"]];
 function renderTabbar() {
   $("#tabbar").innerHTML = TABS.map(([k, l, i]) => `<button class="tabbtn" id="tabbtn-${k}" data-action="tab" data-tab="${k}"${S.tab === k ? ' aria-current="page"' : ""}>${ICON[i]}<span>${l}</span></button>`).join("");
 }
@@ -3988,6 +4110,7 @@ function showTab(k) {
   window.scrollTo(0, 0);
   if (k === "today") { Atelier.attach($("#stage-host")); renderStage(); syncMannequin(false); }
   if (k === "body") { Atelier.attach($("#stage-host-2")); renderBodyStage(); syncMannequin(false); }
+  if (k === "shop") renderShop();
 }
 const currentLook = () => S.looks[S.lookIdx] || null;
 function lookParts(L) {
@@ -4012,7 +4135,9 @@ function renderStage() {
   $("#look-n").textContent = n ? `Look ${S.lookIdx + 1}` : "Ton look";
   const occ = S.sel ? S.sel.occ : S.occ, sty = S.sel ? S.sel.style : S.sty;
   $("#cover-occ").innerHTML = OCC[occ] && STY[sty] ? `${esc(OCC[occ].label)}<em>${esc(STY[sty].label)}</em>` : "";
-  $("#sticker").hidden = !(L && trendMatch(L).badge);
+  const tryL = !!L && lookParts(L).some((p) => p.it.guest);
+  $("#sticker").textContent = tryL ? "Essayage" : "Tendance";
+  $("#sticker").hidden = !(tryL || (L && trendMatch(L).badge));
   $("#pager-n").textContent = n ? `${S.lookIdx + 1} / ${n}` : "0 / 0";
   $("#pg-prev").innerHTML = ICON.left; $("#pg-next").innerHTML = ICON.right;
   $("#pg-prev").disabled = S.lookIdx <= 0;
@@ -4104,18 +4229,19 @@ function renderLookPanel() {
     return;
   }
   el.hidden = false;
-  el.innerHTML = `${notes}
-    <div class="rail"><div class="strip" role="list" aria-label="Pièces du look">${lookParts(L).map((p) => `<button class="pc" role="listitem" id="pc-${p.slot}" data-action="swap" data-o="${i}" data-slot="${p.slot}" aria-label="${esc(p.it.name)} : remplacer"><span class="pc-vis" style="--tint:${tintOf(p.it)}">${itemVisual(p.it)}<span class="sw-ic" aria-hidden="true">${ICON.swap}</span></span><span class="pc-slot">${esc(SLOT_LABEL[p.slot.startsWith("acc") ? "acc" : p.slot])}${p.it.example ? ", exemple" : ""}</span><span class="pc-name">${esc(p.it.name)}</span></button>`).join("")}</div></div>
+  const gp = lookParts(L).find((p) => p.it.guest);
+  el.innerHTML = `${gp ? tryPanelHtml(gp.it) : ""}${notes}
+    <div class="rail"><div class="strip" role="list" aria-label="Pièces du look">${lookParts(L).map((p) => `<button class="pc" role="listitem" id="pc-${p.slot}" data-action="swap" data-o="${i}" data-slot="${p.slot}" aria-label="${esc(p.it.name)} : remplacer"><span class="pc-vis" style="--tint:${tintOf(p.it)}">${itemVisual(p.it)}<span class="sw-ic" aria-hidden="true">${ICON.swap}</span></span><span class="pc-slot">${esc(SLOT_LABEL[p.slot.startsWith("acc") ? "acc" : p.slot])}${p.it.guest ? ", boutique" : p.it.example ? ", exemple" : ""}</span><span class="pc-name">${esc(p.it.name)}</span></button>`).join("")}</div></div>
     <p class="quote">${esc(L.why)}</p>
     ${aiStatusHtml()}
-    <div class="look-actions">
+    ${gp ? "" : `<div class="look-actions">
       <button class="btn primary big" id="wear" data-action="wear" data-o="${i}"${L.worn ? " disabled" : ""}>${L.worn ? "Portée aujourd’hui" : "Je porte ça"}</button>
       <div class="rate">
         <button class="icon-btn" id="up" data-action="rate" data-o="${i}" data-v="1" aria-pressed="${L.rating === 1}" aria-label="J’aime">${ICON.up}</button>
         <button class="icon-btn" id="down" data-action="rate" data-o="${i}" data-v="-1" aria-pressed="${L.rating === -1}" aria-label="J’aime pas">${ICON.down}</button>
         <button class="icon-btn" id="fav" data-action="fav" data-o="${i}" aria-pressed="${!!L.fav}" aria-label="Favori">${ICON.heart}</button>
       </div>
-    </div>`;
+    </div>`}`;
   if (active) { const n = document.getElementById(active); if (n) n.focus({preventScroll: true}); }
 }
 function renderLook(animate) {
@@ -4170,6 +4296,7 @@ function renderChoices() {
   $("#again").innerHTML = ICON.refresh;
 }
 function renderImposed() {
+  if (S.guest) { const g = S.guest; $("#imposed").innerHTML = `<div class="imposed-card"><span class="thumb" style="background:color-mix(in srgb,${tintOf(g)} 17%,var(--board))">${itemVisual(g)}</span><span class="grow">Essai : ${esc(g.name)} · ${esc(g.brand)}</span><button class="btn ghost sm" data-action="try-end">Retirer</button></div>`; return; }
   const it = S.imposed && S.items.get(S.imposed);
   if (S.imposed && !it && S.ready.items) S.imposed = null;
   $("#imposed").innerHTML = it
@@ -4292,6 +4419,201 @@ function renderWardrobe() {
   grid.innerHTML = `<div class="grid">${list.map((it) => itemCard(it, "edit")).join("")}</div>`;
 }
 
+/* ---------------- Rendu : boutiques et envies ---------------- */
+const euro = (n) => new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR", minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2}).format(n);
+const shopName = (p) => (p && SHOP[p.shop] ? SHOP[p.shop].name : (p && p.shopName) || "Boutique");
+const priceText = (p) => `${p.approx ? "environ " : ""}${euro(p.price)}`;
+const priceHtml = (p) => `${p.approx ? `<span class="approx">env.</span>` : ""}${euro(p.price)}`;
+const refocus = (id) => { const n = document.getElementById(id); if (n) n.focus({preventScroll: true}); };
+const fmtDay = (iso) => new Intl.DateTimeFormat("fr-FR", {day: "numeric", month: "long", year: "numeric"}).format(new Date(iso + "T12:00:00"));
+const colorwaysOf = (p) => (p.colors[0] === "imprime" ? [] : [p.colors[0], ...(p.alt || [])].filter((k) => COL[k]));
+function colorsFor(p, color) {
+  if (p.colors[0] === "imprime") return p.colors.slice();
+  return color && colorwaysOf(p).includes(color) ? [color] : p.colors.slice();
+}
+function productOf(w) { return CAT_BY_ID.get(w.pid) || w.snap || null; }
+function productById(pid) { const w = S.wishes.get(pid); return CAT_BY_ID.get(pid) || (w && w.snap) || null; }
+function asGarment(p, color) {
+  const colors = colorsFor(p, color);
+  return {id: "shop:" + p.id, guest: true, shopId: p.id, color: colors[0] === "imprime" ? null : colors[0], name: p.name, cat: p.cat, sub: p.sub, colors, material: p.material || "", brand: shopName(p),
+    styles: p.styles.slice(), warmth: p.warmth || 2, rainOk: !!p.rainOk, status: "ok", photo: null, price: p.price, approx: !!p.approx, url: p.url};
+}
+function snapOf(p) {
+  return {id: p.id, shop: p.shop, shopName: shopName(p), name: p.name, price: p.price, approx: !!p.approx, url: p.url, link: p.link, sex: p.sex, cat: p.cat, sub: p.sub,
+    colors: p.colors.slice(), alt: (p.alt || []).slice(), material: p.material || "", styles: p.styles.slice(), warmth: p.warmth || 2, rainOk: !!p.rainOk};
+}
+function sanitizeSnap(v, id) {
+  if (!v || typeof v !== "object") return null;
+  const cols = (Array.isArray(v.colors) ? v.colors : []).filter((k) => COL[k]);
+  if (!CAT[v.cat] || !ALL_SUBS.includes(v.sub) || !cols.length || typeof v.url !== "string" || !/^https:\/\//.test(v.url)) return null;
+  return {id: String(v.id || id), shop: String(v.shop || ""), shopName: String(v.shopName || "Boutique").slice(0, 40), name: String(v.name || "Pièce").slice(0, 80), price: Number(v.price) || 0, approx: !!v.approx,
+    url: v.url, link: ["fiche", "rayon", "recherche"].includes(v.link) ? v.link : "fiche", sex: ["h", "f", "u"].includes(v.sex) ? v.sex : "u", cat: v.cat, sub: v.sub, colors: cols,
+    alt: (Array.isArray(v.alt) ? v.alt : []).filter((k) => COL[k]), material: String(v.material || "").slice(0, 40), styles: (Array.isArray(v.styles) ? v.styles : []).filter((s) => STY[s]),
+    warmth: [1, 2, 3].includes(v.warmth) ? v.warmth : 2, rainOk: !!v.rainOk};
+}
+const ownedFrom = (pid) => [...S.items.values()].find((it) => it.pid === pid) || null;
+function linkNote(p) {
+  const n = shopName(p);
+  if (p.link === "rayon") return `Le lien ouvre le rayon de ${n} : ses modèles changent souvent, cherche celui-ci dans la liste.`;
+  if (p.link === "recherche") return `Le lien ouvre la recherche ${n} sur ce modèle.`;
+  return "";
+}
+function shopCard(p, color, mark) {
+  const g = asGarment(p, color);
+  const w = mark && S.wishes.has(p.id);
+  return `<button class="icard shop-card" id="sp-${esc(p.id)}" data-action="sp-open" data-id="${esc(p.id)}" aria-label="${esc(p.name)}, ${esc(shopName(p))}, ${esc(priceText(p))}${w ? ", dans tes envies" : ""}">
+      <span class="ic-vis">${itemVisual(g)}${w ? `<span class="wish-dot" aria-hidden="true">${ICON.heart}</span>` : ""}</span>
+      <span class="ic-cap" aria-hidden="true"><span class="sc-shop">${esc(shopName(p))}</span><span class="ic-name">${esc(p.name)}</span><span class="sc-price">${priceHtml(p)}</span></span>
+    </button>`;
+}
+function renderShop() {
+  const f = S.shopF, nW = S.wishes.size, wv = f.view === "wishes";
+  $("#shop-intro").innerHTML = wv
+    ? `<div><p class="eyebrow">${nW ? `${nW} pièce${nW > 1 ? "s" : ""} en vue` : "Ta liste d’achats"}</p><h1 class="display" id="t-shop">Mes <em>envies</em></h1></div><button class="btn ghost sm" id="ss-shops" data-action="shop-view" data-v="shops">${ICON.left} La sélection</button>`
+    : `<div><p class="eyebrow">${CATALOG.length} pièces · ${SHOPS.length} boutiques</p><h1 class="display" id="t-shop">Bou<em>tiques</em></h1></div><button class="btn ghost sm${nW ? " on" : ""}" id="ss-wishes" data-action="shop-view" data-v="wishes">${ICON.heart} Mes envies${nW ? ` · ${nW}` : ""}</button>`;
+  const body = $("#shop-body");
+  if (wv) { body.innerHTML = wishesHtml(); return; }
+  const sh = f.shop !== "all" && SHOP[f.shop];
+  const pool = CATALOG.filter((p) => (f.shop === "all" || p.shop === f.shop) && (f.sex === "all" || p.sex === "u" || p.sex === f.sex));
+  const cats = CATS.filter((c) => pool.some((p) => p.cat === c.key));
+  if (f.cat !== "all" && !cats.some((c) => c.key === f.cat)) f.cat = "all";
+  const list = pool.filter((p) => f.cat === "all" || p.cat === f.cat);
+  body.innerHTML = `
+    <div class="ward-filters" role="group" aria-label="Choisir une boutique">${[["all", "Toutes"], ...SHOPS.map((s) => [s.key, s.name])].map(([k, l]) => `<button class="wf" id="sf-${k}" data-action="shop-f" data-v="${k}" aria-pressed="${f.shop === k}">${esc(l)}</button>`).join("")}</div>
+    ${sh ? `<div class="shop-head"><p class="sh-name">${esc(sh.name)}</p><p class="sh-line">${esc(sh.line)}</p><a class="sh-site" href="${esc(sh.site)}" target="_blank" rel="noopener">Ouvrir le site ${ICON.ext}</a></div>` : ""}
+    <div class="shop-tools">
+      <div class="seg" role="radiogroup" aria-label="Rayon">${[["f", "Femme"], ["h", "Homme"], ["all", "Tout"]].map(([k, l]) => `<button class="seg-b" role="radio" id="sx-${k}" data-action="shop-sex" data-v="${k}" aria-checked="${f.sex === k}">${l}</button>`).join("")}</div>
+      <div class="chips scroll" role="group" aria-label="Catégorie">${[["all", "Tout"], ...cats.map((c) => [c.key, c.label])].map(([k, l]) => `<button class="chip" id="scat-${k}" data-action="shop-cat" data-v="${k}" aria-pressed="${f.cat === k}">${esc(l)}</button>`).join("")}</div>
+    </div>
+    ${list.length ? `<div class="grid">${list.map((p) => shopCard(p, (S.wishes.get(p.id) || {}).color || p.colors[0], true)).join("")}</div>` : `<div class="empty"><p>Rien dans ce rayon pour l’instant.</p></div>`}
+    <p class="shop-note">Prix relevés le ${fmtDay(SHOP_DATE)} sur les sites des marques. « env. » signale un prix indicatif : le site fait foi. Les images sont des rendus de l’appli, pas les photos des marques.</p>`;
+}
+function wishesHtml() {
+  if (!S.capsReady || (S.caps.db && !S.ready.wishes)) return `<div class="empty"><p>Chargement de tes envies…</p></div>`;
+  if (!S.caps.db) return `<div class="empty"><p>Tes envies s’enregistrent avec ton compte : ouvre l’appli dans Claude pour les garder.</p></div>`;
+  const ws = [...S.wishes.values()].filter(productOf).sort((a, b) => String(b.at).localeCompare(String(a.at)));
+  if (!ws.length) return `<div class="empty"><p>Pas encore d’envie. Dans la sélection, ouvre une pièce et touche « Ajouter à mes envies » pour la garder ici.</p><button class="btn primary" data-action="shop-view" data-v="shops">Voir la sélection</button></div>`;
+  const total = ws.reduce((t, w) => t + (Number(productOf(w).price) || 0), 0);
+  const approx = ws.some((w) => productOf(w).approx);
+  return `<div class="wish-sum"><span class="h">Total de ${ws.length} pièce${ws.length > 1 ? "s" : ""}</span><span class="ws-total">${approx ? `<span class="approx">env.</span>` : ""}${euro(Math.round(total * 100) / 100)}</span></div>
+    <div class="grid">${ws.map((w) => shopCard(productOf(w), w.color, false)).join("")}</div>
+    <p class="shop-note">Touche une pièce pour l’essayer sur ton mannequin, la retrouver sur le site, ou la passer dans ta garde-robe une fois achetée.</p>`;
+}
+function openShopItem(pid) {
+  const p = productById(pid);
+  if (!p) return;
+  const w = S.wishes.get(pid);
+  S.shopSel = {pid, color: (w && w.color) || (colorwaysOf(p)[0] || null)};
+  openSheet("shop");
+}
+function shopSheetHtml() {
+  const sel = S.shopSel, p = sel && productById(sel.pid);
+  if (!p) return `${sheetHead("Pièce indisponible")}<div class="sheet-body"><p class="hint">Cette pièce n’est plus dans la sélection.</p></div>`;
+  const g = asGarment(p, sel.color);
+  const w = S.wishes.get(p.id), own = ownedFrom(p.id), cols = colorwaysOf(p);
+  const note = linkNote(p);
+  return `${sheetHead(esc(shopName(p)))}
+  <div class="sheet-body">
+    <div class="sp-hero">${itemVisual(g)}</div>
+    <div class="sp-top"><h3 class="sp-name">${esc(p.name)}</h3><p class="sp-price">${priceHtml(p)}</p></div>
+    ${cols.length > 1 ? `<div class="field"><span class="fl" id="sp-col-l">Coloris <small>${esc(COL[g.colors[0]].label)}</small></span><div class="swatch-row" role="radiogroup" aria-labelledby="sp-col-l">${cols.map((k) => `<button class="swb" role="radio" id="spc-${k}" data-action="sp-color" data-v="${k}" aria-checked="${g.colors[0] === k}" aria-label="${esc(COL[k].label)}" title="${esc(COL[k].label)}" style="--c:${colorHex(k)}"></button>`).join("")}</div></div>` : ""}
+    <dl class="sp-facts">
+      <dt>Pièce</dt><dd>${esc(cap(p.sub))}, ${p.sex === "f" ? "femme" : p.sex === "h" ? "homme" : "mixte"}</dd>
+      <dt>Matière</dt><dd>${esc(cap(p.material || "non précisée"))}</dd>
+      <dt>Style</dt><dd>${esc(p.styles.filter((s) => STY[s]).map((s) => STY[s].label).join(", "))}</dd>
+      <dt>Chaleur</dt><dd>${["", "Légère", "Moyenne", "Chaude"][p.warmth || 2]}${p.rainOk ? ", supporte la pluie" : ""}</dd>
+    </dl>
+    <div class="sp-actions">
+      <button class="btn primary big wide" id="sp-try" data-action="sp-try">${ICON.body} Essayer sur mon mannequin</button>
+      <button class="btn ghost big wide${w ? " on" : ""}" id="sp-wish" data-action="sp-wish" aria-pressed="${!!w}"${S.shopBusy ? " disabled" : ""}>${ICON.heart} ${w ? "Retirer de mes envies" : "Ajouter à mes envies"}</button>
+      <a class="btn ghost big wide" id="sp-site" href="${esc(p.url)}" target="_blank" rel="noopener">${ICON.ext} Voir sur ${esc(shopName(p))}</a>
+      ${own ? `<p class="sp-own">${ICON.hanger}<span>Déjà dans ta garde-robe.</span></p>` : `<button class="btn ghost sm sp-bought" id="sp-own" data-action="sp-own"${S.shopBusy ? " disabled" : ""}>${S.shopBusy ? "Ajout…" : "Je l’ai acheté : l’ajouter à ma garde-robe"}</button>`}
+    </div>
+    <p class="shop-note">${note ? esc(note) + " " : ""}${p.approx ? "Prix indicatif" : "Prix relevé"} le ${fmtDay(SHOP_DATE)} : le site fait foi. L’image est un rendu de l’appli.</p>
+  </div>`;
+}
+async function toggleWish(pid, color) {
+  const db = S.caps.db, p = productById(pid);
+  if (!p) return;
+  if (!db) { toast("Ouvre l’appli dans Claude, connecté à ton compte, pour garder tes envies."); return; }
+  if (S.shopBusy) return;
+  S.shopBusy = true;
+  const had = S.wishes.has(pid);
+  try {
+    if (had) await db.doc("wishes/" + pid).delete();
+    else await db.doc("wishes/" + pid).set({pid, color: color && colorwaysOf(p).includes(color) ? color : null, at: new Date().toISOString(), snap: snapOf(p)});
+    toast(had ? "Retiré de tes envies." : `${p.name} ajouté à tes envies.`);
+  } catch (e) { dbErr(e); } finally { S.shopBusy = false; if (S.sheet === "shop") renderSheet(); renderShop(); if (S.guest) renderLookPanel(); }
+}
+async function addOwned(pid, color) {
+  const db = S.caps.db, p = productById(pid);
+  if (!p || S.shopBusy) return;
+  if (!db) { toast("Ouvre l’appli dans Claude, connecté à ton compte, pour enregistrer ta garde-robe."); return; }
+  const g = asGarment(p, color);
+  const body = {name: p.name.slice(0, 60), cat: p.cat, sub: p.sub, colors: g.colors.slice(0, 3), material: p.material || "", brand: shopName(p), ref: "", styles: p.styles.slice(0, 6), warmth: p.warmth || 2, rainOk: !!p.rainOk,
+    status: "ok", fav: false, photo: null, cutout: false, example: false, lastWorn: null, createdAt: new Date().toISOString(), pid: p.id};
+  S.shopBusy = true;
+  if (S.sheet === "shop") renderSheet();
+  try {
+    const ref = db.collection("items").doc();
+    await ref.set(body);
+    if (S.wishes.has(pid)) await db.doc("wishes/" + pid).delete();
+    if (S.guest && S.guest.shopId === pid) {
+      /* l’essai devient la vraie pièce : les looks se reconstruisent autour dès qu’elle est dans la garde-robe */
+      S.guest = null;
+      S.imposed = ref.id;
+      if (S.items.has(ref.id)) { renderImposed(); refreshLooks(); }
+    }
+    S.shopBusy = false;
+    if (S.sheet === "shop") closeSheet();
+    toast(`${body.name} ajouté à ta garde-robe.`);
+  } catch (e) { dbErr(e); } finally { S.shopBusy = false; if (S.sheet === "shop") renderSheet(); renderShop(); }
+}
+
+/* --- Essayage d’une pièce de boutique dans la cabine --- */
+function soloLook(g) {
+  const L = {top: null, bottom: null, piece: null, outer: null, shoes: null, acc: []};
+  const slot = slotOf(g), part = {it: g, sc: 4, imposed: true};
+  if (slot === "acc") L.acc = [part]; else L[slot] = part;
+  return {...L, why: "La pièce seule : ajoute quelques vêtements à ta garde-robe pour la voir dans un look complet.", ai: false, rating: 0, fav: false};
+}
+function tryOn(pid, color) {
+  const p = productById(pid);
+  if (!p) return;
+  S.guest = asGarment(p, color);
+  S.imposed = null;
+  if (styleFit(S.guest, S.sty) === null) S.sty = S.guest.styles[0];
+  closeSheet();
+  renderChoices();
+  renderImposed();
+  showTab("today");
+  computeLooks(0.6);
+  renderLook(true);
+  if (S.looks.length && aiAvailable() && S.cands.length >= 2) askStylist();
+  toast(`Essayage : ${p.name}, avec les pièces de ta garde-robe.`);
+}
+function endTry() {
+  if (!S.guest) return;
+  S.guest = null;
+  renderImposed();
+  if (S.ready.items || !S.caps.db) { computeLooks(0); renderLook(true); }
+  toast("Essai terminé : retour à ta garde-robe.");
+}
+function tryPanelHtml(g) {
+  const p = productById(g.shopId) || g;
+  const w = S.wishes.has(g.shopId);
+  return `<div class="try-card">
+      <div class="try-top"><span class="label-tag hot">Essayage</span><span class="try-shop">${esc(g.brand)} · ${priceHtml(p)}</span></div>
+      <p class="try-name">${esc(g.name)}</p>
+      <p class="hint">Les autres pièces viennent de ta garde-robe. Change de look avec les flèches, ou touche une pièce pour la remplacer.</p>
+      <div class="try-btns">
+        <button class="btn primary big" id="try-wish" data-action="try-wish" aria-pressed="${w}"${S.shopBusy ? " disabled" : ""}>${ICON.heart} ${w ? "Dans mes envies" : "Ajouter à mes envies"}</button>
+        <a class="btn ghost big" id="try-site" href="${esc(g.url)}" target="_blank" rel="noopener">${ICON.ext} ${esc(g.brand)}</a>
+        <button class="btn ghost big" id="try-end" data-action="try-end">Terminer l’essai</button>
+      </div>
+    </div>`;
+}
+
 /* ---------------- Rendu : historique ---------------- */
 function lookFromIds(ids) {
   const L = {top: null, bottom: null, piece: null, outer: null, shoes: null, acc: []};
@@ -4365,7 +4687,7 @@ function renderSettings() {
     <div class="row-btns"><button class="btn ghost" id="s-export" data-action="export"${S.caps.downloads ? "" : " disabled"}>Exporter (JSON)</button>
       ${S.confirmAll ? `<span class="confirm"><span>Tout supprimer, sans retour possible ?</span><button class="btn danger sm" data-action="delete-all-yes"${S.deleting ? " disabled" : ""}>${S.deleting ? "Suppression…" : "Oui, tout supprimer"}</button><button class="btn ghost sm" data-action="delete-all-no">Annuler</button></span>` : `<button class="btn ghost danger-t" data-action="delete-all">Tout supprimer</button>`}</div>
   </div>
-  <p class="foot-note">Dressing du matin, version 7 · corps 3D MakeHuman (CC0)</p>`;
+  <p class="foot-note">Dressing du matin, version 8 · corps 3D MakeHuman (CC0)</p>`;
 }
 
 /* ---------------- Feuilles (bottom sheet) ---------------- */
@@ -4375,7 +4697,7 @@ function renderSheet(first) {
   const body = el.querySelector(".sheet-body");
   const st = body ? body.scrollTop : 0;
   const act = document.activeElement && el.contains(document.activeElement) ? document.activeElement.id : null;
-  el.innerHTML = S.sheet === "item" ? itemSheetHtml() : S.sheet === "swap" ? swapSheetHtml() : S.sheet === "imposed" ? imposedSheetHtml() : "";
+  el.innerHTML = S.sheet === "item" ? itemSheetHtml() : S.sheet === "shop" ? shopSheetHtml() : S.sheet === "swap" ? swapSheetHtml() : S.sheet === "imposed" ? imposedSheetHtml() : "";
   el.hidden = false; $("#scrim").hidden = false; document.body.classList.add("locked");
   const nb = el.querySelector(".sheet-body");
   if (nb && !first) nb.scrollTop = st;
@@ -4385,7 +4707,7 @@ function renderSheet(first) {
 }
 function closeSheet() {
   if (S.draft && S.draft.aiCtl) S.draft.aiCtl.abort();
-  S.draft = null; S.sheet = null; S.swap = null;
+  S.draft = null; S.sheet = null; S.swap = null; S.shopSel = null;
   $("#sheet").hidden = true; $("#sheet").innerHTML = ""; $("#scrim").hidden = true;
   document.body.classList.remove("locked");
   if (S.lastFocus && S.lastFocus.isConnected && S.lastFocus.focus) S.lastFocus.focus({preventScroll: true});
@@ -5109,7 +5431,7 @@ async function markWorn(ids) {
 async function wear(i) {
   const L = S.looks[i];
   const db = S.caps.db;
-  if (!L || L.worn) return;
+  if (!L || L.worn || lookParts(L).some((p) => p.it.guest)) return;
   if (!db) { toast("Ouvre l’appli dans Claude pour garder ton historique."); return; }
   L.worn = true; L.touched = true;
   renderLookPanel();
@@ -5123,7 +5445,7 @@ async function wear(i) {
 }
 async function persistLook(L) {
   const db = S.caps.db;
-  if (!db) return;
+  if (!db || lookParts(L).some((p) => p.it.guest)) return;
   try {
     if (L.docId) await db.doc("outfits/" + L.docId).update({rating: L.rating || 0, fav: !!L.fav});
     else if (L.rating || L.fav) { const ref = db.collection("outfits").doc(); L.docId = ref.id; await ref.set(outfitBody(L)); }
@@ -5183,7 +5505,7 @@ async function bulk(fn, done) {
 async function exportData() {
   const dl = S.caps.downloads;
   if (!dl) { toast("L’export n’est pas disponible dans cette vue."); return; }
-  const data = {app: "Dressing du matin", exportedAt: new Date().toISOString(), items: [...S.items.values()], outfits: S.outfits, settings: S.settings};
+  const data = {app: "Dressing du matin", exportedAt: new Date().toISOString(), items: [...S.items.values()], outfits: S.outfits, wishes: [...S.wishes.values()], settings: S.settings};
   try { await dl.save({filename: `garde-robe-${today()}.json`, data: JSON.stringify(data, null, 2)}); toast("Export enregistré."); }
   catch (e) { if (!e || e.code !== "declined") toast("Export impossible pour l’instant."); }
 }
@@ -5198,6 +5520,9 @@ async function deleteAll() {
       if (it.photo && S.caps.assets) await S.caps.assets.delete(it.photo).catch(() => {});
     }
     for (const o of S.outfits.slice()) await db.doc("outfits/" + o.id).delete();
+    const wsn = await db.collection("wishes").get();
+    for (const w of wsn.docs) await db.doc("wishes/" + w.id).delete();
+    S.guest = null;
     const ws = await db.collection("weather").get();
     for (const w of ws.docs) await db.doc("weather/" + w.id).delete();
     await db.doc("settings/main").delete();
@@ -5218,7 +5543,21 @@ function subscribe() {
     renderImposed();
     renderTrends();
     if (S.outfits.length || first) renderHistory();
-    if (first || !S.looks.length || S.looks.some((L) => mainParts(L).some((p) => !S.items.has(p.it.id)))) refreshLooks();
+    renderShop();
+    if (S.sheet === "shop") renderSheet();
+    if (first || !S.looks.length || S.looks.some((L) => mainParts(L).some((p) => !p.it.guest && !S.items.has(p.it.id))) || (S.imposed && !S.looks.some((L) => lookIds(L).includes(S.imposed)))) refreshLooks();
+  }, onDbError);
+  db.collection("wishes").onSnapshot((snap) => {
+    const m = new Map();
+    for (const d of snap.docs) {
+      const v = d.data() || {}, pid = String(v.pid || d.id), w = {pid, color: COL[v.color] ? v.color : null, at: String(v.at || ""), snap: sanitizeSnap(v.snap, pid)};
+      if (CAT_BY_ID.has(pid) || w.snap) m.set(pid, w);
+    }
+    S.wishes = m;
+    S.ready.wishes = true;
+    renderShop();
+    if (S.sheet === "shop") renderSheet();
+    if (S.guest) renderLookPanel();
   }, onDbError);
   db.collection("outfits").orderBy("at", "desc").limit(300).onSnapshot((snap) => {
     S.outfits = snap.docs.map((d) => ({...d.data(), id: d.id}));
@@ -5282,8 +5621,26 @@ const ACTIONS = {
     const n = document.getElementById("sty-" + S.sty); if (n) n.focus({preventScroll: true});
   },
   "pick-imposed": () => openSheet("imposed"),
-  "imposed-pick": (el) => { S.imposed = el.dataset.id; closeSheet(); renderImposed(); scheduleRefresh(); },
-  "imposed-clear": () => { S.imposed = null; renderImposed(); scheduleRefresh(); },
+  "imposed-pick": (el) => { S.imposed = el.dataset.id; S.guest = null; closeSheet(); renderImposed(); scheduleRefresh(); },
+  "imposed-clear": () => { S.imposed = null; S.guest = null; renderImposed(); scheduleRefresh(); },
+  "shop-view": (el) => { S.shopF.view = el.dataset.v === "wishes" ? "wishes" : "shops"; renderShop(); refocus(S.shopF.view === "wishes" ? "ss-shops" : "ss-wishes"); },
+  "shop-f": (el) => { S.shopF.shop = SHOP[el.dataset.v] ? el.dataset.v : "all"; renderShop(); refocus("sf-" + S.shopF.shop); },
+  "shop-cat": (el) => { S.shopF.cat = CAT[el.dataset.v] ? el.dataset.v : "all"; renderShop(); refocus("scat-" + S.shopF.cat); },
+  "shop-sex": (el) => { S.shopF.sex = ["f", "h"].includes(el.dataset.v) ? el.dataset.v : "all"; store.set("shopSex", S.shopF.sex); renderShop(); refocus("sx-" + S.shopF.sex); },
+  "sp-open": (el) => openShopItem(el.dataset.id),
+  "sp-color": (el) => {
+    const sel = S.shopSel;
+    if (!sel || !COL[el.dataset.v]) return;
+    sel.color = el.dataset.v;
+    const w = S.wishes.get(sel.pid);
+    if (w && S.caps.db && w.color !== sel.color) S.caps.db.doc("wishes/" + sel.pid).update({color: sel.color}).catch(dbErr);
+    renderSheet();
+  },
+  "sp-wish": () => { if (S.shopSel) toggleWish(S.shopSel.pid, S.shopSel.color); },
+  "sp-try": () => { if (S.shopSel) tryOn(S.shopSel.pid, S.shopSel.color); },
+  "sp-own": () => { if (S.shopSel) addOwned(S.shopSel.pid, S.shopSel.color); },
+  "try-wish": () => { if (S.guest) toggleWish(S.guest.shopId, S.guest.color); },
+  "try-end": () => endTry(),
   propose: () => propose(false),
   again: () => propose(true),
   "ask-ai": () => { if (S.looks.length && S.cands.length) askStylist(); },
@@ -5344,7 +5701,7 @@ const ACTIONS = {
     const n = document.getElementById("f-name"); if (n) n.focus({preventScroll: false});
   },
   "ref-no": () => { const d = S.draft; if (!d) return; d.refState = "idle"; d.refRes = null; renderSheet(); toast("Ajoute une précision (couleur, coupe) puis relance, ou passe par une photo."); const n = document.getElementById("r-desc"); if (n) n.focus({preventScroll: true}); },
-  "impose-go": (el) => { S.imposed = el.dataset.id; renderImposed(); showTab("today"); refreshLooks(); toast("Looks construits autour de cette pièce."); },
+  "impose-go": (el) => { S.imposed = el.dataset.id; S.guest = null; renderImposed(); showTab("today"); refreshLooks(); toast("Looks construits autour de cette pièce."); },
   "set-trends": () => { saveSettings({trends: S.settings.trends === false}); renderTrends(); scheduleRefresh(); },
   "set-missing": () => { saveSettings({missing: !S.settings.missing}); renderTrends(); },
   "item-del": () => { S.draft.confirmDel = true; renderSheet(); const n = $("[data-action='item-del-yes']"); if (n) n.focus(); },
@@ -5479,6 +5836,7 @@ renderChoices();
 renderImposed();
 renderBodyForm();
 renderWardrobe();
+renderShop();
 renderHistory();
 renderSettings();
 showTab("today");
@@ -5579,7 +5937,7 @@ const localDownloads = {
     S.capsReady = true;
     if (!L.persist) setBanner("Ce navigateur n’autorise pas l’enregistrement : ta garde-robe sera perdue en fermant la page.");
     subscribe();
-    renderSettings(); renderWardrobe(); renderLook(false);
+    renderSettings(); renderWardrobe(); renderShop(); renderLook(false);
     initWeather();
     return;
   }
@@ -5591,6 +5949,7 @@ const localDownloads = {
   else subscribe();
   renderSettings();
   renderWardrobe();
+  renderShop();
   renderLook(false);
   initWeather();
 })();

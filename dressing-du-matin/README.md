@@ -10,6 +10,7 @@ Application personnelle de garde-robe : elle propose chaque matin des tenues sel
 - **Météo du jour** : à l’ouverture, l’appli propose d’utiliser la localisation ; sinon, une barre de recherche permet de saisir sa ville. La carte météo s’anime selon le temps (soleil, nuages, pluie, neige, orage, brouillard, vent, nuit) et donne le ressenti du matin et de l’après-midi, la pluie et le vent. Les valeurs restent ajustables à la main.
 - **Tenues du jour** : trois looks construits à partir de la température du matin et de l’après-midi, de la pluie et du vent, de l’occasion et du style. Le styliste IA peut choisir et expliquer les looks.
 - **Mannequin 3D réaliste** : vrai corps humain (maillage MakeHuman, CC0) déformé selon le sexe, la taille, le poids (IMC), la corpulence, les épaules et les hanches, en pose naturelle, bras le long du corps. Les vêtements sont taillés sur ce corps : ajustés, tombé, plis, ourlets nets, cols, revers, boutons, surpiqûres, chaussures, cheveux et accessoires. Moteur WebGL écrit à la main, sans bibliothèque.
+- **Boutiques** : une sélection de vraies pièces chez Uniqlo, Zara, Decathlon, Levi’s, Dr. Martens, Nike, Adidas et Carhartt, filtrable par boutique, rayon (femme, homme) et catégorie. Chaque pièce s’essaie sur le mannequin : l’appli construit des looks autour d’elle avec les vêtements de ta garde-robe. On choisit le coloris, on garde les pièces qui plaisent dans une liste d’envies (avec le total), on ouvre la page de la boutique, et une pièce achetée passe dans la garde-robe en un geste.
 - **Tendances** : couleurs et pièces de la saison, avec les pièces que tu as déjà.
 - **Historique** : tenues portées et notées. L’appli évite de reproposer la tenue de la veille et apprend tes goûts.
 
@@ -19,7 +20,7 @@ L’appli tient dans un seul fichier, `index.html`, sans dépendance à installe
 
 **Sur le site (GitHub Pages)**, pour tout le monde :
 
-- la garde-robe, les photos de vêtements, l’historique et les réglages sont enregistrés dans le navigateur de l’appareil (localStorage pour les fiches, IndexedDB pour les photos) ;
+- la garde-robe, les photos de vêtements, la liste d’envies, l’historique et les réglages sont enregistrés dans le navigateur de l’appareil (localStorage pour les fiches, IndexedDB pour les photos) ;
 - chaque personne a sa propre garde-robe, rien n’est envoyé en ligne ;
 - les fiches se remplissent à la main et les captures de fiche produit se recadrent avec les curseurs ;
 - la météo vient d’Open-Meteo (prévisions et recherche de ville, sans clé) et de BigDataCloud (nom de la ville à partir de la position) ;
@@ -49,8 +50,11 @@ Tout est dans `index.html` :
 - les rendus de vêtements façon photo produit (SVG avec relief et matière) ;
 - le module météo (localisation, recherche de ville, prévisions, icônes animées en SVG) ;
 - les règles de tenue (couches selon la température, accords de couleurs, rotation des pièces, tendances, goûts appris) ;
-- l’interface : Aujourd’hui, Garde-robe, Silhouette, Historique, Réglages.
+- la sélection des boutiques (pièces, prix relevés, liens vers les sites) et la liste d’envies ;
+- l’interface : Aujourd’hui, Garde-robe, Boutiques, Silhouette, Historique, Réglages.
 
 ## Crédits
+
+Les boutiques citées n’ont aucun lien avec l’appli. Les prix ont été relevés sur leurs sites le 26 octobre 2026 (« env. » quand le prix est indicatif) : le site de la marque fait foi. Les images des pièces sont des rendus de l’appli, pas les photos des marques.
 
 Le corps 3D vient de MakeHuman (maillage de base, morphs et poids de squelette), publié sous licence CC0 par la communauté MakeHuman : http://www.makehumancommunity.org
