@@ -82,7 +82,12 @@ a{color:var(--ink)}
 .cl-of{font-size:12px;color:var(--ink-2)}
 .cl-occ{margin:0;font-size:13px;color:var(--ink-2);line-height:1.35}
 .cl-occ em{font-style:normal;display:block;color:var(--ink-2)}
-.cl-wx{position:absolute;z-index:5;right:18px;top:calc(env(safe-area-inset-top,0px) + 50px);display:flex;flex-direction:column;align-items:flex-end;gap:1px;padding:0;color:var(--ink);text-align:right}
+.cl-wx{position:absolute;z-index:5;right:14px;top:calc(env(safe-area-inset-top,0px) + 44px);display:flex;flex-direction:row;align-items:center;gap:4px;padding:0;color:var(--ink);text-align:right}
+.wx-mini{--wx-moon:#C4B27E;--wx-star:#A99D7A;width:36px;height:36px;flex:none;display:block}
+.wx-pt{display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.wx-pt .cl-row{gap:3px}
+.wx-pt .cl-row small{font-size:12px;letter-spacing:0;color:var(--ink-3)}
+.wx-pcity{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);max-width:104px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cl-row{display:flex;align-items:baseline;gap:6px}
 .cl-row b{font-size:15px;font-weight:500;font-variant-numeric:tabular-nums}
 .cl-row small{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
@@ -160,6 +165,104 @@ a{color:var(--ink)}
 .toggle .i{width:15px;height:15px}
 .toggle[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 .advice{margin:0;font-size:13.5px;color:var(--ink-2)}
+
+/* Météo : recherche de ville + carte animée */
+.wx-group{gap:12px}
+.wx-search{position:relative;display:flex;gap:8px}
+.wx-search[hidden]{display:none}
+.wx-field{flex:1;min-width:0;display:flex;align-items:center;gap:9px;min-height:46px;padding:0 12px;border:1px solid var(--rule-2);background:var(--paper);transition:border-color .15s}
+.wx-field:focus-within{border-color:var(--ink)}
+.wx-s-ic{display:grid;place-items:center;color:var(--ink-3)}
+.wx-s-ic .i{width:17px;height:17px}
+.wx-in{flex:1;min-width:0;border:0;outline:0;background:none;font:inherit;font-size:16px;color:var(--ink);padding:10px 0;-webkit-appearance:none;appearance:none}
+.wx-in::placeholder{color:var(--ink-3)}
+.wx-in::-webkit-search-decoration,.wx-in::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;display:none}
+.wx-loc{width:46px;height:46px;flex:none;display:grid;place-items:center;border:1px solid var(--rule-2);background:var(--paper);color:var(--ink);transition:background .15s,color .15s}
+.wx-loc .i{width:18px;height:18px}
+.wx-loc[aria-busy="true"] .i{animation:wx-pulse 1s ease-in-out infinite alternate}
+.wx-loc[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.wx-sugg{position:absolute;left:0;right:54px;top:calc(100% + 4px);z-index:30;display:flex;flex-direction:column;max-height:300px;overflow:auto;background:var(--paper);border:1px solid var(--ink);box-shadow:0 14px 34px rgba(0,0,0,.09)}
+.wx-sugg[hidden]{display:none}
+.wx-opt{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:11px 14px;text-align:left;border-bottom:1px solid var(--rule);color:var(--ink)}
+.wx-opt:last-child{border-bottom:0}
+.wx-opt span{font-size:14.5px;font-weight:500}
+.wx-opt small{font-size:12px;color:var(--ink-3)}
+.wx-opt:hover,.wx-opt:focus-visible,.wx-opt.on{background:var(--studio)}
+.wx-none{margin:0;padding:12px 14px;font-size:13px;color:var(--ink-3)}
+
+.wx-card{--wx-ink:var(--ink);--wx-ink-2:var(--ink-2);--wx-ink-3:#7E7C77;--wx-rule:rgba(21,21,21,.1);position:relative;overflow:hidden;isolation:isolate;display:flex;flex-direction:column;gap:14px;padding:16px 18px 15px;background:var(--studio);color:var(--wx-ink);transition:background .6s ease,color .6s ease}
+.wx-card[data-sky="clear"]{background:linear-gradient(155deg,#FBE9C6 0%,#F8F0DF 42%,#F3F0E9 100%)}
+.wx-card[data-sky="partly"]{background:linear-gradient(155deg,#F6E9CF 0%,#EDEFF1 55%,#ECEEF0 100%)}
+.wx-card[data-sky="cloudy"]{background:linear-gradient(160deg,#E3E7EC 0%,#ECEDEE 60%,#F0F0EE 100%)}
+.wx-card[data-sky="rain"]{background:linear-gradient(165deg,#D7E0EA 0%,#E4E9EF 55%,#ECEEF0 100%)}
+.wx-card[data-sky="snow"]{background:linear-gradient(165deg,#E6EDF6 0%,#F2F5F9 55%,#FAFBFC 100%)}
+.wx-card[data-sky="storm"]{background:linear-gradient(165deg,#C9D0DA 0%,#DCE1E7 55%,#E7EAEE 100%)}
+.wx-card[data-sky="fog"]{background:linear-gradient(170deg,#E5E6E6 0%,#EEEEEC 60%,#F3F2EF 100%)}
+.wx-card[data-sky="night"],.wx-card[data-sky="partly-night"]{--wx-ink:#F4F2EC;--wx-ink-2:rgba(244,242,236,.78);--wx-ink-3:rgba(244,242,236,.55);--wx-rule:rgba(255,255,255,.16);background:linear-gradient(160deg,#1C2331 0%,#283044 60%,#323A4E 100%)}
+.wx-card[data-sky="storm"]::after{content:"";position:absolute;inset:0;z-index:-1;background:#fff;opacity:0;animation:wx-sky-flash 6s linear infinite;pointer-events:none}
+.wx-top{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:18px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.wx-city{display:inline-flex;align-items:center;gap:5px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wx-city .i{width:14px;height:14px;flex:none}
+.wx-cond{font-weight:500;color:var(--wx-ink-2);text-align:right}
+.wx-main{display:flex;align-items:center;gap:10px}
+.wx-ico{width:108px;height:108px;flex:none;margin:-10px -4px -10px -12px}
+.wx-ico.sm{width:58px;height:58px;margin:0}
+.wx-svg{display:block;width:100%;height:100%;overflow:visible}
+.wx-now{display:flex;flex-direction:column;gap:6px;min-width:0}
+.wx-now b{font-family:var(--font-display);font-weight:400;font-size:66px;line-height:.86;letter-spacing:-.01em;font-variant-numeric:lining-nums}
+.wx-deg{font-family:var(--font-body);font-style:normal;font-weight:300;font-size:.4em;line-height:1;vertical-align:top;margin-left:3px;position:relative;top:.06em}
+.wx-now small{font-size:12px;letter-spacing:.04em;color:var(--wx-ink-2)}
+.wx-parts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding-top:12px;border-top:1px solid var(--wx-rule)}
+.wx-part{display:flex;flex-direction:column;gap:5px;min-width:0}
+.wx-part span{font-size:9.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--wx-ink-3);white-space:nowrap}
+.wx-part b{display:flex;align-items:center;gap:2px;font-size:14px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wx-part .wx-svg{width:22px;height:22px;margin:-2px 0 -2px -3px;flex:none}
+.wx-foot{margin:0;font-size:11.5px;line-height:1.45;color:var(--wx-ink-3)}
+.wx-need{display:flex;gap:12px;align-items:center}
+.wx-need-t{margin:0 0 2px;font-family:var(--font-display);font-size:21px;line-height:1.1;font-weight:500}
+.wx-skel{display:flex;flex-direction:column;gap:10px}
+.wx-skel span{display:block;height:58px;background:linear-gradient(90deg,rgba(21,21,21,.04),rgba(21,21,21,.09),rgba(21,21,21,.04));background-size:200% 100%;animation:load 1.3s linear infinite}
+.wx-skel span + span{height:30px}
+.wx-adjust{padding-top:12px}
+.wx-adjust[open] summary{margin-bottom:12px}
+.wx-adjust .temps{margin-bottom:10px}
+
+.wx-rays{animation:wx-spin 26s linear infinite}
+.wx-cloud{animation:wx-drift 5.5s ease-in-out infinite alternate}
+.wx-cloud.back{animation-duration:7.5s;animation-direction:alternate-reverse}
+.wx-drop{animation:wx-drop 1.15s linear infinite}
+.wx-drop.d2{animation-delay:.38s}.wx-drop.d3{animation-delay:.76s}
+.wx-flake{animation:wx-flake 2.8s linear infinite}
+.wx-flake.d2{animation-delay:.9s}.wx-flake.d3{animation-delay:1.8s}
+.wx-bolt{animation:wx-bolt 6s linear infinite}
+.wx-air{stroke-dasharray:100 100;animation:wx-flow 2.6s ease-in-out infinite}
+.wx-air.d2{animation-delay:.45s}.wx-air.d3{animation-delay:.9s}
+.wx-fog{animation:wx-fog 3.6s ease-in-out infinite alternate}
+.wx-fog.d2{animation-delay:-1.2s}.wx-fog.d3{animation-delay:-2.4s}
+.wx-star{animation:wx-twinkle 2.6s ease-in-out infinite alternate}
+.wx-star.d2{animation-delay:-.9s}.wx-star.d3{animation-delay:-1.7s}
+.wx-svg.still *{animation:none!important}
+@keyframes wx-spin{to{transform:rotate(360deg)}}
+@keyframes wx-drift{from{transform:translateX(-1.6px)}to{transform:translateX(2.4px)}}
+@keyframes wx-drop{0%{transform:translate(1px,-5px);opacity:0}18%{opacity:1}80%{opacity:1}100%{transform:translate(-2px,8px);opacity:0}}
+@keyframes wx-flake{0%{transform:translate(0,-5px);opacity:0}15%{opacity:1}50%{transform:translate(2.5px,2px)}85%{opacity:1}100%{transform:translate(-1px,9px);opacity:0}}
+@keyframes wx-bolt{0%,40%,100%{opacity:1}42%{opacity:.15}44%{opacity:1}46%{opacity:.25}48%{opacity:1}}
+@keyframes wx-sky-flash{0%,41%,49%,100%{opacity:0}42%{opacity:.35}44%{opacity:0}46%{opacity:.22}}
+@keyframes wx-flow{0%{stroke-dashoffset:100;opacity:0}12%{opacity:1}55%{stroke-dashoffset:0}88%{opacity:1}100%{stroke-dashoffset:-100;opacity:0}}
+@keyframes wx-fog{from{transform:translateX(-3px)}to{transform:translateX(3px)}}
+@keyframes wx-twinkle{from{opacity:.25}to{opacity:1}}
+@keyframes wx-pulse{from{opacity:.35}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.wx-svg *,.wx-card::after,.wx-skel span{animation:none!important}}
+
+.wx-link{padding:0;font:inherit;color:inherit;text-decoration:underline;text-underline-offset:3px}
+.sheet.wx-ask{max-width:460px;z-index:43}
+#wx-scrim{z-index:42}
+.wx-ask-in{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px max(22px,env(safe-area-inset-left,0px)) 22px max(22px,env(safe-area-inset-right,0px));text-align:center}
+.wx-ask-sky{align-self:stretch;display:grid;place-items:center;height:150px;margin-bottom:6px;background:linear-gradient(155deg,#F6E2B8 0%,#F3EBDD 45%,#E7EBEF 100%)}
+.wx-ask-ico{width:124px;height:124px}
+.wx-ask-t{margin:0;font-family:var(--font-display);font-weight:500;font-size:24px;line-height:1.1;letter-spacing:.05em;text-transform:uppercase}
+.wx-ask-d{margin:0 0 6px;max-width:360px;font-size:14px;line-height:1.55;color:var(--ink-2);text-wrap:pretty}
+.wx-ask-b{align-self:stretch;display:flex;flex-direction:column;gap:8px}
 .group{display:flex;flex-direction:column;gap:10px;min-width:0}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips.scroll{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));scroll-padding-inline:16px}
@@ -416,8 +519,18 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
         <h2 class="day-t" id="day-t">Ta journée</h2>
         <span class="label-tag quiet" id="w-source" hidden></span>
       </div>
-      <div class="group">
+      <div class="group wx-group">
         <h3 class="h">Météo</h3>
+        <form class="wx-search" id="wx-form" role="search" autocomplete="off" hidden>
+          <label class="wx-field">
+            <span class="wx-s-ic" aria-hidden="true"></span>
+            <input class="wx-in" id="wx-q" type="search" placeholder="Rechercher une ville" aria-label="Rechercher une ville" aria-controls="wx-sugg" enterkeyhint="search" autocomplete="off" spellcheck="false">
+          </label>
+          <button type="button" class="wx-loc" id="wx-loc" data-action="wx-locate" aria-label="Utiliser ma position"></button>
+          <div class="wx-sugg" id="wx-sugg" role="listbox" aria-label="Villes trouvées" hidden></div>
+        </form>
+        <div class="wx-card" id="wx-card" data-sky="idle" aria-live="polite"></div>
+        <details class="fine wx-adjust" id="wx-adjust"><summary>Ajuster à la main</summary>
         <div class="temps">
           <div class="temp">
             <span class="temp-label" id="am-l">Matin</span>
@@ -440,6 +553,7 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
           <button class="toggle" id="wx-rain" data-action="wx" data-k="rain" aria-pressed="false"></button>
           <button class="toggle" id="wx-wind" data-action="wx" data-k="wind" aria-pressed="false"></button>
         </div>
+        </details>
         <p class="advice" id="w-advice"></p>
       </div>
       <div class="group">
@@ -511,6 +625,18 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
 </nav>
 <div class="scrim" id="scrim" data-action="close-sheet" hidden></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden></div>
+<div class="scrim" id="wx-scrim" data-action="wx-later" hidden></div>
+<div class="sheet wx-ask" id="wx-ask" role="dialog" aria-modal="true" aria-labelledby="wx-ask-t" aria-describedby="wx-ask-d" hidden>
+  <div class="wx-ask-in">
+    <div class="wx-ask-sky" aria-hidden="true"><div class="wx-ask-ico" id="wx-ask-ico"></div></div>
+    <h2 class="wx-ask-t" id="wx-ask-t">La météo de ta ville</h2>
+    <p class="wx-ask-d" id="wx-ask-d">Autorise la localisation pour que tes tenues suivent le temps qu’il fait chez toi. Ta position sert seulement à demander la météo et reste sur cet appareil.</p>
+    <div class="wx-ask-b">
+      <button class="btn primary big wide" id="wx-allow" data-action="wx-allow">Autoriser la localisation</button>
+      <button class="btn ghost big wide" data-action="wx-city">Saisir ma ville</button>
+    </div>
+  </div>
+</div>
 <div class="toast" id="toast" role="status" hidden></div>
 <input type="file" id="photo-input" accept="image/*" hidden>
 
@@ -634,6 +760,9 @@ const ICON = {
   lock: svgI('<rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/>'),
   screen: svgI('<rect x="6.5" y="2.5" width="11" height="19" rx="2.2"/><path d="M10.5 18.5h3M9 7h6v5H9Z"/>'),
   tag: svgI('<path d="M3.5 12.6V4.9a1.4 1.4 0 0 1 1.4-1.4h7.7l8 8-9.1 9.1Z"/><circle cx="8.3" cy="8.3" r="1.5"/>'),
+  search: svgI('<circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/>'),
+  locate: svgI('<path d="M20.5 3.5 3.5 10.6l7 2.9 2.9 7Z"/>'),
+  pin: svgI('<path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/>'),
 };
 
 /* ---------------- Silhouettes 2D (sans photo) ---------------- */
@@ -1977,6 +2106,341 @@ if (S.view !== "3d" && S.view !== "flat") S.view = "3d";
 function seasonWeather() { const [am, pm] = SEASON[new Date().getMonth()]; return {am, pm, rain: false, wind: false}; }
 S.W = seasonWeather();
 S.wLabel = "valeurs de saison, à ajuster";
+/* ---------------- Météo : position ou ville, prévisions Open-Meteo, carte animée ---------------- */
+const WX_COND = (c, day) => {
+  if (c === 0) return day ? "Ensoleillé" : "Nuit claire";
+  if (c === 1) return day ? "Plutôt ensoleillé" : "Plutôt dégagé";
+  if (c === 2) return "Éclaircies";
+  if (c === 3) return "Couvert";
+  if (c === 45) return "Brouillard";
+  if (c === 48) return "Brouillard givrant";
+  if (c >= 51 && c <= 55) return "Bruine";
+  if (c === 56 || c === 57) return "Bruine verglaçante";
+  if (c === 61) return "Pluie faible";
+  if (c === 63) return "Pluie";
+  if (c === 65) return "Forte pluie";
+  if (c === 66 || c === 67) return "Pluie verglaçante";
+  if (c === 71) return "Neige faible";
+  if (c === 73) return "Neige";
+  if (c === 75) return "Forte neige";
+  if (c === 77) return "Grésil";
+  if (c >= 80 && c <= 82) return "Averses";
+  if (c === 85 || c === 86) return "Averses de neige";
+  if (c === 95) return "Orage";
+  if (c >= 96) return "Orage et grêle";
+  return "Variable";
+};
+const wxRank = (c) => (c >= 95 ? 8 : (c >= 71 && c <= 77) || c === 85 || c === 86 ? 7 : (c >= 61 && c <= 67) || (c >= 80 && c <= 82) ? 6 : c >= 51 && c <= 57 ? 5 : c === 45 || c === 48 ? 4 : c === 3 ? 3 : c === 2 ? 2 : c === 1 ? 1 : 0);
+const isWet = (c) => (c >= 51 && c <= 67) || (c >= 80 && c <= 82) || c >= 95;
+const isSnow = (c) => (c >= 71 && c <= 77) || c === 85 || c === 86;
+function skyOf(c, day) {
+  if (c >= 95) return "storm";
+  if (isSnow(c)) return "snow";
+  if (isWet(c)) return "rain";
+  if (c === 45 || c === 48) return "fog";
+  if (c === 3) return "cloudy";
+  if (c === 2) return day ? "partly" : "partly-night";
+  return day ? "clear" : "night";
+}
+/* sans données en direct (saisie à la main) : on déduit un ciel des réglages */
+function skyFromManual(W) { return W.rain ? "rain" : W.pm >= 20 ? "clear" : W.pm <= 2 ? "cloudy" : "partly"; }
+
+/* icônes animées : soleil, lune, nuage, pluie, neige, orage, brouillard, vent */
+const WXC = {sun: "#F2B23E", ray: "#F2B23E", cloud: "#FFFFFF", cloudLine: "#C9CDD3", cloudDark: "#AEB4BD", drop: "#5D8CC7", flake: "#8FAED3", bolt: "#F2C14E", air: "#8593A5", moon: "#E8E0C4", star: "#F3EFE2", fog: "#B9BEC5"};
+const CLOUD_D = "M18 46H46C52 46 56 42 56 36.5C56 31 52 27 46.6 27C45 20 39 15 32 15C24.5 15 18.5 20.5 18 27.7C12.5 28.3 9 32.5 9 37C9 42 13 46 18 46Z";
+function wxSvg(sky, o) {
+  o = o || {};
+  const still = o.still ? " still" : "";
+  const cloud = (t, fill, line, k) => `<g${t ? ` transform="${t}"` : ""}><g class="wx-cloud${k ? " " + k : ""}"><path d="${CLOUD_D}" fill="${fill || WXC.cloud}" stroke="${line || WXC.cloudLine}" stroke-width="1.6" stroke-linejoin="round"/></g></g>`;
+  const sun = (cx, cy, r) => `<g><g class="wx-rays" style="transform-origin:${cx}px ${cy}px">${Array.from({length: 8}, (_, k) => { const a = (k * Math.PI) / 4; return `<path d="M${(cx + Math.cos(a) * (r + 5)).toFixed(1)} ${(cy + Math.sin(a) * (r + 5)).toFixed(1)}L${(cx + Math.cos(a) * (r + 10)).toFixed(1)} ${(cy + Math.sin(a) * (r + 10)).toFixed(1)}" stroke="${WXC.ray}" stroke-width="3" stroke-linecap="round"/>`; }).join("")}</g><circle cx="${cx}" cy="${cy}" r="${r}" fill="${WXC.sun}"/></g>`;
+  const moon = (t) => `<g${t ? ` transform="${t}"` : ""}><path d="M38 12a19 19 0 1 0 14 31A16 16 0 0 1 38 12Z" style="fill:var(--wx-moon,${WXC.moon})"/><g style="fill:var(--wx-star,${WXC.star})"><circle class="wx-star" cx="14" cy="16" r="1.4"/><circle class="wx-star d2" cx="22" cy="8" r="1"/><circle class="wx-star d3" cx="10" cy="30" r="1"/></g></g>`;
+  const drops = [22, 32, 42].map((x, k) => `<path class="wx-drop d${k + 1}" d="M${x} 50l-2 6" stroke="${WXC.drop}" stroke-width="2.6" stroke-linecap="round"/>`).join("");
+  const flake = (x, y) => `<path d="M${x - 3} ${y}H${x + 3}M${x - 1.5} ${y - 2.6}L${x + 1.5} ${y + 2.6}M${x - 1.5} ${y + 2.6}L${x + 1.5} ${y - 2.6}" stroke="${WXC.flake}" stroke-width="1.5" stroke-linecap="round"/>`;
+  const flakes = [[21, 52], [32, 55], [43, 51]].map(([x, y], k) => `<g class="wx-flake d${k + 1}">${flake(x, y)}</g>`).join("");
+  const AIR = ["M4 20H30C34 20 36 17 36 14.5S34 10 31.5 10 27.5 12 27.5 14", "M4 30H44C48 30 50 33 50 35.5S48 40 45.5 40 41.5 38 41.5 36", "M8 40H26"];
+  const air = `<g class="wx-airg" fill="none" stroke="${WXC.air}" stroke-width="2.4" stroke-linecap="round"><g opacity=".38">${AIR.map((d) => `<path d="${d}"/>`).join("")}</g>${AIR.map((d, k) => `<path class="wx-air${k ? " d" + (k + 1) : ""}" pathLength="100" d="${d}"/>`).join("")}</g>`;
+  let body = "";
+  switch (sky) {
+    case "clear": body = sun(32, 32, 12); break;
+    case "night": body = moon(); break;
+    case "partly": body = sun(23, 24, 9) + cloud("translate(6 8) scale(.86)"); break;
+    case "partly-night": body = moon("translate(-6 -6) scale(.8)") + cloud("translate(6 8) scale(.86)"); break;
+    case "cloudy": body = cloud("translate(-6 -6) scale(.8)", "#EEF0F3", WXC.cloudLine, "back") + cloud("translate(4 2)"); break;
+    case "fog": body = cloud("translate(0 -6)") + [48, 54, 60].map((y, k) => `<path class="wx-fog d${k + 1}" d="M${12 + k * 4} ${y}H${52 - k * 3}" stroke="${WXC.fog}" stroke-width="2.6" stroke-linecap="round"/>`).join(""); break;
+    case "rain": body = cloud("translate(0 -4)") + drops; break;
+    case "snow": body = cloud("translate(0 -4)") + flakes; break;
+    case "storm": body = cloud("translate(0 -6)", "#E4E7EB", WXC.cloudDark) + `<path class="wx-bolt" d="M33 42L26 53H32L29 62L41 49H35L38 42Z" fill="${WXC.bolt}"/>`; break;
+    case "wind": body = air; break;
+    default: body = cloud();
+  }
+  if (o.windy && sky !== "wind") body = `<g transform="translate(9 -3) scale(.8)">${body}</g><g transform="translate(-1 27) scale(.78)">${air}</g>`;
+  return `<svg class="wx-svg${still}" viewBox="0 0 64 64" aria-hidden="true">${body}</svg>`;
+}
+
+/* réseau */
+async function getJSON(url, ms) {
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), ms || 9000);
+  try { const r = await fetch(url, {signal: ctl.signal}); if (!r.ok) throw new Error("http " + r.status); return await r.json(); } finally { clearTimeout(t); }
+}
+async function fetchForecast(lat, lon) {
+  const u = `https://api.open-meteo.com/v1/forecast?latitude=${lat.toFixed(2)}&longitude=${lon.toFixed(2)}&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,is_day&hourly=apparent_temperature,weather_code,precipitation_probability,wind_speed_10m&timezone=auto&forecast_days=1`;
+  const j = await getJSON(u);
+  const H = j.hourly || {}, hrs = (H.time || []).map((t) => Number(String(t).slice(11, 13)));
+  const pick = (arr, h0, h1) => (arr || []).filter((_, k) => hrs[k] >= h0 && hrs[k] <= h1).filter((v) => typeof v === "number");
+  const avg = (a, d) => (a.length ? Math.round(a.reduce((x, y) => x + y, 0) / a.length) : d);
+  const worst = (a, d) => (a.length ? a.reduce((x, y) => (wxRank(y) > wxRank(x) ? y : x)) : d);
+  const cur = j.current || {};
+  const now = Math.round(cur.temperature_2m), feels = Math.round(cur.apparent_temperature);
+  const code = Number(cur.weather_code) || 0, day = cur.is_day !== 0;
+  const am = avg(pick(H.apparent_temperature, 8, 10), feels), pm = avg(pick(H.apparent_temperature, 14, 16), feels);
+  const amCode = worst(pick(H.weather_code, 8, 11), code), pmCode = worst(pick(H.weather_code, 13, 17), code);
+  const dayCodes = pick(H.weather_code, 7, 20);
+  const rainProb = Math.max(0, ...pick(H.precipitation_probability, 7, 20));
+  const wind = Math.round(Math.max(Number(cur.wind_speed_10m) || 0, ...pick(H.wind_speed_10m, 7, 20)));
+  const wet = dayCodes.some(isWet) && rainProb >= 35, snow = dayCodes.some(isSnow);
+  if (!Number.isFinite(now) || !Number.isFinite(am) || !Number.isFinite(pm)) throw new Error("données");
+  return {now, feels, code, day, am, pm, amCode, pmCode, rainProb, wind, rain: wet || rainProb >= 55 || snow, snow, windy: wind >= 30, at: new Date().toISOString()};
+}
+async function reverseCity(lat, lon) {
+  try {
+    const j = await getJSON(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat.toFixed(2)}&longitude=${lon.toFixed(2)}&localityLanguage=fr`, 7000);
+    return String(j.city || j.locality || j.principalSubdivision || "").slice(0, 60) || "Ma position";
+  } catch (e) { return "Ma position"; }
+}
+async function searchCities(q) {
+  const j = await getJSON(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=6&language=fr&format=json`, 7000);
+  return (j.results || []).map((r) => ({name: String(r.name || "").slice(0, 60), sub: [r.admin1, r.country].filter(Boolean).join(", ").slice(0, 80), lat: Number(r.latitude), lon: Number(r.longitude)})).filter((r) => r.name && Number.isFinite(r.lat) && Number.isFinite(r.lon));
+}
+
+/* état : S.place (position ou ville choisie, gardée sur l'appareil), S.wx (prévision du jour) */
+/* la météo en direct ne marche que dans la version web : dans Claude, la page ne peut ni localiser ni appeler un service extérieur */
+const WX_LIVE = !(window.claude && typeof window.claude.use === "function") && typeof fetch === "function";
+const wxOnline = () => WX_LIVE;
+const round2 = (v) => Math.round(v * 100) / 100;
+S.place = store.get("place", null);
+if (S.place && S.place.mode !== "none" && !(Number.isFinite(S.place.lat) && Number.isFinite(S.place.lon))) S.place = null;
+S.wx = null; S.wxSugg = []; S.wxBusy = false; S.wxErr = ""; S.wxNoHit = false;
+S.wxState = !WX_LIVE ? "idle" : S.place && S.place.mode === "none" ? "need" : "loading";
+if (S.wxState === "need") S.wxErr = "Recherche ta ville pour voir sa météo.";
+function wxCacheKey(p) { return p ? `${p.lat.toFixed(2)},${p.lon.toFixed(2)}` : ""; }
+async function loadWeather(force) {
+  const p = S.place;
+  if (!p || !Number.isFinite(p.lat)) return;
+  const key = wxCacheKey(p), c = store.get("wxc", null);
+  if (!force && c && c.key === key && c.day === today() && Date.now() - c.t < 40 * 60 * 1000 && c.wx) { S.wx = c.wx; S.wxState = "ok"; applyAutoWeather(); return; }
+  S.wxState = S.wx ? "ok" : "loading";
+  renderWxCard();
+  try {
+    const wx = await fetchForecast(p.lat, p.lon);
+    if (S.place !== p) return;
+    S.wx = wx; S.wxState = "ok";
+    store.set("wxc", {key, day: today(), t: Date.now(), wx});
+    applyAutoWeather();
+  } catch (e) {
+    if (S.place !== p) return;
+    S.wxState = S.wx ? "ok" : "error";
+    S.wxErr = "Météo indisponible pour le moment. Vérifie ta connexion, ou règle les températures à la main.";
+    renderWxCard();
+  }
+}
+function applyAutoWeather() {
+  const w = S.wx;
+  if (!w) return;
+  if (store.get("wxManual", "") === today()) S.wEdited = true;
+  if (!S.wEdited) {
+    S.W = {am: w.am, pm: w.pm, rain: !!w.rain, wind: !!w.windy};
+    S.wLabel = `automatique · ${S.place ? S.place.name : ""}`;
+    const db = S.caps.db, t = today();
+    if (db) db.doc("weather/" + t).set({date: t, am: w.am, pm: w.pm, rain: !!w.rain, wind: !!w.windy, source: "auto", city: S.place ? S.place.name : "", at: w.at}).catch(() => {});
+    scheduleRefresh();
+  }
+  renderWeather();
+}
+function setPlace(p) {
+  p = {...p, lat: round2(p.lat), lon: round2(p.lon)};
+  const same = S.place && S.place.lat === p.lat && S.place.lon === p.lon && S.wx;
+  S.place = p;
+  store.set("place", p);
+  if (S.capsReady) renderSettings();
+  if (same) { renderWxCard(); renderWeather(); return; }
+  S.wx = null;
+  S.wEdited = false;
+  store.set("wxManual", "");
+  loadWeather(true);
+}
+function wxForget() {
+  S.place = {mode: "none"};
+  store.set("place", S.place);
+  store.set("wxc", null);
+  S.wx = null; S.wxState = "need"; S.wxErr = "Recherche ta ville pour voir sa météo.";
+  if (!S.wEdited) { S.W = seasonWeather(); S.wLabel = "valeurs de saison, à ajuster"; }
+  renderSettings(); renderWeather(); scheduleRefresh();
+}
+function wxBackToAuto() {
+  S.wEdited = false;
+  store.set("wxManual", "");
+  if (S.wx) applyAutoWeather(); else loadWeather(true);
+}
+function wxLocate(userAsked) {
+  if (!navigator.geolocation) { S.wxState = "need"; S.wxErr = "La localisation n’est pas disponible ici : recherche ta ville."; renderWxCard(); return; }
+  S.wxBusy = true;
+  if (!S.wx) S.wxState = "locating";
+  renderWxCard(); renderWxLoc();
+  navigator.geolocation.getCurrentPosition(async (pos) => {
+    const lat = round2(pos.coords.latitude), lon = round2(pos.coords.longitude);
+    const prev = S.place && S.place.mode === "geo" && S.place.lat === lat && S.place.lon === lon ? S.place.name : "";
+    const name = prev || await reverseCity(lat, lon);
+    S.wxBusy = false;
+    setPlace({mode: "geo", name, sub: "", lat, lon});
+    renderWxLoc();
+  }, (err) => {
+    S.wxBusy = false;
+    renderWxLoc();
+    if (err && err.code === 1 && !(S.place && S.place.mode === "city")) { store.set("place", {mode: "none"}); S.place = {mode: "none"}; }
+    if (!S.wx) S.wxState = "need";
+    S.wxErr = err && err.code === 1 ? (userAsked ? "Localisation refusée : recherche ta ville dans la barre ci-dessus." : "Recherche ta ville pour voir sa météo.") : "Position introuvable pour le moment : recherche ta ville.";
+    renderWxCard();
+  }, {enableHighAccuracy: false, timeout: 12000, maximumAge: 30 * 60 * 1000});
+}
+let wxSearchTimer = 0, wxSearchSeq = 0;
+function onWxInput(q) {
+  clearTimeout(wxSearchTimer);
+  q = q.trim();
+  if (q.length < 2) { S.wxSugg = []; renderWxSugg(); return; }
+  wxSearchTimer = setTimeout(async () => {
+    const seq = ++wxSearchSeq;
+    try { const r = await searchCities(q); if (seq !== wxSearchSeq) return; S.wxSugg = r; S.wxNoHit = !r.length; } catch (e) { if (seq !== wxSearchSeq) return; S.wxSugg = []; S.wxNoHit = "err"; }
+    renderWxSugg();
+  }, 280);
+}
+function renderWxSugg() {
+  const el = $("#wx-sugg");
+  if (!el) return;
+  const q = ($("#wx-q") || {}).value || "";
+  if (!S.wxSugg.length && !(S.wxNoHit && q.trim().length >= 2)) { el.hidden = true; el.innerHTML = ""; return; }
+  el.hidden = false;
+  el.innerHTML = S.wxSugg.length
+    ? S.wxSugg.map((c, k) => `<button type="button" class="wx-opt" role="option" id="wxo-${k}" data-action="wx-pick" data-i="${k}"><span>${esc(c.name)}</span><small>${esc(c.sub)}</small></button>`).join("")
+    : `<p class="wx-none">${S.wxNoHit === "err" ? "Recherche impossible pour le moment." : "Aucune ville trouvée."}</p>`;
+}
+async function wxSubmit() {
+  const q = (($("#wx-q") || {}).value || "").trim();
+  if (q.length < 2) return;
+  clearTimeout(wxSearchTimer);
+  if (S.wxSugg.length) { wxPick(S.wxSugg[0]); return; }
+  const seq = ++wxSearchSeq;
+  try { const r = await searchCities(q); if (seq !== wxSearchSeq) return; if (r.length) wxPick(r[0]); else { S.wxSugg = []; S.wxNoHit = true; renderWxSugg(); } }
+  catch (e) { if (seq !== wxSearchSeq) return; S.wxSugg = []; S.wxNoHit = "err"; renderWxSugg(); }
+}
+function wxCloseSugg() { if (!S.wxSugg.length && !S.wxNoHit) return; S.wxSugg = []; S.wxNoHit = false; renderWxSugg(); }
+function renderWxLoc() {
+  const b = $("#wx-loc");
+  if (!b) return;
+  b.setAttribute("aria-busy", String(!!S.wxBusy));
+  b.setAttribute("aria-pressed", String(!!(S.place && S.place.mode === "geo")));
+}
+function wxPick(c) {
+  if (!c) return;
+  S.wxSugg = []; S.wxNoHit = false;
+  const q = $("#wx-q");
+  if (q) { q.value = ""; q.blur(); }
+  renderWxSugg();
+  setPlace({mode: "city", name: c.name, sub: c.sub, lat: c.lat, lon: c.lon});
+}
+/* premier lancement : on demande d'abord dans l'appli, puis le navigateur affiche sa propre autorisation */
+let wxAskFocus = null;
+function wxAskOpen() {
+  wxAskFocus = document.activeElement;
+  $("#wx-ask-ico").innerHTML = wxSvg("partly");
+  $("#wx-scrim").hidden = false; $("#wx-ask").hidden = false;
+  document.body.classList.add("locked");
+  const b = $("#wx-allow"); if (b) b.focus({preventScroll: true});
+}
+function wxAskClose() {
+  if ($("#wx-ask").hidden) return;
+  $("#wx-scrim").hidden = true; $("#wx-ask").hidden = true;
+  if (!S.sheet) document.body.classList.remove("locked");
+  if (wxAskFocus && wxAskFocus.focus && document.contains(wxAskFocus)) wxAskFocus.focus({preventScroll: true});
+}
+/* « Saisir ma ville » ou fenêtre fermée : on ne redemande plus, la carte invite à chercher */
+function wxAskLater() {
+  wxAskClose();
+  if (!S.place || S.place.mode === "none") { S.place = {mode: "none"}; store.set("place", S.place); }
+  S.wxState = S.wx ? "ok" : "need"; S.wxErr = "Recherche ta ville pour voir sa météo.";
+  renderWxCard(); renderSettings();
+}
+function wxFocusSearch() {
+  if (S.tab !== "today" && typeof showTab === "function") showTab("today");
+  const q = $("#wx-q");
+  const g = $(".wx-group");
+  if (g) g.scrollIntoView({behavior: reduceMotion() ? "auto" : "smooth", block: "start"});
+  if (q) setTimeout(() => q.focus({preventScroll: true}), reduceMotion() ? 0 : 350);
+}
+async function initWeather() {
+  const form = $("#wx-form");
+  if (!wxOnline()) { if (form) form.hidden = true; $("#wx-adjust").open = true; renderWxCard(); return; }
+  form.hidden = false;
+  $("#wx-loc").innerHTML = ICON.locate;
+  $(".wx-s-ic").innerHTML = ICON.search;
+  renderWxLoc();
+  const p = S.place;
+  if (p && p.mode === "city") { loadWeather(false); return; }
+  if (p && p.mode === "geo") { loadWeather(false); wxLocate(false); return; }
+  if (p && p.mode === "none") { S.wxState = "need"; renderWxCard(); return; }
+  let perm = "prompt";
+  try { if (navigator.permissions && navigator.permissions.query) perm = (await navigator.permissions.query({name: "geolocation"})).state; } catch (e) { perm = "prompt"; }
+  if (perm === "granted") { wxLocate(false); return; }
+  if (perm === "denied" || !navigator.geolocation) { S.wxState = "need"; S.wxErr = "Recherche ta ville pour voir sa météo."; renderWxCard(); return; }
+  S.wxState = "need"; S.wxErr = "Recherche ta ville ou utilise ta position.";
+  renderWxCard();
+  wxAskOpen();
+}
+
+/* rendu */
+function renderWxCard() {
+  const el = $("#wx-card");
+  if (!el) return;
+  const w = S.wx, live = !!w && S.wxState === "ok";
+  const W = S.W;
+  if (!live && wxOnline() && (S.wxState === "loading" || S.wxState === "locating")) {
+    el.dataset.sky = "idle";
+    el.innerHTML = `<div class="wx-top"><span class="wx-city">${ICON.pin}${S.wxState === "locating" ? "Localisation…" : esc(S.place && S.place.name || "")}</span></div><div class="wx-skel" aria-hidden="true"><span></span><span></span></div><p class="wx-foot">Recherche de la météo…</p>`;
+    return;
+  }
+  if (!live && wxOnline() && (S.wxState === "need" || S.wxState === "error")) {
+    el.dataset.sky = "idle";
+    el.innerHTML = `<div class="wx-need"><div class="wx-ico sm">${wxSvg("partly")}</div><div><p class="wx-need-t">${S.wxState === "error" ? "Météo indisponible" : "La météo de ta ville"}</p><p class="wx-foot">${esc(S.wxErr || "Recherche ta ville ou utilise ta position.")}</p></div></div>
+      ${S.wxState === "need" ? `<button type="button" class="btn ghost sm" data-action="wx-locate" style="align-self:flex-start">${ICON.locate} Utiliser ma position</button>` : `<button type="button" class="btn ghost sm" data-action="wx-retry" style="align-self:flex-start">Réessayer</button>`}`;
+    return;
+  }
+  const sky = live ? skyOf(w.code, w.day) : skyFromManual(W);
+  const windy = live ? w.windy : !!W.wind;
+  const edited = live && S.wEdited;
+  const amSky = live ? skyOf(w.amCode, true) : skyFromManual(W), pmSky = live ? skyOf(w.pmCode, true) : skyFromManual(W);
+  el.dataset.sky = sky;
+  const city = live ? S.place.name : "Météo du jour";
+  el.innerHTML = `
+    <div class="wx-top"><span class="wx-city">${live ? ICON.pin : ""}${esc(city)}</span><span class="wx-cond">${live ? esc(WX_COND(w.code, w.day)) + (w.windy ? ", venteux" : "") : edited ? "" : W.rain ? "Pluie" : "Saisie à la main"}</span></div>
+    <div class="wx-main">
+      <div class="wx-ico">${wxSvg(windy && (sky === "clear" || sky === "partly") && !live ? "wind" : sky, {windy})}</div>
+      <div class="wx-now"><b>${tnum(live ? w.now : W.am)}<i class="wx-deg">°</i></b><small>${live ? `ressenti ${tnum(w.feels)}°` : "ressenti le matin"}</small></div>
+    </div>
+    <div class="wx-parts">
+      <div class="wx-part"><span>Matin</span><b>${wxSvg(amSky, {still: true})}${tnum(W.am)}°</b></div>
+      <div class="wx-part"><span>Après-midi</span><b>${wxSvg(pmSky, {still: true})}${tnum(W.pm)}°</b></div>
+      <div class="wx-part"><span>${live && w.snow ? "Neige" : "Pluie"}</span><b>${live ? `${w.rainProb} %` : W.rain ? "oui" : "non"}</b></div>
+      <div class="wx-part"><span>Vent</span><b>${live ? `${w.wind} km/h` : W.wind ? "fort" : "faible"}</b></div>
+    </div>
+    ${live ? `<p class="wx-foot">${edited ? `Matin et après-midi ajustés à la main. <button type="button" class="wx-link" data-action="wx-auto">Revenir à la météo du jour</button><br>` : "Températures ressenties. "}Mise à jour à ${new Date(w.at).toLocaleTimeString("fr-FR", {hour: "2-digit", minute: "2-digit"})} · Open-Meteo</p>` : !wxOnline() ? `<p class="wx-foot">La météo automatique fonctionne sur la version web de l’appli. Ici, règle-la ci-dessous.</p>` : ""}`;
+}
+function tnum(n) { return n < 0 ? "−" + Math.abs(n) : String(n); }
+function wxPillHtml(ctx) {
+  const w = S.wx, live = !!w && S.wxState === "ok";
+  const sky = live ? skyOf(w.code, w.day) : skyFromManual(S.W);
+  return `<span class="wx-mini">${wxSvg(sky, {windy: live ? w.windy : !!S.W.wind})}</span><span class="wx-pt"><span class="cl-row"><b>${tnum(ctx.am)}°</b><small>/</small><b>${tnum(ctx.pm)}°</b></span>${live ? `<span class="wx-pcity">${esc(S.place.name)}</span>` : ""}</span><span class="sr">${live ? esc(WX_COND(w.code, w.day)) + ", " : ""}matin ${ctx.am} degrés, après-midi ${ctx.pm} degrés. Voir la météo</span>`;
+}
+
 (function initChoices() {
   const wd = new Date().getDay();
   const saved = store.get("occ", null);
@@ -2486,7 +2950,7 @@ function renderStage() {
   $("#pg-prev").disabled = S.lookIdx <= 0;
   $("#pg-next").disabled = S.lookIdx >= n - 1;
   const ctx = makeCtx();
-  $("#wx-pill").innerHTML = `<span class="cl-row"><small>matin</small><b>${ctx.am}°</b></span><span class="cl-row"><small>après-midi</small><b>${ctx.pm}°</b></span>${ctx.rain || ctx.wind ? `<span class="cl-ic">${ctx.rain ? ICON.rain : ""}${ctx.wind ? ICON.wind : ""}</span>` : ""}<span class="sr">${ctx.rain ? "pluie, " : ""}${ctx.wind ? "vent fort, " : ""}modifier la météo</span>`;
+  $("#wx-pill").innerHTML = wxPillHtml(ctx);
   $("#issue-n").textContent = "";
   fitMastheads();
   $("#view-3d").setAttribute("aria-checked", String(S.view === "3d"));
@@ -2627,8 +3091,9 @@ function renderWeather() {
   $("#wx-rain").setAttribute("aria-pressed", String(!!S.W.rain));
   $("#wx-wind").setAttribute("aria-pressed", String(!!S.W.wind));
   $("#w-source").textContent = S.wLabel;
-  $("#w-source").hidden = !String(S.wLabel).startsWith("automatique");
+  $("#w-source").hidden = WX_LIVE || !String(S.wLabel).startsWith("automatique");
   $("#w-advice").textContent = adviceText(makeCtx());
+  renderWxCard();
   if (S.tab === "today") renderStage();
 }
 function renderChoices() {
@@ -2824,10 +3289,11 @@ function renderSettings() {
       <button class="switch bare" id="s-tr" data-action="set-trends" aria-pressed="${s.trends !== false}" aria-labelledby="s-tr-l"><span class="knob"></span></button></div>
     <div class="set-row"><div><h2 class="set-t" id="s-mi-l">Pièces de saison qui me manquent</h2><p class="set-d">Les affiche dans les tendances.</p></div>
       <button class="switch bare" id="s-mi" data-action="set-missing" aria-pressed="${!!s.missing}" aria-labelledby="s-mi-l"><span class="knob"></span></button></div>
+    ${WX_LIVE ? `<div class="set-row"><div><h2 class="set-t">Météo</h2><p class="set-d">${S.place && S.place.name ? `${S.place.mode === "geo" ? "Ta position" : "Ta ville"} : ${esc(S.place.name)}` : "Aucune ville choisie."}</p></div>${S.place && S.place.name ? `<button class="btn ghost sm" data-action="wx-forget">Oublier</button>` : `<button class="btn ghost sm" data-action="wx-locate">Ma position</button>`}</div>` : ""}
     ${S.local ? "" : `<label class="set-row col" for="s-city"><span class="set-t">Ville</span><span class="set-d">Pour la météo automatique.</span><input class="in" id="s-city" value="${esc(s.city || "")}" placeholder="ex. Cergy" autocomplete="address-level2"></label>`}
   </div>
   <div class="card set">
-    <div><h2 class="set-t">Tes données</h2><p class="set-d">${S.local ? "Enregistrées dans ce navigateur, sur cet appareil. Rien n’est envoyé en ligne." : "Enregistrées sur ton compte Claude, modifiables par toi seul. Ta silhouette reste sur cet appareil."}</p></div>
+    <div><h2 class="set-t">Tes données</h2><p class="set-d">${S.local ? "Enregistrées dans ce navigateur, sur cet appareil. Pour la météo, seule ta ville, ou ta position arrondie à 1 km environ, est envoyée aux services Open-Meteo et BigDataCloud." : "Enregistrées sur ton compte Claude, modifiables par toi seul. Ta silhouette reste sur cet appareil."}</p></div>
     <div class="row-btns"><button class="btn ghost" id="s-export" data-action="export"${S.caps.downloads ? "" : " disabled"}>Exporter (JSON)</button>
       ${S.confirmAll ? `<span class="confirm"><span>Tout supprimer, sans retour possible ?</span><button class="btn danger sm" data-action="delete-all-yes"${S.deleting ? " disabled" : ""}>${S.deleting ? "Suppression…" : "Oui, tout supprimer"}</button><button class="btn ghost sm" data-action="delete-all-no">Annuler</button></span>` : `<button class="btn ghost danger-t" data-action="delete-all">Tout supprimer</button>`}</div>
   </div>
@@ -3600,6 +4066,7 @@ async function persistLook(L) {
 let wTimer = null;
 function onWeatherEdit() {
   S.wEdited = true;
+  if (WX_LIVE) store.set("wxManual", today());
   S.wLabel = "saisie ce matin";
   renderWeather();
   scheduleRefresh();
@@ -3619,7 +4086,10 @@ function applyWeatherDoc(snap) {
   if (!w || typeof w.am !== "number" || typeof w.pm !== "number" || !w.date) return;
   const age = daysBetween(w.date, t);
   if (age === 0) {
-    if (S.wEdited && w.source !== "auto") return;
+    if (WX_LIVE) {
+      if (w.source === "auto") { if (S.wEdited || S.wx) return; }
+      else S.wEdited = true;
+    } else if (S.wEdited && w.source !== "auto") return;
     S.W = {am: w.am, pm: w.pm, rain: !!w.rain, wind: !!w.wind};
     S.wLabel = w.source === "auto" ? `automatique${w.city ? " · " + w.city : ""}` : "saisie ce matin";
   } else if (age > 0 && age <= 3 && !S.wEdited) {
@@ -3664,6 +4134,7 @@ async function deleteAll() {
     for (const w of ws.docs) await db.doc("weather/" + w.id).delete();
     await db.doc("settings/main").delete();
     S.imposed = null;
+    if (WX_LIVE) { ["wxc", "wxManual"].forEach((k) => store.set(k, null)); S.place = {mode: "none"}; store.set("place", S.place); S.wx = null; S.wEdited = false; S.wxState = "need"; S.wxErr = "Recherche ta ville pour voir sa météo."; S.W = seasonWeather(); renderWeather(); }
     toast("Toutes tes données ont été supprimées.");
   } catch (e) { dbErr(e); } finally { S.deleting = false; S.confirmAll = false; renderSettings(); }
 }
@@ -3712,6 +4183,14 @@ function toast(msg) {
 /* ---------------- Événements ---------------- */
 const ACTIONS = {
   tab: (el) => showTab(el.dataset.tab),
+  "wx-locate": () => { wxCloseSugg(); wxLocate(true); },
+  "wx-pick": (el) => wxPick(S.wxSugg[Number(el.dataset.i)]),
+  "wx-retry": () => loadWeather(true),
+  "wx-auto": () => wxBackToAuto(),
+  "wx-forget": () => wxForget(),
+  "wx-allow": () => { wxAskClose(); wxLocate(true); },
+  "wx-city": () => { wxAskLater(); wxFocusSearch(); },
+  "wx-later": () => wxAskLater(),
   "goto-day": () => { const d = $("#day"); if (d) d.scrollIntoView({behavior: reduceMotion() ? "auto" : "smooth", block: "start"}); },
   look: (el) => { const n = S.looks.length; if (!n) return; S.lookIdx = clamp(S.lookIdx + Number(el.dataset.d), 0, n - 1); renderLook(true); },
   view: (el) => { S.view = el.dataset.v === "flat" || !Atelier.ok ? "flat" : "3d"; store.set("view", S.view); renderStage(); syncMannequin(false); },
@@ -3856,6 +4335,7 @@ document.addEventListener("click", (e) => {
 });
 document.addEventListener("input", (e) => {
   const t = e.target;
+  if (t.id === "wx-q") { onWxInput(t.value); return; }
   if (t.id === "ph-tol") { onTolChange(Number(t.value)); return; }
   if (t.dataset && t.dataset.crop) { onCropInput(t.dataset.crop, Number(t.value) / 100); return; }
   if (t.dataset && t.dataset.b) {
@@ -3880,7 +4360,26 @@ document.addEventListener("change", (e) => {
   if (t.id === "f-sub" && S.draft) { S.draft.it.sub = t.value; S.draft.touched.add("sub"); renderSheet(); return; }
   if (t.id === "s-city") saveSettings({city: t.value.trim().slice(0, 60)});
 });
-document.addEventListener("keydown", (e) => { if (e.key === "Escape" && S.sheet) closeSheet(); });
+document.addEventListener("keydown", (e) => {
+  const ask = $("#wx-ask");
+  if (ask && !ask.hidden) {
+    if (e.key === "Escape") { e.preventDefault(); wxAskLater(); return; }
+    if (e.key === "Tab") { const f = [...ask.querySelectorAll("button")]; const i = f.indexOf(document.activeElement); if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); } }
+    return;
+  }
+  const inWx = e.target && e.target.closest && e.target.closest("#wx-form");
+  if (inWx) {
+    const opts = [...document.querySelectorAll("#wx-sugg .wx-opt")];
+    const i = opts.indexOf(document.activeElement);
+    if (e.key === "ArrowDown" && opts.length) { e.preventDefault(); opts[Math.min(opts.length - 1, i + 1)].focus(); return; }
+    if (e.key === "ArrowUp" && opts.length && i >= 0) { e.preventDefault(); if (i === 0) $("#wx-q").focus(); else opts[i - 1].focus(); return; }
+    if (e.key === "Escape" && (S.wxSugg.length || S.wxNoHit)) { e.preventDefault(); wxCloseSugg(); $("#wx-q").focus(); return; }
+  }
+  if (e.key === "Escape" && S.sheet) closeSheet();
+});
+document.addEventListener("submit", (e) => { if (e.target && e.target.id === "wx-form") { e.preventDefault(); wxSubmit(); } });
+document.addEventListener("pointerdown", (e) => { if (!e.target.closest || !e.target.closest("#wx-form")) wxCloseSugg(); });
+document.addEventListener("focusin", (e) => { if (e.target && e.target.closest && !e.target.closest("#wx-form")) wxCloseSugg(); });
 document.addEventListener("error", (e) => {
   const img = e.target;
   if (img && img.tagName === "IMG" && img.classList.contains("ph")) {
@@ -3898,9 +4397,11 @@ document.addEventListener("visibilitychange", () => {
   S.wLabel = "valeurs de saison, à ajuster";
   $("#today-date").textContent = cap(fmtLong(S.day));
   applyWeatherDoc(S.lastWDoc);
+  if (WX_LIVE && store.get("wxManual", "") !== S.day) S.wEdited = false;
   renderWeather();
   refreshLooks();
 });
+document.addEventListener("visibilitychange", () => { if (!document.hidden && WX_LIVE && S.place && Number.isFinite(S.place.lat)) loadWeather(false); });
 
 /* ---------------- Démarrage ---------------- */
 $("#today-date").textContent = cap(fmtLong(S.day));
@@ -4011,6 +4512,7 @@ const localDownloads = {
     if (!L.persist) setBanner("Ce navigateur n’autorise pas l’enregistrement : ta garde-robe sera perdue en fermant la page.");
     subscribe();
     renderSettings(); renderWardrobe(); renderLook(false);
+    initWeather();
     return;
   }
   const names = ["db", "assets", "sample", "downloads"];
@@ -4022,6 +4524,7 @@ const localDownloads = {
   renderSettings();
   renderWardrobe();
   renderLook(false);
+  initWeather();
 })();
 })();
 </script>
