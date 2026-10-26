@@ -9,7 +9,7 @@ Application personnelle de garde-robe : elle propose chaque matin des tenues sel
 - **Garde-robe** : hauts, bas, pièces uniques, vestes et manteaux, chaussures, accessoires. Ajout par photo (fond détouré automatiquement), par capture d’écran de la fiche produit, ou par marque et référence. Lecture d’étiquette pour la marque, la référence et la matière.
 - **Météo du jour** : à l’ouverture, l’appli propose d’utiliser la localisation ; sinon, une barre de recherche permet de saisir sa ville. La carte météo s’anime selon le temps (soleil, nuages, pluie, neige, orage, brouillard, vent, nuit) et donne le ressenti du matin et de l’après-midi, la pluie et le vent. Les valeurs restent ajustables à la main.
 - **Tenues du jour** : trois looks construits à partir de la température du matin et de l’après-midi, de la pluie et du vent, de l’occasion et du style. Le styliste IA peut choisir et expliquer les looks.
-- **Mannequin 3D** : femme ou homme, taille, poids, corpulence, épaules, hanches, teint et cheveux. Moteur WebGL écrit à la main, sans bibliothèque.
+- **Mannequin 3D réaliste** : vrai corps humain (maillage MakeHuman, CC0) déformé selon le sexe, la taille, le poids (IMC), la corpulence, les épaules et les hanches, en pose naturelle, bras le long du corps. Les vêtements sont taillés sur ce corps : ajustés, tombé, plis, ourlets nets, cols, revers, boutons, surpiqûres, chaussures, cheveux et accessoires. Moteur WebGL écrit à la main, sans bibliothèque.
 - **Tendances** : couleurs et pièces de la saison, avec les pièces que tu as déjà.
 - **Historique** : tenues portées et notées. L’appli évite de reproposer la tenue de la veille et apprend tes goûts.
 
@@ -45,8 +45,12 @@ L’appli tient dans un seul fichier, `index.html`, sans dépendance à installe
 Tout est dans `index.html` :
 
 - les styles (design « studio » : blanc, noir, gris pierre, Bodoni Moda et Hanken Grotesk) ;
-- le moteur 3D « Atelier » (corps et vêtements modélisés par champs de distance dans un Web Worker, éclairage de studio en WebGL) ;
+- le moteur 3D « Atelier » : corps MakeHuman compressé dans la page, morphing et squelette simplifié, vêtements générés dans un Web Worker (coques subdivisées, découpes nettes, tombé, plis), rendu WebGL façon studio photo ;
 - les rendus de vêtements façon photo produit (SVG avec relief et matière) ;
 - le module météo (localisation, recherche de ville, prévisions, icônes animées en SVG) ;
 - les règles de tenue (couches selon la température, accords de couleurs, rotation des pièces, tendances, goûts appris) ;
 - l’interface : Aujourd’hui, Garde-robe, Silhouette, Historique, Réglages.
+
+## Crédits
+
+Le corps 3D vient de MakeHuman (maillage de base, morphs et poids de squelette), publié sous licence CC0 par la communauté MakeHuman : http://www.makehumancommunity.org
