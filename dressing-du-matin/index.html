@@ -475,52 +475,176 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
 .ref-name{margin:0;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
 .ref-q{margin:4px 0 0;font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
 .ok{margin:0;font-size:13px;color:var(--good)}
-/* Boutiques : sélection de vraies pièces, envies, essayage dans la cabine */
-.shop-head{display:flex;flex-direction:column;gap:6px;padding:16px;background:var(--studio)}
-.sh-name{margin:0;font-family:var(--font-display);font-weight:500;font-size:26px;line-height:1.05;letter-spacing:.04em;text-transform:uppercase;font-variation-settings:"opsz" 40}
-.sh-line{margin:0;font-size:13.5px;color:var(--ink-2)}
-.sh-site{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-underline-offset:3px}
-.sh-site .i{width:14px;height:14px}
-.shop-tools{display:flex;flex-direction:column;gap:12px}
-.shop-card .ic-cap{gap:4px}
-.sc-shop{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
-.sc-price{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:2px}
-.approx{font-weight:500;color:var(--ink-3);margin-right:4px;font-size:.85em;letter-spacing:.02em}
-.wish-dot{position:absolute;top:6px;right:6px;width:26px;height:26px;display:grid;place-items:center;background:var(--paper);color:var(--ink)}
-.wish-dot .i{width:14px;height:14px}
-.wish-dot .fillable,.btn.on .fillable,.btn[aria-pressed="true"] .fillable{fill:currentColor}
-.shop-note{margin:0;font-size:11.5px;line-height:1.55;color:var(--ink-3)}
-.wish-sum{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+/* Boutiques : catalogue en photos réelles, façon page de marque (rayons numérotés, vignettes, grande image, vue 1-2-3) */
+body.is-shop .wrap{max-width:1480px}
+#tab-shop{gap:0}
+.zs-top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;padding:6px 0 18px}
+.zs-brand{display:flex;flex-direction:column;gap:6px;min-width:0}
+.zs-title{margin:0;font-family:var(--font-display);font-weight:500;font-size:34px;line-height:1;letter-spacing:.04em;text-transform:uppercase;font-variation-settings:"opsz" 40}
+.zs-sub{margin:0;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.zs-tools{display:flex;align-items:flex-end;gap:20px;flex:1 1 260px;justify-content:flex-end}
+.zs-search{flex:1 1 180px;max-width:260px}
+.zs-search input{width:100%;border:0;border-bottom:1px solid var(--ink);background:transparent;padding:6px 0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-align:right;border-radius:0;outline:0;-webkit-appearance:none;appearance:none}
+.zs-search input::placeholder{color:var(--ink)}
+.zs-search input:focus{text-align:left}
+.zs-search input:focus::placeholder{color:var(--ink-3)}
+.zs-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;padding:6px 0;color:var(--ink)}
+.zs-link .i{width:15px;height:15px}
+.zs-count{display:inline-grid;place-items:center;min-width:18px;height:17px;padding:0 4px;border:1px solid var(--ink);font-size:10px;letter-spacing:0;line-height:1}
+.zs-layout{display:flex;flex-direction:column;gap:14px}
+.zs-nav{display:flex;flex-direction:column;gap:10px;min-width:0}
+.zs-cats{list-style:none;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:0 max(16px,env(safe-area-inset-left,0px)) 2px;display:flex;gap:18px;overflow-x:auto;scrollbar-width:none}
+.zs-cats::-webkit-scrollbar{display:none}
+.zs-cat{display:inline-flex;align-items:baseline;gap:8px;padding:6px 0;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:var(--ink-2)}
+.zs-num{font-size:10.5px;letter-spacing:.02em;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.zs-cat[aria-current="true"]{color:var(--ink);font-weight:700}
+.zs-cat[aria-current="true"] .zs-num{color:var(--ink)}
+.zs-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--rule);padding-top:8px}
+.zs-opt{padding:6px 0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+.zs-opt[aria-pressed="true"]{color:var(--ink);font-weight:700}
+.zs-filt{color:var(--ink)}
+.zs-vue{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.zs-vue .zs-opt{min-width:16px}
+.zs-filters{display:flex;flex-direction:column;gap:12px;padding:4px 0 6px}
+.zs-filters[data-closed]{display:none}
+.zs-fg{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px}
+.zs-k{margin:0;width:100%;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.zs-chip{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--ink);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
+.zs-chip i{width:12px;height:12px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.zs-main{display:flex;flex-direction:column;gap:18px;min-width:0}
+.zs-tiles{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.zs-tiles::-webkit-scrollbar{display:none}
+.zs-tile{flex:0 0 112px;display:flex;flex-direction:column;gap:7px;text-align:left}
+.zs-tile-m{position:relative;display:block;aspect-ratio:3/4;background:#F2F1EE;overflow:hidden}
+.zs-tile-l{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.zs-tile[aria-pressed="true"] .zs-tile-l{color:var(--ink);font-weight:700}
+.zs-tile[aria-pressed="true"] .zs-tile-m{outline:1px solid var(--ink);outline-offset:2px}
+.zimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;transition:opacity .25s}
+.zimg.contain{object-fit:contain;object-position:center;padding:10%;background:#F5F5F3}
+.zs-tile-m > img.garment,.zc-media > img.garment,.zp-shot > img.garment{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain}
+.zs-hero{position:relative;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));background:#E9E7E2;overflow:hidden}
+.zs-hero-b{display:block;width:100%;position:relative;aspect-ratio:4/5;max-height:78vh}
+.zs-hero .zimg{object-position:center 25%}
+.zs-hero figcaption{position:absolute;left:18px;bottom:18px;right:18px;display:flex;flex-direction:column;gap:6px;color:#fff;text-shadow:0 1px 18px rgba(0,0,0,.35);pointer-events:none}
+.zs-hk{margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.zs-ht{margin:0;font-family:var(--font-display);font-size:44px;line-height:1;font-weight:500;letter-spacing:.02em;text-transform:uppercase}
+.zs-hs{margin:0;font-size:13.5px;max-width:34ch}
+.zs-shophead{display:flex;flex-direction:column;gap:6px;padding:16px;background:var(--studio)}
+.zs-sh-n{margin:0;font-family:var(--font-display);font-weight:500;font-size:26px;line-height:1.05;letter-spacing:.04em;text-transform:uppercase}
+.zs-sh-l{margin:0;font-size:13.5px;color:var(--ink-2)}
+.zs-sh-a{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-underline-offset:3px}
+.zs-sh-a .i{width:14px;height:14px}
+.zs-count-l{margin:0;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.zs-grid{display:grid;gap:22px 4px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.zs-grid.v1{grid-template-columns:minmax(0,1fr)}
+.zs-grid.v3{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 3px}
+.zc{position:relative;display:flex;flex-direction:column;gap:8px;min-width:0}
+.zc-link{display:block;width:100%;text-align:left}
+.zc-media{position:relative;display:block;aspect-ratio:2/3;background:#F2F1EE;overflow:hidden}
+.zc-media .zimg.b{opacity:0}
+@media (hover:hover){.zc-link:hover .zc-media .zimg.b{opacity:1}.zc-link:hover .zc-media .zimg.a:not(:only-child){opacity:0}}
+.zc-wish{position:absolute;top:6px;right:6px;width:30px;height:30px;display:grid;place-items:center;color:var(--ink);background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.zc-wish .i{width:15px;height:15px}
+.zc-wish[aria-pressed="true"] .fillable{fill:currentColor}
+.zc-cap{display:flex;flex-direction:column;gap:3px;padding:0 4px;min-width:0}
+.zc-name{margin:0;font-size:11px;letter-spacing:.06em;text-transform:uppercase;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.zc-meta{margin:0;display:flex;justify-content:space-between;gap:8px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.zc-price{color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+.zs-grid.v3 .zc-meta span:first-child{display:none}
+.was{color:var(--ink-3);margin-right:6px;font-weight:400}
+.now{color:var(--bad)}
+.shop-note{margin:6px 0 0;font-size:11.5px;line-height:1.55;color:var(--ink-3)}
+.wish-sum{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:0 0 14px;margin-bottom:18px;border-bottom:1px solid var(--rule)}
 .ws-total{font-family:var(--font-display);font-size:26px;font-weight:500;line-height:1}
-.ws-total .approx{font-family:var(--font-body);font-size:12px}
-.sp-hero{--garment-line:var(--tile-ink);position:relative;height:min(34vh,290px);flex:none;background:var(--tile);margin:-18px calc(-1 * max(18px,env(safe-area-inset-right,0px))) 0 calc(-1 * max(18px,env(safe-area-inset-left,0px)));display:flex;align-items:center;justify-content:center;overflow:hidden}
-.sp-hero > img{height:86%;width:auto;max-width:86%;object-fit:contain}
-.sp-top{display:flex;flex-direction:column;gap:6px}
-.sp-name{margin:0;font-family:var(--font-display);font-weight:500;font-size:24px;line-height:1.15;font-variation-settings:"opsz" 30;text-wrap:balance}
-.sp-price{margin:0;font-size:16px;font-weight:600;font-variant-numeric:tabular-nums}
+#shop-root > .zs-grid{margin-bottom:18px}
+@media (min-width:900px){
+  .zs-top{padding:10px 0 26px}
+  .zs-title{font-size:40px}
+  .zs-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:36px;align-items:start}
+  .zs-nav{position:sticky;top:18px;gap:22px}
+  .zs-cats{flex-direction:column;gap:2px;margin:0;padding:0;overflow:visible}
+  .zs-cat{font-size:12.5px;padding:5px 0}
+  .zs-bar{flex-direction:column;align-items:flex-start;gap:14px;border:0;padding:0}
+  .zs-filt{display:none}
+  .zs-filters,.zs-filters[data-closed]{display:flex;gap:18px}
+  .zs-fg{flex-direction:column;align-items:flex-start;gap:2px}
+  .zs-opt{padding:3px 0}
+  .zs-tiles{margin:0;padding:0;gap:14px;overflow:visible;flex-wrap:wrap}
+  .zs-tile{flex:0 0 150px}
+  .zs-hero{margin:0}
+  .zs-hero-b{aspect-ratio:16/8;max-height:74vh}
+  .zs-hero figcaption{left:34px;bottom:30px}
+  .zs-ht{font-size:72px}
+  .zs-hs{font-size:15px}
+  .zs-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:30px 8px}
+  .zs-grid.v1{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .zs-grid.v3{grid-template-columns:repeat(6,minmax(0,1fr));gap:22px 6px}
+}
+/* Fiche produit : galerie de photos + infos ; large sur ordinateur */
+.sheet.is-zp{max-width:1100px}
+.zp{gap:18px}
+.zp-media{position:relative;margin:-18px calc(-1 * max(18px,env(safe-area-inset-right,0px))) 0 calc(-1 * max(18px,env(safe-area-inset-left,0px)))}
+.zp-gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;background:#F2F1EE;outline-offset:-3px}
+.zp-gal::-webkit-scrollbar{display:none}
+.zp-shot{position:relative;flex:0 0 100%;aspect-ratio:3/4;max-height:62vh;scroll-snap-align:start;overflow:hidden}
+.zp-n{position:absolute;right:12px;bottom:10px;margin:0;padding:3px 8px;background:rgba(255,255,255,.85);font-size:11px;letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.zp-info{display:flex;flex-direction:column;gap:18px}
+.zp-top{display:flex;flex-direction:column;gap:6px}
+.zp-name{margin:0;font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;line-height:1.35}
+.zp-price{margin:0;font-size:15px;font-variant-numeric:tabular-nums}
+@media (min-width:900px){
+  .sheet.is-zp{top:4vh;bottom:4vh;max-height:none}
+  .sheet.is-zp .sheet-body.zp{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:36px;align-items:start;padding-top:0}
+  .zp-media{margin:0 0 0 calc(-1 * max(18px,env(safe-area-inset-left,0px)))}
+  .zp-gal{flex-direction:column;overflow:visible;scroll-snap-type:none;gap:4px;background:none}
+  .zp-shot{flex:none;width:100%;max-height:none;background:#F2F1EE}
+  .zp-n{display:none}
+  .zp-info{position:sticky;top:18px;padding-top:24px}
+}
 .sp-facts{display:grid;grid-template-columns:max-content 1fr;gap:8px 16px;margin:0;font-size:13.5px}
 .sp-facts dt{font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding-top:2px}
 .sp-facts dd{margin:0;color:var(--ink-2)}
 .sp-actions{display:flex;flex-direction:column;gap:8px}
 a.btn{text-decoration:none}
 .sp-actions .btn .i,.try-btns .btn .i{width:18px;height:18px}
+.btn.on .fillable,.btn[aria-pressed="true"] .fillable{fill:currentColor}
 .sp-bought{align-self:center;border:0;text-decoration:underline;text-underline-offset:3px;min-height:42px;white-space:normal;text-align:center}
 .sp-own{display:flex;align-items:center;justify-content:center;gap:8px;margin:0;min-height:42px;font-size:12.5px;color:var(--good)}
 .sp-own .i{width:16px;height:16px}
-.try-card{display:flex;flex-direction:column;gap:10px;padding:16px;background:var(--studio)}
-.try-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+/* Essayage dans la cabine */
+.try-card{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px 14px;padding:14px;background:var(--studio)}
+.try-shot{position:relative;display:block;aspect-ratio:3/4;background:#F2F1EE;overflow:hidden;grid-row:span 1}
+.try-txt{display:flex;flex-direction:column;gap:8px;min-width:0}
+.try-card:not(:has(.try-shot)) .try-txt{grid-column:1 / -1}
+.try-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .try-shop{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
-.try-shop .approx{text-transform:none}
-.try-name{margin:0;font-family:var(--font-display);font-size:22px;line-height:1.15;font-weight:500;text-wrap:balance}
-.try-btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:4px}
+.try-name{margin:0;font-family:var(--font-display);font-size:20px;line-height:1.15;font-weight:500;text-wrap:balance}
+.try-btns{grid-column:1 / -1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .try-btns .btn.primary{grid-column:1 / -1}
 .try-btns .btn{padding:0 10px;min-width:0;overflow:hidden;text-overflow:ellipsis}
-
-.shop-intro{align-items:flex-end}
-.shop-intro .btn{gap:6px}
-.shop-intro .btn .i{width:15px;height:15px}
-.shop-intro .btn.on .fillable{fill:currentColor}
-@media (max-width:370px){.tabbtn{font-size:10px}}
+/* Photos de boutique dans la garde-robe et le look */
+.ic-vis > img.ph.shot,.pc-vis > img.ph.shot,.thumb > img.ph.shot,.cell > img.ph.shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.ic-vis > img.ph.shot.contain,.pc-vis > img.ph.shot.contain,.cell > img.ph.shot.contain{object-fit:contain;padding:8%;background:#F5F5F3}
+.thumb{position:relative}
+.cell{position:relative;overflow:hidden}
+.ic-vis.shot .zimg{object-position:center 20%}
+/* Tendances : les couleurs expliquées */
+.tr-what{display:flex;flex-direction:column;gap:8px;padding:16px;background:var(--studio)}
+.tr-what-t{margin:0;font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.tr-what p{margin:0;font-size:13.5px;line-height:1.55;color:var(--ink-2)}
+.tr-what .label-tag{vertical-align:1px;padding:4px 6px;font-size:10px}
+.tr-sub{margin:0;font-size:13.5px;line-height:1.55;color:var(--ink-2);max-width:52ch}
+.tr-key{display:flex;align-items:center;gap:8px;margin:0;font-size:12.5px;color:var(--ink-2)}
+.tr-key .tr-have{position:static;flex:none;box-shadow:inset 0 0 0 1px var(--rule-2)}
+button.tr-col{padding:0;cursor:pointer}
+button.tr-col:active .dot{opacity:.85}
+.tc-band{display:flex;align-items:flex-end;height:120px;padding:14px;background:var(--c);margin:-18px calc(-1 * max(18px,env(safe-area-inset-right,0px))) 0 calc(-1 * max(18px,env(safe-area-inset-left,0px)))}
+.tc-band span{padding:4px 8px;background:rgba(255,255,255,.9);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.tc-why{margin:0;font-size:14px;line-height:1.6;color:var(--ink-2)}
+.tc-mates{display:flex;flex-wrap:wrap;gap:8px}
+.tc-mate{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--rule-2);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
+.tc-mate i{width:14px;height:14px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+@media (max-width:370px){.tabbtn{font-size:10px}.zs-tools{gap:14px}}
 @media (max-width:360px){.hcard{grid-template-columns:38px 1fr}.viewseg button{padding:0 9px}.ref-result{grid-template-columns:80px 1fr}.tr-colors{grid-template-columns:repeat(3,minmax(0,1fr))}.pc{flex-basis:128px}}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -634,8 +758,7 @@ a.btn{text-decoration:none}
   </section>
 
   <section id="tab-shop" class="tab" aria-labelledby="t-shop" hidden>
-    <div class="intro row shop-intro" id="shop-intro"><div><p class="eyebrow">Sélection de vraies pièces</p><h1 class="display" id="t-shop">Bou<em>tiques</em></h1></div></div>
-    <div id="shop-body" class="tab" style="gap:22px"></div>
+    <div id="shop-root"><h1 class="zs-title" id="t-shop">Boutiques</h1></div>
   </section>
 
   <section id="tab-body" class="tab" aria-labelledby="t-body" hidden>
@@ -664,7 +787,7 @@ a.btn{text-decoration:none}
 
   <section id="tab-settings" class="tab" aria-labelledby="t-set" hidden>
     <div class="intro">
-      <p class="eyebrow">Version 8</p>
+      <p class="eyebrow">Version 9</p>
       <h1 class="display" id="t-set"><em>Réglages</em></h1>
     </div>
     <div id="settings" class="tab" style="gap:14px"></div>
@@ -761,10 +884,11 @@ const HAIRS = [["aucun", "Sans"], ["courts", "Courts"], ["longs", "Longs"], ["ch
 const HAIR_COLORS = [["Noir", "#1D1A19"], ["Brun", "#3A2A20"], ["Châtain", "#6A4A2E"], ["Blond", "#C6A469"], ["Roux", "#9A4822"], ["Gris", "#A7A7A4"]];
 const BODY_DEFAULT = {sex: null, height: 175, weight: 70, build: 0, shoulders: 0, hips: 0, skin: "#D7DBE1", hair: "aucun", hairColor: "#3A2A20"};
 
-/* ---------------- Boutiques : vraies pièces, prix relevés sur les sites des marques ---------------- */
-/* link : « fiche » = page du produit, « rayon » = rayon de la boutique (modèles renouvelés souvent), « recherche » = recherche du site sur ce modèle.
-   approx : prix indicatif (page produit non consultée). Les coloris servent à l’essayage sur le mannequin. */
-const SHOP_DATE = "2026-10-26";
+/* ---------------- Boutiques : vraies pièces, vraies photos ---------------- */
+/* Prix et photos relevés sur les sites des marques. Les photos restent hébergées chez les marques (elles ne sont pas copiées dans l’appli).
+   colors : coloris montré par défaut ; alt : autres coloris photographiés ; photos : vues partagées ajoutées après la photo du coloris.
+   fit "contain" : photo produit sur fond clair (chaussures), à montrer en entier. */
+const SHOP_DATE = "2026-10-30";
 const SHOPS = [
   {key: "uniqlo", name: "Uniqlo", line: "Basiques japonais, mailles fines et doudounes légères.", site: "https://www.uniqlo.com/fr/fr/"},
   {key: "zara", name: "Zara", line: "Les coupes du moment, renouvelées chaque semaine.", site: "https://www.zara.com/fr/fr/"},
@@ -775,55 +899,104 @@ const SHOPS = [
   {key: "adidas", name: "Adidas", line: "Les classiques à trois bandes.", site: "https://www.adidas.fr/"},
   {key: "carhartt", name: "Carhartt", line: "Vêtements de travail en coutil, faits pour durer.", site: "https://www.carhartt.com/fr-fr"},
 ];
-const UQ = "https://www.uniqlo.com/fr/fr/products/";
-const ZR = "https://www.zara.com/fr/fr/";
+const IMG = {
+  uq: (c, k) => `https://image.uniqlo.com/UQ/ST3/eu/imagesgoods/${c}/item/eugoods_${k}_${c}_3x4.jpg?width=750`,
+  uqs: (c, n) => `https://image.uniqlo.com/UQ/ST3/eu/imagesgoods/${c}/sub/eugoods_${c}_sub${n}_3x4.jpg?width=750`,
+  zr: (p) => `https://static.zara.net/assets/public/${p}?w=750`,
+  dc: (p) => `https://contents.mediadecathlon.com/${p}/picture.jpg?format=auto&quality=80&f=800x800`,
+  nk: (p) => `https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/${p}`,
+  ad: (p) => `https://assets.adidas.com/images/w_750,f_auto,q_auto/${p}`,
+  dm: (p) => `https://cdn.media.amplience.net/i/drmartens/${p}?w=750&fmt=auto`,
+  ch: (p) => `https://imgcdn.carhartt.com/is/image/Carhartt/${p}?wid=800`,
+  lv: (p) => `https://lsco.scene7.com/is/image/lsco/${p}?fmt=jpeg&qlt=80&wid=1400`,
+};
+const UQP = "https://www.uniqlo.com/fr/fr/products/";
+const ZRP = "https://www.zara.com/fr/fr/";
 const CATALOG = [
   /* Uniqlo */
-  {id: "uq-supima", shop: "uniqlo", sex: "h", name: "T-shirt 100 % coton Supima", price: 19.9, url: UQ + "E455365-000/00", link: "fiche", cat: "haut", sub: "t-shirt", colors: ["blanc"], alt: ["noir", "marine", "gris"], material: "coton Supima", styles: ["casual", "minimaliste", "streetwear"], warmth: 1},
-  {id: "uq-merino", shop: "uniqlo", sex: "h", name: "Pull 100 % laine mérinos", price: 39.9, url: UQ + "E450535-000/00", link: "fiche", cat: "haut", sub: "pull", colors: ["kaki"], alt: ["marine", "gris", "bordeaux"], material: "laine mérinos", styles: ["smartcasual", "classique", "minimaliste"], warmth: 2},
-  {id: "uq-cardigan", shop: "uniqlo", sex: "h", name: "Cardigan col V 100 % laine mérinos", price: 49.9, url: UQ + "E450540-000/00", link: "fiche", cat: "haut", sub: "gilet", colors: ["noir"], alt: ["marine", "beige"], material: "laine mérinos", styles: ["classique", "smartcasual", "minimaliste"], warmth: 2},
-  {id: "uq-cashmere", shop: "uniqlo", sex: "h", name: "Pull 100 % cachemire", price: 99.9, url: UQ + "E450543-000/00", link: "fiche", cat: "haut", sub: "pull", colors: ["marine"], alt: ["camel", "gris", "blanc"], material: "cachemire", styles: ["classique", "chic", "minimaliste"], warmth: 2},
-  {id: "uq-fairisle", shop: "uniqlo", sex: "h", name: "Pull 100 % laine Fair Isle", price: 49.9, url: UQ + "E486087-000/00", link: "fiche", cat: "haut", sub: "pull", colors: ["imprime", "noir"], material: "laine", styles: ["vintage", "casual", "classique"], warmth: 3},
-  {id: "uq-flannel", shop: "uniqlo", sex: "h", name: "Chemise en flanelle à carreaux", price: 39.9, url: UQ + "E486615-000/00", link: "fiche", cat: "haut", sub: "chemise", colors: ["imprime", "bleu"], material: "coton flanelle", styles: ["casual", "vintage", "rock"], warmth: 2},
-  {id: "uq-oxford-f", shop: "uniqlo", sex: "f", name: "Chemise Oxford coupe boxy", price: 34.9, url: UQ + "E484928-000/00", link: "fiche", cat: "haut", sub: "chemise", colors: ["blanc"], alt: ["bleu-clair"], material: "coton", styles: ["smartcasual", "classique", "minimaliste"], warmth: 1},
-  {id: "uq-linen-f", shop: "uniqlo", sex: "f", name: "Chemise 100 % lin premium", price: 49.9, url: UQ + "E475647-000/00", link: "fiche", cat: "haut", sub: "chemise", colors: ["beige"], alt: ["blanc"], material: "lin", styles: ["minimaliste", "casual", "boheme"], warmth: 1},
-  {id: "uq-robe-f", shop: "uniqlo", sex: "f", name: "Robe en maille doublée sans manches", price: 39.9, url: UQ + "E488186-000/00", link: "fiche", cat: "piece", sub: "robe", colors: ["marron"], alt: ["noir"], material: "maille", styles: ["chic", "minimaliste", "smartcasual"], warmth: 2},
-  {id: "uq-puffer-f", shop: "uniqlo", sex: "f", name: "Doudoune PUFFERTECH", price: 69.9, url: UQ + "E487408-000/00", link: "fiche", cat: "veste", sub: "doudoune", colors: ["noir"], alt: ["beige", "marine"], material: "polyester", styles: ["casual", "minimaliste", "sportswear"], warmth: 3},
-  {id: "uq-bag", shop: "uniqlo", sex: "u", name: "Mini-sac rond à bandoulière", price: 14.9, url: UQ + "E481610-000/00", link: "fiche", cat: "accessoire", sub: "sac", colors: ["noir"], alt: ["kaki", "beige"], material: "toile de nylon", styles: ["casual", "minimaliste", "streetwear"], warmth: 1},
-  {id: "uq-beanie", shop: "uniqlo", sex: "u", name: "Bonnet HEATTECH côtelé", price: 14.9, url: UQ + "E486191-000/00", link: "fiche", cat: "accessoire", sub: "bonnet", colors: ["noir"], alt: ["gris", "bordeaux"], material: "maille", styles: ["casual", "minimaliste", "streetwear"], warmth: 3},
-  /* Zara : les modèles changent vite, le lien ouvre le rayon */
-  {id: "zr-blazer", shop: "zara", sex: "f", name: "Blazer à épaulettes", price: 65.95, url: ZR + "femme-blazers-l1055.html", link: "rayon", cat: "veste", sub: "blazer", colors: ["noir"], alt: ["beige", "marine"], material: "tissu fluide", styles: ["chic", "business", "smartcasual"], warmth: 2},
-  {id: "zr-pull", shop: "zara", sex: "f", name: "Pull oversize 100 % laine", price: 59.95, url: ZR + "femme-maille-pulls-l1165.html", link: "rayon", cat: "haut", sub: "pull", colors: ["beige"], alt: ["gris", "noir"], material: "laine", styles: ["casual", "minimaliste", "smartcasual"], warmth: 3},
-  {id: "zr-trench", shop: "zara", sex: "f", name: "Trench à ceinture water repellent", price: 89.95, url: ZR + "femme-vetements-d-exterieur-trench-l1202.html", link: "rayon", cat: "veste", sub: "trench", colors: ["beige"], alt: ["noir"], material: "coton mélangé", styles: ["classique", "chic", "smartcasual"], warmth: 2, rainOk: true},
-  {id: "zr-coat", shop: "zara", sex: "h", name: "Manteau regular fit avec laine", price: 99.95, url: ZR + "homme-vetements-d-exterieur-l715.html", link: "rayon", cat: "veste", sub: "manteau", colors: ["camel"], alt: ["noir", "gris"], material: "laine mélangée", styles: ["classique", "smartcasual", "business"], warmth: 3},
-  {id: "zr-croise", shop: "zara", sex: "h", name: "Manteau croisé en mélange de laine", price: 149, url: ZR + "homme-vetements-d-exterieur-l715.html", link: "rayon", cat: "veste", sub: "manteau", colors: ["marine"], alt: ["noir", "gris"], material: "laine mélangée", styles: ["business", "classique", "chic"], warmth: 3},
-  {id: "zr-parka", shop: "zara", sex: "h", name: "Parka technique à capuche water repellent", price: 99.95, url: ZR + "homme-vetements-d-exterieur-l715.html", link: "rayon", cat: "veste", sub: "imperméable", colors: ["kaki"], alt: ["noir"], material: "polyester", styles: ["casual", "streetwear", "sportswear"], warmth: 2, rainOk: true},
-  {id: "zr-suede", shop: "zara", sex: "h", name: "Manteau relaxed fit en croûte de cuir", price: 239, url: ZR + "homme-vetements-d-exterieur-l715.html", link: "rayon", cat: "veste", sub: "manteau", colors: ["marron"], alt: ["noir"], material: "croûte de cuir", styles: ["rock", "vintage", "smartcasual"], warmth: 2},
+  {id: "uq-supima", shop: "uniqlo", sex: "h", name: "T-shirt 100 % coton Supima", price: 19.9, url: UQP + "E455365-000/00", cat: "haut", sub: "t-shirt", colors: ["blanc"], material: "coton Supima", styles: ["casual", "minimaliste", "streetwear"], warmth: 1,
+    photos: [IMG.uq(455365, "00")], alt: {noir: [IMG.uq(455365, "09")], marine: [IMG.uq(455365, "69"), IMG.uqs(455365, 3)]}, more: [IMG.uqs(455365, 6)]},
+  {id: "uq-merino", shop: "uniqlo", sex: "h", name: "Pull 100 % laine mérinos", price: 39.9, url: UQP + "E450535-000/00", cat: "haut", sub: "pull", colors: ["vert"], material: "laine mérinos", styles: ["smartcasual", "classique", "minimaliste"], warmth: 2,
+    photos: [IMG.uq(450535, "57")], alt: {marine: [IMG.uq(450535, "69")], bordeaux: [IMG.uq(450535, "18")]}, more: [IMG.uqs(450535, 3)]},
+  {id: "uq-cardigan", shop: "uniqlo", sex: "h", name: "Cardigan col V 100 % laine mérinos", price: 49.9, url: UQP + "E450540-000/00", cat: "haut", sub: "gilet", colors: ["noir"], material: "laine mérinos", styles: ["classique", "smartcasual", "minimaliste"], warmth: 2,
+    photos: [IMG.uq(450540, "09")], alt: {marine: [IMG.uq(450540, "69"), IMG.uqs(450540, 3)]}, more: [IMG.uqs(450540, 6), IMG.uqs(450540, 7)]},
+  {id: "uq-cashmere", shop: "uniqlo", sex: "h", name: "Pull 100 % cachemire", price: 99.9, url: UQP + "E450543-000/00", cat: "haut", sub: "pull", colors: ["marine"], material: "cachemire", styles: ["classique", "chic", "minimaliste"], warmth: 2,
+    photos: [IMG.uq(450543, "69"), IMG.uqs(450543, 3)], alt: {gris: [IMG.uq(450543, "08")], beige: [IMG.uq(450543, "32")], blanc: [IMG.uq(450543, "01")]}},
+  {id: "uq-fairisle", shop: "uniqlo", sex: "h", name: "Pull 100 % laine Fair Isle", price: 49.9, url: UQP + "E486087-000/00", cat: "haut", sub: "pull", colors: ["imprime", "noir"], material: "laine", styles: ["vintage", "casual", "classique"], warmth: 3,
+    photos: [IMG.uq(486087, "09"), IMG.uqs(486087, 3), IMG.uqs(486087, 6), IMG.uqs(486087, 7)]},
+  {id: "uq-flannel", shop: "uniqlo", sex: "h", name: "Chemise en flanelle à carreaux", price: 39.9, url: UQP + "E486615-000/00", cat: "haut", sub: "chemise", colors: ["imprime", "bleu"], material: "coton flanelle", styles: ["casual", "vintage", "rock"], warmth: 2,
+    photos: [IMG.uq(486615, "65"), IMG.uqs(486615, 3), IMG.uqs(486615, 6), IMG.uqs(486615, 7)]},
+  {id: "uq-oxford-f", shop: "uniqlo", sex: "f", name: "Chemise Oxford coupe boxy", price: 34.9, url: UQP + "E484928-000/00", cat: "haut", sub: "chemise", colors: ["blanc"], material: "coton", styles: ["smartcasual", "classique", "minimaliste"], warmth: 1,
+    photos: [IMG.uq(484928, "00"), IMG.uqs(484928, 3), IMG.uqs(484928, 6)]},
+  {id: "uq-linen-f", shop: "uniqlo", sex: "f", name: "Chemise 100 % lin premium", price: 49.9, url: UQP + "E475647-000/00", cat: "haut", sub: "chemise", colors: ["marron"], material: "lin", styles: ["minimaliste", "casual", "boheme"], warmth: 1,
+    photos: [IMG.uq(475647, "37")], alt: {blanc: [IMG.uq(475647, "00")]}, more: [IMG.uqs(475647, 3), IMG.uqs(475647, 4)]},
+  {id: "uq-robe-f", shop: "uniqlo", sex: "f", name: "Robe en maille doublée sans manches", price: 39.9, url: UQP + "E488186-000/00", cat: "piece", sub: "robe", colors: ["marron"], material: "maille", styles: ["chic", "minimaliste", "smartcasual"], warmth: 2,
+    photos: [IMG.uq(488186, "39")], alt: {noir: [IMG.uq(488186, "09")]}, more: [IMG.uqs(488186, 3), IMG.uqs(488186, 4), IMG.uqs(488186, 5)]},
+  {id: "uq-puffer-f", shop: "uniqlo", sex: "f", name: "Doudoune PUFFERTECH", price: 69.9, url: UQP + "E487408-000/00", cat: "veste", sub: "doudoune", colors: ["noir"], material: "polyester", styles: ["casual", "minimaliste", "sportswear"], warmth: 3,
+    photos: [IMG.uq(487408, "09")], alt: {blanc: [IMG.uq(487408, "00")]}, more: [IMG.uqs(487408, 3), IMG.uqs(487408, 4)]},
+  {id: "uq-bag", shop: "uniqlo", sex: "u", name: "Mini-sac rond à bandoulière", price: 14.9, url: UQP + "E481610-000/00", cat: "accessoire", sub: "sac", colors: ["bordeaux"], material: "toile de nylon", styles: ["casual", "minimaliste", "streetwear"], warmth: 1,
+    photos: [IMG.uqs(481610, 4), IMG.uqs(481610, 3), IMG.uqs(481610, 5), IMG.uqs(481610, 6)]},
+  {id: "uq-beanie", shop: "uniqlo", sex: "u", name: "Bonnet HEATTECH côtelé", price: 14.9, url: UQP + "E486191-000/00", cat: "accessoire", sub: "bonnet", colors: ["marron"], material: "maille", styles: ["casual", "minimaliste", "streetwear"], warmth: 3,
+    photos: [IMG.uqs(486191, 3), IMG.uqs(486191, 6)]},
+  /* Zara */
+  {id: "zr-blazer", shop: "zara", sex: "f", name: "Blazer oversize à épaulettes", price: 45.95, url: ZRP + "blazer-oversize-a-epaulettes-p01255734.html", cat: "veste", sub: "blazer", colors: ["noir"], material: "tissu fluide", styles: ["chic", "business", "smartcasual"], warmth: 2,
+    photos: [IMG.zr("f6bc/fe01/de3f41989f09/b6070c4c8776/01255734800-p/01255734800-p.jpg"), IMG.zr("c257/fbdc/8ea24345b930/5c509cd298b7/01255734800-a1/01255734800-a1.jpg"), IMG.zr("c1bd/8076/3f6b4fa681c0/fd4c1cde06a2/01255734800-e1/01255734800-e1.jpg")]},
+  {id: "zr-pull", shop: "zara", sex: "f", name: "Pull oversize 100 % laine", price: 59.95, url: ZRP + "pull-oversize-100-laine-p03644104.html", cat: "haut", sub: "pull", colors: ["marine"], material: "laine", styles: ["casual", "minimaliste", "smartcasual"], warmth: 3,
+    photos: [IMG.zr("ef8a/4ad9/4ab64ddd831f/0fd9cc4691e8/03644104401-p/03644104401-p.jpg"), IMG.zr("a719/0c9b/25754f238824/bb2bca507368/03644104401-a1/03644104401-a1.jpg"), IMG.zr("1489/d046/c7904875bf28/b3ac81a17e50/03644104401-e1/03644104401-e1.jpg")]},
+  {id: "zr-trench", shop: "zara", sex: "f", name: "Trench à ceinture water repellent", price: 89.95, url: ZRP + "trench-a-ceinture-water-repellent-p03046317.html", cat: "veste", sub: "trench", colors: ["beige"], material: "coton mélangé", styles: ["classique", "chic", "smartcasual"], warmth: 2, rainOk: true,
+    photos: [IMG.zr("b3c8/5392/07d645a5b645/3ea57e19b78e/03046317730-p/03046317730-p.jpg"), IMG.zr("7c64/e67b/9b7e4f1cad48/2913336d7d19/03046317730-a1/03046317730-a1.jpg"), IMG.zr("0620/b274/28234651a22b/404f10eba4b1/03046317730-e1/03046317730-e1.jpg")]},
+  {id: "zr-coat", shop: "zara", sex: "h", name: "Manteau regular fit avec laine", price: 99.95, url: ZRP + "manteau-regular-fit-avec-laine-p02949001.html", cat: "veste", sub: "manteau", colors: ["marine"], material: "laine mélangée", styles: ["classique", "smartcasual", "business"], warmth: 3,
+    photos: [IMG.zr("bd0e/5e8b/20664aca9961/c99b3ea1445b/02949001401-p/02949001401-p.jpg"), IMG.zr("7ade/91b5/416946ad8e84/f3101460e776/02949001401-a1/02949001401-a1.jpg"), IMG.zr("c935/dc0a/2eb440a5bb19/0e81a2ba95ce/02949001401-e1/02949001401-e1.jpg")]},
+  {id: "zr-chevrons", shop: "zara", sex: "h", name: "Manteau croisé 100 % laine à chevrons", price: 149, url: ZRP + "manteau-a-boutonnage-croise-100-laine-a-chevrons-p06441666.html", cat: "veste", sub: "manteau", colors: ["gris"], material: "laine", styles: ["business", "classique", "chic"], warmth: 3,
+    photos: [IMG.zr("e11b/aa61/ac4642b3a25e/6cb4ea4d0960/06441666802-p/06441666802-p.jpg"), IMG.zr("6280/0d95/9e3f4bbe9851/c003c2a86445/06441666802-a1/06441666802-a1.jpg"), IMG.zr("a8d8/82c9/886b465dae65/1585f0ca34a1/06441666802-e1/06441666802-e1.jpg")]},
+  {id: "zr-parka", shop: "zara", sex: "h", name: "Parka technique à capuche water repellent", price: 99.95, url: ZRP + "parka-technique-capuche-water-repellent-p08281021.html", cat: "veste", sub: "imperméable", colors: ["marine"], material: "polyester", styles: ["casual", "streetwear", "sportswear"], warmth: 2, rainOk: true,
+    photos: [IMG.zr("a913/6cbe/793f488d8a4d/d4b49736e9db/08281021401-p/08281021401-p.jpg"), IMG.zr("7492/783e/b29e40e486db/701c5107d348/08281021401-a1/08281021401-a1.jpg"), IMG.zr("ce66/069d/0bea4d2dbcd7/5199ff76e579/08281021401-e1/08281021401-e1.jpg")]},
+  {id: "zr-suede", shop: "zara", sex: "h", name: "Manteau relaxed fit en croûte de cuir", price: 239, url: ZRP + "manteau-relaxed-fit-en-cuir-suede-p08281432.html", cat: "veste", sub: "manteau", colors: ["marron"], material: "croûte de cuir", styles: ["rock", "vintage", "smartcasual"], warmth: 2,
+    photos: [IMG.zr("58ba/834b/a3f1421eb707/8fe7271c2c20/08281432700-p/08281432700-p.jpg"), IMG.zr("ddaf/4b91/c1134b4e8388/d5924719a869/08281432700-a1/08281432700-a1.jpg"), IMG.zr("3324/89ad/890749ee93d7/b990188c8c89/08281432700-e1/08281432700-e1.jpg")]},
   /* Decathlon */
-  {id: "dc-mt100", shop: "decathlon", sex: "h", name: "Doudoune de trek en duvet recyclé MT100", price: 59.99, url: "https://www.decathlon.fr/p/doudoune-de-trek-avec-90-percent-duvet-recycle-3degc-homme-mt100-noir/356260/c1m8901459", link: "fiche", cat: "veste", sub: "doudoune", colors: ["noir"], material: "duvet recyclé", styles: ["sportswear", "casual"], warmth: 3},
-  {id: "dc-hoodie", shop: "decathlon", sex: "h", name: "Sweat à capuche oversize Elementals", price: 29.99, url: "https://www.decathlon.fr/p/sweat-a-capuche-oversize-homme-elementals-vert-fonce/387941/c328m9038183", link: "fiche", cat: "haut", sub: "hoodie", colors: ["vert"], material: "coton", styles: ["sportswear", "streetwear", "casual"], warmth: 2},
-  {id: "dc-parka-f", shop: "decathlon", sex: "f", name: "Parka de randonnée imperméable NH500", price: 49.99, url: "https://www.decathlon.fr/p/parka-de-randonnee-10degc-impermeable-femme-nh500-vert/340342/c377c241m8928779", link: "fiche", cat: "veste", sub: "imperméable", colors: ["kaki"], material: "polyester", styles: ["sportswear", "casual"], warmth: 3, rainOk: true},
-  {id: "dc-yoga-f", shop: "decathlon", sex: "f", name: "Pantalon de yoga taille haute en coton doux", price: 19.99, url: "https://www.decathlon.fr/p/pantalon-de-yoga-coton-doux-taille-haute-femme-noir-ultra/353135/c378m8872652", link: "fiche", cat: "bas", sub: "legging", colors: ["noir"], material: "coton", styles: ["sportswear", "casual"], warmth: 1},
+  {id: "dc-mt100", shop: "decathlon", sex: "h", name: "Doudoune de trek en duvet recyclé MT100", price: 59.99, url: "https://www.decathlon.fr/p/doudoune-de-trek-avec-90-percent-duvet-recycle-3degc-homme-mt100-noir/356260/c1m8901459", cat: "veste", sub: "doudoune", colors: ["noir"], material: "duvet recyclé", styles: ["sportswear", "casual"], warmth: 3,
+    photos: [IMG.dc("p3177312/k$de4a29b90a87a75c0397d884dc6697ff"), IMG.dc("p3177329/k$01a220d238d2f5ea8b596c0738e30efe"), IMG.dc("p3177300/k$e758514009e827b2af09b421c9dad69e")]},
+  {id: "dc-hoodie", shop: "decathlon", sex: "h", name: "Sweat à capuche oversize Elementals", price: 29.99, was: 44.99, url: "https://www.decathlon.fr/p/sweat-a-capuche-oversize-homme-elementals-vert-fonce/387941/c328m9038183", cat: "haut", sub: "hoodie", colors: ["vert"], material: "coton", styles: ["sportswear", "streetwear", "casual"], warmth: 2,
+    photos: [IMG.dc("p3188079/k$87c38ece648c159a521f7a08923c85f1"), IMG.dc("p3188117/k$ec5cfeec3a27ad5aafeb70872850dc32"), IMG.dc("p3188021/k$77fe903c11dccf5ad360e5a7db473de2")]},
+  {id: "dc-yoga-f", shop: "decathlon", sex: "f", name: "Pantalon de yoga taille haute en coton doux", price: 19.99, url: "https://www.decathlon.fr/p/pantalon-de-yoga-coton-doux-taille-haute-femme-noir-ultra/353135/c378m8872652", cat: "bas", sub: "legging", colors: ["noir"], material: "coton", styles: ["sportswear", "casual"], warmth: 1,
+    photos: [IMG.dc("p2834025/k$82c02c1838221c29ced3442a6e20cdc6")]},
   /* Levi’s */
-  {id: "lv-501", shop: "levis", sex: "h", name: "Jean 501® Original", price: 110, url: "https://www.levi.com/FR/fr_FR/vetements/vetements-homme-levis/jean-levis-501-original/p/005010114", link: "fiche", cat: "bas", sub: "jean", colors: ["denim"], material: "denim 100 % coton", styles: ["casual", "streetwear", "vintage", "rock"], warmth: 2},
-  {id: "lv-trucker", shop: "levis", sex: "h", name: "Veste Trucker", price: 130, url: "https://www.levi.com/FR/fr_FR/vtements/vtements-homme-levis/vestes-en-jeans-sherpas/veste-trucker/p/723340791", link: "fiche", cat: "veste", sub: "veste en jean", colors: ["denim"], material: "denim 100 % coton", styles: ["casual", "vintage", "rock", "streetwear"], warmth: 2},
-  {id: "lv-ribcage", shop: "levis", sex: "f", name: "Jean Ribcage droit", price: 130, url: "https://www.levi.com/FR/fr_FR/vetements/femme/jeans/droits/jean-ribcage-longueur-normale/p/790780044", link: "fiche", cat: "bas", sub: "jean", colors: ["denim"], material: "denim", styles: ["casual", "vintage", "streetwear"], warmth: 2},
+  {id: "lv-501", shop: "levis", sex: "h", name: "Jean 501® Original", price: 110, url: "https://www.levi.com/FR/fr_FR/vetements/vetements-homme-levis/jean-levis-501-original/p/005010114", cat: "bas", sub: "jean", colors: ["denim"], material: "denim 100 % coton", styles: ["casual", "streetwear", "vintage", "rock"], warmth: 2,
+    photos: [IMG.lv("005010114-front-pdp"), IMG.lv("005010114-dynamic1-pdp"), IMG.lv("005010114-back-pdp"), IMG.lv("005010114-detail1-pdp")]},
+  {id: "lv-trucker", shop: "levis", sex: "h", name: "Veste Trucker", price: 130, url: "https://www.levi.com/FR/fr_FR/vtements/vtements-homme-levis/vestes-en-jeans-sherpas/veste-trucker/p/723340791", cat: "veste", sub: "veste en jean", colors: ["denim"], material: "denim 100 % coton", styles: ["casual", "vintage", "rock", "streetwear"], warmth: 2,
+    photos: [IMG.lv("723340791-front-pdp"), IMG.lv("723340791-detail1-pdp"), IMG.lv("723340791-back-pdp")]},
+  {id: "lv-ribcage", shop: "levis", sex: "f", name: "Jean Ribcage droit", price: 130, url: "https://www.levi.com/FR/fr_FR/vetements/femme/jeans/droits/jean-ribcage-longueur-normale/p/790780044", cat: "bas", sub: "jean", colors: ["denim"], material: "denim", styles: ["casual", "vintage", "streetwear"], warmth: 2,
+    photos: [IMG.lv("790780044-front-pdp"), IMG.lv("790780044-detail1-pdp"), IMG.lv("790780044-back-pdp")]},
   /* Dr. Martens */
-  {id: "dm-1460", shop: "drmartens", sex: "u", name: "Boots 1460 en cuir Smooth", price: 200, url: "https://www.drmartens.com/fr/fr/boots-1460-en-cuir-smooth-a-lacets-noir/p/11822006", link: "fiche", cat: "chaussures", sub: "boots", colors: ["noir"], alt: ["bordeaux"], material: "cuir", styles: ["rock", "vintage", "casual", "streetwear"], warmth: 3, rainOk: true},
-  {id: "dm-1461", shop: "drmartens", sex: "u", name: "Chaussures 1461 en cuir Smooth", price: 180, approx: true, url: "https://www.drmartens.com/fr/fr/chaussures-1461-en-cuir-smooth-noir/p/11837002", link: "fiche", cat: "chaussures", sub: "derbies", colors: ["noir"], material: "cuir", styles: ["rock", "smartcasual", "vintage", "classique"], warmth: 2},
-  /* Nike et Adidas : le lien ouvre la recherche du site sur le modèle */
-  {id: "nk-af1", shop: "nike", sex: "u", name: "Air Force 1 ’07", price: 130, approx: true, url: "https://www.nike.com/fr/w?q=air%20force%201%2007", link: "recherche", cat: "chaussures", sub: "baskets", colors: ["blanc"], alt: ["noir"], material: "cuir", styles: ["casual", "streetwear", "sportswear"], warmth: 2},
-  {id: "nk-club", shop: "nike", sex: "u", name: "Sweat à capuche Club Fleece", price: 65, approx: true, url: "https://www.nike.com/fr/w?q=club%20fleece%20sweat%20a%20capuche", link: "recherche", cat: "haut", sub: "hoodie", colors: ["gris"], alt: ["noir", "marine"], material: "molleton de coton", styles: ["sportswear", "streetwear", "casual"], warmth: 2},
-  {id: "nk-tech", shop: "nike", sex: "h", name: "Pantalon de jogging Tech Fleece", price: 110, approx: true, url: "https://www.nike.com/fr/w?q=tech%20fleece%20pantalon", link: "recherche", cat: "bas", sub: "jogging", colors: ["noir"], alt: ["gris"], material: "molleton technique", styles: ["sportswear", "streetwear"], warmth: 2},
-  {id: "ad-samba", shop: "adidas", sex: "u", name: "Samba OG", price: 120, approx: true, url: "https://www.adidas.fr/search?q=samba%20og", link: "recherche", cat: "chaussures", sub: "baskets", colors: ["noir"], alt: ["blanc"], material: "cuir", styles: ["casual", "streetwear", "vintage"], warmth: 2},
-  {id: "ad-stan", shop: "adidas", sex: "u", name: "Stan Smith", price: 110, approx: true, url: "https://www.adidas.fr/search?q=stan%20smith", link: "recherche", cat: "chaussures", sub: "baskets", colors: ["blanc"], material: "cuir", styles: ["casual", "minimaliste", "smartcasual"], warmth: 2},
+  {id: "dm-1460", shop: "drmartens", sex: "u", name: "Boots 1460 en cuir Smooth", price: 200, url: "https://www.drmartens.com/fr/fr/boots-1460-en-cuir-smooth-a-lacets-noir/p/11822006", cat: "chaussures", sub: "boots", colors: ["noir"], material: "cuir", styles: ["rock", "vintage", "casual", "streetwear"], warmth: 3, rainOk: true, fit: "contain",
+    photos: [IMG.dm("NX_11822006.80"), IMG.dm("NX_11822006.81"), IMG.dm("NX_11822006.84"), IMG.dm("NX_11822006.82")]},
+  {id: "dm-1461", shop: "drmartens", sex: "u", name: "Chaussures 1461 en cuir Smooth", price: 159, url: "https://www.drmartens.com/fr/fr/chaussures-1461-en-cuir-smooth-noir/p/11837002", cat: "chaussures", sub: "derbies", colors: ["noir"], material: "cuir", styles: ["rock", "smartcasual", "vintage", "classique"], warmth: 2, fit: "contain",
+    photos: [IMG.dm("11837002.80"), IMG.dm("11837002.84"), IMG.dm("11837002.81"), IMG.dm("11837002.82")]},
+  /* Nike */
+  {id: "nk-af1", shop: "nike", sex: "u", name: "Air Force 1 ’07", price: 119.99, url: "https://www.nike.com/fr/t/chaussure-nike-air-force-1-07-pour-homme-n8juM1H2/CW2288-111", cat: "chaussures", sub: "baskets", colors: ["blanc"], material: "cuir", styles: ["casual", "streetwear", "sportswear"], warmth: 2, fit: "contain",
+    photos: [IMG.nk("b7d9211c-26e7-431a-ac24-b0540fb3c00f/AIR+FORCE+1+%2707.png")]},
+  {id: "nk-club", shop: "nike", sex: "h", name: "Sweat à capuche en fleece Nike Club", price: 59.99, url: "https://www.nike.com/fr/t/sweat-a-capuche-en-fleece-nike-club-pour-homme-3XHBj6KS/FN3859-010", cat: "haut", sub: "hoodie", colors: ["noir"], material: "molleton de coton", styles: ["sportswear", "streetwear", "casual"], warmth: 2,
+    photos: [IMG.nk("a55ead3e-1096-4ded-9af0-77dcce14d456/M+NK+CLUB+BB+PO+HOODIE.png"), IMG.nk("548f234f-b753-4d45-a7e1-e27d6141e52d/M+NK+CLUB+BB+PO+HOODIE.png"), IMG.nk("ab0dd7f1-50db-4cff-843d-73b8c06c0f3f/M+NK+CLUB+BB+PO+HOODIE.png")]},
+  {id: "nk-pant", shop: "nike", sex: "h", name: "Pantalon en fleece à ourlet ouvert Nike Club", price: 54.99, url: "https://www.nike.com/fr/t/pantalon-en-fleece-a-ourlet-ouvert-nike-club-pour-homme-k62luLev/FN3730-063", cat: "bas", sub: "jogging", colors: ["gris"], material: "molleton de coton", styles: ["sportswear", "streetwear"], warmth: 2,
+    photos: [IMG.nk("776612b7-8db3-4af2-ac84-cf3746538d3c/M+NK+CLUB+BB+OH+PANT.png"), IMG.nk("15b75b2c-3a55-4b23-937c-93ef0071e569/M+NK+CLUB+BB+OH+PANT.png")]},
+  /* Adidas */
+  {id: "ad-samba", shop: "adidas", sex: "u", name: "Samba OG", price: 120, url: "https://www.adidas.fr/chaussure-samba-og/B75807.html", cat: "chaussures", sub: "baskets", colors: ["noir"], material: "cuir", styles: ["casual", "streetwear", "vintage"], warmth: 2, fit: "contain",
+    photos: [IMG.ad("4c70105150234ac4b948a8bf01187e0c_9366/Chaussure_Samba_OG_Noir_B75807_01_standard.jpg"), IMG.ad("309a0c8f53dd45d3a3bea8bf0118aa6b_9366/Chaussure_Samba_OG_Noir_B75807_02_standard_hover.jpg"), IMG.ad("bf736a86d077446ab7e3a8bf0118f574_9366/Chaussure_Samba_OG_Noir_B75807_43_detail.jpg")]},
+  {id: "ad-stan", shop: "adidas", sex: "u", name: "Stan Smith", price: 110, url: "https://www.adidas.fr/chaussure-stan-smith/M20324.html", cat: "chaussures", sub: "baskets", colors: ["blanc"], material: "cuir", styles: ["casual", "minimaliste", "smartcasual"], warmth: 2, fit: "contain",
+    photos: [IMG.ad("69721f2e7c934d909168a80e00818569_9366/Chaussure_Stan_Smith_Blanc_M20324_01_standard.jpg"), IMG.ad("18172395b7ca45b596a2aacb01672f66_9366/Chaussure_Stan_Smith_Blanc_M20324_HM5.jpg")]},
   /* Carhartt */
-  {id: "ch-activejac", shop: "carhartt", sex: "h", name: "Veste Active Jac en coutil délavé", price: 169.99, url: "https://www.carhartt.com/fr-fr/p/loose-fit-washed-duck-insulated-active-jac/104053", link: "fiche", cat: "veste", sub: "bomber", colors: ["marron"], alt: ["noir"], material: "coutil de coton", styles: ["streetwear", "casual", "rock"], warmth: 3},
-  {id: "ch-double", shop: "carhartt", sex: "h", name: "Pantalon double devant Rugged Flex", price: 74.99, url: "https://www.carhartt.com/fr-fr/p/relaxed-fit-rugged-flex-garment-dyed-duck-double-front-utility-pant/106595", link: "fiche", cat: "bas", sub: "cargo", colors: ["beige"], alt: ["kaki"], material: "coutil de coton", styles: ["streetwear", "casual", "vintage"], warmth: 2},
-  {id: "ch-beanie", shop: "carhartt", sex: "u", name: "Bonnet à revers en maille", price: 17.99, url: "https://www.carhartt.com/fr-fr/p/knit-cuffed-beanie/A18-019OS", link: "fiche", cat: "accessoire", sub: "bonnet", colors: ["noir"], alt: ["marine"], material: "maille acrylique", styles: ["streetwear", "casual"], warmth: 3},
+  {id: "ch-activejac", shop: "carhartt", sex: "h", name: "Veste Active Jac en coutil délavé", price: 169.99, url: "https://www.carhartt.com/fr-fr/p/veste-en-coutil-delave-active-jac/104053", cat: "veste", sub: "bomber", colors: ["marron"], material: "coutil de coton", styles: ["streetwear", "casual", "rock"], warmth: 3,
+    photos: [IMG.ch("EU_104053_BRN_AVB")]},
+  {id: "ch-double", shop: "carhartt", sex: "h", name: "Pantalon double devant Rugged Flex", price: 74.99, was: 99.99, url: "https://www.carhartt.com/fr-fr/p/pantalon-de-travail-a-double-devant-decontracte-en-coutil-teint-rugged-flex/106595", cat: "bas", sub: "cargo", colors: ["beige"], material: "coutil de coton", styles: ["streetwear", "casual", "vintage"], warmth: 2, fit: "contain",
+    photos: [IMG.ch("EU_106595_A16_AVB")], alt: {kaki: [IMG.ch("EU_106595_MOS_AVB")]}},
 ];
 const SHOP = Object.fromEntries(SHOPS.map((s) => [s.key, s]));
 const CAT_BY_ID = new Map(CATALOG.map((p) => [p.id, p]));
+/* Grandes images de la page d’accueil des boutiques, selon le rayon */
+const SHOP_HERO = {
+  f: {pid: "zr-trench", src: IMG.zr("7c64/e67b/9b7e4f1cad48/2913336d7d19/03046317730-a1/03046317730-a1.jpg").replace("w=750", "w=1600")},
+  h: {pid: "zr-coat", src: IMG.zr("7ade/91b5/416946ad8e84/f3101460e776/02949001401-a1/02949001401-a1.jpg").replace("w=750", "w=1600")},
+};
 
 /* ---------------- Utilitaires ---------------- */
 const $ = (s, el = document) => el.querySelector(s);
@@ -1507,6 +1680,7 @@ function garmentSvg(it) {
 }
 function itemVisual(it) {
   if (it && it.photo) return `<img class="ph ${it.cutout ? "cutout" : "flat"}" src="${esc(photoSrc(it.photo))}" alt="" data-id="${esc(it.id)}" loading="lazy" decoding="async">`;
+  if (it && typeof it.shot === "string" && /^https:\/\//.test(it.shot)) return `<img class="ph shot ${it.shotFit === "contain" || it.fit === "contain" ? "contain" : ""}" src="${esc(it.shot)}" alt="" data-id="${esc(it.id)}" loading="lazy" decoding="async" referrerpolicy="no-referrer">`;
   return garmentSvg(it || {});
 }
 const tintOf = (it) => colorHex(((it && it.colors) || [])[0] === "imprime" ? ((it.colors || [])[1] || "gris") : ((it && it.colors) || [])[0]);
@@ -3286,9 +3460,9 @@ const S = {
   wardFilter: "all", showSale: false, histFilter: "all", histConfirm: null,
   confirmEx: false, confirmAll: false, deleting: false, busyBulk: false,
   sheet: null, draft: null, swap: null, lastFocus: null,
-  wishes: new Map(), guest: null, shopSel: null, shopBusy: false,
+  wishes: new Map(), guest: null, shopSel: null, shopBusy: false, trCol: null,
 };
-S.shopF = {view: "shops", shop: "all", cat: "all", sex: ["f", "h", "all"].includes(store.get("shopSex", "")) ? store.get("shopSex", "") : S.body.sex || "all"};
+S.shopF = {view: "shops", shop: "all", cat: "all", sex: ["f", "h", "all"].includes(store.get("shopSex", "")) ? store.get("shopSex", "") : S.body.sex || "all", vue: [1, 2, 3].includes(store.get("shopVue", 2)) ? store.get("shopVue", 2) : 2, q: "", color: null, open: false};
 if (S.view !== "3d" && S.view !== "flat") S.view = "3d";
 function seasonWeather() { const [am, pm] = SEASON[new Date().getMonth()]; return {am, pm, rain: false, wind: false}; }
 S.W = seasonWeather();
@@ -4105,6 +4279,7 @@ function renderTabbar() {
 }
 function showTab(k) {
   S.tab = k;
+  document.body.classList.toggle("is-shop", k === "shop");
   for (const [t] of TABS) $("#tab-" + t).hidden = t !== k;
   renderTabbar();
   window.scrollTo(0, 0);
@@ -4319,9 +4494,10 @@ function renderTrends() {
   let upd = "";
   try { if (T.updatedAt) upd = new Intl.DateTimeFormat("fr-FR", {day: "numeric", month: "long", year: "numeric"}).format(new Date(T.updatedAt)); } catch (e) { upd = ""; }
   el.innerHTML = `
-    <div class="tr-head"><h2 class="tr-title">Tendances</h2><p class="tr-lead">Ce qui se porte en ${esc(season.charAt(0).toLowerCase() + season.slice(1))}. Les looks qui la suivent portent le badge « Tendance ».</p></div>
+    <div class="tr-head"><h2 class="tr-title">Tendances</h2><p class="tr-lead">Ce qui se porte en ${esc(season.charAt(0).toLowerCase() + season.slice(1))}.</p></div>
+    <div class="tr-what"><p class="tr-what-t">C’est quoi ?</p><p>Chaque saison, quelques couleurs et quelques pièces reviennent partout : défilés, magazines, vitrines. L’appli les suit pour te proposer des looks dans l’air du temps. Un look qui en contient au moins une porte le badge <span class="label-tag hot">Tendance</span>.</p></div>
     ${mine.length ? `<div class="group"><h3 class="h">Déjà dans ta garde-robe</h3><div class="tr-mine">${mine.map((it) => `<button class="tr-pc" id="tp-${esc(it.id)}" data-action="impose-go" data-id="${esc(it.id)}" aria-label="${esc(it.name)} : construire un look autour"><span class="ic-vis">${itemVisual(it)}</span><span class="ic-name" aria-hidden="true">${esc(it.name)}</span></button>`).join("")}</div><p class="hint">Touche une pièce : un look se construit autour.</p></div>` : ""}
-    ${T.colors.length ? `<div class="group"><h3 class="h">Les couleurs</h3><div class="tr-colors" role="list">${T.colors.map((k) => `<span class="tr-col" role="listitem"><span class="dot" style="--c:${colorHex(k)}"></span>${esc(COL[k].label)}${ownedCols.has(k) ? `<span class="tr-have" aria-hidden="true">✓</span><span class="sr"> (tu en as)</span>` : ""}</span>`).join("")}</div></div>` : ""}
+    ${T.colors.length ? trColorsHtml(T, ownedCols) : ""}
     ${T.tips[0] ? `<p class="tr-tip">${esc(T.tips[0])}</p>` : ""}
     <details class="fine tr-more"><summary>Plus de conseils et sources</summary>
       ${T.tips.length > 1 ? `<ul class="tr-tips">${T.tips.slice(1).map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
@@ -4419,84 +4595,146 @@ function renderWardrobe() {
   grid.innerHTML = `<div class="grid">${list.map((it) => itemCard(it, "edit")).join("")}</div>`;
 }
 
-/* ---------------- Rendu : boutiques et envies ---------------- */
+/* ---------------- Rendu : boutiques (photos réelles), envies, essayage ---------------- */
 const euro = (n) => new Intl.NumberFormat("fr-FR", {style: "currency", currency: "EUR", minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2}).format(n);
 const shopName = (p) => (p && SHOP[p.shop] ? SHOP[p.shop].name : (p && p.shopName) || "Boutique");
-const priceText = (p) => `${p.approx ? "environ " : ""}${euro(p.price)}`;
-const priceHtml = (p) => `${p.approx ? `<span class="approx">env.</span>` : ""}${euro(p.price)}`;
+const priceText = (p) => euro(p.price);
+const priceHtml = (p) => `${p.was ? `<s class="was">${euro(p.was)}</s>` : ""}<span class="${p.was ? "now" : ""}">${euro(p.price)}</span>`;
 const refocus = (id) => { const n = document.getElementById(id); if (n) n.focus({preventScroll: true}); };
 const fmtDay = (iso) => new Intl.DateTimeFormat("fr-FR", {day: "numeric", month: "long", year: "numeric"}).format(new Date(iso + "T12:00:00"));
-const colorwaysOf = (p) => (p.colors[0] === "imprime" ? [] : [p.colors[0], ...(p.alt || [])].filter((k) => COL[k]));
+const fold = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const pad2 = (n) => String(n).padStart(2, "0");
+const colorwaysOf = (p) => (p.colors[0] === "imprime" ? [] : [p.colors[0], ...Object.keys(p.alt || {})].filter((k) => COL[k]));
 function colorsFor(p, color) {
   if (p.colors[0] === "imprime") return p.colors.slice();
   return color && colorwaysOf(p).includes(color) ? [color] : p.colors.slice();
+}
+function photosFor(p, color) {
+  const own = color && color !== p.colors[0] && p.alt && p.alt[color] ? p.alt[color] : p.photos || [];
+  return [...own, ...(p.more || [])].filter((u) => typeof u === "string" && /^https:\/\//.test(u));
 }
 function productOf(w) { return CAT_BY_ID.get(w.pid) || w.snap || null; }
 function productById(pid) { const w = S.wishes.get(pid); return CAT_BY_ID.get(pid) || (w && w.snap) || null; }
 function asGarment(p, color) {
   const colors = colorsFor(p, color);
   return {id: "shop:" + p.id, guest: true, shopId: p.id, color: colors[0] === "imprime" ? null : colors[0], name: p.name, cat: p.cat, sub: p.sub, colors, material: p.material || "", brand: shopName(p),
-    styles: p.styles.slice(), warmth: p.warmth || 2, rainOk: !!p.rainOk, status: "ok", photo: null, price: p.price, approx: !!p.approx, url: p.url};
+    styles: p.styles.slice(), warmth: p.warmth || 2, rainOk: !!p.rainOk, status: "ok", photo: null, price: p.price, url: p.url, shot: photosFor(p, colors[0])[0] || null, fit: p.fit || ""};
 }
 function snapOf(p) {
-  return {id: p.id, shop: p.shop, shopName: shopName(p), name: p.name, price: p.price, approx: !!p.approx, url: p.url, link: p.link, sex: p.sex, cat: p.cat, sub: p.sub,
-    colors: p.colors.slice(), alt: (p.alt || []).slice(), material: p.material || "", styles: p.styles.slice(), warmth: p.warmth || 2, rainOk: !!p.rainOk};
+  return {id: p.id, shop: p.shop, shopName: shopName(p), name: p.name, price: p.price, url: p.url, sex: p.sex, cat: p.cat, sub: p.sub, colors: p.colors.slice(), material: p.material || "",
+    styles: p.styles.slice(), warmth: p.warmth || 2, rainOk: !!p.rainOk, fit: p.fit || "", photos: (p.photos || []).slice(0, 4), more: (p.more || []).slice(0, 3), alt: p.alt ? JSON.parse(JSON.stringify(p.alt)) : {}};
 }
 function sanitizeSnap(v, id) {
   if (!v || typeof v !== "object") return null;
   const cols = (Array.isArray(v.colors) ? v.colors : []).filter((k) => COL[k]);
+  const urls = (a) => (Array.isArray(a) ? a : []).filter((u) => typeof u === "string" && /^https:\/\//.test(u)).slice(0, 4);
   if (!CAT[v.cat] || !ALL_SUBS.includes(v.sub) || !cols.length || typeof v.url !== "string" || !/^https:\/\//.test(v.url)) return null;
-  return {id: String(v.id || id), shop: String(v.shop || ""), shopName: String(v.shopName || "Boutique").slice(0, 40), name: String(v.name || "Pièce").slice(0, 80), price: Number(v.price) || 0, approx: !!v.approx,
-    url: v.url, link: ["fiche", "rayon", "recherche"].includes(v.link) ? v.link : "fiche", sex: ["h", "f", "u"].includes(v.sex) ? v.sex : "u", cat: v.cat, sub: v.sub, colors: cols,
-    alt: (Array.isArray(v.alt) ? v.alt : []).filter((k) => COL[k]), material: String(v.material || "").slice(0, 40), styles: (Array.isArray(v.styles) ? v.styles : []).filter((s) => STY[s]),
-    warmth: [1, 2, 3].includes(v.warmth) ? v.warmth : 2, rainOk: !!v.rainOk};
+  const alt = {};
+  if (v.alt && typeof v.alt === "object") for (const [k, a] of Object.entries(v.alt)) if (COL[k]) alt[k] = urls(a);
+  return {id: String(v.id || id), shop: String(v.shop || ""), shopName: String(v.shopName || "Boutique").slice(0, 40), name: String(v.name || "Pièce").slice(0, 80), price: Number(v.price) || 0,
+    url: v.url, sex: ["h", "f", "u"].includes(v.sex) ? v.sex : "u", cat: v.cat, sub: v.sub, colors: cols, material: String(v.material || "").slice(0, 40),
+    styles: (Array.isArray(v.styles) ? v.styles : []).filter((s) => STY[s]), warmth: [1, 2, 3].includes(v.warmth) ? v.warmth : 2, rainOk: !!v.rainOk,
+    fit: v.fit === "contain" ? "contain" : "", photos: urls(v.photos), more: urls(v.more), alt};
 }
 const ownedFrom = (pid) => [...S.items.values()].find((it) => it.pid === pid) || null;
-function linkNote(p) {
-  const n = shopName(p);
-  if (p.link === "rayon") return `Le lien ouvre le rayon de ${n} : ses modèles changent souvent, cherche celui-ci dans la liste.`;
-  if (p.link === "recherche") return `Le lien ouvre la recherche ${n} sur ce modèle.`;
-  return "";
+/* Une photo de boutique ; si elle ne se charge pas (hors ligne, site qui la refuse), l’appli remet son propre rendu */
+function zimg(p, src, cls, eager) {
+  if (!src) return garmentSvg(asGarment(p));
+  return `<img class="zimg ${p.fit === "contain" ? "contain" : ""} ${cls || ""}" src="${esc(src)}" alt="" ${eager ? "" : 'loading="lazy" '}decoding="async" referrerpolicy="no-referrer" data-pid="${esc(p.id)}">`;
 }
-function shopCard(p, color, mark) {
-  const g = asGarment(p, color);
-  const w = mark && S.wishes.has(p.id);
-  return `<button class="icard shop-card" id="sp-${esc(p.id)}" data-action="sp-open" data-id="${esc(p.id)}" aria-label="${esc(p.name)}, ${esc(shopName(p))}, ${esc(priceText(p))}${w ? ", dans tes envies" : ""}">
-      <span class="ic-vis">${itemVisual(g)}${w ? `<span class="wish-dot" aria-hidden="true">${ICON.heart}</span>` : ""}</span>
-      <span class="ic-cap" aria-hidden="true"><span class="sc-shop">${esc(shopName(p))}</span><span class="ic-name">${esc(p.name)}</span><span class="sc-price">${priceHtml(p)}</span></span>
-    </button>`;
+const CAT_SHORT = {haut: "Hauts", bas: "Bas", piece: "Robes", veste: "Vestes et manteaux", chaussures: "Chaussures", accessoire: "Accessoires"};
+function shopPool(ignoreCat) {
+  const f = S.shopF, q = fold(f.q).trim();
+  return CATALOG.filter((p) => (f.shop === "all" || p.shop === f.shop) && (f.sex === "all" || p.sex === "u" || p.sex === f.sex)
+    && (!f.color || colorwaysOf(p).includes(f.color) || p.colors.includes(f.color))
+    && (!q || fold(`${p.name} ${shopName(p)} ${p.sub} ${p.material} ${p.colors.map(colorLabel).join(" ")}`).includes(q))
+    && (ignoreCat || f.cat === "all" || p.cat === f.cat));
+}
+function shopCard(p, color) {
+  const ph = photosFor(p, color || p.colors[0]);
+  const w = S.wishes.has(p.id);
+  return `<article class="zc">
+      <button class="zc-link" id="sp-${esc(p.id)}" data-action="sp-open" data-id="${esc(p.id)}" aria-label="${esc(p.name)}, ${esc(shopName(p))}, ${esc(priceText(p))}">
+        <span class="zc-media">${zimg(p, ph[0], "a")}${ph[1] ? zimg(p, ph[1], "b") : ""}</span>
+      </button>
+      <button class="zc-wish" id="zw-${esc(p.id)}" data-action="sp-wishq" data-id="${esc(p.id)}" aria-pressed="${w}" aria-label="${w ? "Retirer de mes envies" : "Ajouter à mes envies"} : ${esc(p.name)}">${ICON.heart}</button>
+      <div class="zc-cap" aria-hidden="true"><p class="zc-name">${esc(p.name)}</p><p class="zc-meta"><span>${esc(shopName(p))}</span><span class="zc-price">${priceHtml(p)}</span></p></div>
+    </article>`;
+}
+function syncWishMarks() {
+  for (const b of document.querySelectorAll(".zc-wish[data-id]")) {
+    const w = S.wishes.has(b.dataset.id);
+    b.setAttribute("aria-pressed", String(w));
+    b.setAttribute("aria-label", `${w ? "Retirer de mes envies" : "Ajouter à mes envies"}`);
+  }
+  const n = $("#zs-wn");
+  if (n) n.textContent = S.wishes.size ? String(S.wishes.size) : "0";
 }
 function renderShop() {
-  const f = S.shopF, nW = S.wishes.size, wv = f.view === "wishes";
-  $("#shop-intro").innerHTML = wv
-    ? `<div><p class="eyebrow">${nW ? `${nW} pièce${nW > 1 ? "s" : ""} en vue` : "Ta liste d’achats"}</p><h1 class="display" id="t-shop">Mes <em>envies</em></h1></div><button class="btn ghost sm" id="ss-shops" data-action="shop-view" data-v="shops">${ICON.left} La sélection</button>`
-    : `<div><p class="eyebrow">${CATALOG.length} pièces · ${SHOPS.length} boutiques</p><h1 class="display" id="t-shop">Bou<em>tiques</em></h1></div><button class="btn ghost sm${nW ? " on" : ""}" id="ss-wishes" data-action="shop-view" data-v="wishes">${ICON.heart} Mes envies${nW ? ` · ${nW}` : ""}</button>`;
-  const body = $("#shop-body");
-  if (wv) { body.innerHTML = wishesHtml(); return; }
-  const sh = f.shop !== "all" && SHOP[f.shop];
-  const pool = CATALOG.filter((p) => (f.shop === "all" || p.shop === f.shop) && (f.sex === "all" || p.sex === "u" || p.sex === f.sex));
-  const cats = CATS.filter((c) => pool.some((p) => p.cat === c.key));
+  const root = $("#shop-root");
+  if (!root) return;
+  const f = S.shopF;
+  if (f.view === "wishes") { root.innerHTML = wishesHtml(); return; }
+  const all = shopPool(true);
+  const cats = CATS.filter((c) => all.some((p) => p.cat === c.key));
   if (f.cat !== "all" && !cats.some((c) => c.key === f.cat)) f.cat = "all";
-  const list = pool.filter((p) => f.cat === "all" || p.cat === f.cat);
-  body.innerHTML = `
-    <div class="ward-filters" role="group" aria-label="Choisir une boutique">${[["all", "Toutes"], ...SHOPS.map((s) => [s.key, s.name])].map(([k, l]) => `<button class="wf" id="sf-${k}" data-action="shop-f" data-v="${k}" aria-pressed="${f.shop === k}">${esc(l)}</button>`).join("")}</div>
-    ${sh ? `<div class="shop-head"><p class="sh-name">${esc(sh.name)}</p><p class="sh-line">${esc(sh.line)}</p><a class="sh-site" href="${esc(sh.site)}" target="_blank" rel="noopener">Ouvrir le site ${ICON.ext}</a></div>` : ""}
-    <div class="shop-tools">
-      <div class="seg" role="radiogroup" aria-label="Rayon">${[["f", "Femme"], ["h", "Homme"], ["all", "Tout"]].map(([k, l]) => `<button class="seg-b" role="radio" id="sx-${k}" data-action="shop-sex" data-v="${k}" aria-checked="${f.sex === k}">${l}</button>`).join("")}</div>
-      <div class="chips scroll" role="group" aria-label="Catégorie">${[["all", "Tout"], ...cats.map((c) => [c.key, c.label])].map(([k, l]) => `<button class="chip" id="scat-${k}" data-action="shop-cat" data-v="${k}" aria-pressed="${f.cat === k}">${esc(l)}</button>`).join("")}</div>
-    </div>
-    ${list.length ? `<div class="grid">${list.map((p) => shopCard(p, (S.wishes.get(p.id) || {}).color || p.colors[0], true)).join("")}</div>` : `<div class="empty"><p>Rien dans ce rayon pour l’instant.</p></div>`}
-    <p class="shop-note">Prix relevés le ${fmtDay(SHOP_DATE)} sur les sites des marques. « env. » signale un prix indicatif : le site fait foi. Les images sont des rendus de l’appli, pas les photos des marques.</p>`;
+  const nFilters = (f.shop !== "all") + (f.color ? 1 : 0);
+  const catBtn = (k, label, i) => `<li><button class="zs-cat" id="zcat-${k}" data-action="shop-cat" data-v="${k}" aria-current="${f.cat === k}"><span class="zs-num" aria-hidden="true">|${pad2(i)}|</span>${esc(label)}</button></li>`;
+  const txt = (act, k, label, on, id) => `<button class="zs-opt" id="${id}" data-action="${act}" data-v="${k}" aria-pressed="${on}">${esc(label)}</button>`;
+  root.innerHTML = `
+    <header class="zs-top">
+      <div class="zs-brand"><h1 class="zs-title" id="t-shop">Boutiques</h1><p class="zs-sub">${CATALOG.length} pièces · ${SHOPS.length} boutiques · vraies photos</p></div>
+      <div class="zs-tools">
+        <label class="zs-search"><span class="sr">Rechercher une pièce</span><input id="zs-q" type="search" placeholder="RECHERCHER" value="${esc(f.q)}" autocomplete="off" spellcheck="false" enterkeyhint="search"></label>
+        <button class="zs-link" id="ss-wishes" data-action="shop-view" data-v="wishes">Mes envies <span class="zs-count" id="zs-wn">${S.wishes.size}</span></button>
+      </div>
+    </header>
+    <div class="zs-layout">
+      <nav class="zs-nav" aria-label="Rayons des boutiques">
+        <ol class="zs-cats">${catBtn("all", "Tout voir", 1)}${cats.map((c, i) => catBtn(c.key, CAT_SHORT[c.key] || c.label, i + 2)).join("")}</ol>
+        <div class="zs-bar">
+          <button class="zs-opt zs-filt" id="zs-filt" data-action="shop-filters" aria-expanded="${!!f.open}">Filtres${nFilters ? ` (${nFilters})` : ""}</button>
+          <div class="zs-vue" role="group" aria-label="Vue"><span>Vue</span>${[1, 2, 3].map((n) => txt("shop-vue", n, String(n), f.vue === n, "zv-" + n)).join("")}</div>
+        </div>
+        <div class="zs-filters"${f.open ? "" : ' data-closed="1"'}>
+          <div class="zs-fg"><p class="zs-k">Rayon</p>${[["f", "Femme"], ["h", "Homme"], ["all", "Tout"]].map(([k, l]) => txt("shop-sex", k, l, f.sex === k, "sx-" + k)).join("")}</div>
+          <div class="zs-fg"><p class="zs-k">Boutiques</p>${[["all", "Toutes"], ...SHOPS.map((s) => [s.key, s.name])].map(([k, l]) => txt("shop-f", k, l, f.shop === k, "sf-" + k)).join("")}</div>
+          ${f.color && COL[f.color] ? `<div class="zs-fg"><p class="zs-k">Couleur</p><button class="zs-chip" id="zs-col-x" data-action="shop-color-clear"><i style="--c:${colorHex(f.color)}"></i>${esc(COL[f.color].label)} <span aria-hidden="true">×</span><span class="sr"> : retirer ce filtre</span></button></div>` : ""}
+        </div>
+      </nav>
+      <div class="zs-main">
+        <div class="zs-tiles" role="list">${cats.map((c) => { const p = all.find((x) => x.cat === c.key); return `<button class="zs-tile" role="listitem" id="zt-${c.key}" data-action="shop-cat" data-v="${c.key}" aria-pressed="${f.cat === c.key}"><span class="zs-tile-m">${zimg(p, photosFor(p, p.colors[0])[0], "")}</span><span class="zs-tile-l">${esc(CAT_SHORT[c.key] || c.label)}</span></button>`; }).join("")}</div>
+        <div id="zs-grid-wrap"></div>
+      </div>
+    </div>`;
+  renderShopGrid();
+}
+function renderShopGrid() {
+  const host = $("#zs-grid-wrap");
+  if (!host) return;
+  const f = S.shopF, list = shopPool(false);
+  const showHero = f.cat === "all" && !f.q && !f.color && f.shop === "all";
+  const hero = SHOP_HERO[f.sex === "f" ? "f" : f.sex === "h" ? "h" : (S.body.sex === "f" ? "f" : "h")];
+  const hp = hero && CAT_BY_ID.get(hero.pid);
+  const sh = f.shop !== "all" && SHOP[f.shop];
+  host.innerHTML = `
+    ${showHero && hp ? `<figure class="zs-hero"><button class="zs-hero-b" data-action="sp-open" data-id="${esc(hp.id)}" aria-label="${esc(hp.name)}, ${esc(shopName(hp))}">${zimg(hp, hero.src, "", true)}</button>
+      <figcaption><p class="zs-hk">Automne-hiver 26</p><p class="zs-ht">La sélection</p><p class="zs-hs">De vraies pièces de ${SHOPS.length} boutiques. Essaie-les sur ton mannequin avant d’acheter.</p></figcaption></figure>` : ""}
+    ${sh ? `<div class="zs-shophead"><p class="zs-sh-n">${esc(sh.name)}</p><p class="zs-sh-l">${esc(sh.line)}</p><a class="zs-sh-a" href="${esc(sh.site)}" target="_blank" rel="noopener">Ouvrir le site ${ICON.ext}</a></div>` : ""}
+    <p class="zs-count-l" aria-live="polite">${list.length} pièce${list.length > 1 ? "s" : ""}${f.q ? ` pour « ${esc(f.q)} »` : ""}</p>
+    ${list.length ? `<div class="zs-grid v${f.vue}">${list.map((p) => shopCard(p, (S.wishes.get(p.id) || {}).color || p.colors[0])).join("")}</div>` : `<div class="empty"><p>Aucune pièce ne correspond. Change de rayon ou efface la recherche.</p></div>`}
+    <p class="shop-note">Prix relevés le ${fmtDay(SHOP_DATE)} sur les sites des marques : le site fait foi. Photos des marques, affichées depuis leurs sites. Aucune de ces boutiques n’est liée à l’appli.</p>`;
 }
 function wishesHtml() {
-  if (!S.capsReady || (S.caps.db && !S.ready.wishes)) return `<div class="empty"><p>Chargement de tes envies…</p></div>`;
-  if (!S.caps.db) return `<div class="empty"><p>Tes envies s’enregistrent avec ton compte : ouvre l’appli dans Claude pour les garder.</p></div>`;
+  const head = `<header class="zs-top"><div class="zs-brand"><h1 class="zs-title" id="t-shop">Mes envies</h1><p class="zs-sub">Ta liste d’achats, séparée de ta garde-robe</p></div>
+    <div class="zs-tools"><button class="zs-link" id="ss-shops" data-action="shop-view" data-v="shops">${ICON.left} Retour aux boutiques</button></div></header>`;
+  if (!S.capsReady || (S.caps.db && !S.ready.wishes)) return head + `<div class="empty"><p>Chargement de tes envies…</p></div>`;
+  if (!S.caps.db) return head + `<div class="empty"><p>Tes envies s’enregistrent avec ton compte : ouvre l’appli dans Claude pour les garder.</p></div>`;
   const ws = [...S.wishes.values()].filter(productOf).sort((a, b) => String(b.at).localeCompare(String(a.at)));
-  if (!ws.length) return `<div class="empty"><p>Pas encore d’envie. Dans la sélection, ouvre une pièce et touche « Ajouter à mes envies » pour la garder ici.</p><button class="btn primary" data-action="shop-view" data-v="shops">Voir la sélection</button></div>`;
+  if (!ws.length) return head + `<div class="empty"><p>Pas encore d’envie. Touche le cœur sur une pièce pour la garder ici.</p><button class="btn primary" data-action="shop-view" data-v="shops">Voir les boutiques</button></div>`;
   const total = ws.reduce((t, w) => t + (Number(productOf(w).price) || 0), 0);
-  const approx = ws.some((w) => productOf(w).approx);
-  return `<div class="wish-sum"><span class="h">Total de ${ws.length} pièce${ws.length > 1 ? "s" : ""}</span><span class="ws-total">${approx ? `<span class="approx">env.</span>` : ""}${euro(Math.round(total * 100) / 100)}</span></div>
-    <div class="grid">${ws.map((w) => shopCard(productOf(w), w.color, false)).join("")}</div>
+  return head + `<div class="wish-sum"><span class="h">Total de ${ws.length} pièce${ws.length > 1 ? "s" : ""}</span><span class="ws-total">${euro(Math.round(total * 100) / 100)}</span></div>
+    <div class="zs-grid v${S.shopF.vue}">${ws.map((w) => shopCard(productOf(w), w.color)).join("")}</div>
     <p class="shop-note">Touche une pièce pour l’essayer sur ton mannequin, la retrouver sur le site, ou la passer dans ta garde-robe une fois achetée.</p>`;
 }
 function openShopItem(pid) {
@@ -4511,26 +4749,40 @@ function shopSheetHtml() {
   if (!p) return `${sheetHead("Pièce indisponible")}<div class="sheet-body"><p class="hint">Cette pièce n’est plus dans la sélection.</p></div>`;
   const g = asGarment(p, sel.color);
   const w = S.wishes.get(p.id), own = ownedFrom(p.id), cols = colorwaysOf(p);
-  const note = linkNote(p);
+  const ph = photosFor(p, g.colors[0]);
   return `${sheetHead(esc(shopName(p)))}
-  <div class="sheet-body">
-    <div class="sp-hero">${itemVisual(g)}</div>
-    <div class="sp-top"><h3 class="sp-name">${esc(p.name)}</h3><p class="sp-price">${priceHtml(p)}</p></div>
-    ${cols.length > 1 ? `<div class="field"><span class="fl" id="sp-col-l">Coloris <small>${esc(COL[g.colors[0]].label)}</small></span><div class="swatch-row" role="radiogroup" aria-labelledby="sp-col-l">${cols.map((k) => `<button class="swb" role="radio" id="spc-${k}" data-action="sp-color" data-v="${k}" aria-checked="${g.colors[0] === k}" aria-label="${esc(COL[k].label)}" title="${esc(COL[k].label)}" style="--c:${colorHex(k)}"></button>`).join("")}</div></div>` : ""}
-    <dl class="sp-facts">
-      <dt>Pièce</dt><dd>${esc(cap(p.sub))}, ${p.sex === "f" ? "femme" : p.sex === "h" ? "homme" : "mixte"}</dd>
-      <dt>Matière</dt><dd>${esc(cap(p.material || "non précisée"))}</dd>
-      <dt>Style</dt><dd>${esc(p.styles.filter((s) => STY[s]).map((s) => STY[s].label).join(", "))}</dd>
-      <dt>Chaleur</dt><dd>${["", "Légère", "Moyenne", "Chaude"][p.warmth || 2]}${p.rainOk ? ", supporte la pluie" : ""}</dd>
-    </dl>
-    <div class="sp-actions">
-      <button class="btn primary big wide" id="sp-try" data-action="sp-try">${ICON.body} Essayer sur mon mannequin</button>
-      <button class="btn ghost big wide${w ? " on" : ""}" id="sp-wish" data-action="sp-wish" aria-pressed="${!!w}"${S.shopBusy ? " disabled" : ""}>${ICON.heart} ${w ? "Retirer de mes envies" : "Ajouter à mes envies"}</button>
-      <a class="btn ghost big wide" id="sp-site" href="${esc(p.url)}" target="_blank" rel="noopener">${ICON.ext} Voir sur ${esc(shopName(p))}</a>
-      ${own ? `<p class="sp-own">${ICON.hanger}<span>Déjà dans ta garde-robe.</span></p>` : `<button class="btn ghost sm sp-bought" id="sp-own" data-action="sp-own"${S.shopBusy ? " disabled" : ""}>${S.shopBusy ? "Ajout…" : "Je l’ai acheté : l’ajouter à ma garde-robe"}</button>`}
+  <div class="sheet-body zp">
+    <div class="zp-media">
+      <div class="zp-gal" id="zp-gal" tabindex="0" aria-label="Photos de la pièce">${ph.length ? ph.map((u, i) => `<div class="zp-shot">${zimg(p, u, "", i === 0)}</div>`).join("") : `<div class="zp-shot">${garmentSvg(g)}</div>`}</div>
+      ${ph.length > 1 ? `<p class="zp-n" aria-hidden="true"><span id="zp-i">1</span> / ${ph.length}</p>` : ""}
     </div>
-    <p class="shop-note">${note ? esc(note) + " " : ""}${p.approx ? "Prix indicatif" : "Prix relevé"} le ${fmtDay(SHOP_DATE)} : le site fait foi. L’image est un rendu de l’appli.</p>
+    <div class="zp-info">
+      <div class="zp-top"><h3 class="zp-name">${esc(p.name)}</h3><p class="zp-price">${priceHtml(p)}</p></div>
+      ${cols.length > 1 ? `<div class="field"><span class="fl" id="sp-col-l">Coloris <small>${esc(COL[g.colors[0]].label)}</small></span><div class="swatch-row" role="radiogroup" aria-labelledby="sp-col-l">${cols.map((k) => `<button class="swb" role="radio" id="spc-${k}" data-action="sp-color" data-v="${k}" aria-checked="${g.colors[0] === k}" aria-label="${esc(COL[k].label)}" title="${esc(COL[k].label)}" style="--c:${colorHex(k)}"></button>`).join("")}</div></div>` : ""}
+      <dl class="sp-facts">
+        <dt>Pièce</dt><dd>${esc(cap(p.sub))}, ${p.sex === "f" ? "femme" : p.sex === "h" ? "homme" : "mixte"}</dd>
+        <dt>Matière</dt><dd>${esc(cap(p.material || "non précisée"))}</dd>
+        <dt>Style</dt><dd>${esc(p.styles.filter((s) => STY[s]).map((s) => STY[s].label).join(", "))}</dd>
+        <dt>Chaleur</dt><dd>${["", "Légère", "Moyenne", "Chaude"][p.warmth || 2]}${p.rainOk ? ", supporte la pluie" : ""}</dd>
+      </dl>
+      <div class="sp-actions">
+        <button class="btn primary big wide" id="sp-try" data-action="sp-try">${ICON.body} Essayer sur mon mannequin</button>
+        <button class="btn ghost big wide${w ? " on" : ""}" id="sp-wish" data-action="sp-wish" aria-pressed="${!!w}"${S.shopBusy ? " disabled" : ""}>${ICON.heart} ${w ? "Retirer de mes envies" : "Ajouter à mes envies"}</button>
+        <a class="btn ghost big wide" id="sp-site" href="${esc(p.url)}" target="_blank" rel="noopener">${ICON.ext} Voir sur ${esc(shopName(p))}</a>
+        ${own ? `<p class="sp-own">${ICON.hanger}<span>Déjà dans ta garde-robe.</span></p>` : `<button class="btn ghost sm sp-bought" id="sp-own" data-action="sp-own"${S.shopBusy ? " disabled" : ""}>${S.shopBusy ? "Ajout…" : "Je l’ai acheté : l’ajouter à ma garde-robe"}</button>`}
+      </div>
+      <p class="shop-note">Prix relevé le ${fmtDay(SHOP_DATE)} : le site fait foi. Photos ${esc(shopName(p))}. L’essayage montre la coupe et la couleur sur ton mannequin 3D.</p>
+    </div>
   </div>`;
+}
+function mountGallery() {
+  const gal = $("#zp-gal"), n = $("#zp-i");
+  if (!gal || !n) return;
+  gal.addEventListener("scroll", () => {
+    const horiz = gal.scrollWidth > gal.clientWidth + 4;
+    const i = horiz ? Math.round(gal.scrollLeft / Math.max(1, gal.clientWidth)) : 0;
+    n.textContent = String(clamp(i + 1, 1, gal.children.length));
+  }, {passive: true});
 }
 async function toggleWish(pid, color) {
   const db = S.caps.db, p = productById(pid);
@@ -4543,7 +4795,7 @@ async function toggleWish(pid, color) {
     if (had) await db.doc("wishes/" + pid).delete();
     else await db.doc("wishes/" + pid).set({pid, color: color && colorwaysOf(p).includes(color) ? color : null, at: new Date().toISOString(), snap: snapOf(p)});
     toast(had ? "Retiré de tes envies." : `${p.name} ajouté à tes envies.`);
-  } catch (e) { dbErr(e); } finally { S.shopBusy = false; if (S.sheet === "shop") renderSheet(); renderShop(); if (S.guest) renderLookPanel(); }
+  } catch (e) { dbErr(e); } finally { S.shopBusy = false; if (S.sheet === "shop") renderSheet(); if (S.shopF.view === "wishes") renderShop(); else syncWishMarks(); if (S.guest) renderLookPanel(); }
 }
 async function addOwned(pid, color) {
   const db = S.caps.db, p = productById(pid);
@@ -4551,7 +4803,7 @@ async function addOwned(pid, color) {
   if (!db) { toast("Ouvre l’appli dans Claude, connecté à ton compte, pour enregistrer ta garde-robe."); return; }
   const g = asGarment(p, color);
   const body = {name: p.name.slice(0, 60), cat: p.cat, sub: p.sub, colors: g.colors.slice(0, 3), material: p.material || "", brand: shopName(p), ref: "", styles: p.styles.slice(0, 6), warmth: p.warmth || 2, rainOk: !!p.rainOk,
-    status: "ok", fav: false, photo: null, cutout: false, example: false, lastWorn: null, createdAt: new Date().toISOString(), pid: p.id};
+    status: "ok", fav: false, photo: null, cutout: false, example: false, lastWorn: null, createdAt: new Date().toISOString(), pid: p.id, shot: g.shot || null, shotFit: p.fit || ""};
   S.shopBusy = true;
   if (S.sheet === "shop") renderSheet();
   try {
@@ -4567,7 +4819,7 @@ async function addOwned(pid, color) {
     S.shopBusy = false;
     if (S.sheet === "shop") closeSheet();
     toast(`${body.name} ajouté à ta garde-robe.`);
-  } catch (e) { dbErr(e); } finally { S.shopBusy = false; if (S.sheet === "shop") renderSheet(); renderShop(); }
+  } catch (e) { dbErr(e); } finally { S.shopBusy = false; if (S.sheet === "shop") renderSheet(); if (S.shopF.view === "wishes") renderShop(); }
 }
 
 /* --- Essayage d’une pièce de boutique dans la cabine --- */
@@ -4603,15 +4855,55 @@ function tryPanelHtml(g) {
   const p = productById(g.shopId) || g;
   const w = S.wishes.has(g.shopId);
   return `<div class="try-card">
-      <div class="try-top"><span class="label-tag hot">Essayage</span><span class="try-shop">${esc(g.brand)} · ${priceHtml(p)}</span></div>
-      <p class="try-name">${esc(g.name)}</p>
-      <p class="hint">Les autres pièces viennent de ta garde-robe. Change de look avec les flèches, ou touche une pièce pour la remplacer.</p>
+      ${g.shot ? `<span class="try-shot">${zimg(p, g.shot, "", true)}</span>` : ""}
+      <div class="try-txt">
+        <div class="try-top"><span class="label-tag hot">Essayage</span><span class="try-shop">${esc(g.brand)} · ${priceHtml(p)}</span></div>
+        <p class="try-name">${esc(g.name)}</p>
+        <p class="hint">À gauche, la vraie pièce ; sur le mannequin, sa coupe et sa couleur avec les vêtements de ta garde-robe. Change de look avec les flèches.</p>
+      </div>
       <div class="try-btns">
         <button class="btn primary big" id="try-wish" data-action="try-wish" aria-pressed="${w}"${S.shopBusy ? " disabled" : ""}>${ICON.heart} ${w ? "Dans mes envies" : "Ajouter à mes envies"}</button>
         <a class="btn ghost big" id="try-site" href="${esc(g.url)}" target="_blank" rel="noopener">${ICON.ext} ${esc(g.brand)}</a>
         <button class="btn ghost big" id="try-end" data-action="try-end">Terminer l’essai</button>
       </div>
     </div>`;
+}
+
+/* --- Tendances : les couleurs de la saison, expliquées --- */
+function trColorsHtml(T, owned) {
+  const n = T.colors.length, have = T.colors.filter((k) => owned.has(k)).length;
+  return `<div class="group tr-cols-g">
+      <h3 class="h">Les ${n} couleurs de la saison</h3>
+      <p class="tr-sub">Ce sont les couleurs qu’on voit le plus dans les défilés, les magazines et les vitrines cet automne-hiver. Pas besoin de toutes les porter : une seule dans ta tenue suffit à lui donner un air actuel.</p>
+      <p class="tr-key"><span class="tr-have" aria-hidden="true">✓</span><span>= tu as déjà au moins une pièce de cette couleur (${have} sur ${n}).</span></p>
+      <div class="tr-colors">${T.colors.map((k) => `<button class="tr-col" id="trc-${k}" data-action="tr-col" data-v="${k}" aria-label="${esc(COL[k].label)}${owned.has(k) ? ", tu en as" : ""} : comment la porter"><span class="dot" style="--c:${colorHex(k)}"></span>${esc(COL[k].label)}${owned.has(k) ? `<span class="tr-have" aria-hidden="true">✓</span>` : ""}</button>`).join("")}</div>
+      <p class="hint">Touche une couleur pour savoir avec quoi la porter, voir tes pièces de cette couleur et celles des boutiques.</p>
+    </div>`;
+}
+function trColSheetHtml() {
+  const k = S.trCol, c = COL[k], T = S.trends;
+  if (!c) return `${sheetHead("Couleur")}<div class="sheet-body"></div>`;
+  const label = c.label.toLowerCase();
+  const mates = [...new Set(PAIRS.filter((p) => p.includes(k)).map((p) => (p[0] === k ? p[1] : p[0])))];
+  if (!mates.length) mates.push(...(c.n ? ["blanc", "marine", "beige"] : ["gris", "marine", "denim", "beige"]));
+  const how = c.n ? `Couleur facile : elle peut servir de base à toute la tenue et va avec presque tout.`
+    : c.soft ? `Couleur douce : elle se porte sans effort en haut, en pull ou en écharpe, avec des couleurs calmes autour.`
+    : `Couleur forte : porte-la sur une seule pièce (pull, bonnet, chaussures ou sac) et garde le reste de la tenue neutre.`;
+  /* un conseil de la saison, seulement s’il parle vraiment de cette couleur (avant les deux-points) */
+  const terms = {rouge: /\brouge/, "bleu-clair": /bleu ciel|bleu clair/, orange: /mandarine|orange/, violet: /aubergine|violet/, rose: /magenta|\brose/, bordeaux: /bordeaux/, vert: /\bvert/, jaune: /jaune/, bleu: /\bbleu\b/}[k];
+  const tip = !c.n && terms && T && (T.tips || []).find((t) => terms.test(fold(t).split(":")[0]));
+  const mine = [...S.items.values()].filter((it) => it.status !== "sale" && (it.colors || []).includes(k));
+  const shop = CATALOG.filter((p) => colorwaysOf(p).includes(k) || p.colors.includes(k));
+  return `${sheetHead(`Couleur de la saison : ${esc(c.label)}`)}
+  <div class="sheet-body">
+    <div class="tc-band" style="--c:${c.hex}"><span>${esc(c.label)}</span></div>
+    <p class="tc-why">C’est l’une des couleurs qu’on voit le plus cette saison. ${how}</p>
+    ${tip ? `<p class="tr-tip">${esc(tip)}</p>` : ""}
+    <div class="group"><h3 class="h">Elle va bien avec</h3><div class="tc-mates">${mates.filter((m) => COL[m]).map((m) => `<span class="tc-mate"><i style="--c:${colorHex(m)}"></i>${esc(COL[m].label)}</span>`).join("")}</div></div>
+    <div class="group"><h3 class="h">Dans ta garde-robe</h3>${mine.length ? `<div class="tr-mine">${mine.slice(0, 10).map((it) => `<button class="tr-pc" id="tcm-${esc(it.id)}" data-action="tc-impose" data-id="${esc(it.id)}" aria-label="${esc(it.name)} : construire un look autour"><span class="ic-vis">${itemVisual(it)}</span><span class="ic-name" aria-hidden="true">${esc(it.name)}</span></button>`).join("")}</div><p class="hint">Touche une pièce : un look se construit autour.</p>` : `<p class="hint">Tu n’as pas encore de pièce ${esc(label)}.</p>`}</div>
+    <div class="group"><h3 class="h">En boutique</h3>${shop.length ? `<div class="tr-mine">${shop.slice(0, 10).map((p) => `<button class="tr-pc" id="tcs-${esc(p.id)}" data-action="sp-open" data-id="${esc(p.id)}" aria-label="${esc(p.name)}, ${esc(shopName(p))}"><span class="ic-vis shot">${zimg(p, photosFor(p, colorwaysOf(p).includes(k) ? k : p.colors[0])[0], "")}</span><span class="ic-name" aria-hidden="true">${esc(p.name)}</span></button>`).join("")}</div>
+      <button class="btn ghost" id="tc-shop" data-action="tr-shop" data-v="${k}">Voir les pièces ${esc(label)} en boutique</button>` : `<p class="hint">Pas encore de pièce ${esc(label)} dans la sélection des boutiques.</p>`}</div>
+  </div>`;
 }
 
 /* ---------------- Rendu : historique ---------------- */
@@ -4687,7 +4979,7 @@ function renderSettings() {
     <div class="row-btns"><button class="btn ghost" id="s-export" data-action="export"${S.caps.downloads ? "" : " disabled"}>Exporter (JSON)</button>
       ${S.confirmAll ? `<span class="confirm"><span>Tout supprimer, sans retour possible ?</span><button class="btn danger sm" data-action="delete-all-yes"${S.deleting ? " disabled" : ""}>${S.deleting ? "Suppression…" : "Oui, tout supprimer"}</button><button class="btn ghost sm" data-action="delete-all-no">Annuler</button></span>` : `<button class="btn ghost danger-t" data-action="delete-all">Tout supprimer</button>`}</div>
   </div>
-  <p class="foot-note">Dressing du matin, version 8 · corps 3D MakeHuman (CC0)</p>`;
+  <p class="foot-note">Dressing du matin, version 9 · corps 3D MakeHuman (CC0) · photos des boutiques</p>`;
 }
 
 /* ---------------- Feuilles (bottom sheet) ---------------- */
@@ -4697,17 +4989,20 @@ function renderSheet(first) {
   const body = el.querySelector(".sheet-body");
   const st = body ? body.scrollTop : 0;
   const act = document.activeElement && el.contains(document.activeElement) ? document.activeElement.id : null;
-  el.innerHTML = S.sheet === "item" ? itemSheetHtml() : S.sheet === "shop" ? shopSheetHtml() : S.sheet === "swap" ? swapSheetHtml() : S.sheet === "imposed" ? imposedSheetHtml() : "";
+  el.innerHTML = S.sheet === "item" ? itemSheetHtml() : S.sheet === "shop" ? shopSheetHtml() : S.sheet === "trcol" ? trColSheetHtml() : S.sheet === "swap" ? swapSheetHtml() : S.sheet === "imposed" ? imposedSheetHtml() : "";
+  el.classList.toggle("is-zp", S.sheet === "shop");
   el.hidden = false; $("#scrim").hidden = false; document.body.classList.add("locked");
   const nb = el.querySelector(".sheet-body");
   if (nb && !first) nb.scrollTop = st;
   if (S.sheet === "item") mountPhoto();
+  if (S.sheet === "shop") mountGallery();
   if (first) { const c = el.querySelector("#sheet-close"); if (c) c.focus({preventScroll: true}); }
   else if (act) { const n = document.getElementById(act); if (n) n.focus({preventScroll: true}); }
 }
 function closeSheet() {
   if (S.draft && S.draft.aiCtl) S.draft.aiCtl.abort();
-  S.draft = null; S.sheet = null; S.swap = null; S.shopSel = null;
+  S.draft = null; S.sheet = null; S.swap = null; S.shopSel = null; S.trCol = null;
+  $("#sheet").classList.remove("is-zp");
   $("#sheet").hidden = true; $("#sheet").innerHTML = ""; $("#scrim").hidden = true;
   document.body.classList.remove("locked");
   if (S.lastFocus && S.lastFocus.isConnected && S.lastFocus.focus) S.lastFocus.focus({preventScroll: true});
@@ -5344,6 +5639,7 @@ async function saveItem() {
       name: it.name.trim().slice(0, 60), cat: it.cat, sub: it.sub, colors: it.colors.slice(0, 3), material: (it.material || "").trim(), brand: (it.brand || "").trim(), ref: (it.ref || "").trim(),
       styles: it.styles.slice(0, 6), warmth: Number(it.warmth) || 2, rainOk: !!it.rainOk, status: it.status === "sale" ? "sale" : "ok", fav: !!it.fav,
       photo, cutout, example: d.photo ? false : !!it.example, lastWorn: it.lastWorn || null, createdAt: it.createdAt || new Date().toISOString(),
+      pid: it.pid || null, shot: it.shot || null, shotFit: it.shotFit || "",
     };
     const ref = d.id ? db.doc("items/" + d.id) : db.collection("items").doc();
     await ref.set(body);
@@ -5543,11 +5839,12 @@ function subscribe() {
     renderImposed();
     renderTrends();
     if (S.outfits.length || first) renderHistory();
-    renderShop();
     if (S.sheet === "shop") renderSheet();
     if (first || !S.looks.length || S.looks.some((L) => mainParts(L).some((p) => !p.it.guest && !S.items.has(p.it.id))) || (S.imposed && !S.looks.some((L) => lookIds(L).includes(S.imposed)))) refreshLooks();
   }, onDbError);
+  let firstW = true;
   db.collection("wishes").onSnapshot((snap) => {
+    const first = firstW; firstW = false;
     const m = new Map();
     for (const d of snap.docs) {
       const v = d.data() || {}, pid = String(v.pid || d.id), w = {pid, color: COL[v.color] ? v.color : null, at: String(v.at || ""), snap: sanitizeSnap(v.snap, pid)};
@@ -5555,7 +5852,7 @@ function subscribe() {
     }
     S.wishes = m;
     S.ready.wishes = true;
-    renderShop();
+    if (S.shopF.view === "wishes" || first) renderShop(); else syncWishMarks();
     if (S.sheet === "shop") renderSheet();
     if (S.guest) renderLookPanel();
   }, onDbError);
@@ -5623,10 +5920,17 @@ const ACTIONS = {
   "pick-imposed": () => openSheet("imposed"),
   "imposed-pick": (el) => { S.imposed = el.dataset.id; S.guest = null; closeSheet(); renderImposed(); scheduleRefresh(); },
   "imposed-clear": () => { S.imposed = null; S.guest = null; renderImposed(); scheduleRefresh(); },
-  "shop-view": (el) => { S.shopF.view = el.dataset.v === "wishes" ? "wishes" : "shops"; renderShop(); refocus(S.shopF.view === "wishes" ? "ss-shops" : "ss-wishes"); },
+  "shop-view": (el) => { S.shopF.view = el.dataset.v === "wishes" ? "wishes" : "shops"; renderShop(); window.scrollTo(0, 0); refocus(S.shopF.view === "wishes" ? "ss-shops" : "ss-wishes"); },
   "shop-f": (el) => { S.shopF.shop = SHOP[el.dataset.v] ? el.dataset.v : "all"; renderShop(); refocus("sf-" + S.shopF.shop); },
-  "shop-cat": (el) => { S.shopF.cat = CAT[el.dataset.v] ? el.dataset.v : "all"; renderShop(); refocus("scat-" + S.shopF.cat); },
+  "shop-cat": (el) => { S.shopF.cat = CAT[el.dataset.v] ? el.dataset.v : "all"; renderShop(); refocus((el.id && el.id.startsWith("zt-") ? "zt-" : "zcat-") + S.shopF.cat); },
   "shop-sex": (el) => { S.shopF.sex = ["f", "h"].includes(el.dataset.v) ? el.dataset.v : "all"; store.set("shopSex", S.shopF.sex); renderShop(); refocus("sx-" + S.shopF.sex); },
+  "shop-vue": (el) => { const n = Number(el.dataset.v); S.shopF.vue = [1, 2, 3].includes(n) ? n : 2; store.set("shopVue", S.shopF.vue); renderShop(); refocus("zv-" + S.shopF.vue); },
+  "shop-filters": () => { S.shopF.open = !S.shopF.open; renderShop(); refocus("zs-filt"); },
+  "shop-color-clear": () => { S.shopF.color = null; renderShop(); refocus("zs-filt"); },
+  "sp-wishq": (el) => { const p = productById(el.dataset.id); if (p) toggleWish(p.id, (S.wishes.get(p.id) || {}).color || p.colors[0]); },
+  "tr-col": (el) => { if (!COL[el.dataset.v]) return; S.trCol = el.dataset.v; openSheet("trcol"); },
+  "tr-shop": (el) => { const k = el.dataset.v; closeSheet(); S.shopF = {...S.shopF, view: "shops", cat: "all", shop: "all", q: "", color: COL[k] ? k : null, open: true}; showTab("shop"); },
+  "tc-impose": (el) => { closeSheet(); ACTIONS["impose-go"](el); },
   "sp-open": (el) => openShopItem(el.dataset.id),
   "sp-color": (el) => {
     const sel = S.shopSel;
@@ -5761,6 +6065,7 @@ document.addEventListener("click", (e) => {
 document.addEventListener("input", (e) => {
   const t = e.target;
   if (t.id === "wx-q") { onWxInput(t.value); return; }
+  if (t.id === "zs-q") { S.shopF.q = t.value.slice(0, 60); renderShopGrid(); return; }
   if (t.id === "ph-tol") { onTolChange(Number(t.value)); return; }
   if (t.dataset && t.dataset.crop) { onCropInput(t.dataset.crop, Number(t.value) / 100); return; }
   if (t.dataset && t.dataset.b) {
@@ -5807,8 +6112,16 @@ document.addEventListener("pointerdown", (e) => { if (!e.target.closest || !e.ta
 document.addEventListener("focusin", (e) => { if (e.target && e.target.closest && !e.target.closest("#wx-form")) wxCloseSugg(); });
 document.addEventListener("error", (e) => {
   const img = e.target;
+  if (img && img.tagName === "IMG" && img.classList.contains("zimg")) {
+    const p = productById(img.dataset.pid);
+    const holder = document.createElement("span");
+    holder.innerHTML = garmentSvg(p ? asGarment(p) : {});
+    img.replaceWith(holder.firstChild);
+    return;
+  }
   if (img && img.tagName === "IMG" && img.classList.contains("ph")) {
-    const it = S.items.get(img.dataset.id) || (S.draft && S.draft.it);
+    const base = S.items.get(img.dataset.id) || (S.guest && S.guest.id === img.dataset.id ? S.guest : null) || (S.draft && S.draft.it);
+    const it = base && base.shot && !base.photo ? {...base, shot: null} : base;
     const holder = document.createElement("span");
     holder.innerHTML = garmentSvg(it || {});
     img.replaceWith(holder.firstChild);

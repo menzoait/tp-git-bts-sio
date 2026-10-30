@@ -10,8 +10,8 @@ Application personnelle de garde-robe : elle propose chaque matin des tenues sel
 - **Météo du jour** : à l’ouverture, l’appli propose d’utiliser la localisation ; sinon, une barre de recherche permet de saisir sa ville. La carte météo s’anime selon le temps (soleil, nuages, pluie, neige, orage, brouillard, vent, nuit) et donne le ressenti du matin et de l’après-midi, la pluie et le vent. Les valeurs restent ajustables à la main.
 - **Tenues du jour** : trois looks construits à partir de la température du matin et de l’après-midi, de la pluie et du vent, de l’occasion et du style. Le styliste IA peut choisir et expliquer les looks.
 - **Mannequin 3D réaliste** : vrai corps humain (maillage MakeHuman, CC0) déformé selon le sexe, la taille, le poids (IMC), la corpulence, les épaules et les hanches, en pose naturelle, bras le long du corps. Les vêtements sont taillés sur ce corps : ajustés, tombé, plis, ourlets nets, cols, revers, boutons, surpiqûres, chaussures, cheveux et accessoires. Moteur WebGL écrit à la main, sans bibliothèque.
-- **Boutiques** : une sélection de vraies pièces chez Uniqlo, Zara, Decathlon, Levi’s, Dr. Martens, Nike, Adidas et Carhartt, filtrable par boutique, rayon (femme, homme) et catégorie. Chaque pièce s’essaie sur le mannequin : l’appli construit des looks autour d’elle avec les vêtements de ta garde-robe. On choisit le coloris, on garde les pièces qui plaisent dans une liste d’envies (avec le total), on ouvre la page de la boutique, et une pièce achetée passe dans la garde-robe en un geste.
-- **Tendances** : couleurs et pièces de la saison, avec les pièces que tu as déjà.
+- **Boutiques** : une sélection de vraies pièces chez Uniqlo, Zara, Decathlon, Levi’s, Dr. Martens, Nike, Adidas et Carhartt, avec leurs vraies photos, présentée comme une page de marque : rayons numérotés, vignettes, grande image, recherche, vue à 1, 2 ou 3 colonnes, filtres par rayon (femme, homme), boutique et couleur. Chaque pièce s’essaie sur le mannequin : l’appli construit des looks autour d’elle avec les vêtements de ta garde-robe. On choisit le coloris, on garde les pièces qui plaisent dans une liste d’envies (avec le total), on ouvre la page de la boutique, et une pièce achetée passe dans la garde-robe en un geste.
+- **Tendances** : couleurs et pièces de la saison, expliquées dans l’appli (ce que c’est, à quoi sert le badge « Tendance », ce que veut dire la coche). Chaque couleur s’ouvre : avec quoi la porter, tes pièces de cette couleur et celles des boutiques.
 - **Historique** : tenues portées et notées. L’appli évite de reproposer la tenue de la veille et apprend tes goûts.
 
 ## Fonctionnement
@@ -55,6 +55,6 @@ Tout est dans `index.html` :
 
 ## Crédits
 
-Les boutiques citées n’ont aucun lien avec l’appli. Les prix ont été relevés sur leurs sites le 26 octobre 2026 (« env. » quand le prix est indicatif) : le site de la marque fait foi. Les images des pièces sont des rendus de l’appli, pas les photos des marques.
+Les boutiques citées n’ont aucun lien avec l’appli. Les prix ont été relevés sur leurs sites le 30 octobre 2026 : le site de la marque fait foi. Les photos des pièces appartiennent aux marques : elles sont affichées depuis leurs sites (rien n’est copié dans le dépôt) et chaque pièce renvoie vers sa page d’origine. Si une photo ne se charge pas, l’appli montre son propre rendu de la pièce.
 
 Le corps 3D vient de MakeHuman (maillage de base, morphs et poids de squelette), publié sous licence CC0 par la communauté MakeHuman : http://www.makehumancommunity.org
