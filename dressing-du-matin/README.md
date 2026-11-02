@@ -6,11 +6,12 @@ Application personnelle de garde-robe : elle propose chaque matin des tenues sel
 
 ## Ce qu’elle fait
 
-- **Garde-robe** : hauts, bas, pièces uniques, vestes et manteaux, chaussures, accessoires. Ajout par photo (fond détouré automatiquement), par capture d’écran de la fiche produit, ou par marque et référence. Lecture d’étiquette pour la marque, la référence et la matière.
+- **Éclairage** : au premier lancement, l’appli demande le mode clair ou le mode sombre (ou de suivre l’appareil). Le choix se change à tout moment dans les réglages, et le studio 3D adapte sa lumière.
+- **Garde-robe** : hauts, bas, pièces uniques, vestes et manteaux, chaussures, accessoires, présentés comme dans les boutiques : rayons numérotés, vignettes, recherche, vue à 1, 2 ou 3 colonnes, filtres (propres ou au sale, favoris, achetées en boutique, couleur), tri (par rayon, récentes, moins portées) et cœur pour les favoris. Ajout par photo (fond détouré automatiquement), par capture d’écran de la fiche produit, ou par marque et référence. Lecture d’étiquette pour la marque, la référence et la matière.
 - **Météo du jour** : à l’ouverture, l’appli propose d’utiliser la localisation ; sinon, une barre de recherche permet de saisir sa ville. La carte météo s’anime selon le temps (soleil, nuages, pluie, neige, orage, brouillard, vent, nuit) et donne le ressenti du matin et de l’après-midi, la pluie et le vent. Les valeurs restent ajustables à la main.
 - **Tenues du jour** : trois looks construits à partir de la température du matin et de l’après-midi, de la pluie et du vent, de l’occasion et du style. Le styliste IA peut choisir et expliquer les looks.
-- **Mannequin 3D réaliste** : vrai corps humain (maillage MakeHuman, CC0) déformé selon le sexe, la taille, le poids (IMC), la corpulence, les épaules et les hanches, en pose naturelle, bras le long du corps. Les vêtements sont taillés sur ce corps : ajustés, tombé, plis, ourlets nets, cols, revers, boutons, surpiqûres, chaussures, cheveux et accessoires. Moteur WebGL écrit à la main, sans bibliothèque.
-- **Boutiques** : une sélection de vraies pièces chez Uniqlo, Zara, Decathlon, Levi’s, Dr. Martens, Nike, Adidas et Carhartt, avec leurs vraies photos, présentée comme une page de marque : rayons numérotés, vignettes, grande image, recherche, vue à 1, 2 ou 3 colonnes, filtres par rayon (femme, homme), boutique et couleur. Chaque pièce s’essaie sur le mannequin : l’appli construit des looks autour d’elle avec les vêtements de ta garde-robe. On choisit le coloris, on garde les pièces qui plaisent dans une liste d’envies (avec le total), on ouvre la page de la boutique, et une pièce achetée passe dans la garde-robe en un geste.
+- **Mannequin 3D réaliste** : vrai corps humain (maillage MakeHuman, CC0) déformé selon le sexe, la taille, le poids (IMC), la corpulence, les épaules et les hanches, en pose naturelle, bras le long du corps. Les vêtements sont taillés sur ce corps : ajustés, tombé, plis, ourlets nets, cols, revers, boutons, surpiqûres, chaussures, cheveux et accessoires. Rendu façon photo de studio : ombres portées au sol et ombres douces entre les pièces (shadow mapping), relief des matières (laine, maille, denim, cuir, peau), rendu filmique et suréchantillonnage pour des contours nets. Moteur WebGL écrit à la main, sans bibliothèque.
+- **Boutiques** : une sélection de vraies pièces chez Uniqlo, Zara, Decathlon, Levi’s, Dr. Martens, Nike, Adidas et Carhartt, avec leurs vraies photos, présentée comme une page de marque : rayons numérotés, vignettes, grande image, recherche, vue à 1, 2 ou 3 colonnes, filtres par rayon (femme, homme), boutique et couleur. Chaque pièce s’essaie sur le mannequin : l’appli construit des looks autour d’elle avec les vêtements de ta garde-robe. On choisit le coloris, on garde les pièces qui plaisent dans une liste d’envies (avec le total) et on achète sur le site de la boutique. Au retour dans l’appli, elle demande « Tu l’as acheté ? » : un geste, et la pièce arrive dans la garde-robe avec sa photo (l’appli ne voit pas ce qui se passe sur le site de la boutique, c’est pourquoi elle pose la question).
 - **Tendances** : couleurs et pièces de la saison, expliquées dans l’appli (ce que c’est, à quoi sert le badge « Tendance », ce que veut dire la coche). Chaque couleur s’ouvre : avec quoi la porter, tes pièces de cette couleur et celles des boutiques.
 - **Historique** : tenues portées et notées. L’appli évite de reproposer la tenue de la veille et apprend tes goûts.
 
@@ -20,7 +21,7 @@ L’appli tient dans un seul fichier, `index.html`, sans dépendance à installe
 
 **Sur le site (GitHub Pages)**, pour tout le monde :
 
-- la garde-robe, les photos de vêtements, la liste d’envies, l’historique et les réglages sont enregistrés dans le navigateur de l’appareil (localStorage pour les fiches, IndexedDB pour les photos) ;
+- la garde-robe, les photos de vêtements, la liste d’envies, l’historique, les réglages et le choix d’éclairage sont enregistrés dans le navigateur de l’appareil (localStorage pour les fiches, IndexedDB pour les photos) ;
 - chaque personne a sa propre garde-robe, rien n’est envoyé en ligne ;
 - les fiches se remplissent à la main et les captures de fiche produit se recadrent avec les curseurs ;
 - la météo vient d’Open-Meteo (prévisions et recherche de ville, sans clé) et de BigDataCloud (nom de la ville à partir de la position) ;
@@ -45,8 +46,8 @@ L’appli tient dans un seul fichier, `index.html`, sans dépendance à installe
 
 Tout est dans `index.html` :
 
-- les styles (design « studio » : blanc, noir, gris pierre, Bodoni Moda et Hanken Grotesk) ;
-- le moteur 3D « Atelier » : corps MakeHuman compressé dans la page, morphing et squelette simplifié, vêtements générés dans un Web Worker (coques subdivisées, découpes nettes, tombé, plis), rendu WebGL façon studio photo ;
+- les styles (design « studio » en deux éclairages, clair et sombre : blanc, noir, gris pierre, Bodoni Moda et Hanken Grotesk) ;
+- le moteur 3D « Atelier » : corps MakeHuman compressé dans la page, morphing et squelette simplifié, vêtements générés dans un Web Worker (coques subdivisées, découpes nettes, tombé, plis), rendu WebGL façon studio photo (ombres, relief des matières, rendu filmique) ;
 - les rendus de vêtements façon photo produit (SVG avec relief et matière) ;
 - le module météo (localisation, recherche de ville, prévisions, icônes animées en SVG) ;
 - les règles de tenue (couches selon la température, accords de couleurs, rotation des pièces, tendances, goûts appris) ;

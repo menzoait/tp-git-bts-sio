@@ -16,7 +16,7 @@ img{max-width:100%}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Hanken+Grotesk:wght@400..700&display=swap">
 <style>
 :root{
-  /* Layout : une colonne façon appli de mode (580px max), blanche, sans décor. « Aujourd’hui » s’ouvre sur le studio : le mannequin en pied sur fond gris clair, la marque en haut, le look en légende. Dessous, les pièces en fiches produit, l’avis du styliste, le bouton d’action, puis la journée et les tendances, séparées par des filets. Un seul thème, clair. */
+  /* Layout : une colonne façon appli de mode (580px max), blanche, sans décor. « Aujourd’hui » s’ouvre sur le studio : le mannequin en pied sur fond gris clair, la marque en haut, le look en légende. Dessous, les pièces en fiches produit, l’avis du styliste, le bouton d’action, puis la journée et les tendances, séparées par des filets. Deux éclairages, clair ou sombre, choisis au premier lancement. */
   color-scheme:light;
   --paper:#FFFFFF;
   --studio:#EFEEEA;
@@ -647,9 +647,122 @@ button.tr-col:active .dot{opacity:.85}
 @media (max-width:370px){.tabbtn{font-size:10px}.zs-tools{gap:14px}}
 @media (max-width:360px){.hcard{grid-template-columns:38px 1fr}.viewseg button{padding:0 9px}.ref-result{grid-template-columns:80px 1fr}.tr-colors{grid-template-columns:repeat(3,minmax(0,1fr))}.pc{flex-basis:128px}}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+
+/* ===== v10 : netteté ===== */
+[hidden]{display:none!important}
+:root{--ink-3:#77756F;--board:var(--tile);--photo:#F2F1EE;--photo-2:#F5F5F3;--photo-line:rgba(32,28,22,.42)}
+body{text-rendering:optimizeLegibility;font-kerning:normal}
+.zs-tile-m,.zc-media,.zp-gal,.try-shot,.zs-hero{background:var(--photo)}
+.zimg.contain,.ic-vis > img.ph.shot.contain,.pc-vis > img.ph.shot.contain,.cell > img.ph.shot.contain{background:var(--photo-2)}
+.zs-tile-l{font-size:10.5px}
+.zc-name,.zc-meta{font-size:11.5px}
+
+/* ===== v10 : mode sombre ===== */
+:root[data-scheme="dark"]{color-scheme:dark;--paper:#0F0F10;--studio:#19191B;--tile:#1D1D1F;--tile-ink:rgba(236,232,224,.42);--ink:#F2F0EB;--ink-2:#C4C1BA;--ink-3:#8E8B85;--rule:#28282A;--rule-2:#3A3A3D;--good:#7CC9A0;--warn:#E3AE5B;--bad:#F07267;--garment-line:rgba(236,232,224,.42);--photo:#E6E4E0;--photo-2:#EAE9E6}
+[data-scheme="dark"] .cover{background:linear-gradient(180deg,#252527 0%,var(--studio) 58%,#101011 100%)}
+[data-scheme="dark"] .cover::before{background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.28))}
+[data-scheme="dark"] .cover .glass{background:rgba(24,24,26,.74)}
+[data-scheme="dark"] .cover .stage-msg .box.glass{background:rgba(24,24,26,.92)}
+[data-scheme="dark"] .tabbar{background:rgba(15,15,16,.92)}
+[data-scheme="dark"] .scrim{background:rgba(0,0,0,.62)}
+[data-scheme="dark"] .sheet{box-shadow:0 -10px 40px rgba(0,0,0,.55);border-top:1px solid var(--rule)}
+[data-scheme="dark"] .btn.danger{color:#1A0B0A}
+[data-scheme="dark"] .wx-card{--wx-ink-3:rgba(242,240,235,.62);--wx-rule:rgba(255,255,255,.12)}
+[data-scheme="dark"] .wx-card[data-sky="clear"]{background:linear-gradient(155deg,#3E3120 0%,#29251F 45%,#1C1C1D 100%)}
+[data-scheme="dark"] .wx-card[data-sky="partly"]{background:linear-gradient(155deg,#373020 0%,#24262A 55%,#1D1E20 100%)}
+[data-scheme="dark"] .wx-card[data-sky="cloudy"]{background:linear-gradient(160deg,#2B2F35 0%,#222428 60%,#1C1C1E 100%)}
+[data-scheme="dark"] .wx-card[data-sky="rain"]{background:linear-gradient(165deg,#222C39 0%,#1E242C 55%,#1A1B1E 100%)}
+[data-scheme="dark"] .wx-card[data-sky="snow"]{background:linear-gradient(165deg,#2D3541 0%,#23282F 55%,#1D1E21 100%)}
+[data-scheme="dark"] .wx-card[data-sky="storm"]{background:linear-gradient(165deg,#1E232C 0%,#181B21 55%,#141518 100%)}
+[data-scheme="dark"] .wx-card[data-sky="fog"]{background:linear-gradient(170deg,#2B2B2A 0%,#222221 60%,#1B1B1A 100%)}
+[data-scheme="dark"] .wx-card[data-sky="storm"]::after{background:#9fb3cc}
+[data-scheme="dark"] .wx-skel span{background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.09),rgba(255,255,255,.04));background-size:200% 100%}
+[data-scheme="dark"] .wx-ask-sky{background:linear-gradient(155deg,#3B3121 0%,#27241F 45%,#1D2026 100%)}
+[data-scheme="dark"] .zs-tile-m,[data-scheme="dark"] .zc-media,[data-scheme="dark"] .zp-gal,[data-scheme="dark"] .zp-shot,[data-scheme="dark"] .try-shot,[data-scheme="dark"] .bq-m{--garment-line:var(--photo-line);background:var(--photo)}
+[data-scheme="dark"] .zc-wish{color:#151515;background:rgba(255,255,255,.84)}
+[data-scheme="dark"] .zp-n,[data-scheme="dark"] .tc-band span{color:#151515}
+[data-scheme="dark"] .zs-search input::placeholder{color:var(--ink-2)}
+[data-scheme="dark"] .sq i,[data-scheme="dark"] .cdot,[data-scheme="dark"] .sw-dot,[data-scheme="dark"] .tc-mate i,[data-scheme="dark"] .zs-chip i,[data-scheme="dark"] .tr-col .dot,[data-scheme="dark"] .zs-sw,[data-scheme="dark"] .bq-c i{box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+[data-scheme="dark"] .ph.cutout{filter:drop-shadow(0 8px 12px rgba(0,0,0,.5))}
+
+/* ===== v10 : choix de l’éclairage au premier lancement ===== */
+.sheet.th-ask{max-width:520px;z-index:45}
+#th-scrim{z-index:44}
+.th-in{display:flex;flex-direction:column;gap:16px;padding:12px max(22px,env(safe-area-inset-left,0px)) 22px max(22px,env(safe-area-inset-right,0px));overflow-y:auto}
+.th-k{margin:0;text-align:center;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.th-t{margin:-8px 0 0;text-align:center;font-family:var(--font-display);font-weight:500;font-size:26px;line-height:1.1;letter-spacing:.05em;text-transform:uppercase}
+.th-d{margin:-4px auto 0;max-width:380px;text-align:center;font-size:14px;line-height:1.55;color:var(--ink-2);text-wrap:pretty}
+.th-opts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.th-opt{display:flex;flex-direction:column;gap:9px;text-align:left;min-width:0}
+.th-prev{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;box-shadow:0 0 0 1px var(--rule-2);transition:box-shadow .15s}
+.th-opt[aria-checked="true"] .th-prev{box-shadow:0 0 0 2px var(--ink)}
+.th-l{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.th-s{margin-top:-5px;font-size:12px;line-height:1.4;color:var(--ink-2)}
+.ck{flex:none;width:18px;height:18px;border:1.5px solid var(--ink-3);border-radius:50%;display:grid;place-items:center}
+.th-opt[aria-checked="true"] .ck{border-color:var(--ink)}
+.th-opt[aria-checked="true"] .ck::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--ink)}
+.th-auto{align-self:center;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.th-auto .ck{width:16px;height:16px}
+.th-auto[aria-pressed="true"]{color:var(--ink);font-weight:700}
+.th-auto[aria-pressed="true"] .ck{border-color:var(--ink)}
+.th-auto[aria-pressed="true"] .ck::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--ink)}
+/* mini maquette de l’appli, aux couleurs fixes de chaque thème */
+.tp{--p:#FFFFFF;--s:#EFEEEA;--s2:#E4E2DD;--i:#151515;--i3:#8A8883;--r:#E3E1DC;position:absolute;inset:0;display:flex;flex-direction:column;background:var(--p);color:var(--i)}
+.tp.dk{--p:#0F0F10;--s:#1C1C1E;--s2:#121213;--i:#F2F0EB;--i3:#8E8B85;--r:#2A2A2C}
+.tp-stage{position:relative;flex:1 1 auto;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(180deg,var(--s) 55%,var(--s2));overflow:hidden}
+.tp-mh{position:absolute;top:9%;left:0;right:0;text-align:center;font-family:var(--font-display);font-size:10.5px;font-weight:500;letter-spacing:.32em;padding-left:.32em}
+.tp-fig{position:relative;z-index:1;width:21%;height:auto;margin-bottom:7%}
+.tp-sh{position:absolute;bottom:5%;left:50%;width:26%;height:5%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.32),rgba(0,0,0,0))}
+.tp.dk .tp-sh{background:radial-gradient(closest-side,rgba(0,0,0,.7),rgba(0,0,0,0))}
+.tp-lines{display:flex;flex-direction:column;gap:5px;padding:9% 10% 7%}
+.tp-lines i{display:block;height:4px;background:var(--i)}
+.tp-lines i:nth-child(2){width:64%;opacity:.4}
+.tp-lines i:nth-child(3){width:42%;opacity:.4}
+.tp-bar{display:flex;justify-content:space-around;padding:6% 10%;border-top:1px solid var(--r)}
+.tp-bar i{width:8px;height:8px;border:1.3px solid var(--i3);border-radius:2px}
+.tp-bar i:first-child{border-color:var(--i)}
+@media (min-width:700px){.sheet.th-ask{bottom:auto;top:50%;transform:translateY(-50%)}.sheet.th-ask::before{display:none}.th-in{padding-top:26px}}
+@media (max-height:640px){.th-prev{aspect-ratio:1/1}}
+
+/* ===== v10 : garde-robe façon boutique ===== */
+body.is-ward .wrap{max-width:1480px}
+#tab-wardrobe{gap:0}
+.zs-add{gap:6px;padding:8px 13px;background:var(--ink);color:var(--paper);font-weight:600}
+.zs-add .i{width:15px;height:15px}
+.zs-n{margin-left:2px;font-size:10.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.zs-cat[aria-current="true"] .zs-n{color:var(--ink-2)}
+.zw-notes{display:flex;flex-direction:column;gap:8px;margin:0 0 18px}
+.zc-tag{position:absolute;left:6px;top:6px;z-index:1;padding:4px 7px;background:rgba(255,255,255,.9);color:#151515;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;line-height:1.2}
+.zc-tag.new{background:#151515;color:#fff}
+.wc.is-sale .zc-media > img{opacity:.45}
+.wv > img.ph{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center 22%}
+.wv > img.ph.cutout{object-fit:contain;object-position:center;padding:9%}
+.wv > img.ph.shot.contain{object-fit:contain;object-position:center;padding:10%;background:var(--photo-2)}
+.wv > img.garment,.bq-m > img.garment{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain}
+.zs-sws{display:flex;flex-wrap:wrap;gap:9px;padding:4px 0}
+.zs-sw{width:22px;height:22px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.zs-sw[aria-pressed="true"]{outline:1.5px solid var(--ink);outline-offset:3px}
+.zw-empty{align-items:flex-start}
+.wc .zc-meta .sq{flex:none;display:inline-flex;gap:3px;align-items:center}
+
+/* ===== v10 : retour de boutique ===== */
+.bq{gap:20px}
+.bq-item{display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:center}
+.bq-m{position:relative;display:block;aspect-ratio:2/3;background:var(--photo);overflow:hidden}
+.bq-t{display:flex;flex-direction:column;gap:6px;min-width:0}
+.bq-c{margin:0;display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.bq-c i{width:12px;height:12px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.bq-h{margin:0 0 6px;font-family:var(--font-display);font-weight:500;font-size:24px;line-height:1.1;letter-spacing:.04em;text-transform:uppercase}
+.sp-tip{display:flex;gap:9px;align-items:flex-start;margin:0;font-size:12.5px;line-height:1.45;color:var(--ink-2)}
+.sp-tip .i{width:16px;height:16px;margin-top:1px}
 </style>
 </head>
 <body>
+<script>/* Éclairage choisi (clair, sombre ou comme l’appareil), appliqué avant l’affichage pour éviter un flash */
+(function () { var v = null, dark = false; try { v = JSON.parse(localStorage.getItem("dm:theme") || "null"); } catch (e) { v = null; }
+  try { dark = v === "dark" || (v !== "light" && !!window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches); } catch (e) { dark = v === "dark"; }
+  document.documentElement.setAttribute("data-scheme", dark ? "dark" : "light"); })();</script>
+
 <div class="wrap">
   <p id="banner" class="banner" hidden></p>
 
@@ -745,16 +858,7 @@ button.tr-col:active .dot{opacity:.85}
   </section>
 
   <section id="tab-wardrobe" class="tab" aria-labelledby="t-ward" hidden>
-    <div class="intro row">
-      <div>
-        <p class="eyebrow" id="ward-count">Chargement…</p>
-        <h1 class="display" id="t-ward">Garde-<em>robe</em></h1>
-      </div>
-      <button class="btn primary" id="add-btn" data-action="add"></button>
-    </div>
-    <div id="ward-notes" class="tab" style="gap:10px"></div>
-    <div class="ward-filters" id="ward-filters" role="group" aria-label="Filtrer par catégorie"></div>
-    <div id="ward-grid"></div>
+    <div id="ward-root"><h1 class="zs-title" id="t-ward">Garde-robe</h1><p class="zs-sub" id="ward-count">Chargement…</p></div>
   </section>
 
   <section id="tab-shop" class="tab" aria-labelledby="t-shop" hidden>
@@ -787,7 +891,7 @@ button.tr-col:active .dot{opacity:.85}
 
   <section id="tab-settings" class="tab" aria-labelledby="t-set" hidden>
     <div class="intro">
-      <p class="eyebrow">Version 9</p>
+      <p class="eyebrow">Version 10</p>
       <h1 class="display" id="t-set"><em>Réglages</em></h1>
     </div>
     <div id="settings" class="tab" style="gap:14px"></div>
@@ -809,6 +913,17 @@ button.tr-col:active .dot{opacity:.85}
       <button class="btn primary big wide" id="wx-allow" data-action="wx-allow">Autoriser la localisation</button>
       <button class="btn ghost big wide" data-action="wx-city">Saisir ma ville</button>
     </div>
+  </div>
+</div>
+<div class="scrim" id="th-scrim" hidden></div>
+<div class="sheet th-ask" id="theme-ask" role="dialog" aria-modal="true" aria-labelledby="th-t" aria-describedby="th-d" hidden>
+  <div class="th-in">
+    <p class="th-k">Bienvenue</p>
+    <h2 class="th-t" id="th-t">Éclairage de l’appli</h2>
+    <p class="th-d" id="th-d">Choisis l’ambiance de ton dressing. Tu pourras en changer quand tu veux dans les réglages.</p>
+    <div class="th-opts" id="th-opts" role="radiogroup" aria-label="Éclairage"></div>
+    <button class="th-auto" id="th-auto" data-action="th-pick" data-v="auto" aria-pressed="false"></button>
+    <button class="btn primary big wide" id="th-go" data-action="th-go">Continuer</button>
   </div>
 </div>
 <div class="toast" id="toast" role="status" hidden></div>
@@ -2474,8 +2589,9 @@ function DM_HUMAN(scope, inWorker) {
       for (let j = 0; j < nC; j++) { if (prmC[j * 10 + 4] > 0.4) continue; const dx = base[j * 3] - baseS[i * 3], dy = base[j * 3 + 1] - baseS[i * 3 + 1], dz = base[j * 3 + 2] - baseS[i * 3 + 2], d = dx * dx + dy * dy + dz * dz; if (d < bd) { bd = d; bj = j; } }
       near[i] = bj;
     }
+    const longLegs = items.some((x) => ["jeans", "chino", "trousers", "cargo", "jogger", "jumpsuit"].includes(x.kind));
     for (const it of items) {
-      if (SHOE2[it.kind]) { buildShoes2(P, Pp, it, O, L, LP); continue; }
+      if (SHOE2[it.kind]) { buildShoes2(P, Pp, it, O, L, LP, longLegs); continue; }
       if (["beanie", "cap", "hat", "scarf", "belt", "watch", "glove", "bag"].includes(it.kind)) { buildAccessory(P, Pp, it, O, L, LP, B); continue; }
       const sp = specOf(it.kind, L);
       if (!sp) continue;
@@ -2624,7 +2740,7 @@ function DM_HUMAN(scope, inWorker) {
     }
     return {pos, tris};
   }
-  function buildShoes2(Prest, P, it, O, L, LP) {
+  function buildShoes2(Prest, P, it, O, L, LP, underPants) {
     const sp = SHOE2[it.kind];
     if (!sp) return false;
     const hs = L.hs, reg = H.reg, soleC = it.sole || (it.kind === "sneaker" ? [0.93, 0.92, 0.9] : [0.13, 0.11, 0.1]);
@@ -2716,7 +2832,7 @@ function DM_HUMAN(scope, inWorker) {
       const so = shoeLoft(sole, 20, true), RS = rootW(so.pos.length / 3);
       O.mesh(so.pos, RS.bi, RS.bw, so.tris, soleC, 7, null, 0);
       /* tige de botte : autour du tibia, jusqu'à la hauteur voulue */
-      if (sp.shaft) {
+      if (sp.shaft && !(underPants && sp.shaft > 0)) {
         const topY = sp.shaft > 0 ? floorY + sp.shaft * hs + 0.03 : LP.S[sx].kn[1] - 0.07 * hs;
         const y0 = floorY + sp.collar * hs * 0.85, NR = 28, NY = 18, rr = [];
         const leg = [];
@@ -3124,18 +3240,34 @@ const Atelier = (() => {
   }
 
   const VS = `attribute vec3 aP;attribute vec3 aN;attribute vec3 aC;attribute float aA;attribute float aM;attribute vec2 aU;attribute vec3 aO;
-uniform mat4 uVP;uniform vec2 uR;
-varying vec3 vN;varying vec3 vNO;varying vec3 vO;varying vec3 vW;varying vec3 vC;varying float vA;varying float vM;varying vec2 vU;
+uniform mat4 uVP;uniform vec2 uR;uniform mat4 uLVP;
+varying vec3 vN;varying vec3 vNO;varying vec3 vO;varying vec3 vW;varying vec3 vC;varying float vA;varying float vM;varying vec2 vU;varying vec4 vL;
 vec3 rot(vec3 q){return vec3(uR.x*q.x+uR.y*q.z,q.y,-uR.y*q.x+uR.x*q.z);}
-void main(){vO=aO;vNO=aN;vN=rot(aN);vW=rot(aP);vC=aC;vA=aA;vM=aM;vU=aU;gl_Position=uVP*vec4(vW,1.0);}`;
+void main(){vO=aO;vNO=aN;vN=rot(aN);vW=rot(aP);vC=aC;vA=aA;vM=aM;vU=aU;vL=uLVP*vec4(vW+vN*0.005,1.0);gl_Position=uVP*vec4(vW,1.0);}`;
+  /* passe d'ombre : profondeur vue depuis la lumière principale, rangée dans une texture RGBA */
+  const VS_S = `attribute vec3 aP;attribute float aM;uniform mat4 uLVP;uniform vec2 uR;varying float vM;
+vec3 rot(vec3 q){return vec3(uR.x*q.x+uR.y*q.z,q.y,-uR.y*q.x+uR.x*q.z);}
+void main(){vM=aM;gl_Position=uLVP*vec4(rot(aP),1.0);}`;
+  const FS_S = `precision highp float;varying float vM;
+void main(){if(vM>98.5)discard;float d=gl_FragCoord.z;vec4 e=fract(d*vec4(1.0,255.0,65025.0,16581375.0));e-=e.yzww*vec4(1.0/255.0,1.0/255.0,1.0/255.0,0.0);gl_FragColor=e;}`;
   const FS = `#extension GL_OES_standard_derivatives : enable
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 precision highp float;
 #else
 precision mediump float;
 #endif
-varying vec3 vN;varying vec3 vNO;varying vec3 vO;varying vec3 vW;varying vec3 vC;varying float vA;varying float vM;varying vec2 vU;
-uniform vec3 uEye;uniform vec2 uSh;uniform vec2 uF;uniform float uAlpha;uniform vec2 uR;uniform float uHt;
+varying vec3 vN;varying vec3 vNO;varying vec3 vO;varying vec3 vW;varying vec3 vC;varying float vA;varying float vM;varying vec2 vU;varying vec4 vL;
+uniform vec3 uEye;uniform vec2 uSh;uniform vec2 uF;uniform float uAlpha;uniform vec2 uR;uniform float uHt;uniform sampler2D uSM;uniform float uTx;uniform float uShOn;uniform float uDark;
+const vec3 L1=vec3(-0.3655,0.8124,0.4542);
+float unpackD(vec4 c){return dot(c,vec4(1.0,1.0/255.0,1.0/65025.0,1.0/16581375.0));}
+/* ombre douce : 16 échantillons tournés au hasard pour éviter les marches */
+float shadowAt(float bias){if(uShOn<0.5)return 1.0;vec3 p=vL.xyz/vL.w*0.5+0.5;if(p.x<0.002||p.x>0.998||p.y<0.002||p.y>0.998||p.z>1.0)return 1.0;
+ float an=6.2832*fract(sin(dot(gl_FragCoord.xy,vec2(12.9898,78.233)))*43758.5453);float ca=cos(an),sa=sin(an);float s=0.0;
+ for(int i=0;i<4;i++)for(int j=0;j<4;j++){vec2 o=(vec2(float(i),float(j))-1.5)*uTx*1.35;o=vec2(ca*o.x-sa*o.y,sa*o.x+ca*o.y);s+=step(p.z-bias,unpackD(texture2D(uSM,p.xy+o)));}
+ return s/16.0;}
+/* relief fin sans tangentes (hauteur en mètres) */
+vec3 bump(vec3 n,float h){vec3 dpx=dFdx(vW);vec3 dpy=dFdy(vW);float hx=dFdx(h);float hy=dFdy(h);vec3 r1=cross(dpy,n);vec3 r2=cross(n,dpx);float det=dot(dpx,r1);if(abs(det)<1e-12)return n;vec3 g=sign(det)*(hx*r1+hy*r2);return normalize(abs(det)*n-g);}
+vec3 aces(vec3 x){return clamp((x*(2.51*x+0.03))/(x*(2.43*x+0.59)+0.14),0.0,1.0);}
 float hash(vec3 p){p=fract(p*0.3183099+0.1);p*=17.0;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}
 float noise(vec3 x){vec3 i=floor(x);vec3 f=fract(x);f=f*f*(3.0-2.0*f);
  return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);}
@@ -3147,31 +3279,34 @@ void main(){
  if(vM>98.5){
   vec2 q=vO.xz/uSh;float a=exp(-dot(q,q)*2.4)*0.24;
   vec2 f1=(vec2(abs(vO.x),vO.z)-uF)/vec2(0.065,0.15);a+=exp(-dot(f1,f1)*1.5)*0.34;
+  float rr=length(vO.xz)/(uSh.x*2.6);float csh=(1.0-shadowAt(0.0012))*(1.0-smoothstep(0.55,1.0,rr));
+  a=1.0-(1.0-a)*(1.0-csh*mix(0.3,0.45,uDark));
   gl_FragColor=vec4(0.0,0.0,0.0,a*uAlpha);return;}
  vec3 n=normalize(vN);vec3 V=normalize(uEye-vW);if(dot(n,V)<0.0)n=-n;
  vec3 nO=normalize(vNO);
  float h=mix(vO.x,vO.z,abs(nO.x)/(abs(nO.x)+abs(nO.z)+1e-4));
  float m=vM;vec3 al=lin(vC);float rough=0.8;float f0=0.03;float sheen=0.0;vec3 wrap=vec3(0.0);float spec=1.0;
- float hd=vU.x;float code=vU.y;
+ float hd=vU.x;float code=vU.y;float bh=0.0;
  if(m<0.5){
   al=mix(al,al*vec3(0.9,0.62,0.6),vU.x*0.4);al=mix(al,al*vec3(0.32,0.26,0.22),vU.y*0.75);
   rough=0.5;f0=0.028;wrap=vec3(0.42,0.24,0.18);
+  float pf=1.0-smoothstep(0.25,0.7,fwidth(vO.x)*700.0);bh=(noise(vO*700.0)-0.5)*0.00007*pf+(noise(vO*vec3(90.0,240.0,90.0))-0.5)*0.00005;rough=0.46+0.1*noise(vO*260.0);
  }else if(m<9.5){
   float big=noise(vO*vec3(45.0,30.0,45.0));
-  if(m<1.5){al*=0.94+0.06*fine(h+vO.y*0.5,0.0011)+0.06*big;rough=0.88;sheen=0.3;wrap=vec3(0.12);}
+  if(m<1.5){float jr=fine(h+vO.y*0.5,0.0011);al*=0.94+0.06*jr+0.06*big;rough=0.88;sheen=0.3;wrap=vec3(0.12);bh=(jr-0.5)*0.00009+(big-0.5)*0.0004;}
   else if(m<2.5){
    float row=fract(vO.y/0.0034);float col=fract(h/0.0042);
    float v=abs(col-0.5)*2.0;float knit=smoothstep(0.0,0.5,abs(row-v*0.5-0.25)*2.0);
    float w=max(fwidth(vO.y)/0.0034,fwidth(h)/0.0042);knit=mix(knit,0.5,smoothstep(0.3,0.8,w));
-   al*=0.8+0.28*knit;al*=0.95+0.08*big;rough=0.97;sheen=0.6;wrap=vec3(0.18);
+   al*=0.8+0.28*knit;al*=0.95+0.08*big;rough=0.97;sheen=0.6;wrap=vec3(0.18);bh=(knit-0.5)*0.0008*(1.0-smoothstep(0.3,0.8,w));
   }else if(m<3.5){
    float tw=fine(h+vO.y,0.0014);float slub=noise(vO*vec3(220.0,25.0,220.0));
    al*=0.82+0.16*tw;al*=0.86+0.3*slub;
    float fade=smoothstep(0.45,0.9,noise(vO*vec3(9.0,6.0,9.0)))*smoothstep(0.2,0.8,nO.z);al=mix(al,al*1.35+lin(vec3(0.06,0.08,0.1)),fade*0.45);
-   rough=0.9;sheen=0.15;
-  }else if(m<4.5){al*=0.94+0.1*noise(vO*900.0)*(1.0-smoothstep(0.2,0.6,fwidth(vO.x)*900.0));rough=0.34;f0=0.045;}
+   rough=0.9;sheen=0.15;bh=(tw-0.5)*0.00018+(slub-0.5)*0.00012;
+  }else if(m<4.5){float pb=noise(vO*900.0);float pfa=1.0-smoothstep(0.2,0.6,fwidth(vO.x)*900.0);al*=0.94+0.1*pb*pfa;rough=0.34+0.12*pb*pfa;f0=0.045;bh=(pb-0.5)*0.00009*pfa+(big-0.5)*0.0003;}
   else if(m<5.5){rough=0.32;f0=0.05;sheen=0.15;}
-  else if(m<6.5){al*=0.9+0.12*noise(vO*420.0)*(1.0-smoothstep(0.3,0.8,fwidth(vO.x)*420.0))+0.06*big;rough=0.97;sheen=0.45;wrap=vec3(0.15);}
+  else if(m<6.5){float fz=noise(vO*420.0);float ffa=1.0-smoothstep(0.3,0.8,fwidth(vO.x)*420.0);al*=0.9+0.12*fz*ffa+0.06*big;rough=0.97;sheen=0.45;wrap=vec3(0.15);bh=(fz-0.5)*0.00022*ffa+(big-0.5)*0.0005;}
   else if(m<7.5){rough=0.75;al*=0.97+0.05*fine(vO.y,0.0015);}
   else if(m<8.5){
    vec3 g=vO/0.028;vec3 cell=floor(g);vec3 f=fract(g)-0.5-0.3*(vec3(hash(cell+1.7),hash(cell+3.1),hash(cell+5.3))-0.5);
@@ -3197,36 +3332,39 @@ void main(){
     al*=1.0-0.28*flap*max(line(vO.y-(code<6.5?0.52:0.47)*uHt,0.0012),line(vO.y-(code<6.5?0.555:0.505)*uHt,0.0012)*0.7);}
   }
  }else if(m<10.5){
-  float st=noise(vec3(vO.x*300.0,vO.y*14.0,vO.z*300.0));al*=0.7+0.55*st;rough=0.38;f0=0.046;
+  float st=noise(vec3(vO.x*300.0,vO.y*14.0,vO.z*300.0));al*=0.7+0.55*st;rough=0.38;f0=0.046;bh=(st-0.5)*0.0004;
  }else if(m<11.5){
   float r=length(vU);vec3 iris=lin(vec3(0.42,0.3,0.19))*(0.8+0.4*noise(vec3(vU*40.0,1.0)));
   al=mix(lin(vec3(0.9,0.88,0.85)),iris,smoothstep(0.5,0.45,r));al=mix(al,al*0.4,smoothstep(0.38,0.5,r)*step(r,0.5));al=mix(al,vec3(0.01),smoothstep(0.2,0.16,r));rough=0.1;f0=0.06;
  }else{al=lin(vec3(0.06,0.05,0.05));rough=0.9;spec=0.0;}
  float ao=vA;
+ n=bump(n,bh);
  /* studio : boîte à lumière principale haute à gauche, débouchage froid, deux contre-jours */
- vec3 L1=normalize(vec3(-0.6,0.75,0.7));vec3 L2=normalize(vec3(0.85,0.15,0.5));vec3 L3=normalize(vec3(0.6,0.45,-0.9));vec3 L4=normalize(vec3(-0.7,0.3,-0.8));
- vec3 c1=vec3(1.0,0.96,0.91)*1.75;vec3 c2=vec3(0.84,0.89,1.0)*0.36;vec3 c3=vec3(1.0,0.98,0.95)*0.55;vec3 c4=vec3(0.9,0.94,1.0)*0.35;
- float d1=dot(n,L1);float d2=dot(n,L2);float d3=dot(n,L3);float d4=dot(n,L4);
+ vec3 L2=normalize(vec3(0.85,0.15,0.5));vec3 L3=normalize(vec3(0.6,0.45,-0.9));vec3 L4=normalize(vec3(-0.7,0.3,-0.8));
+ vec3 c1=vec3(1.0,0.96,0.91)*1.8;vec3 c2=vec3(0.84,0.89,1.0)*0.4;vec3 c3=vec3(1.0,0.98,0.95)*mix(0.55,0.95,uDark);vec3 c4=vec3(0.9,0.94,1.0)*mix(0.35,0.7,uDark);
+ float d1=dot(n,L1);float shd=shadowAt(0.0009+0.0022*(1.0-clamp(dot(normalize(vN),L1),0.0,1.0)));float sk=mix(shd,1.0,0.12);float d2=dot(n,L2);float d3=dot(n,L3);float d4=dot(n,L4);
  vec3 w1=max((vec3(d1)+wrap)/(1.0+wrap),0.0);vec3 w2=max((vec3(d2)+wrap)/(1.0+wrap),0.0);
- vec3 diff=c1*w1*(0.35+0.65*ao)+c2*w2*ao+(c3*max(d3,0.0)+c4*max(d4,0.0))*(0.5+0.5*ao);
+ vec3 diff=c1*w1*(0.35+0.65*ao)*sk+c2*w2*ao+(c3*max(d3,0.0)+c4*max(d4,0.0))*(0.5+0.5*ao);
  vec3 amb=mix(vec3(0.36,0.33,0.31),vec3(0.82,0.84,0.88),0.5+0.5*n.y)*0.42*ao*ao;
  vec3 col=al*(diff+amb)*0.66;
  float a2=rough*rough;a2*=a2;float nv=max(dot(n,V),0.001);
  vec3 Hh=normalize(L1+V);float nh=max(dot(n,Hh),0.0);
  float Dg=a2/(3.14159*pow(nh*nh*(a2-1.0)+1.0,2.0));
  float Fr=f0+(1.0-f0)*pow(1.0-max(dot(Hh,V),0.0),5.0);
- col+=c1*Dg*Fr*max(d1,0.0)*0.22*spec*(0.3+0.7*ao);
+ col+=c1*Dg*Fr*max(d1,0.0)*0.22*spec*(0.3+0.7*ao)*shd;
+ vec3 Rv=reflect(-V,n);float gl=1.0-rough;float sb=pow(max(dot(Rv,L1),0.0),mix(6.0,90.0,gl*gl));
+ vec3 env=mix(vec3(0.22,0.21,0.2),vec3(0.86,0.88,0.92),0.5+0.5*Rv.y)*0.05+vec3(1.0,0.97,0.92)*sb*0.12*shd;
+ col+=env*(f0+(1.0-f0)*pow(1.0-nv,5.0))*spec*ao*(0.25+0.75*gl);
  vec3 H3=normalize(L3+V);float D3=a2/(3.14159*pow(pow(max(dot(n,H3),0.0),2.0)*(a2-1.0)+1.0,2.0));
  col+=c3*D3*Fr*max(d3,0.0)*0.25*spec*ao;
  if(m>9.5&&m<10.5){vec3 T=normalize(vec3(0.0,1.0,0.0)-n*n.y);float th=dot(T,Hh);col+=vec3(1.0,0.94,0.86)*pow(sqrt(max(1.0-th*th,0.0)),70.0)*0.18*ao*(0.5+al.r*2.0);}
  col+=al*sheen*pow(1.0-nv,2.5)*0.5*ao;
  col+=vec3(0.92,0.95,1.0)*pow(1.0-nv,4.0)*0.05*ao;
- col=col*(1.0+col/5.0)/(1.0+col);
- col*=1.12;
+ float lu=dot(col,vec3(0.2126,0.7152,0.0722));col=mix(vec3(lu),col,0.86);col=aces(col*0.68);
  gl_FragColor=vec4(pow(clamp(col,0.0,1.0),vec3(1.0/2.2))*uAlpha,uAlpha);
 }`;
   function compile(type, src) { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
-  let prog, loc;
+  let prog, loc, progS = null, locS = null, sm = null;
   const ATTR = [["aP", 3], ["aN", 3], ["aC", 3], ["aA", 1], ["aM", 1], ["aU", 2], ["aO", 3]], STRIDE = 16;
   function setup() {
     prog = gl.createProgram();
@@ -3236,7 +3374,27 @@ void main(){
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
     loc = {};
     for (const [a] of ATTR) loc[a] = gl.getAttribLocation(prog, a);
-    for (const u of ["uVP", "uR", "uEye", "uSh", "uF", "uAlpha", "uHt"]) loc[u] = gl.getUniformLocation(prog, u);
+    for (const u of ["uVP", "uR", "uEye", "uSh", "uF", "uAlpha", "uHt", "uLVP", "uSM", "uTx", "uShOn", "uDark"]) loc[u] = gl.getUniformLocation(prog, u);
+    try {
+      progS = gl.createProgram();
+      gl.attachShader(progS, compile(gl.VERTEX_SHADER, VS_S));
+      gl.attachShader(progS, compile(gl.FRAGMENT_SHADER, FS_S));
+      gl.linkProgram(progS);
+      if (!gl.getProgramParameter(progS, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(progS));
+      locS = {aP: gl.getAttribLocation(progS, "aP"), aM: gl.getAttribLocation(progS, "aM"), uLVP: gl.getUniformLocation(progS, "uLVP"), uR: gl.getUniformLocation(progS, "uR")};
+      const size = Math.min(2048, gl.getParameter(gl.MAX_TEXTURE_SIZE) || 1024, gl.getParameter(gl.MAX_RENDERBUFFER_SIZE) || 1024);
+      const tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, size, size, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      const rb = gl.createRenderbuffer(); gl.bindRenderbuffer(gl.RENDERBUFFER, rb); gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, size, size);
+      const fb = gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+      gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, rb);
+      const okFb = gl.checkFramebufferStatus(gl.FRAMEBUFFER) === gl.FRAMEBUFFER_COMPLETE;
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      sm = okFb ? {tex, fb, size, key: ""} : null;
+    } catch (e) { sm = null; progS = null; }
   }
   try { setup(); } catch (e) { if (window.console) console.error(e); return api; }
 
@@ -3278,6 +3436,21 @@ void main(){
   }
   function mul(a, b) { const o = new Array(16); for (let c = 0; c < 4; c++) for (let r = 0; r < 4; r++) { let s = 0; for (let k = 0; k < 4; k++) s += a[k * 4 + r] * b[c * 4 + k]; o[c * 4 + r] = s; } return o; }
   const clampN = (x, a, b) => Math.max(a, Math.min(b, x));
+  function ortho(l, r, b, t, n, f) { return [2 / (r - l), 0, 0, 0, 0, 2 / (t - b), 0, 0, 0, 0, -2 / (f - n), 0, -(r + l) / (r - l), -(t + b) / (t - b), -(f + n) / (f - n), 1]; }
+  let LVP = null;
+  function lightFit() {
+    const L = vnorm(v(-0.3655, 0.8124, 0.4542)), s = Hh / 1.78, c = v(0, Hh * 0.45, 0);
+    const view = lookAt(v(c.x + L.x * 5, c.y + L.y * 5, c.z + L.z * 5), c, v(0, 1, 0));
+    let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9, z0 = 1e9, z1 = -1e9;
+    const R = 0.9 * s;
+    for (const x of [-0.55 * s, 0.55 * s]) for (const y of [-0.05, Hh * 1.04]) for (const z of [-0.55 * s, 0.55 * s]) {
+      const px = view[0] * x + view[4] * y + view[8] * z + view[12], py = view[1] * x + view[5] * y + view[9] * z + view[13], pz = view[2] * x + view[6] * y + view[10] * z + view[14];
+      x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py); z0 = Math.min(z0, pz); z1 = Math.max(z1, pz);
+    }
+    for (const x of [-R, R]) for (const z of [-R, R]) { const px = view[0] * x + view[8] * z + view[12], py = view[1] * x + view[9] * z + view[13]; x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py); }
+    LVP = mul(ortho(x0 - 0.02, x1 + 0.02, y0 - 0.02, y1 + 0.02, -z1 - 0.2, -z0 + 0.2), view);
+    if (sm) sm.key = "";
+  }
 
   /* scène */
   let host = null, ro = null, raf = 0, rotY = 0.3, vel = 0, drag = null, spin = false, anim = null, fade = null;
@@ -3291,11 +3464,14 @@ void main(){
     const c = host && host.dataset.c ? clampN(Number(host.dataset.c) || 0.5, host.dataset.free ? 0 : 0.3, host.dataset.free ? 1 : 0.7) : 0.5;
     eye = v(0, Hh * (c + 0.04), d);
     VP = mul(persp(fov, asp, 0.05, 40), lookAt(eye, v(0, Hh * c, 0), v(0, 1, 0)));
+    lightFit();
   }
   function resize() {
     if (!host) return;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const w = Math.max(1, Math.round(host.clientWidth * dpr)), h = Math.max(1, Math.round(host.clientHeight * dpr));
+    const dev = window.devicePixelRatio || 1, cw = Math.max(1, host.clientWidth), ch = Math.max(1, host.clientHeight);
+    let dpr = dev < 1.5 ? 2 : Math.min(dev, 3);
+    if (cw * ch * dpr * dpr > 6.5e6) dpr = Math.sqrt(6.5e6 / (cw * ch));
+    const w = Math.max(1, Math.round(cw * dpr)), h = Math.max(1, Math.round(ch * dpr));
     if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
     fit();
   }
@@ -3304,8 +3480,32 @@ void main(){
     let o = 0;
     for (const [a, n] of ATTR) { if (loc[a] >= 0) gl.vertexAttribPointer(loc[a], n, gl.FLOAT, false, STRIDE * 4, o * 4); o += n; }
   }
+  let meshGen = 0, dark = 0;
+  function shadowPass() {
+    if (!sm || !progS || !mesh || !LVP) return;
+    const key = meshGen + ":" + rotY.toFixed(4) + ":" + Hh.toFixed(3);
+    if (sm.key === key) return;
+    sm.key = key;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, sm.fb);
+    gl.viewport(0, 0, sm.size, sm.size);
+    gl.clearColor(1, 1, 1, 1);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.disable(gl.BLEND); gl.enable(gl.DEPTH_TEST); gl.depthMask(true); gl.disable(gl.CULL_FACE);
+    gl.useProgram(progS);
+    for (const [a] of ATTR) if (loc[a] >= 0) gl.disableVertexAttribArray(loc[a]);
+    gl.bindBuffer(gl.ARRAY_BUFFER, mesh.vb);
+    gl.enableVertexAttribArray(locS.aP); gl.vertexAttribPointer(locS.aP, 3, gl.FLOAT, false, STRIDE * 4, 0);
+    if (locS.aM >= 0) { gl.enableVertexAttribArray(locS.aM); gl.vertexAttribPointer(locS.aM, 1, gl.FLOAT, false, STRIDE * 4, 10 * 4); }
+    gl.uniformMatrix4fv(locS.uLVP, false, new Float32Array(LVP));
+    gl.uniform2f(locS.uR, Math.cos(rotY), Math.sin(rotY));
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, mesh.ib);
+    gl.drawElements(gl.TRIANGLES, mesh.count, gl.UNSIGNED_INT, 0);
+    gl.disableVertexAttribArray(locS.aP); if (locS.aM >= 0) gl.disableVertexAttribArray(locS.aM);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  }
   function draw() {
     if (!VP || lost) return;
+    shadowPass();
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -3320,6 +3520,11 @@ void main(){
     gl.uniform2f(loc.uF, mesh.feet ? mesh.feet[0] : 0.1 * s, mesh.feet ? mesh.feet[1] : 0.03 * s);
     gl.uniform1f(loc.uAlpha, alpha);
     gl.uniform1f(loc.uHt, Hh);
+    gl.uniformMatrix4fv(loc.uLVP, false, new Float32Array(LVP || VP));
+    gl.uniform1f(loc.uShOn, sm && LVP ? 1 : 0);
+    gl.uniform1f(loc.uTx, sm ? 1 / sm.size : 0.001);
+    gl.uniform1f(loc.uDark, dark);
+    if (sm) { gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, sm.tex); gl.uniform1i(loc.uSM, 0); }
     gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.enable(gl.DEPTH_TEST); gl.disable(gl.CULL_FACE);
     if (floor) { gl.depthMask(false); bindVB(floor.vb); gl.drawArrays(gl.TRIANGLES, 0, floor.count); gl.depthMask(true); }
@@ -3348,7 +3553,7 @@ void main(){
   canvas.addEventListener("pointerup", endDrag);
   canvas.addEventListener("pointercancel", endDrag);
   canvas.addEventListener("webglcontextlost", (e) => { e.preventDefault(); lost = true; });
-  canvas.addEventListener("webglcontextrestored", () => { lost = false; try { setup(); } catch (er) { return; } mesh = null; floor = null; have = null; if (lastOpts) show(lastOpts); });
+  canvas.addEventListener("webglcontextrestored", () => { lost = false; try { setup(); } catch (er) { return; } mesh = null; floor = null; have = null; LVP = null; fit(); if (lastOpts) show(lastOpts); });
 
   /* vêtements : type de volume et matière */
   const KIND_OF = {
@@ -3408,6 +3613,7 @@ void main(){
         const m = upload(r);
         freeMesh(mesh);
         mesh = m;
+        meshGen++;
         if (Math.abs(m.H - Hh) > 1e-4 || !floor) { Hh = m.H; makeFloor(0.9 * (Hh / 1.78)); fit(); }
         have = {key, draft: job.draft};
         if (alpha < 1 && !fade) fade = {t0: performance.now(), from: alpha};
@@ -3442,7 +3648,7 @@ void main(){
     kick();
   }
   window.addEventListener("resize", () => { resize(); kick(); });
-  return {ok: true, attach, show, setSpin: (b) => { spin = !!b; kick(); }, isSpinning: () => spin, redraw: kick, setRot: (r) => { rotY = r; anim = null; kick(); }, busy: () => busy || !!want};
+  return {ok: true, attach, show, setSpin: (b) => { spin = !!b; kick(); }, isSpinning: () => spin, redraw: kick, setRot: (r) => { rotY = r; anim = null; kick(); }, busy: () => busy || !!want, setDark: (d) => { dark = d ? 1 : 0; kick(); }};
 })();
 
 /* ---------------- État ---------------- */
@@ -3457,7 +3663,8 @@ const S = {
   view: Atelier.ok ? store.get("view", "3d") : "flat", spin: false,
   body: {...BODY_DEFAULT, ...store.get("body", {})}, bodySaved: true,
   aiState: "idle", aiCtl: null, aiErr: "",
-  wardFilter: "all", showSale: false, histFilter: "all", histConfirm: null,
+  wardFilter: "all", showSale: false, theme: null, themeAsk: false, wxAskPending: false, visit: null, bought: null, wardNew: null,
+  wardF: {q: "", vue: [1, 2, 3].includes(store.get("wardVue", 2)) ? store.get("wardVue", 2) : 2, open: false, state: "all", fav: false, shop: false, color: null, sort: "cat"}, histFilter: "all", histConfirm: null,
   confirmEx: false, confirmAll: false, deleting: false, busyBulk: false,
   sheet: null, draft: null, swap: null, lastFocus: null,
   wishes: new Map(), guest: null, shopSel: null, shopBusy: false, trCol: null,
@@ -3711,6 +3918,61 @@ function wxPick(c) {
 }
 /* premier lancement : on demande d'abord dans l'appli, puis le navigateur affiche sa propre autorisation */
 let wxAskFocus = null;
+/* ---------------- Éclairage : clair ou sombre, choisi au premier lancement ---------------- */
+const THEME_MQ = (() => { try { return window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null; } catch (e) { return null; } })();
+let themeAskFocus = null;
+const themePref = () => { const v = store.get("theme", null); return ["light", "dark", "auto"].includes(v) ? v : null; };
+const themeResolved = (p) => (p === "dark" || (p !== "light" && THEME_MQ && THEME_MQ.matches) ? "dark" : "light");
+const storageOk = () => { try { localStorage.setItem("dm:probe", "1"); localStorage.removeItem("dm:probe"); return true; } catch (e) { return false; } };
+function applyTheme(p) {
+  const t = themeResolved(p);
+  document.documentElement.setAttribute("data-scheme", t);
+  if (Atelier && Atelier.setDark) Atelier.setDark(t === "dark");
+}
+function setTheme(p, save) { S.theme = p; applyTheme(p); if (save) store.set("theme", p); }
+if (THEME_MQ) {
+  const onMq = () => { if (!S.theme || S.theme === "auto") { applyTheme(S.theme); if (S.themeAsk) renderThemeAsk(); else renderSettings(); } };
+  if (THEME_MQ.addEventListener) THEME_MQ.addEventListener("change", onMq); else if (THEME_MQ.addListener) THEME_MQ.addListener(onMq);
+}
+const TP_FIG = `<svg class="tp-fig" viewBox="0 0 60 150" aria-hidden="true"><path d="M23.5 9c0-5 3-8 6.5-8s6.5 3 6.5 8c0 2-.3 3.5-.8 4.6-.3-3-2.6-5-5.7-5s-5.4 2-5.7 5c-.5-1.1-.8-2.6-.8-4.6z" fill="#2A211C"/><ellipse cx="30" cy="13.5" rx="6.2" ry="7.6" fill="#C8987A"/><rect x="27" y="19.5" width="6" height="7" fill="#B98A6C"/><path d="M17 29c4-3.2 8.5-4.2 13-4.2s9 1 13 4.2l4.6 51-6.2 1.4-1.3 15.6H19.9l-1.3-15.6-6.2-1.4z" fill="#B48A60"/><path d="M30 25.2v71.6" stroke="#8E6A47" stroke-width=".8"/><circle cx="14.6" cy="84" r="2.6" fill="#C8987A"/><circle cx="45.4" cy="84" r="2.6" fill="#C8987A"/><path d="M21 96h18l-1.4 43.5h-5.6L30 104l-2 35.5h-5.6z" fill="#2C3140"/><path d="M21.6 139h7.2l.6 4.6h-9.2zm9.6 0h7.2l1.4 4.6h-9.2z" fill="#151515"/></svg>`;
+function themeMock(dark) {
+  return `<span class="tp${dark ? " dk" : ""}" aria-hidden="true"><span class="tp-stage"><span class="tp-mh">DRESSING</span>${TP_FIG}<span class="tp-sh"></span></span><span class="tp-lines"><i></i><i></i><i></i></span><span class="tp-bar"><i></i><i></i><i></i><i></i></span></span>`;
+}
+function renderThemeAsk() {
+  const p = S.theme || themeResolved(null);
+  $("#th-opts").innerHTML = [["light", "Mode clair", "Fond blanc, lumineux, comme en plein jour."], ["dark", "Mode sombre", "Fond noir, doux pour les yeux le soir."]]
+    .map(([k, l, d]) => `<button class="th-opt" role="radio" id="th-${k}" data-action="th-pick" data-v="${k}" aria-checked="${p === k}"><span class="th-prev">${themeMock(k === "dark")}</span><span class="th-l">${l}<span class="ck" aria-hidden="true"></span></span><span class="th-s">${d}</span></button>`).join("");
+  const a = $("#th-auto");
+  a.setAttribute("aria-pressed", String(p === "auto"));
+  a.innerHTML = `<span class="ck" aria-hidden="true"></span>Comme mon appareil${p === "auto" ? ` · ${themeResolved("auto") === "dark" ? "sombre" : "clair"} en ce moment` : ""}`;
+}
+function themeAskOpen() {
+  themeAskFocus = document.activeElement;
+  S.themeAsk = true;
+  renderThemeAsk();
+  $("#th-scrim").hidden = false; $("#theme-ask").hidden = false;
+  document.body.classList.add("locked");
+  const b = $("#th-go");
+  if (b) b.focus({preventScroll: true});
+}
+function themeAskDone() {
+  if ($("#theme-ask").hidden) return;
+  setTheme(S.theme || themeResolved(null), true);
+  S.themeAsk = false;
+  $("#th-scrim").hidden = true; $("#theme-ask").hidden = true;
+  if (!S.sheet) document.body.classList.remove("locked");
+  renderSettings();
+  if (S.wxAskPending) { S.wxAskPending = false; wxAskOpen(); return; }
+  if (themeAskFocus && themeAskFocus.focus && document.contains(themeAskFocus)) themeAskFocus.focus({preventScroll: true});
+  toast(`Mode ${themeResolved(S.theme) === "dark" ? "sombre" : "clair"}${S.theme === "auto" ? ", comme ton appareil" : ""}. Modifiable dans Réglages.`);
+}
+function initTheme() {
+  const p = themePref();
+  S.theme = p;
+  applyTheme(p);
+  if (!p && storageOk()) themeAskOpen();
+}
+
 function wxAskOpen() {
   wxAskFocus = document.activeElement;
   $("#wx-ask-ico").innerHTML = wxSvg("partly");
@@ -3755,7 +4017,7 @@ async function initWeather() {
   if (perm === "denied" || !navigator.geolocation) { S.wxState = "need"; S.wxErr = "Recherche ta ville pour voir sa météo."; renderWxCard(); return; }
   S.wxState = "need"; S.wxErr = "Recherche ta ville ou utilise ta position.";
   renderWxCard();
-  wxAskOpen();
+  if (S.themeAsk) S.wxAskPending = true; else wxAskOpen();
 }
 
 /* rendu */
@@ -4280,6 +4542,8 @@ function renderTabbar() {
 function showTab(k) {
   S.tab = k;
   document.body.classList.toggle("is-shop", k === "shop");
+  document.body.classList.toggle("is-ward", k === "wardrobe");
+  if (k !== "wardrobe" && S.wardNew) S.wardNew = null;
   for (const [t] of TABS) $("#tab-" + t).hidden = t !== k;
   renderTabbar();
   window.scrollTo(0, 0);
@@ -4567,32 +4831,94 @@ function itemCard(it, action) {
     </button>`;
 }
 function renderWardrobe() {
+  const root = $("#ward-root");
+  if (!root) return;
+  if (document.activeElement && document.activeElement.id === "ws-q" && $("#ward-grid")) { renderWardGrid(); return; }
+  const act = document.activeElement && root.contains(document.activeElement) ? document.activeElement.id : null;
   const all = [...S.items.values()];
-  const sale = all.filter((i) => i.status === "sale").length;
-  const ex = all.filter((i) => i.example).length;
+  const sale = all.filter((i) => i.status === "sale").length, ex = all.filter((i) => i.example).length;
+  const favs = all.filter((i) => i.fav).length, shops = all.filter((i) => i.pid).length;
   const loading = !S.capsReady || (S.caps.db && !S.ready.items);
-  $("#add-btn").innerHTML = `${ICON.plus} Ajouter`;
-  $("#ward-count").textContent = loading ? "Chargement…" : `${all.length} pièce${all.length > 1 ? "s" : ""}`;
-  const notes = [];
-  if (ex) notes.push(`<div class="note"><p>${ex} pièces d’exemple pour essayer.</p>${S.confirmEx ? `<span class="confirm"><button class="btn danger sm" data-action="del-examples-yes"${S.busyBulk ? " disabled" : ""}>${S.busyBulk ? "Suppression…" : "Oui, supprimer"}</button><button class="btn ghost sm" data-action="del-examples-no">Annuler</button></span>` : `<button class="btn ghost sm" data-action="del-examples">Supprimer</button>`}</div>`);
-  if (sale) notes.push(`<div class="note"><p>${sale} au sale.</p><button class="btn ghost sm" data-action="laundry"${S.busyBulk ? " disabled" : ""}>${ICON.wash} Lessive faite</button></div>`);
-  $("#ward-notes").innerHTML = notes.join("");
-  $("#ward-notes").hidden = !notes.length;
-  const has = (k) => all.some((i) => i.cat === k);
-  $("#ward-filters").innerHTML = [`<button class="wf" id="wf-all" data-action="wf" data-v="all" aria-pressed="${S.wardFilter === "all" && !S.showSale}">Tout</button>`]
-    .concat(CATS.filter((c) => has(c.key) || S.wardFilter === c.key).map((c) => `<button class="wf" id="wf-${c.key}" data-action="wf" data-v="${c.key}" aria-pressed="${S.wardFilter === c.key && !S.showSale}">${esc(c.label)}</button>`))
-    .concat(sale ? [`<button class="wf" id="wf-sale" data-action="wf-sale" aria-pressed="${S.showSale}">Au sale</button>`] : [])
-    .join("");
-  const grid = $("#ward-grid");
-  if (loading) { grid.innerHTML = `<div class="empty"><p>Chargement de ta garde-robe…</p></div>`; return; }
+  const f = S.wardF;
+  const head = `<header class="zs-top">
+      <div class="zs-brand"><h1 class="zs-title" id="t-ward">Garde-robe</h1><p class="zs-sub" id="ward-count">${loading ? "Chargement…" : `${all.length} pièce${all.length > 1 ? "s" : ""}${sale ? ` · ${sale} au sale` : ""}${favs ? ` · ${favs} favori${favs > 1 ? "s" : ""}` : ""}`}</p></div>
+      <div class="zs-tools">
+        ${all.length ? `<label class="zs-search"><span class="sr">Rechercher dans ta garde-robe</span><input id="ws-q" type="search" placeholder="RECHERCHER" value="${esc(f.q)}" autocomplete="off" spellcheck="false" enterkeyhint="search"></label>` : ""}
+        <button class="zs-link zs-add" id="add-btn" data-action="add">${ICON.plus} Ajouter</button>
+      </div>
+    </header>`;
+  if (loading) { root.innerHTML = head + `<div class="empty"><p>Chargement de ta garde-robe…</p></div>`; return; }
   if (!all.length) {
-    grid.innerHTML = `<div class="empty"><p>Ta garde-robe est vide.</p><button class="btn primary" data-action="add">${ICON.camera} Ajouter un vêtement</button></div>`;
+    root.innerHTML = head + `<div class="empty zw-empty"><p>Ta garde-robe est vide.</p><p class="hint">Ajoute une pièce en photo, ou pioche dans les boutiques : ce que tu achètes arrive ici.</p><div class="row-btns"><button class="btn primary" data-action="add">${ICON.camera} Ajouter un vêtement</button><button class="btn ghost" data-action="tab" data-tab="shop">${ICON.bag} Voir les boutiques</button></div></div>`;
+    if (act) refocus(act);
     return;
   }
-  const list = all.filter((i) => (S.wardFilter === "all" || i.cat === S.wardFilter) && (!S.showSale || i.status === "sale"))
-    .sort((a, b) => catOrder(a) - catOrder(b) || String(a.name).localeCompare(String(b.name), "fr"));
-  if (!list.length) { grid.innerHTML = `<div class="empty"><p>Rien ici pour l’instant.</p></div>`; return; }
-  grid.innerHTML = `<div class="grid">${list.map((it) => itemCard(it, "edit")).join("")}</div>`;
+  const notes = [];
+  if (ex) notes.push(`<div class="note"><p>${ex} pièces d’exemple pour essayer.</p>${S.confirmEx ? `<span class="confirm"><button class="btn danger sm" data-action="del-examples-yes"${S.busyBulk ? " disabled" : ""}>${S.busyBulk ? "Suppression…" : "Oui, supprimer"}</button><button class="btn ghost sm" data-action="del-examples-no">Annuler</button></span>` : `<button class="btn ghost sm" data-action="del-examples">Supprimer</button>`}</div>`);
+  if (sale) notes.push(`<div class="note"><p>${sale} pièce${sale > 1 ? "s" : ""} au sale, mise${sale > 1 ? "s" : ""} de côté dans les tenues.</p><button class="btn ghost sm" data-action="laundry"${S.busyBulk ? " disabled" : ""}>${ICON.wash} Lessive faite</button></div>`);
+  const cats = CATS.filter((c) => all.some((i) => i.cat === c.key));
+  if (S.wardFilter !== "all" && !cats.some((c) => c.key === S.wardFilter)) S.wardFilter = "all";
+  const order = Object.keys(COL);
+  const colors = [...new Set(all.flatMap((i) => i.colors || []))].filter((k) => COL[k]).sort((a, b) => order.indexOf(a) - order.indexOf(b));
+  if (f.color && !colors.includes(f.color)) f.color = null;
+  const nF = (f.state !== "all" ? 1 : 0) + (f.fav ? 1 : 0) + (f.shop ? 1 : 0) + (f.color ? 1 : 0);
+  const catBtn = (k, label, i, n) => `<li><button class="zs-cat" id="wf-${k}" data-action="wf" data-v="${k}" aria-current="${S.wardFilter === k}"><span class="zs-num" aria-hidden="true">|${pad2(i)}|</span>${esc(label)}<span class="zs-n" aria-label="${n} pièce${n > 1 ? "s" : ""}">${n}</span></button></li>`;
+  const opt = (a, k, label, on, id) => `<button class="zs-opt" id="${id}" data-action="${a}" data-v="${k}" aria-pressed="${on}">${esc(label)}</button>`;
+  const best = (k) => { const xs = all.filter((i) => i.cat === k); return xs.find((i) => i.photo) || xs.find((i) => i.shot) || xs[0]; };
+  root.innerHTML = head + (notes.length ? `<div class="zw-notes" id="ward-notes">${notes.join("")}</div>` : "") + `
+    <div class="zs-layout">
+      <nav class="zs-nav" aria-label="Rayons de ta garde-robe">
+        <ol class="zs-cats">${catBtn("all", "Tout voir", 1, all.length)}${cats.map((c, i) => catBtn(c.key, CAT_SHORT[c.key] || c.label, i + 2, all.filter((x) => x.cat === c.key).length)).join("")}</ol>
+        <div class="zs-bar">
+          <button class="zs-opt zs-filt" id="ws-filt" data-action="ward-filters" aria-expanded="${!!f.open}">Filtres${nF ? ` (${nF})` : ""}</button>
+          <div class="zs-vue" role="group" aria-label="Vue"><span>Vue</span>${[1, 2, 3].map((n) => opt("ward-vue", n, String(n), f.vue === n, "wv-" + n)).join("")}</div>
+        </div>
+        <div class="zs-filters"${f.open ? "" : ' data-closed="1"'}>
+          <div class="zs-fg"><p class="zs-k">État</p>${[["all", "Toutes"], ["ok", "Propres"], ["sale", `Au sale${sale ? ` (${sale})` : ""}`]].map(([k, l]) => opt("ward-state", k, l, f.state === k, "wst-" + k)).join("")}</div>
+          <div class="zs-fg"><p class="zs-k">Sélection</p>${opt("ward-fav", "1", `Favoris${favs ? ` (${favs})` : ""}`, f.fav, "wfav")}${shops ? opt("ward-shop", "1", `Achetées en boutique (${shops})`, f.shop, "wshop") : ""}</div>
+          <div class="zs-fg"><p class="zs-k">Trier</p>${[["cat", "Par rayon"], ["new", "Récentes"], ["worn", "Moins portées"]].map(([k, l]) => opt("ward-sort", k, l, f.sort === k, "wso-" + k)).join("")}</div>
+          ${colors.length > 1 ? `<div class="zs-fg"><p class="zs-k">Couleur${f.color ? ` : ${esc(COL[f.color].label)}` : ""}</p><div class="zs-sws" role="group" aria-label="Couleur">${colors.map((k) => `<button class="zs-sw" id="wc-${k}" data-action="ward-color" data-v="${k}" aria-pressed="${f.color === k}" title="${esc(COL[k].label)}" style="--c:${colorHex(k)}"><span class="sr">${esc(COL[k].label)}</span></button>`).join("")}</div></div>` : ""}
+        </div>
+      </nav>
+      <div class="zs-main">
+        ${cats.length > 1 ? `<div class="zs-tiles" role="list">${cats.map((c) => `<button class="zs-tile" role="listitem" id="wt-${c.key}" data-action="wf" data-v="${c.key}" aria-pressed="${S.wardFilter === c.key}"><span class="zs-tile-m wv">${itemVisual(best(c.key))}</span><span class="zs-tile-l">${esc(CAT_SHORT[c.key] || c.label)}</span></button>`).join("")}</div>` : ""}
+        <div id="ward-grid"></div>
+      </div>
+    </div>`;
+  renderWardGrid();
+  if (act) refocus(act);
+}
+function wardPool(ignoreCat) {
+  const f = S.wardF, q = fold(f.q).trim();
+  return [...S.items.values()].filter((it) => (ignoreCat || S.wardFilter === "all" || it.cat === S.wardFilter)
+    && (f.state === "all" || (f.state === "sale" ? it.status === "sale" : it.status !== "sale"))
+    && (!f.fav || it.fav) && (!f.shop || it.pid) && (!f.color || (it.colors || []).includes(f.color))
+    && (!q || fold(`${it.name} ${it.brand || ""} ${it.sub || ""} ${it.material || ""} ${(it.colors || []).map(colorLabel).join(" ")}`).includes(q)));
+}
+const WARD_SORT = {
+  cat: (a, b) => catOrder(a) - catOrder(b) || String(a.name).localeCompare(String(b.name), "fr"),
+  new: (a, b) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")) || String(a.name).localeCompare(String(b.name), "fr"),
+  worn: (a, b) => String(a.lastWorn || "").localeCompare(String(b.lastWorn || "")) || catOrder(a) - catOrder(b),
+};
+function wardCard(it) {
+  const sale = it.status === "sale", isNew = !!S.wardNew && it.pid === S.wardNew;
+  const tag = isNew ? `<span class="zc-tag new">Nouveau</span>` : sale ? `<span class="zc-tag">Au sale</span>` : "";
+  const line = it.brand ? it.brand : cap(it.sub || "");
+  return `<article class="zc wc${sale ? " is-sale" : ""}">
+      <button class="zc-link" id="ic-${esc(it.id)}" data-action="edit" data-id="${esc(it.id)}" aria-label="${esc(it.name)}${sale ? ", au sale" : ""}${it.fav ? ", favori" : ""}${isNew ? ", nouveau" : ""}">
+        <span class="zc-media wv">${itemVisual(it)}${tag}</span>
+      </button>
+      <button class="zc-wish" id="wfv-${esc(it.id)}" data-action="w-fav" data-id="${esc(it.id)}" aria-pressed="${!!it.fav}" aria-label="${it.fav ? "Retirer des favoris" : "Mettre en favori"} : ${esc(it.name)}">${ICON.heart}</button>
+      <div class="zc-cap" aria-hidden="true"><p class="zc-name">${esc(it.name)}</p><p class="zc-meta"><span>${esc(line)}</span>${colorSquares(it)}</p></div>
+    </article>`;
+}
+function renderWardGrid() {
+  const host = $("#ward-grid");
+  if (!host) return;
+  const f = S.wardF, list = wardPool(false).sort(WARD_SORT[f.sort] || WARD_SORT.cat);
+  const filtered = f.q || f.state !== "all" || f.fav || f.shop || f.color || S.wardFilter !== "all";
+  host.innerHTML = `<p class="zs-count-l" aria-live="polite">${list.length} pièce${list.length > 1 ? "s" : ""}${f.q ? ` pour « ${esc(f.q)} »` : ""}</p>
+    ${list.length ? `<div class="zs-grid v${f.vue}">${list.map(wardCard).join("")}</div>` : `<div class="empty"><p>Aucune pièce ne correspond. Change de rayon, retire un filtre ou efface la recherche.</p>${filtered ? `<button class="btn ghost sm" id="ws-reset" data-action="ward-reset">Tout afficher</button>` : ""}</div>`}`;
 }
 
 /* ---------------- Rendu : boutiques (photos réelles), envies, essayage ---------------- */
@@ -4662,7 +4988,7 @@ function shopCard(p, color) {
     </article>`;
 }
 function syncWishMarks() {
-  for (const b of document.querySelectorAll(".zc-wish[data-id]")) {
+  for (const b of document.querySelectorAll('.zc-wish[data-action="sp-wishq"]')) {
     const w = S.wishes.has(b.dataset.id);
     b.setAttribute("aria-pressed", String(w));
     b.setAttribute("aria-label", `${w ? "Retirer de mes envies" : "Ajouter à mes envies"}`);
@@ -4768,7 +5094,8 @@ function shopSheetHtml() {
       <div class="sp-actions">
         <button class="btn primary big wide" id="sp-try" data-action="sp-try">${ICON.body} Essayer sur mon mannequin</button>
         <button class="btn ghost big wide${w ? " on" : ""}" id="sp-wish" data-action="sp-wish" aria-pressed="${!!w}"${S.shopBusy ? " disabled" : ""}>${ICON.heart} ${w ? "Retirer de mes envies" : "Ajouter à mes envies"}</button>
-        <a class="btn ghost big wide" id="sp-site" href="${esc(p.url)}" target="_blank" rel="noopener">${ICON.ext} Voir sur ${esc(shopName(p))}</a>
+        <a class="btn ghost big wide" id="sp-site" href="${esc(p.url)}" target="_blank" rel="noopener" data-visit="${esc(p.id)}" data-color="${esc(g.color || "")}">${ICON.ext} Acheter sur ${esc(shopName(p))}</a>
+        ${own ? "" : `<p class="sp-tip">${ICON.hanger}<span>Tu l’achètes sur le site ? À ton retour dans l’appli, un geste suffit pour le ranger dans ta garde-robe.</span></p>`}
         ${own ? `<p class="sp-own">${ICON.hanger}<span>Déjà dans ta garde-robe.</span></p>` : `<button class="btn ghost sm sp-bought" id="sp-own" data-action="sp-own"${S.shopBusy ? " disabled" : ""}>${S.shopBusy ? "Ajout…" : "Je l’ai acheté : l’ajouter à ma garde-robe"}</button>`}
       </div>
       <p class="shop-note">Prix relevé le ${fmtDay(SHOP_DATE)} : le site fait foi. Photos ${esc(shopName(p))}. L’essayage montre la coupe et la couleur sur ton mannequin 3D.</p>
@@ -4819,7 +5146,54 @@ async function addOwned(pid, color) {
     S.shopBusy = false;
     if (S.sheet === "shop") closeSheet();
     toast(`${body.name} ajouté à ta garde-robe.`);
+    return true;
   } catch (e) { dbErr(e); } finally { S.shopBusy = false; if (S.sheet === "shop") renderSheet(); if (S.shopF.view === "wishes") renderShop(); }
+}
+
+
+/* --- Retour de boutique : la pièce vue sur le site a-t-elle été achetée ? (l’appli ne voit pas le site, elle demande au retour) --- */
+function noteVisit(pid, color) {
+  const p = productById(pid);
+  if (!p || ownedFrom(pid)) return;
+  S.visit = {pid, color: color || null, at: Date.now(), left: false};
+  store.set("visit", {pid, color: color || null, at: S.visit.at});
+}
+function clearVisit() { S.visit = null; store.set("visit", null); }
+function resumeVisit() {
+  const v = store.get("visit", null);
+  if (!v || typeof v !== "object" || !v.pid || !Number(v.at)) return;
+  S.visit = {pid: String(v.pid), color: COL[v.color] ? v.color : null, at: Number(v.at), left: true};
+  setTimeout(() => checkVisit(true), 1200);
+}
+function checkVisit(fromBoot) {
+  const v = S.visit;
+  if (!v || document.visibilityState === "hidden") return;
+  if (!fromBoot && (!v.left || Date.now() - v.at < 2500)) return;
+  if (Date.now() - v.at > 36 * 3600e3) { clearVisit(); return; }
+  /* la fiche de la pièce peut rester ouverte pendant la visite du site : la question la remplace */
+  if ((S.sheet && S.sheet !== "shop") || S.themeAsk || !$("#wx-ask").hidden) { if (fromBoot) setTimeout(() => checkVisit(true), 1500); return; }
+  if (!S.capsReady || (S.caps.db && !S.ready.items)) { setTimeout(() => checkVisit(fromBoot), 600); return; }
+  const p = productById(v.pid);
+  if (!p || ownedFrom(v.pid)) { clearVisit(); return; }
+  if (S.sheet === "shop") closeSheet();
+  S.bought = {pid: v.pid, color: v.color};
+  openSheet("bought");
+}
+function boughtSheetHtml() {
+  const b = S.bought, p = b && productById(b.pid);
+  if (!p) return `${sheetHead("Retour de boutique")}<div class="sheet-body"><p class="hint">Cette pièce n’est plus dans la sélection.</p></div>`;
+  const g = asGarment(p, b.color), ph = photosFor(p, g.colors[0]), inWish = S.wishes.has(p.id);
+  const col = p.colors[0] !== "imprime" && COL[g.colors[0]] ? g.colors[0] : null;
+  return `${sheetHead("Retour de " + esc(shopName(p)))}
+  <div class="sheet-body bq">
+    <div class="bq-item"><span class="bq-m">${zimg(p, ph[0], "", true)}</span>
+      <div class="bq-t"><p class="zp-name">${esc(p.name)}</p><p class="zp-price">${priceHtml(p)}</p>${col ? `<p class="bq-c"><i style="--c:${colorHex(col)}"></i>${esc(COL[col].label)}</p>` : ""}</div></div>
+    <div><h3 class="bq-h">Tu l’as acheté ?</h3><p class="hint">Si oui, il passe tout de suite dans ta garde-robe, avec sa photo, et entre dans tes tenues du matin.</p></div>
+    <div class="sp-actions">
+      <button class="btn primary big wide" id="bq-yes" data-action="bq-yes"${S.shopBusy ? " disabled" : ""}>${ICON.hanger} ${S.shopBusy ? "Ajout…" : "Oui, l’ajouter à ma garde-robe"}</button>
+      ${inWish ? `<button class="btn ghost big wide" id="bq-no" data-action="bq-no">Pas encore : il reste dans mes envies</button>` : `<button class="btn ghost big wide" id="bq-wish" data-action="bq-wish">${ICON.heart} Pas encore : le garder en envie</button><button class="btn ghost big wide" id="bq-no" data-action="bq-no">Non, merci</button>`}
+    </div>
+  </div>`;
 }
 
 /* --- Essayage d’une pièce de boutique dans la cabine --- */
@@ -4863,7 +5237,7 @@ function tryPanelHtml(g) {
       </div>
       <div class="try-btns">
         <button class="btn primary big" id="try-wish" data-action="try-wish" aria-pressed="${w}"${S.shopBusy ? " disabled" : ""}>${ICON.heart} ${w ? "Dans mes envies" : "Ajouter à mes envies"}</button>
-        <a class="btn ghost big" id="try-site" href="${esc(g.url)}" target="_blank" rel="noopener">${ICON.ext} ${esc(g.brand)}</a>
+        <a class="btn ghost big" id="try-site" href="${esc(g.url)}" target="_blank" rel="noopener" data-visit="${esc(g.shopId)}" data-color="${esc(g.color || "")}">${ICON.ext} ${esc(g.brand)}</a>
         <button class="btn ghost big" id="try-end" data-action="try-end">Terminer l’essai</button>
       </div>
     </div>`;
@@ -4962,6 +5336,8 @@ function renderSettings() {
   if (document.activeElement && document.activeElement.id === "s-city") return;
   $("#settings").innerHTML = `
   <div class="card set">
+    <div class="set-row"><div><h2 class="set-t" id="s-th-l">Éclairage</h2><p class="set-d">${(S.theme || "auto") === "auto" ? `Suit ton appareil : mode ${themeResolved("auto") === "dark" ? "sombre" : "clair"} en ce moment.` : `Mode ${S.theme === "dark" ? "sombre" : "clair"} pour toute l’appli.`}</p></div>
+      <div class="seg" role="radiogroup" aria-labelledby="s-th-l">${[["light", "Clair"], ["dark", "Sombre"], ["auto", "Auto"]].map(([k, l]) => `<button class="seg-b" role="radio" id="st-${k}" aria-checked="${(S.theme || "auto") === k}" data-action="set-theme" data-v="${k}">${l}</button>`).join("")}</div></div>
     <div class="set-row"><div><h2 class="set-t" id="s-cold-l">Sensibilité au froid</h2><p class="set-d">Pour ajouter une couche plus tôt, ou plus tard.</p></div>
       <div class="seg" role="radiogroup" aria-labelledby="s-cold-l">${[["frileux", "Frileux"], ["normal", "Normal"], ["chaud", "Jamais froid"]].map(([k, l]) => `<button class="seg-b" role="radio" id="sc-${k}" aria-checked="${s.cold === k}" data-action="set-cold" data-v="${k}">${l}</button>`).join("")}</div></div>
     <div class="set-row"><div><h2 class="set-t" id="s-ai-l">Styliste IA</h2><p class="set-d">Remplit les fiches et explique les tenues, avec ton compte Claude.</p></div>
@@ -4979,7 +5355,7 @@ function renderSettings() {
     <div class="row-btns"><button class="btn ghost" id="s-export" data-action="export"${S.caps.downloads ? "" : " disabled"}>Exporter (JSON)</button>
       ${S.confirmAll ? `<span class="confirm"><span>Tout supprimer, sans retour possible ?</span><button class="btn danger sm" data-action="delete-all-yes"${S.deleting ? " disabled" : ""}>${S.deleting ? "Suppression…" : "Oui, tout supprimer"}</button><button class="btn ghost sm" data-action="delete-all-no">Annuler</button></span>` : `<button class="btn ghost danger-t" data-action="delete-all">Tout supprimer</button>`}</div>
   </div>
-  <p class="foot-note">Dressing du matin, version 9 · corps 3D MakeHuman (CC0) · photos des boutiques</p>`;
+  <p class="foot-note">Dressing du matin, version 10 · corps 3D MakeHuman (CC0), ombres et matières en temps réel · photos des boutiques · mode clair ou sombre</p>`;
 }
 
 /* ---------------- Feuilles (bottom sheet) ---------------- */
@@ -4989,7 +5365,7 @@ function renderSheet(first) {
   const body = el.querySelector(".sheet-body");
   const st = body ? body.scrollTop : 0;
   const act = document.activeElement && el.contains(document.activeElement) ? document.activeElement.id : null;
-  el.innerHTML = S.sheet === "item" ? itemSheetHtml() : S.sheet === "shop" ? shopSheetHtml() : S.sheet === "trcol" ? trColSheetHtml() : S.sheet === "swap" ? swapSheetHtml() : S.sheet === "imposed" ? imposedSheetHtml() : "";
+  el.innerHTML = S.sheet === "item" ? itemSheetHtml() : S.sheet === "shop" ? shopSheetHtml() : S.sheet === "bought" ? boughtSheetHtml() : S.sheet === "trcol" ? trColSheetHtml() : S.sheet === "swap" ? swapSheetHtml() : S.sheet === "imposed" ? imposedSheetHtml() : "";
   el.classList.toggle("is-zp", S.sheet === "shop");
   el.hidden = false; $("#scrim").hidden = false; document.body.classList.add("locked");
   const nb = el.querySelector(".sheet-body");
@@ -5000,8 +5376,9 @@ function renderSheet(first) {
   else if (act) { const n = document.getElementById(act); if (n) n.focus({preventScroll: true}); }
 }
 function closeSheet() {
+  if (S.sheet === "bought") clearVisit();
   if (S.draft && S.draft.aiCtl) S.draft.aiCtl.abort();
-  S.draft = null; S.sheet = null; S.swap = null; S.shopSel = null; S.trCol = null;
+  S.draft = null; S.sheet = null; S.swap = null; S.shopSel = null; S.trCol = null; S.bought = null;
   $("#sheet").classList.remove("is-zp");
   $("#sheet").hidden = true; $("#sheet").innerHTML = ""; $("#scrim").hidden = true;
   document.body.classList.remove("locked");
@@ -6011,8 +6388,41 @@ const ACTIONS = {
   "item-del": () => { S.draft.confirmDel = true; renderSheet(); const n = $("[data-action='item-del-yes']"); if (n) n.focus(); },
   "item-del-no": () => { S.draft.confirmDel = false; renderSheet(); },
   "item-del-yes": () => deleteItem(),
-  wf: (el) => { S.wardFilter = el.dataset.v; S.showSale = false; renderWardrobe(); },
-  "wf-sale": () => { S.showSale = !S.showSale; renderWardrobe(); },
+  wf: (el) => { const id = el.id; S.wardFilter = el.dataset.v; renderWardrobe(); refocus(id); },
+  "wf-sale": () => { S.wardF.state = S.wardF.state === "sale" ? "all" : "sale"; renderWardrobe(); },
+  "th-pick": (el) => { const v = el.dataset.v; if (!["light", "dark", "auto"].includes(v)) return; S.theme = v; applyTheme(v); renderThemeAsk(); refocus(v === "auto" ? "th-auto" : "th-" + v); },
+  "th-go": () => themeAskDone(),
+  "set-theme": (el) => { const v = el.dataset.v; if (!["light", "dark", "auto"].includes(v)) return; setTheme(v, true); renderSettings(); refocus("st-" + v); },
+  "ward-filters": () => { S.wardF.open = !S.wardF.open; renderWardrobe(); refocus("ws-filt"); },
+  "ward-vue": (el) => { const n = Number(el.dataset.v); S.wardF.vue = [1, 2, 3].includes(n) ? n : 2; store.set("wardVue", S.wardF.vue); renderWardrobe(); refocus("wv-" + S.wardF.vue); },
+  "ward-state": (el) => { S.wardF.state = ["all", "ok", "sale"].includes(el.dataset.v) ? el.dataset.v : "all"; renderWardrobe(); refocus("wst-" + S.wardF.state); },
+  "ward-fav": () => { S.wardF.fav = !S.wardF.fav; renderWardrobe(); refocus("wfav"); },
+  "ward-shop": () => { S.wardF.shop = !S.wardF.shop; renderWardrobe(); refocus("wshop"); },
+  "ward-sort": (el) => { S.wardF.sort = WARD_SORT[el.dataset.v] ? el.dataset.v : "cat"; renderWardrobe(); refocus("wso-" + S.wardF.sort); },
+  "ward-color": (el) => { const k = el.dataset.v; S.wardF.color = S.wardF.color === k ? null : k; renderWardrobe(); refocus("wc-" + k); },
+  "ward-reset": () => { Object.assign(S.wardF, {q: "", state: "all", fav: false, shop: false, color: null}); S.wardFilter = "all"; renderWardrobe(); },
+  "w-fav": async (el) => {
+    const it = S.items.get(el.dataset.id), db = S.caps.db;
+    if (!it || !db) return;
+    const v = !it.fav;
+    el.setAttribute("aria-pressed", String(v));
+    try { await db.doc("items/" + it.id).update({fav: v}); toast(v ? `${it.name} en favori : il reviendra plus souvent dans tes tenues.` : "Retiré des favoris."); }
+    catch (e) { el.setAttribute("aria-pressed", String(!v)); dbErr(e); }
+  },
+  "bq-yes": async () => {
+    const b = S.bought;
+    if (!b || S.shopBusy) return;
+    const ok = await addOwned(b.pid, b.color);
+    if (!ok) { if (S.sheet === "bought") renderSheet(); return; }
+    clearVisit();
+    if (S.sheet === "bought") closeSheet();
+    Object.assign(S.wardF, {q: "", state: "all", fav: false, shop: false, color: null, sort: "new"});
+    S.wardFilter = "all"; S.wardNew = b.pid;
+    showTab("wardrobe");
+  },
+  "bq-wish": async () => { const b = S.bought; clearVisit(); closeSheet(); if (b && !S.wishes.has(b.pid)) await toggleWish(b.pid, b.color); },
+  "bq-no": () => { clearVisit(); closeSheet(); },
+
   laundry: () => bulk(async () => { for (const it of [...S.items.values()]) if (it.status === "sale") await S.caps.db.doc("items/" + it.id).update({status: "ok"}); }, "Lessive faite : tout revient dans les tenues."),
   "del-examples": () => { S.confirmEx = true; renderWardrobe(); },
   "del-examples-no": () => { S.confirmEx = false; renderWardrobe(); },
@@ -6065,6 +6475,7 @@ document.addEventListener("click", (e) => {
 document.addEventListener("input", (e) => {
   const t = e.target;
   if (t.id === "wx-q") { onWxInput(t.value); return; }
+  if (t.id === "ws-q") { S.wardF.q = t.value.slice(0, 60); renderWardGrid(); return; }
   if (t.id === "zs-q") { S.shopF.q = t.value.slice(0, 60); renderShopGrid(); return; }
   if (t.id === "ph-tol") { onTolChange(Number(t.value)); return; }
   if (t.dataset && t.dataset.crop) { onCropInput(t.dataset.crop, Number(t.value) / 100); return; }
@@ -6091,6 +6502,12 @@ document.addEventListener("change", (e) => {
   if (t.id === "s-city") saveSettings({city: t.value.trim().slice(0, 60)});
 });
 document.addEventListener("keydown", (e) => {
+  const th = $("#theme-ask");
+  if (th && !th.hidden) {
+    if (e.key === "Escape") { e.preventDefault(); themeAskDone(); return; }
+    if (e.key === "Tab") { const f = [...th.querySelectorAll("button")]; const i = f.indexOf(document.activeElement); if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); } }
+    return;
+  }
   const ask = $("#wx-ask");
   if (ask && !ask.hidden) {
     if (e.key === "Escape") { e.preventDefault(); wxAskLater(); return; }
@@ -6107,6 +6524,10 @@ document.addEventListener("keydown", (e) => {
   }
   if (e.key === "Escape" && S.sheet) closeSheet();
 });
+document.addEventListener("click", (e) => { const a = e.target && e.target.closest && e.target.closest("a[data-visit]"); if (a) noteVisit(a.dataset.visit, a.dataset.color); }, true);
+document.addEventListener("visibilitychange", () => { if (!S.visit) return; if (document.visibilityState === "hidden") S.visit.left = true; else setTimeout(() => checkVisit(false), 300); });
+window.addEventListener("blur", () => { if (S.visit) S.visit.left = true; });
+window.addEventListener("focus", () => { if (S.visit) setTimeout(() => checkVisit(false), 300); });
 document.addEventListener("submit", (e) => { if (e.target && e.target.id === "wx-form") { e.preventDefault(); wxSubmit(); } });
 document.addEventListener("pointerdown", (e) => { if (!e.target.closest || !e.target.closest("#wx-form")) wxCloseSugg(); });
 document.addEventListener("focusin", (e) => { if (e.target && e.target.closest && !e.target.closest("#wx-form")) wxCloseSugg(); });
@@ -6240,6 +6661,7 @@ const localDownloads = {
 };
 
 (async function boot() {
+  initTheme();
   const C = window.claude;
   if (!C || typeof C.use !== "function") {
     S.local = true;
@@ -6252,6 +6674,7 @@ const localDownloads = {
     subscribe();
     renderSettings(); renderWardrobe(); renderShop(); renderLook(false);
     initWeather();
+    resumeVisit();
     return;
   }
   const names = ["db", "assets", "sample", "downloads"];
@@ -6265,6 +6688,7 @@ const localDownloads = {
   renderShop();
   renderLook(false);
   initWeather();
+  resumeVisit();
 })();
 })();
 </script>
