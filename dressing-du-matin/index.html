@@ -872,9 +872,21 @@ body.is-ward .wrap{max-width:1480px}
 .psh{position:absolute;inset:0;display:block;background:var(--photo)}
 .psh > img.garment{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain}
 .psh.wait::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,var(--ink-3),transparent);background-size:50% 100%;background-repeat:no-repeat;animation:wait-bar 1.3s linear infinite;opacity:.6}
+.zc-media .psh.b{opacity:0}
+.zimg.wshot.b,.zimg.pshot.b{animation:none}
+@media (hover:hover){.zc-link:hover .zc-media .zimg.pshot.b,.zc-link:hover .zc-media .psh.b{opacity:1}}
 .zimg.pshot{object-position:center center;animation:wshot-in .45s ease both}
 .zc-tag.pv{top:auto;bottom:6px;background:rgba(255,255,255,.86);font-weight:600;letter-spacing:.08em}
 @media (prefers-reduced-motion:reduce){.psh.wait::after,.zimg.pshot{animation:none}}
+
+/* v14 : photos studio partout (accueil, tendances, historique, vue à plat, fiches) */
+img.ph.sshot{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center 30%;animation:wshot-in .45s ease both}
+.ph-wait{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;max-height:none;background:linear-gradient(180deg,#EFEEEB 0%,#E8E6E2 62%,#DEDCD7 100%);overflow:hidden}
+.ph-wait::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,rgba(21,21,21,.35),transparent);background-size:50% 100%;background-repeat:no-repeat;animation:wait-bar 1.3s linear infinite}
+.ph-wait.still::after,.wv .ph-wait::after{display:none}
+.psh{background:linear-gradient(180deg,#EFEEEB 0%,#E8E6E2 62%,#DEDCD7 100%)}
+.ref-vis,.pc-vis,.hc-pc,.thumb,.tr-pc .ic-vis{overflow:hidden}
+@media (prefers-reduced-motion:reduce){img.ph.sshot{animation:none}.ph-wait::after{animation:none}}
 </style>
 </head>
 <body>
@@ -1018,7 +1030,7 @@ body.is-ward .wrap{max-width:1480px}
 
   <section id="tab-settings" class="tab" aria-labelledby="t-set" hidden>
     <div class="intro">
-      <p class="eyebrow">Version 13</p>
+      <p class="eyebrow">Version 14</p>
       <h1 class="display" id="t-set"><em>Réglages</em></h1>
     </div>
     <div id="settings" class="tab" style="gap:14px"></div>
@@ -1943,7 +1955,7 @@ ${sh.over || ""}
 function garmentSvg(it) {
   return `<img class="garment art" src="${GarmentArt.url(it || {}, colorHex)}" alt="" aria-hidden="true" decoding="async">`;
 }
-function itemVisual(it) {
+function itemVisualRaw(it) {
   if (it && it.photo) return `<img class="ph ${it.cutout ? "cutout" : "flat"}" src="${esc(photoSrc(it.photo))}" alt="" data-id="${esc(it.id)}" loading="lazy" decoding="async">`;
   if (it && typeof it.shot === "string" && /^https:\/\//.test(it.shot)) return `<img class="ph shot ${it.shotFit === "contain" || it.fit === "contain" ? "contain" : ""}" src="${esc(it.shot)}" alt="" data-id="${esc(it.id)}" loading="lazy" decoding="async" referrerpolicy="no-referrer">`;
   return garmentSvg(it || {});
@@ -5122,7 +5134,7 @@ async function pumpShots() {
     if (f) SHOT_URLS.set(key + ":f", URL.createObjectURL(f));
     paintShot(id);
   } catch (e) { if (++shotFail > 3) S.shotsOff = true; }
-  finally { shotBusy = false; shotProgress(); setTimeout(pumpShots, 20); }
+  finally { shotBusy = false; shotProgress(); setTimeout(() => (window.requestIdleCallback ? requestIdleCallback(() => pumpShots(), {timeout: 600}) : pumpShots()), 160); }
 }
 function shotProgress() {
   if (S.shotsOff) for (const e of document.querySelectorAll(".wv.wait")) e.classList.remove("wait");
@@ -5134,12 +5146,13 @@ function shotProgress() {
   if (on) el.innerHTML = `<span>Photos portées sur ton mannequin : ${done} / ${all.length}</span><i aria-hidden="true"><b style="width:${Math.round((100 * done) / all.length)}%"></b></i>`;
 }
 function paintShot(id) {
+  paintGeneric(id);
   if (String(id).startsWith("shop:")) {
     const pid = id.slice(5), p = productById(pid);
     if (!p) return;
     for (const el of document.querySelectorAll(`.psh[data-psh="${CSS.escape(pid)}"]`)) {
       const cls = [...el.classList].filter((c) => c !== "psh" && c !== "wait").join(" ");
-      el.outerHTML = prodShotHtml(p, cls);
+      el.outerHTML = prodShotHtml(p, cls, el.dataset.alt === "1");
     }
     if (S.sheet === "shop" && S.shopSel && S.shopSel.pid === pid) renderSheet();
     return;
@@ -5158,22 +5171,56 @@ function prodGarment(p) {
   return g;
 }
 function shotSubject(id) {
+  if (String(id).startsWith("tmp:")) return SHOT_TMP.get(id) || null;
   if (String(id).startsWith("shop:")) { const p = productById(id.slice(5)); return p ? prodGarment(p) : null; }
   return S.items.get(id) || null;
 }
 function queueProdShot(pid) { const id = "shop:" + pid; if (!prodQ.includes(id)) { prodQ.push(id); setTimeout(pumpShots, 0); } }
 function nextShotId() {
-  const wantW = S.tab === "wardrobe" || S.sheet === "piece";
-  const wantP = S.tab === "shop" || S.sheet === "shop" || S.sheet === "bought" || S.sheet === "trcol" || (S.tab === "today" && !!S.guest);
-  if (wantW && shotQ.length) return shotQ.shift();
-  if (wantP && prodQ.length) return prodQ.shift();
+  const shopFirst = S.tab === "shop" || S.sheet === "shop";
+  for (const q of shopFirst ? [prodQ, shotQ, tmpQ] : [shotQ, tmpQ, prodQ]) if (q.length) return q.shift();
   return null;
 }
-function prodShotHtml(p, cls) {
-  const g = prodGarment(p), u = shotUrl(g, ":c");
+const PROD_FULL = ["haut", "bas", "piece", "veste"];
+function prodShotHtml(p, cls, alt) {
+  const g = prodGarment(p), which = PROD_FULL.includes(p.cat) !== !!alt ? ":f" : ":c", u = shotUrl(g, which);
   if (u) return `<img class="zimg pshot ${cls || ""}" src="${esc(u)}" alt="" decoding="async">`;
   if (!S.shotsOff) queueProdShot(p.id);
-  return `<span class="psh ${cls || ""}${S.shotsOff ? "" : " wait"}" data-psh="${esc(p.id)}">${garmentSvg(g)}</span>`;
+  return `<span class="psh ${cls || ""}${S.shotsOff ? "" : " wait"}" data-psh="${esc(p.id)}"${alt ? ' data-alt="1"' : ""}></span>`;
+}
+/* Une pièce en photo, partout : ta photo, la photo de la boutique, sinon la photo studio portée sur ton mannequin (jamais de dessin) */
+const SHOT_TMP = new Map(), tmpQ = [];
+const sshotImg = (u) => `<img class="ph flat sshot" src="${esc(u)}" alt="" decoding="async">`;
+function shotIdFor(it) {
+  if (it && it.id && S.items.has(it.id)) return it.id;
+  const k = "tmp:" + shotKey(it);
+  if (!SHOT_TMP.has(k)) SHOT_TMP.set(k, {cat: it.cat, sub: it.sub, colors: (it.colors || []).slice(0, 3), material: it.material || ""});
+  return k;
+}
+function studioVisual(it, which) {
+  if (!it || !CAT[it.cat] || !CAT[it.cat].subs.includes(it.sub)) return `<span class="ph ph-wait still" aria-hidden="true"></span>`;
+  const u = shotUrl(it, which || ":c");
+  if (u) return sshotImg(u);
+  if (S.shotsOff) return `<span class="ph ph-wait still" aria-hidden="true"></span>`;
+  const id = shotIdFor(it);
+  if (id.startsWith("tmp:")) { if (!tmpQ.includes(id)) tmpQ.push(id); setTimeout(pumpShots, 0); }
+  else queueShots([id], true);
+  return `<span class="ph ph-wait" data-shotfor="${esc(id)}" aria-hidden="true"></span>`;
+}
+function itemVisual(it) {
+  if (!it) return studioVisual(null);
+  if (it.photo || (typeof it.shot === "string" && /^https:\/\//.test(it.shot))) return itemVisualRaw(it);
+  if (it.shopId) {
+    const p = productById(it.shopId);
+    if (p) { const u = shotUrl(prodGarment(p), ":c"); if (u) return sshotImg(u); if (!S.shotsOff) queueProdShot(p.id); return `<span class="ph ph-wait${S.shotsOff ? " still" : ""}" data-shotfor="shop:${esc(p.id)}" aria-hidden="true"></span>`; }
+  }
+  return studioVisual(it);
+}
+function paintGeneric(id) {
+  const els = document.querySelectorAll(`[data-shotfor="${CSS.escape(id)}"]`);
+  if (!els.length) return;
+  const it = shotSubject(id), u = it && shotUrl(it, ":c");
+  if (u) for (const el of els) el.outerHTML = sshotImg(u);
 }
 /* ---------------- Rendu : garde-robe ---------------- */
 const catOrder = (it) => CATS.findIndex((c) => c.key === it.cat);
@@ -5253,13 +5300,18 @@ const WARD_SORT = {
 /* Visuel d’une pièce : photo portée sur le mannequin, et la pièce seule au survol (une photo de boutique reste en premier) */
 const STILL = ["montre", "gants", "ceinture"];
 function wardMedia(it) {
-  const still = STILL.includes(it.sub), c = shotUrl(it, still ? ":f" : ":c"), alone = itemVisual(it);
-  const shopFirst = still || (typeof it.shot === "string" && /^https:\/\//.test(it.shot));
+  const still = STILL.includes(it.sub), hasPhoto = !!it.photo, hasShop = typeof it.shot === "string" && /^https:\/\//.test(it.shot);
+  const c = shotUrl(it, ":c"), f = shotUrl(it, ":f");
   const sale = it.status === "sale", isNew = !!S.wardNew && it.pid === S.wardNew;
   const tag = isNew ? `<span class="zc-tag new">Nouveau</span>` : sale ? `<span class="zc-tag">Au sale</span>` : "";
-  if (!c) return alone + tag;
-  const worn = (cls) => `<img class="zimg wshot ${cls}" src="${esc(c)}" alt="" decoding="async">`;
-  return (shopFirst ? alone + worn("b") : worn("a") + `<span class="wv-b b">${alone}</span>`) + tag;
+  const img = (u, cls) => `<img class="zimg wshot ${cls}" src="${esc(u)}" alt="" decoding="async">`;
+  const raw = () => itemVisualRaw(it), wait = `<span class="ph ph-wait" aria-hidden="true"></span>`;
+  const main = still ? f : c, second = still ? c : f;
+  let html;
+  if (hasShop) html = raw() + (c ? img(c, "b") : "");
+  else if (main) html = img(main, "a") + (hasPhoto ? `<span class="wv-b b">${raw()}</span>` : second ? img(second, "b") : "");
+  else html = hasPhoto ? raw() : wait;
+  return html + tag;
 }
 function wardCard(it, px) {
   px = px || "";
@@ -5321,11 +5373,11 @@ function pieceSheetHtml() {
   const it = S.items.get(S.pieceId);
   if (!it) return `${sheetHead("Pièce introuvable")}<div class="sheet-body"><p class="hint">Cette pièce n’est plus dans ta garde-robe.</p></div>`;
   const c = shotUrl(it, ":c"), fu = shotUrl(it, ":f");
-  const shopFirst = STILL.includes(it.sub) || (typeof it.shot === "string" && /^https:\/\//.test(it.shot));
-  const alone = `<div class="zp-shot"><span class="wv-b">${itemVisual(it)}</span></div>`;
-  const worn = (STILL.includes(it.sub) ? [fu] : [c, fu]).filter(Boolean).map((u) => `<div class="zp-shot"><img class="zimg" src="${esc(u)}" alt="" decoding="async"></div>`);
+  const shopFirst = typeof it.shot === "string" && /^https:\/\//.test(it.shot);
+  const alone = it.photo || shopFirst ? `<div class="zp-shot"><span class="wv-b">${itemVisualRaw(it)}</span></div>` : null;
+  const worn = (STILL.includes(it.sub) ? [fu, c] : [c, fu]).filter(Boolean).map((u) => `<div class="zp-shot"><img class="zimg" src="${esc(u)}" alt="" decoding="async"></div>`);
   const wait = c || S.shotsOff ? [] : [`<div class="zp-shot pz-wait"><p>Photo portée en cours…</p></div>`];
-  const shots = shopFirst ? [alone, ...worn, ...wait] : [...worn, ...wait, alone];
+  const shots = (shopFirst ? [alone, ...worn, ...wait] : [...worn, ...wait, alone]).filter(Boolean);
   const p = it.pid ? productById(it.pid) : null;
   const sale = it.status === "sale";
   const worn1 = typeof it.lastWorn === "string" && /^\d{4}-\d{2}-\d{2}$/.test(it.lastWorn) ? `Portée le ${fmtDay(it.lastWorn)}` : "Pas encore portée";
@@ -5435,7 +5487,7 @@ function shopCard(p, color, px) {
   const w = S.wishes.has(p.id);
   return `<article class="zc">
       <button class="zc-link" id="${px}sp-${esc(p.id)}" data-action="sp-open" data-id="${esc(p.id)}" aria-label="${esc(p.name)}, ${esc(shopName(p))}, ${esc(priceText(p))}">
-        <span class="zc-media">${zimg(p, ph[0], "a")}${ph[1] ? zimg(p, ph[1], "b") : ""}${p.was ? `<span class="zc-tag">−${Math.round(100 - (100 * p.price) / p.was)} %</span>` : ""}${ph.length ? "" : `<span class="zc-tag pv" title="Photo de la marque à venir : la pièce est montrée sur ton mannequin">Aperçu</span>`}</span>
+        <span class="zc-media">${zimg(p, ph[0], "a")}${ph[1] ? zimg(p, ph[1], "b") : ph.length ? "" : prodShotHtml(p, "b", true)}${p.was ? `<span class="zc-tag">−${Math.round(100 - (100 * p.price) / p.was)} %</span>` : ""}${ph.length ? "" : `<span class="zc-tag pv" title="Photo de la marque à venir : la pièce est montrée sur ton mannequin">Aperçu</span>`}</span>
       </button>
       <button class="zc-wish" id="${px}zw-${esc(p.id)}" data-action="sp-wishq" data-id="${esc(p.id)}" aria-pressed="${w}" aria-label="${w ? "Retirer de mes envies" : "Ajouter à mes envies"} : ${esc(p.name)}">${ICON.heart}</button>
       <div class="zc-cap" aria-hidden="true"><p class="zc-name">${esc(p.name)}</p><p class="zc-meta"><span>${esc(shopName(p))}</span><span class="zc-price">${priceHtml(p)}</span></p></div>
@@ -5507,7 +5559,7 @@ function brandGrid() {
   const list = SHOPS.filter((s) => !q || fold(s.name).includes(q) || CATALOG.some((p) => p.shop === s.key && fold(`${p.name} ${p.sub} ${p.material}`).includes(q)));
   if (!list.length) return `<div class="empty"><p>Aucune marque ne correspond à ta recherche.</p></div>`;
   return `<div class="zbr-grid">${list.map((s) => {
-    const items = CATALOG.filter((p) => p.shop === s.key), p = items.find((x) => x.fit !== "contain") || items[0];
+    const items = CATALOG.filter((p) => p.shop === s.key), p = items.find((x) => x.fit !== "contain" && (x.photos || []).length) || items.find((x) => PROD_FULL.includes(x.cat)) || items[0];
     return `<button class="zbr" id="zb-${s.key}" data-action="shop-brand" data-v="${s.key}"><span class="zbr-m">${p ? zimg(p, photosFor(p, p.colors[0])[0], "") : ""}</span><span class="zbr-n">${esc(s.name)}</span><span class="zbr-l">${esc(s.line)}</span><span class="zbr-c">${items.length} pièce${items.length > 1 ? "s" : ""}</span></button>`;
   }).join("")}</div>`;
 }
@@ -5526,7 +5578,7 @@ function shopHomeHtml(list) {
   if (promo.length) out.push(`<section class="rub" aria-labelledby="zr-promo">${rubHead("zr-promo", "Promos", promo.length, rubMore("zr-more-promo", "shop-cat", "promo"))}${rubRow(promo.map((p) => card(p, "p-")).join(""), "Promos")}</section>`);
   const brands = SHOPS.filter((s) => list.some((p) => p.shop === s.key));
   out.push(`<section class="rub band" aria-labelledby="zr-brands">${rubHead("zr-brands", "Les marques", null, rubMore("zr-more-brands", "shop-tab", "marques", "Toutes les marques"))}${rubRow(brands.map((s) => {
-    const items = list.filter((p) => p.shop === s.key), p = items.find((x) => x.fit !== "contain") || items[0];
+    const items = list.filter((p) => p.shop === s.key), p = items.find((x) => x.fit !== "contain" && (x.photos || []).length) || items.find((x) => PROD_FULL.includes(x.cat)) || items[0];
     return `<button class="zbr sm" id="zrb-${s.key}" data-action="shop-brand-go" data-v="${s.key}"><span class="zbr-m">${p ? zimg(p, photosFor(p, p.colors[0])[0], "") : ""}</span><span class="zbr-n">${esc(s.name)}</span><span class="zbr-l">${esc(s.line)}</span></button>`;
   }).join(""), "Les marques")}</section>`);
   return out.join("");
@@ -5579,7 +5631,7 @@ function shopSheetHtml() {
   return `${sheetHead(esc(shopName(p)))}
   <div class="sheet-body zp">
     <div class="zp-media">
-      <div class="zp-gal" id="zp-gal" tabindex="0" aria-label="Photos de la pièce">${ph.length ? ph.map((u, i) => `<div class="zp-shot">${zimg(p, u, "", i === 0)}</div>`).join("") : `<div class="zp-shot">${prodShotHtml(p, "")}</div>${(() => { const u = shotUrl(prodGarment(p), ":f"); return u ? `<div class="zp-shot"><img class="zimg pshot" src="${esc(u)}" alt="" decoding="async"></div>` : ""; })()}`}</div>
+      <div class="zp-gal" id="zp-gal" tabindex="0" aria-label="Photos de la pièce">${ph.length ? ph.map((u, i) => `<div class="zp-shot">${zimg(p, u, "", i === 0)}</div>`).join("") : `<div class="zp-shot">${prodShotHtml(p, "")}</div><div class="zp-shot">${prodShotHtml(p, "", true)}</div>`}</div>
       ${ph.length > 1 ? `<p class="zp-n" aria-hidden="true"><span id="zp-i">1</span> / ${ph.length}</p>` : ""}
     </div>
     <div class="zp-info">
@@ -5903,7 +5955,7 @@ function renderSettings() {
     <div class="row-btns"><button class="btn ghost" id="s-export" data-action="export"${S.caps.downloads ? "" : " disabled"}>Exporter (JSON)</button>
       ${S.confirmAll ? `<span class="confirm"><span>Tout supprimer, sans retour possible ?</span><button class="btn danger sm" data-action="delete-all-yes"${S.deleting ? " disabled" : ""}>${S.deleting ? "Suppression…" : "Oui, tout supprimer"}</button><button class="btn ghost sm" data-action="delete-all-no">Annuler</button></span>` : `<button class="btn ghost danger-t" data-action="delete-all">Tout supprimer</button>`}</div>
   </div>
-  <p class="foot-note">Dressing du matin, version 13 · corps 3D MakeHuman (CC0), ombres et matières en temps réel, photos portées · photos des boutiques · mode clair ou sombre</p>`;
+  <p class="foot-note">Dressing du matin, version 14 · corps 3D MakeHuman (CC0), ombres et matières en temps réel, photos portées · photos des boutiques · mode clair ou sombre</p>`;
 }
 
 /* ---------------- Feuilles (bottom sheet) ---------------- */
@@ -6001,7 +6053,7 @@ function refBlockHtml() {
   if (d.refState === "working") res = `<div class="ai-line"><span class="label-tag">${ICON.spark} Styliste IA</span><span>cherche dans ses connaissances…</span></div><div class="stitching" aria-hidden="true"></div>`;
   else if (d.refState === "done" && d.refRes) {
     const r = d.refRes, prev = {cat: r.cat, sub: r.sub, colors: r.colors};
-    res = `<div class="ref-result"><span class="ref-vis" style="--tint:${tintOf(prev)}">${garmentSvg(prev)}</span><div class="ref-text">
+    res = `<div class="ref-result"><span class="ref-vis">${studioVisual({...prev, material: ""})}</span><div class="ref-text">
       <p class="ref-name">${esc(r.name)}</p>
       <p class="hint">${esc(cap(r.sub))} · ${esc(r.colors.map(colorLabel).join(", "))} · confiance ${esc(r.confidence)}</p>
       ${r.note ? `<p class="hint">${esc(r.note)}</p>` : ""}
@@ -7136,7 +7188,7 @@ document.addEventListener("error", (e) => {
   if (img && img.tagName === "IMG" && img.classList.contains("zimg")) {
     const p = productById(img.dataset.pid);
     const holder = document.createElement("span");
-    holder.innerHTML = garmentSvg(p ? asGarment(p) : {});
+    holder.innerHTML = p ? prodShotHtml(p, "") : studioVisual(null);
     img.replaceWith(holder.firstChild);
     return;
   }
@@ -7144,7 +7196,7 @@ document.addEventListener("error", (e) => {
     const base = S.items.get(img.dataset.id) || (S.guest && S.guest.id === img.dataset.id ? S.guest : null) || (S.draft && S.draft.it);
     const it = base && base.shot && !base.photo ? {...base, shot: null} : base;
     const holder = document.createElement("span");
-    holder.innerHTML = garmentSvg(it || {});
+    holder.innerHTML = studioVisual(it || null);
     img.replaceWith(holder.firstChild);
   }
 }, true);
