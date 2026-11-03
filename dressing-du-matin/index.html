@@ -813,6 +813,9 @@ body.is-ward .wrap{max-width:1480px}
 .pz-cols{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
 .pz-cols span{display:inline-flex;align-items:center;gap:7px}
 .pz-cols i{width:12px;height:12px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.imp-list{display:flex;flex-direction:column;gap:14px}
+.imp-it{display:grid;grid-template-columns:84px minmax(0,1fr);gap:14px;align-items:center}
+.imp-t{display:flex;flex-direction:column;gap:5px;min-width:0}
 .pz-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .pz-wait{display:grid;place-items:center;align-content:center;gap:10px;text-align:center;color:#55544F;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
 .pz-wait::before{content:"";width:28px;height:28px;border:1.5px solid rgba(21,21,21,.18);border-top-color:#151515;border-radius:50%;animation:wx-spin 1s linear infinite}
@@ -5477,6 +5480,54 @@ async function addOwned(pid, color) {
 }
 
 
+
+/* ---------------- Ajout par lien : un lien …#ajout=… propose d’ajouter des pièces à la garde-robe de cet appareil ---------------- */
+function b64urlText(s) {
+  s = s.replace(/-/g, "+").replace(/_/g, "/");
+  while (s.length % 4) s += "=";
+  const bin = atob(s), bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+function cleanImport(v) {
+  if (!v || typeof v !== "object" || !CAT[v.cat] || !CAT[v.cat].subs.includes(v.sub)) return null;
+  const colors = (Array.isArray(v.colors) ? v.colors : []).filter((k) => COL[k]).slice(0, 3);
+  if (!colors.length) return null;
+  const str = (x, n) => String(x == null ? "" : x).replace(/[\u0000-\u001f<>]/g, "").trim().slice(0, n);
+  return {name: str(v.name, 60) || defaultName({sub: v.sub, colors}), cat: v.cat, sub: v.sub, colors, material: str(v.material, 40), brand: str(v.brand, 40), ref: str(v.ref, 60),
+    styles: (Array.isArray(v.styles) ? v.styles : []).filter((s) => STY[s]).slice(0, 6), warmth: [1, 2, 3].includes(Number(v.warmth)) ? Number(v.warmth) : 2, rainOk: !!v.rainOk,
+    status: "ok", fav: false, photo: null, cutout: false, example: false, lastWorn: null};
+}
+const importDup = (it) => [...S.items.values()].some((x) => x.cat === it.cat && x.sub === it.sub && fold(x.name).trim() === fold(it.name).trim());
+function readImportLink() {
+  const m = /[#&]ajout=([A-Za-z0-9_-]{8,12000})/.exec(location.hash || "");
+  if (!m) return;
+  try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { /* adresse inchangée */ }
+  let list = null;
+  try { list = JSON.parse(b64urlText(m[1])); } catch (e) { list = null; }
+  const items = (Array.isArray(list) ? list : []).slice(0, 20).map(cleanImport).filter(Boolean);
+  if (!items.length) { toast("Ce lien d’ajout n’est pas valide."); return; }
+  S.importItems = items;
+  checkImport();
+}
+function checkImport() {
+  if (!S.importItems) return;
+  if (S.sheet || S.themeAsk || !$("#wx-ask").hidden || !S.capsReady || (S.caps.db && !S.ready.items)) { setTimeout(checkImport, 700); return; }
+  openSheet("import");
+}
+function importSheetHtml() {
+  const items = S.importItems || [], fresh = items.filter((it) => !importDup(it)), n = fresh.length;
+  return `${sheetHead("Ajouter à ta garde-robe")}
+  <div class="sheet-body">
+    <p class="hint">Ce lien ajoute ${items.length} pièce${items.length > 1 ? "s" : ""} à ta garde-robe, sur cet appareil. Vérifie avant de valider : tu pourras compléter chaque fiche ensuite (photo, matière).</p>
+    <div class="imp-list">${items.map((it) => `<div class="imp-it"><span class="imp-m ic-vis">${itemVisual(it)}</span><div class="imp-t"><p class="zp-name">${esc(it.name)}</p><p class="pz-sub">${esc([it.brand, cap(it.sub)].filter(Boolean).join(" · "))}</p><p class="pz-cols">${it.colors.map((k) => `<span><i style="--c:${colorHex(k)}"></i>${esc(COL[k].label)}</span>`).join("")}</p>${importDup(it) ? `<p class="hint">Déjà dans ta garde-robe : elle ne sera pas ajoutée en double.</p>` : ""}</div></div>`).join("")}</div>
+    <div class="sp-actions">
+      ${S.caps.db ? `<button class="btn primary big wide" id="imp-yes" data-action="imp-yes"${S.importBusy || !n ? " disabled" : ""}>${ICON.hanger} ${S.importBusy ? "Ajout…" : n ? `Ajouter ${n > 1 ? `les ${n} pièces` : "la pièce"}` : "Rien de nouveau à ajouter"}</button>` : `<p class="hint">Ta garde-robe ne peut pas être enregistrée dans cette vue.</p>`}
+      <button class="btn ghost big wide" id="imp-no" data-action="imp-no">Annuler</button>
+    </div>
+  </div>`;
+}
+
 /* --- Retour de boutique : la pièce vue sur le site a-t-elle été achetée ? (l’appli ne voit pas le site, elle demande au retour) --- */
 function noteVisit(pid, color) {
   const p = productById(pid);
@@ -5691,7 +5742,7 @@ function renderSheet(first) {
   const body = el.querySelector(".sheet-body");
   const st = body ? body.scrollTop : 0;
   const act = document.activeElement && el.contains(document.activeElement) ? document.activeElement.id : null;
-  el.innerHTML = S.sheet === "item" ? itemSheetHtml() : S.sheet === "shop" ? shopSheetHtml() : S.sheet === "piece" ? pieceSheetHtml() : S.sheet === "bought" ? boughtSheetHtml() : S.sheet === "trcol" ? trColSheetHtml() : S.sheet === "swap" ? swapSheetHtml() : S.sheet === "imposed" ? imposedSheetHtml() : "";
+  el.innerHTML = S.sheet === "item" ? itemSheetHtml() : S.sheet === "shop" ? shopSheetHtml() : S.sheet === "piece" ? pieceSheetHtml() : S.sheet === "import" ? importSheetHtml() : S.sheet === "bought" ? boughtSheetHtml() : S.sheet === "trcol" ? trColSheetHtml() : S.sheet === "swap" ? swapSheetHtml() : S.sheet === "imposed" ? imposedSheetHtml() : "";
   el.classList.toggle("is-zp", S.sheet === "shop" || S.sheet === "piece");
   el.hidden = false; $("#scrim").hidden = false; document.body.classList.add("locked");
   const nb = el.querySelector(".sheet-body");
@@ -5703,6 +5754,7 @@ function renderSheet(first) {
 }
 function closeSheet() {
   if (S.sheet === "bought") clearVisit();
+  if (S.sheet === "import") S.importItems = null;
   if (S.draft && S.draft.aiCtl) S.draft.aiCtl.abort();
   S.draft = null; S.sheet = null; S.swap = null; S.shopSel = null; S.trCol = null; S.bought = null; S.pieceId = null;
   $("#sheet").classList.remove("is-zp");
@@ -6630,6 +6682,20 @@ const ACTIONS = {
   "shop-color": (el) => { const k = el.dataset.v; S.shopF.color = S.shopF.color === k || !COL[k] ? null : k; renderShop(); refocus("zsc-" + k); },
   "shop-clear": () => { S.shopF.shop = "all"; S.shopF.color = null; renderShop(); refocus("zs-filt"); },
   "piece-open": (el) => openPiece(el.dataset.id),
+  "imp-yes": async () => {
+    const db = S.caps.db, items = S.importItems;
+    if (!db || !items || S.importBusy) return;
+    const fresh = items.filter((it) => !importDup(it));
+    S.importBusy = true; renderSheet();
+    let n = 0;
+    try { for (const it of fresh) { await db.collection("items").doc().set({...it, createdAt: new Date(Date.now() + n).toISOString()}); n++; } }
+    catch (e) { dbErr(e); }
+    finally {
+      S.importBusy = false; S.importItems = null; closeSheet();
+      if (n) { toast(`${n} pièce${n > 1 ? "s ajoutées" : " ajoutée"} à ta garde-robe.`); Object.assign(S.wardF, {q: "", state: "all", fav: false, shop: false, color: null, sort: "new"}); S.wardFilter = "all"; showTab("wardrobe"); }
+    }
+  },
+  "imp-no": () => { S.importItems = null; closeSheet(); },
   "pz-wear": (el) => { closeSheet(); ACTIONS["impose-go"](el); },
   "pz-edit": () => { const id = S.pieceId; closeSheet(); openItem(id); },
   "pz-fav": async () => { const it = S.items.get(S.pieceId), db = S.caps.db; if (!it || !db) return; try { await db.doc("items/" + it.id).update({fav: !it.fav}); toast(!it.fav ? `${it.name} en favori : il reviendra plus souvent dans tes tenues.` : "Retiré des favoris."); } catch (e) { dbErr(e); } },
@@ -6869,6 +6935,7 @@ document.addEventListener("keydown", (e) => {
 document.addEventListener("click", (e) => { const a = e.target && e.target.closest && e.target.closest("a[data-visit]"); if (a) noteVisit(a.dataset.visit, a.dataset.color); }, true);
 document.addEventListener("visibilitychange", () => { if (!S.visit) return; if (document.visibilityState === "hidden") S.visit.left = true; else setTimeout(() => checkVisit(false), 300); });
 window.addEventListener("blur", () => { if (S.visit) S.visit.left = true; });
+window.addEventListener("hashchange", () => readImportLink());
 window.addEventListener("focus", () => { if (S.visit) setTimeout(() => checkVisit(false), 300); });
 document.addEventListener("submit", (e) => { if (e.target && e.target.id === "wx-form") { e.preventDefault(); wxSubmit(); } });
 document.addEventListener("pointerdown", (e) => { if (!e.target.closest || !e.target.closest("#wx-form")) wxCloseSugg(); });
@@ -7017,6 +7084,7 @@ const localDownloads = {
     renderSettings(); renderWardrobe(); renderShop(); renderLook(false);
     initWeather();
     resumeVisit();
+    readImportLink();
     return;
   }
   const names = ["db", "assets", "sample", "downloads"];
@@ -7031,6 +7099,7 @@ const localDownloads = {
   renderLook(false);
   initWeather();
   resumeVisit();
+  readImportLink();
 })();
 })();
 </script>
