@@ -755,6 +755,73 @@ body.is-ward .wrap{max-width:1480px}
 .bq-h{margin:0 0 6px;font-family:var(--font-display);font-weight:500;font-size:24px;line-height:1.1;letter-spacing:.04em;text-transform:uppercase}
 .sp-tip{display:flex;gap:9px;align-items:flex-start;margin:0;font-size:12.5px;line-height:1.45;color:var(--ink-2)}
 .sp-tip .i{width:16px;height:16px;margin-top:1px}
+
+/* ===== v11 : onglets et barres, communs à la boutique et à la garde-robe ===== */
+#tab-shop .zs-top,#tab-wardrobe .zs-top{padding-bottom:14px}
+.zs-tabs{display:flex;gap:28px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--rule);margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:0 max(16px,env(safe-area-inset-left,0px))}
+.zs-tabs::-webkit-scrollbar{display:none}
+.zs-tab{flex:none;display:inline-flex;align-items:center;gap:8px;padding:12px 0 11px;margin-bottom:-1px;font-size:13.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+.zs-tab[aria-selected="true"]{color:var(--ink);font-weight:700;border-bottom-color:var(--ink)}
+.zs-tab .zs-count{font-weight:500}
+.zs-subs{display:flex;gap:20px;overflow-x:auto;scrollbar-width:none;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:14px max(16px,env(safe-area-inset-left,0px)) 2px}
+.zs-subs::-webkit-scrollbar{display:none}
+.zs-sub-b{flex:none;display:inline-flex;align-items:baseline;gap:6px;padding:6px 0;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;color:var(--ink-2);border-bottom:1px solid transparent}
+.zs-sub-b[aria-current="true"]{color:var(--ink);font-weight:700;border-bottom-color:var(--ink)}
+.zb-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0;margin-top:8px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.zb-count{margin:0;flex:1;text-align:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.zf-panel{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;padding:14px 0 16px;border-bottom:1px solid var(--rule)}
+.zf-panel .zs-fg{flex-direction:row;align-items:center;gap:2px 16px}
+.zb-prog{margin:12px 0 0;display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.zb-prog i{position:relative;flex:1;max-width:160px;height:2px;background:var(--rule);overflow:hidden}
+.zb-prog i b{position:absolute;inset:0 auto 0 0;background:var(--ink);transition:width .3s}
+#ward-grid,#zs-grid-wrap{display:flex;flex-direction:column;gap:16px;padding-top:16px}
+.zs-clear{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.zs-lead{margin:16px 0 0;font-size:13.5px;color:var(--ink-2)}
+@media (min-width:900px){
+  .zb-bar .zs-filt{display:inline-block}
+  .zs-tabs,.zs-subs{margin:0;padding-left:0;padding-right:0}
+  .zs-tabs{gap:40px}
+  .zs-tab{font-size:14px}
+  .zf-panel{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 32px}
+  .zf-panel .zs-fg{flex-direction:column;align-items:flex-start;gap:2px}
+}
+/* Marques */
+.zbr-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 6px}
+.zbr{display:flex;flex-direction:column;gap:6px;text-align:left;min-width:0}
+.zbr-m{position:relative;display:block;aspect-ratio:3/4;background:var(--photo);overflow:hidden;margin-bottom:4px}
+.zbr-n{font-family:var(--font-display);font-size:22px;font-weight:500;line-height:1.05;letter-spacing:.03em;text-transform:uppercase}
+.zbr-l{font-size:12.5px;line-height:1.4;color:var(--ink-2)}
+.zbr-c{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.zb-head{display:flex;flex-direction:column;gap:10px;padding-top:14px}
+.zb-head .zs-link{align-self:flex-start}
+@media (min-width:900px){.zbr-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:36px 10px}.zbr-n{font-size:26px}}
+[data-scheme="dark"] .zbr-m{--garment-line:var(--photo-line)}
+/* Garde-robe : photo portée, pièce seule au survol */
+.wv .b{opacity:0;transition:opacity .25s}
+@media (hover:hover){.zc-link:hover .wv .b{opacity:1}.zc-link:hover .wv > .zimg.a:not(:only-child){opacity:0}}
+.wv > .wv-b{position:absolute;inset:0;display:block;background:var(--photo)}
+.wv img.ph{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center 22%}
+.wv img.ph.cutout{object-fit:contain;object-position:center;padding:9%}
+.wv img.ph.shot.contain{object-fit:contain;object-position:center;padding:10%;background:var(--photo-2)}
+.wv img.garment{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain}
+.wshot{object-position:center center;animation:wshot-in .45s ease both}
+@keyframes wshot-in{from{opacity:0}to{opacity:1}}
+.wv.wait::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,var(--ink-3),transparent);background-size:50% 100%;background-repeat:no-repeat;animation:wait-bar 1.3s linear infinite;opacity:.6}
+@keyframes wait-bar{from{background-position:-50% 0}to{background-position:150% 0}}
+/* Fiche pièce de la garde-robe */
+.pz-sub{margin:0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.pz-cols{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.pz-cols span{display:inline-flex;align-items:center;gap:7px}
+.pz-cols i{width:12px;height:12px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.pz-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pz-wait{display:grid;place-items:center;align-content:center;gap:10px;text-align:center;color:#55544F;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.pz-wait::before{content:"";width:28px;height:28px;border:1.5px solid rgba(21,21,21,.18);border-top-color:#151515;border-radius:50%;animation:wx-spin 1s linear infinite}
+.zp-shot > .wv-b{position:absolute;inset:0;display:block}
+.zp-shot .wv-b > img.garment{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain}
+.zp-shot img.ph{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;padding:6%}
+.zp-shot img.ph.flat{object-fit:cover;padding:0}
+.zp-shot img.ph.shot:not(.contain){object-fit:cover;padding:0}
+@media (prefers-reduced-motion:reduce){.wshot{animation:none}.wv.wait::after{animation:none}}
 </style>
 </head>
 <body>
@@ -891,7 +958,7 @@ body.is-ward .wrap{max-width:1480px}
 
   <section id="tab-settings" class="tab" aria-labelledby="t-set" hidden>
     <div class="intro">
-      <p class="eyebrow">Version 10</p>
+      <p class="eyebrow">Version 11</p>
       <h1 class="display" id="t-set"><em>Réglages</em></h1>
     </div>
     <div id="settings" class="tab" style="gap:14px"></div>
@@ -3206,8 +3273,34 @@ function DM_HUMAN(scope, inWorker) {
 }
 
 /* ---------------- Atelier : mannequin réaliste en 3D (WebGL, maillage calculé dans un worker) ---------------- */
-const Atelier = (() => {
-  const api = {ok: false, attach() {}, show() {}, setSpin() {}, isSpinning: () => false, redraw() {}};
+/* Worker partagé entre la cabine et le studio photo : les données du corps n’y sont chargées qu’une fois */
+const DM_POOL = {worker: null, jobId: 0, ready: null, pending: new Map()};
+function dmStart() {
+  const P = DM_POOL;
+  if (P.ready) return !!P.worker;
+  try {
+    const src = "(" + DM_HUMAN.toString() + ")(self, true);";
+    P.worker = new Worker(URL.createObjectURL(new Blob([src], {type: "text/javascript"})));
+    P.worker.onmessage = (ev) => { const cb = P.pending.get(ev.data.id); P.pending.delete(ev.data.id); if (cb) cb(ev.data); };
+    P.worker.onerror = () => { P.worker = null; for (const [id, cb] of P.pending) { P.pending.delete(id); cb(null); } };
+    const D = window.DM_HUMAN_DATA, bin = atob(D.b64), bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    P.ready = new Promise((res) => { const id = ++P.jobId; P.pending.set(id, (r) => res(!!(r && r.ok))); P.worker.postMessage({type: "init", id, meta: D.meta, buf: bytes.buffer, deflated: true}, [bytes.buffer]); });
+    return true;
+  } catch (e) { P.worker = null; P.ready = Promise.resolve(false); return false; }
+}
+function dmCompute(job, cb) {
+  const P = DM_POOL;
+  if (!P.ready) dmStart();
+  P.ready.then((ok) => {
+    if (!ok || !P.worker) { cb(null); return; }
+    const id = ++P.jobId;
+    P.pending.set(id, cb);
+    P.worker.postMessage({type: "build", id, job});
+  });
+}
+function makeAtelier(studio) {
+  const api = {ok: false, attach() {}, show() {}, setSpin() {}, isSpinning: () => false, redraw() {}, snap: async () => null};
   const canvas = document.createElement("canvas");
   canvas.setAttribute("aria-hidden", "true");
   let gl = null;
@@ -3216,28 +3309,8 @@ const Atelier = (() => {
   const U32 = !!gl.getExtension("OES_element_index_uint");
   if (!U32) return api;
   gl.getExtension("OES_standard_derivatives");
-
-  /* calcul du maillage dans un worker ; les données du corps y sont chargées une fois */
-  let worker = null, jobId = 0, ready = null;
-  const pending = new Map();
-  function startWorker() {
-    const src = "(" + DM_HUMAN.toString() + ")(self, true);";
-    worker = new Worker(URL.createObjectURL(new Blob([src], {type: "text/javascript"})));
-    worker.onmessage = (ev) => { const cb = pending.get(ev.data.id); pending.delete(ev.data.id); if (cb) cb(ev.data); };
-    worker.onerror = () => { worker = null; for (const [id, cb] of pending) { pending.delete(id); cb(null); } };
-    const D = window.DM_HUMAN_DATA, bin = atob(D.b64), bytes = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-    ready = new Promise((res) => { const id = ++jobId; pending.set(id, (r) => res(!!(r && r.ok))); worker.postMessage({type: "init", id, meta: D.meta, buf: bytes.buffer, deflated: true}, [bytes.buffer]); });
-  }
-  try { startWorker(); } catch (e) { return api; }
-  function compute(job, cb) {
-    ready.then((ok) => {
-      if (!ok || !worker) { cb(null); return; }
-      const id = ++jobId;
-      pending.set(id, cb);
-      worker.postMessage({type: "build", id, job});
-    });
-  }
+  if (!dmStart()) return api;
+  const compute = dmCompute;
 
   const VS = `attribute vec3 aP;attribute vec3 aN;attribute vec3 aC;attribute float aA;attribute float aM;attribute vec2 aU;attribute vec3 aO;
 uniform mat4 uVP;uniform vec2 uR;uniform mat4 uLVP;
@@ -3455,8 +3528,16 @@ void main(){
   /* scène */
   let host = null, ro = null, raf = 0, rotY = 0.3, vel = 0, drag = null, spin = false, anim = null, fade = null;
   let Hh = 1.75, eye = v(0, 1, 4), VP = null, lost = false, lastOpts = null, alpha = 0;
+  let frameOv = null;
   function fit() {
     const w = Math.max(1, canvas.width), h = Math.max(1, canvas.height), asp = w / h, fov = (22 * Math.PI) / 180;
+    if (frameOv) {
+      const f = frameOv, d = (Hh * f.k) / Math.tan(fov / 2);
+      eye = v(0, Hh * (f.c + (f.tilt == null ? 0.03 : f.tilt)), d);
+      VP = mul(persp(fov, asp, 0.05, 40), lookAt(eye, v(0, Hh * f.c, 0), v(0, 1, 0)));
+      lightFit();
+      return;
+    }
     const k = host && host.dataset.k ? clampN(Number(host.dataset.k) || 0.62, host.dataset.free ? 0.05 : 0.45, 1.2) : 0.62;
     let d = (Hh * k) / Math.tan(fov / 2);
     const hf = 2 * Math.atan(Math.tan(fov / 2) * asp);
@@ -3637,6 +3718,42 @@ void main(){
     pump();
     kick();
   }
+  /* Studio photo : une tenue, un ou plusieurs cadrages, rendus hors écran sur fond de studio clair */
+  function snap(o, opt) {
+    return new Promise((resolve) => {
+      if (lost) { resolve(null); return; }
+      compute(jobFor(o), (r) => {
+        if (!r || r.error || !(r.nv > 0) || lost) { resolve(null); return; }
+        const out = [];
+        try {
+          const m = upload(r);
+          freeMesh(mesh); mesh = m; meshGen++;
+          Hh = m.H; makeFloor(0.9 * (Hh / 1.78));
+          const W = opt.w, H = opt.h, ss = opt.ss || 2;
+          canvas.width = Math.round(W * ss); canvas.height = Math.round(H * ss);
+          alpha = 1; dark = 0;
+          for (const f of opt.frames) {
+            frameOv = f; rotY = f.rot == null ? 0.22 : f.rot;
+            fit();
+            if (sm) sm.key = "";
+            draw();
+            const c = document.createElement("canvas"); c.width = W; c.height = H;
+            const x = c.getContext("2d");
+            const g = x.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, opt.bg0 || "#EFEEEB"); g.addColorStop(0.62, opt.bg1 || "#E8E6E2"); g.addColorStop(1, opt.bg2 || "#DEDCD7");
+            x.fillStyle = g; x.fillRect(0, 0, W, H);
+            x.imageSmoothingEnabled = true; x.imageSmoothingQuality = "high";
+            x.drawImage(canvas, 0, 0, W, H);
+            out.push(c);
+          }
+        } catch (e) { if (window.console) console.error(e); }
+        frameOv = null;
+        freeMesh(mesh); mesh = null;
+        canvas.width = 1; canvas.height = 1;
+        resolve(out.length ? out : null);
+      });
+    });
+  }
   function attach(el) {
     if (host !== el) {
       host = el;
@@ -3647,9 +3764,12 @@ void main(){
     resize();
     kick();
   }
-  window.addEventListener("resize", () => { resize(); kick(); });
-  return {ok: true, attach, show, setSpin: (b) => { spin = !!b; kick(); }, isSpinning: () => spin, redraw: kick, setRot: (r) => { rotY = r; anim = null; kick(); }, busy: () => busy || !!want, setDark: (d) => { dark = d ? 1 : 0; kick(); }};
-})();
+  if (!studio) window.addEventListener("resize", () => { resize(); kick(); });
+  return {ok: true, attach, show, snap, setSpin: (b) => { spin = !!b; kick(); }, isSpinning: () => spin, redraw: kick, setRot: (r) => { rotY = r; anim = null; kick(); }, busy: () => busy || !!want, setDark: (d) => { dark = d ? 1 : 0; kick(); }};
+}
+const Atelier = makeAtelier(false);
+let STUDIO = null;
+const studioEngine = () => STUDIO || (STUDIO = makeAtelier(true));
 
 /* ---------------- État ---------------- */
 const S = {
@@ -3663,13 +3783,13 @@ const S = {
   view: Atelier.ok ? store.get("view", "3d") : "flat", spin: false,
   body: {...BODY_DEFAULT, ...store.get("body", {})}, bodySaved: true,
   aiState: "idle", aiCtl: null, aiErr: "",
-  wardFilter: "all", showSale: false, theme: null, themeAsk: false, wxAskPending: false, visit: null, bought: null, wardNew: null,
+  wardFilter: "all", showSale: false, theme: null, themeAsk: false, pieceId: null, shotsOff: false, wxAskPending: false, visit: null, bought: null, wardNew: null,
   wardF: {q: "", vue: [1, 2, 3].includes(store.get("wardVue", 2)) ? store.get("wardVue", 2) : 2, open: false, state: "all", fav: false, shop: false, color: null, sort: "cat"}, histFilter: "all", histConfirm: null,
   confirmEx: false, confirmAll: false, deleting: false, busyBulk: false,
   sheet: null, draft: null, swap: null, lastFocus: null,
   wishes: new Map(), guest: null, shopSel: null, shopBusy: false, trCol: null,
 };
-S.shopF = {view: "shops", shop: "all", cat: "all", sex: ["f", "h", "all"].includes(store.get("shopSex", "")) ? store.get("shopSex", "") : S.body.sex || "all", vue: [1, 2, 3].includes(store.get("shopVue", 2)) ? store.get("shopVue", 2) : 2, q: "", color: null, open: false};
+S.shopF = {tab: null, brand: null, bsex: "all", view: "shops", shop: "all", cat: "all", sex: ["f", "h", "all"].includes(store.get("shopSex", "")) ? store.get("shopSex", "") : S.body.sex || "all", vue: [1, 2, 3].includes(store.get("shopVue", 2)) ? store.get("shopVue", 2) : 2, q: "", color: null, open: false};
 if (S.view !== "3d" && S.view !== "flat") S.view = "3d";
 function seasonWeather() { const [am, pm] = SEASON[new Date().getMonth()]; return {am, pm, rain: false, wind: false}; }
 S.W = seasonWeather();
@@ -4549,7 +4669,8 @@ function showTab(k) {
   window.scrollTo(0, 0);
   if (k === "today") { Atelier.attach($("#stage-host")); renderStage(); syncMannequin(false); }
   if (k === "body") { Atelier.attach($("#stage-host-2")); renderBodyStage(); syncMannequin(false); }
-  if (k === "shop") renderShop();
+  if (k === "shop") { const f = S.shopF; if (!f.touched && (f.tab === "f" || f.tab === "h") && (S.body.sex === "f" || S.body.sex === "h") && S.body.sex !== f.tab) setShopTab(S.body.sex); renderShop(); }
+  if (k === "wardrobe") { shotProgress(); pumpShots(); }
 }
 const currentLook = () => S.looks[S.lookIdx] || null;
 function lookParts(L) {
@@ -4819,6 +4940,120 @@ function onBodyChange() {
   bodyTimer = setTimeout(() => { S.bodySaved = store.set("body", S.body); }, 400);
 }
 
+/* ---------------- Studio photo : chaque pièce portée sur le mannequin, cadrée comme une photo de catalogue ---------------- */
+const SHOT_V = "s2", SHOT_W = 540, SHOT_H = 810;
+const SHOT_URLS = new Map();
+const shotQ = [];
+let shotBusy = false, shotFail = 0, shotDbP = null;
+function hash36(s) { let h = 2166136261 >>> 0, g = 5381; for (let i = 0; i < s.length; i++) { const c = s.charCodeAt(i); h = Math.imul(h ^ c, 16777619) >>> 0; g = (Math.imul(g, 33) + c) >>> 0; } return h.toString(36) + g.toString(36); }
+function shotDb() {
+  if (!shotDbP) shotDbP = new Promise((res) => {
+    try {
+      const rq = indexedDB.open("dm-shots", 1);
+      rq.onupgradeneeded = () => { try { rq.result.createObjectStore("shots"); } catch (e) { /* déjà là */ } };
+      rq.onsuccess = () => res(rq.result);
+      rq.onerror = () => res(null);
+      rq.onblocked = () => res(null);
+    } catch (e) { res(null); }
+  });
+  return shotDbP;
+}
+async function shotGet(k) {
+  const db = await shotDb();
+  if (!db) return null;
+  return new Promise((res) => { try { const r = db.transaction("shots").objectStore("shots").get(k); r.onsuccess = () => res(r.result instanceof Blob ? r.result : null); r.onerror = () => res(null); } catch (e) { res(null); } });
+}
+async function shotPut(k, blob) {
+  const db = await shotDb();
+  if (!db || !blob) return;
+  try { db.transaction("shots", "readwrite").objectStore("shots").put(blob, k); } catch (e) { /* stockage plein : la photo reste pour cette session */ }
+}
+const SHOT_BASIC = {
+  tee: (c) => ({cat: "haut", sub: "t-shirt", colors: [c], material: "coton"}),
+  jean: (c) => ({cat: "bas", sub: "jean", colors: [c], material: "denim"}),
+  pant: (c) => ({cat: "bas", sub: "pantalon de tailleur", colors: [c], material: "laine"}),
+  skirt: (c) => ({cat: "bas", sub: "jupe", colors: [c], material: "laine"}),
+  snk: (c) => ({cat: "chaussures", sub: "baskets", colors: [c], material: "cuir"}),
+  loafer: (c) => ({cat: "chaussures", sub: "mocassins", colors: [c], material: "cuir"}),
+};
+/* la pièce, avec des basiques neutres qui la laissent ressortir */
+function shotOutfit(it) {
+  const c0 = (it.colors || [])[0], B = SHOT_BASIC;
+  const self = {cat: it.cat, sub: it.sub, colors: (it.colors || []).slice(0, 3), material: it.material || ""};
+  const teeC = ["blanc", "beige", "bleu-clair", "jaune", "rose"].includes(c0) ? "noir" : "blanc";
+  switch (it.cat) {
+    case "haut": return [self, c0 === "denim" ? B.pant("noir") : B.jean("denim"), B.snk("blanc")];
+    case "bas": return [self, B.tee(teeC), B.snk("blanc")];
+    case "piece": return it.sub === "ensemble" ? [self, B.tee("blanc"), B.loafer("noir")] : [self, B.loafer("noir")];
+    case "veste": return [self, B.tee(c0 === "blanc" ? "gris" : "blanc"), c0 === "denim" ? B.pant("noir") : B.jean("denim"), B.snk(c0 === "blanc" ? "noir" : "blanc")];
+    case "chaussures": return [self, B.tee("blanc"), ["bottes", "escarpins", "talons", "sandales"].includes(it.sub) ? B.skirt("noir") : B.jean("denim")];
+    default: return [self, B.tee(c0 === "blanc" ? "noir" : "blanc"), B.jean("denim"), B.snk("blanc")];
+  }
+}
+const SHOT_FULL = {c: 0.5, k: 0.56, rot: 0.22};
+function shotFrame(it) {
+  const s = it.sub;
+  switch (it.cat) {
+    case "haut": return {c: 0.665, k: 0.255, rot: 0.2};
+    case "bas": return {c: 0.31, k: 0.34, rot: 0.2, tilt: 0.06};
+    case "piece": return {c: 0.53, k: 0.39, rot: 0.2};
+    case "veste": return {c: 0.6, k: 0.32, rot: 0.24};
+    case "chaussures": return {c: 0.085, k: 0.15, rot: 0.6, tilt: 0.14};
+    default:
+      if (["bonnet", "casquette", "chapeau"].includes(s)) return {c: 0.86, k: 0.16, rot: 0.3};
+      if (s === "écharpe") return {c: 0.8, k: 0.16, rot: 0.25};
+      if (s === "ceinture") return {c: 0.56, k: 0.17, rot: 0.2};
+      if (["montre", "gants"].includes(s)) return {c: 0.47, k: 0.18, rot: 0.55};
+      return {c: 0.56, k: 0.3, rot: 0.35};
+  }
+}
+const shotKey = (it) => SHOT_V + ":" + hash36(JSON.stringify([it.cat, it.sub, it.colors || [], it.material || "", bodyParams()]));
+const shotUrl = (it, w) => (it ? SHOT_URLS.get(shotKey(it) + w) || null : null);
+const shotsWanted = () => !S.shotsOff && (S.tab === "wardrobe" || S.sheet === "piece");
+function queueShots(ids, front) {
+  const want = ids.filter((id) => { const it = S.items.get(id); return it && !shotUrl(it, ":c"); });
+  if (front) { for (let i = want.length - 1; i >= 0; i--) { const k = shotQ.indexOf(want[i]); if (k >= 0) shotQ.splice(k, 1); shotQ.unshift(want[i]); } }
+  else for (const id of want) if (!shotQ.includes(id)) shotQ.push(id);
+  pumpShots();
+}
+async function pumpShots() {
+  if (shotBusy || !shotQ.length || !shotsWanted()) { shotProgress(); return; }
+  const id = shotQ.shift(), it = S.items.get(id);
+  if (!it || shotUrl(it, ":c")) { pumpShots(); return; }
+  shotBusy = true;
+  const key = shotKey(it);
+  try {
+    let c = await shotGet(key + ":c"), f = await shotGet(key + ":f");
+    if (!c || !f) {
+      const eng = studioEngine();
+      if (!eng.ok) { S.shotsOff = true; return; }
+      const cv = await eng.snap({body: bodyParams(), items: shotOutfit(it), slotOf}, {w: SHOT_W, h: SHOT_H, ss: 2, frames: [shotFrame(it), SHOT_FULL]});
+      if (!cv) { if (++shotFail > 3) S.shotsOff = true; return; }
+      [c, f] = await Promise.all(cv.map((x) => new Promise((r) => { try { x.toBlob(r, "image/jpeg", 0.9); } catch (e) { r(null); } })));
+      shotPut(key + ":c", c); shotPut(key + ":f", f);
+    }
+    if (c) SHOT_URLS.set(key + ":c", URL.createObjectURL(c));
+    if (f) SHOT_URLS.set(key + ":f", URL.createObjectURL(f));
+    paintShot(id);
+  } catch (e) { if (++shotFail > 3) S.shotsOff = true; }
+  finally { shotBusy = false; shotProgress(); setTimeout(pumpShots, 20); }
+}
+function shotProgress() {
+  if (S.shotsOff) for (const e of document.querySelectorAll(".wv.wait")) e.classList.remove("wait");
+  const el = $("#ws-prog");
+  if (!el) return;
+  const all = [...S.items.values()], done = all.filter((it) => shotUrl(it, ":c")).length;
+  const on = !S.shotsOff && all.length > 0 && done < all.length;
+  el.hidden = !on;
+  if (on) el.innerHTML = `<span>Photos portées sur ton mannequin : ${done} / ${all.length}</span><i aria-hidden="true"><b style="width:${Math.round((100 * done) / all.length)}%"></b></i>`;
+}
+function paintShot(id) {
+  const it = S.items.get(id);
+  if (!it) return;
+  for (const el of document.querySelectorAll(`.wv[data-wid="${CSS.escape(id)}"]`)) { el.innerHTML = wardMedia(it); el.classList.remove("wait"); }
+  if (S.sheet === "piece" && S.pieceId === id) renderSheet();
+}
+
 /* ---------------- Rendu : garde-robe ---------------- */
 const catOrder = (it) => CATS.findIndex((c) => c.key === it.cat);
 function colorDots(it) { return `<span class="cdots">${(it.colors || []).slice(0, 3).map((k) => `<span class="cdot" style="--c:${colorHex(k)}"></span>`).join("")}</span>`; }
@@ -4856,35 +5091,29 @@ function renderWardrobe() {
   const notes = [];
   if (ex) notes.push(`<div class="note"><p>${ex} pièces d’exemple pour essayer.</p>${S.confirmEx ? `<span class="confirm"><button class="btn danger sm" data-action="del-examples-yes"${S.busyBulk ? " disabled" : ""}>${S.busyBulk ? "Suppression…" : "Oui, supprimer"}</button><button class="btn ghost sm" data-action="del-examples-no">Annuler</button></span>` : `<button class="btn ghost sm" data-action="del-examples">Supprimer</button>`}</div>`);
   if (sale) notes.push(`<div class="note"><p>${sale} pièce${sale > 1 ? "s" : ""} au sale, mise${sale > 1 ? "s" : ""} de côté dans les tenues.</p><button class="btn ghost sm" data-action="laundry"${S.busyBulk ? " disabled" : ""}>${ICON.wash} Lessive faite</button></div>`);
-  const cats = CATS.filter((c) => all.some((i) => i.cat === c.key));
-  if (S.wardFilter !== "all" && !cats.some((c) => c.key === S.wardFilter)) S.wardFilter = "all";
+  const cats = WARD_CATS.filter((k) => all.some((i) => i.cat === k));
+  if (S.wardFilter !== "all" && !cats.includes(S.wardFilter)) S.wardFilter = "all";
   const order = Object.keys(COL);
   const colors = [...new Set(all.flatMap((i) => i.colors || []))].filter((k) => COL[k]).sort((a, b) => order.indexOf(a) - order.indexOf(b));
   if (f.color && !colors.includes(f.color)) f.color = null;
   const nF = (f.state !== "all" ? 1 : 0) + (f.fav ? 1 : 0) + (f.shop ? 1 : 0) + (f.color ? 1 : 0);
-  const catBtn = (k, label, i, n) => `<li><button class="zs-cat" id="wf-${k}" data-action="wf" data-v="${k}" aria-current="${S.wardFilter === k}"><span class="zs-num" aria-hidden="true">|${pad2(i)}|</span>${esc(label)}<span class="zs-n" aria-label="${n} pièce${n > 1 ? "s" : ""}">${n}</span></button></li>`;
+  const sub = (k, label, n) => `<button class="zs-sub-b" id="wf-${k}" data-action="wf" data-v="${k}" aria-current="${S.wardFilter === k}">${esc(label)}<span class="zs-n">${n}</span></button>`;
   const opt = (a, k, label, on, id) => `<button class="zs-opt" id="${id}" data-action="${a}" data-v="${k}" aria-pressed="${on}">${esc(label)}</button>`;
-  const best = (k) => { const xs = all.filter((i) => i.cat === k); return xs.find((i) => i.photo) || xs.find((i) => i.shot) || xs[0]; };
   root.innerHTML = head + (notes.length ? `<div class="zw-notes" id="ward-notes">${notes.join("")}</div>` : "") + `
-    <div class="zs-layout">
-      <nav class="zs-nav" aria-label="Rayons de ta garde-robe">
-        <ol class="zs-cats">${catBtn("all", "Tout voir", 1, all.length)}${cats.map((c, i) => catBtn(c.key, CAT_SHORT[c.key] || c.label, i + 2, all.filter((x) => x.cat === c.key).length)).join("")}</ol>
-        <div class="zs-bar">
-          <button class="zs-opt zs-filt" id="ws-filt" data-action="ward-filters" aria-expanded="${!!f.open}">Filtres${nF ? ` (${nF})` : ""}</button>
-          <div class="zs-vue" role="group" aria-label="Vue"><span>Vue</span>${[1, 2, 3].map((n) => opt("ward-vue", n, String(n), f.vue === n, "wv-" + n)).join("")}</div>
-        </div>
-        <div class="zs-filters"${f.open ? "" : ' data-closed="1"'}>
-          <div class="zs-fg"><p class="zs-k">État</p>${[["all", "Toutes"], ["ok", "Propres"], ["sale", `Au sale${sale ? ` (${sale})` : ""}`]].map(([k, l]) => opt("ward-state", k, l, f.state === k, "wst-" + k)).join("")}</div>
-          <div class="zs-fg"><p class="zs-k">Sélection</p>${opt("ward-fav", "1", `Favoris${favs ? ` (${favs})` : ""}`, f.fav, "wfav")}${shops ? opt("ward-shop", "1", `Achetées en boutique (${shops})`, f.shop, "wshop") : ""}</div>
-          <div class="zs-fg"><p class="zs-k">Trier</p>${[["cat", "Par rayon"], ["new", "Récentes"], ["worn", "Moins portées"]].map(([k, l]) => opt("ward-sort", k, l, f.sort === k, "wso-" + k)).join("")}</div>
-          ${colors.length > 1 ? `<div class="zs-fg"><p class="zs-k">Couleur${f.color ? ` : ${esc(COL[f.color].label)}` : ""}</p><div class="zs-sws" role="group" aria-label="Couleur">${colors.map((k) => `<button class="zs-sw" id="wc-${k}" data-action="ward-color" data-v="${k}" aria-pressed="${f.color === k}" title="${esc(COL[k].label)}" style="--c:${colorHex(k)}"><span class="sr">${esc(COL[k].label)}</span></button>`).join("")}</div></div>` : ""}
-        </div>
-      </nav>
-      <div class="zs-main">
-        ${cats.length > 1 ? `<div class="zs-tiles" role="list">${cats.map((c) => `<button class="zs-tile" role="listitem" id="wt-${c.key}" data-action="wf" data-v="${c.key}" aria-pressed="${S.wardFilter === c.key}"><span class="zs-tile-m wv">${itemVisual(best(c.key))}</span><span class="zs-tile-l">${esc(CAT_SHORT[c.key] || c.label)}</span></button>`).join("")}</div>` : ""}
-        <div id="ward-grid"></div>
-      </div>
-    </div>`;
+    <div class="zs-subs" role="group" aria-label="Rayons de ta garde-robe">${sub("all", "Tout voir", all.length)}${cats.map((k) => sub(k, CAT_SHORT[k] || CAT[k].label, all.filter((x) => x.cat === k).length)).join("")}</div>
+    <div class="zb-bar">
+      <button class="zs-opt zs-filt" id="ws-filt" data-action="ward-filters" aria-expanded="${!!f.open}" aria-controls="ws-panel">Filtres${nF ? ` (${nF})` : ""}</button>
+      <p class="zb-count" id="ws-count" aria-live="polite"></p>
+      <div class="zs-vue" role="group" aria-label="Vue"><span>Vue</span>${[1, 2, 3].map((n) => opt("ward-vue", n, String(n), f.vue === n, "wv-" + n)).join("")}</div>
+    </div>
+    <div class="zf-panel" id="ws-panel"${f.open ? "" : " hidden"}>
+      <div class="zs-fg"><p class="zs-k">État</p>${[["all", "Toutes"], ["ok", "Propres"], ["sale", `Au sale${sale ? ` (${sale})` : ""}`]].map(([k, l]) => opt("ward-state", k, l, f.state === k, "wst-" + k)).join("")}</div>
+      <div class="zs-fg"><p class="zs-k">Sélection</p>${opt("ward-fav", "1", `Favoris${favs ? ` (${favs})` : ""}`, f.fav, "wfav")}${shops ? opt("ward-shop", "1", `Achetées en boutique (${shops})`, f.shop, "wshop") : ""}</div>
+      <div class="zs-fg"><p class="zs-k">Trier</p>${[["cat", "Par rayon"], ["new", "Récentes"], ["worn", "Moins portées"]].map(([k, l]) => opt("ward-sort", k, l, f.sort === k, "wso-" + k)).join("")}</div>
+      ${colors.length > 1 ? `<div class="zs-fg"><p class="zs-k">Couleur${f.color ? ` : ${esc(COL[f.color].label)}` : ""}</p><div class="zs-sws" role="group" aria-label="Couleur">${colors.map((k) => `<button class="zs-sw" id="wc-${k}" data-action="ward-color" data-v="${k}" aria-pressed="${f.color === k}" title="${esc(COL[k].label)}" style="--c:${colorHex(k)}"><span class="sr">${esc(COL[k].label)}</span></button>`).join("")}</div></div>` : ""}
+    </div>
+    <p class="zb-prog" id="ws-prog" aria-live="polite" hidden></p>
+    <div id="ward-grid"></div>`;
   renderWardGrid();
   if (act) refocus(act);
 }
@@ -4900,13 +5129,24 @@ const WARD_SORT = {
   new: (a, b) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")) || String(a.name).localeCompare(String(b.name), "fr"),
   worn: (a, b) => String(a.lastWorn || "").localeCompare(String(b.lastWorn || "")) || catOrder(a) - catOrder(b),
 };
-function wardCard(it) {
+/* Visuel d’une pièce : photo portée sur le mannequin, et la pièce seule au survol (une photo de boutique reste en premier) */
+const STILL = ["montre", "gants", "ceinture"];
+function wardMedia(it) {
+  const still = STILL.includes(it.sub), c = shotUrl(it, still ? ":f" : ":c"), alone = itemVisual(it);
+  const shopFirst = still || (typeof it.shot === "string" && /^https:\/\//.test(it.shot));
   const sale = it.status === "sale", isNew = !!S.wardNew && it.pid === S.wardNew;
   const tag = isNew ? `<span class="zc-tag new">Nouveau</span>` : sale ? `<span class="zc-tag">Au sale</span>` : "";
+  if (!c) return alone + tag;
+  const worn = (cls) => `<img class="zimg wshot ${cls}" src="${esc(c)}" alt="" decoding="async">`;
+  return (shopFirst ? alone + worn("b") : worn("a") + `<span class="wv-b b">${alone}</span>`) + tag;
+}
+function wardCard(it) {
+  const sale = it.status === "sale", isNew = !!S.wardNew && it.pid === S.wardNew;
   const line = it.brand ? it.brand : cap(it.sub || "");
+  const ready = !!shotUrl(it, ":c");
   return `<article class="zc wc${sale ? " is-sale" : ""}">
-      <button class="zc-link" id="ic-${esc(it.id)}" data-action="edit" data-id="${esc(it.id)}" aria-label="${esc(it.name)}${sale ? ", au sale" : ""}${it.fav ? ", favori" : ""}${isNew ? ", nouveau" : ""}">
-        <span class="zc-media wv">${itemVisual(it)}${tag}</span>
+      <button class="zc-link" id="ic-${esc(it.id)}" data-action="piece-open" data-id="${esc(it.id)}" aria-label="${esc(it.name)}${sale ? ", au sale" : ""}${it.fav ? ", favori" : ""}${isNew ? ", nouveau" : ""}">
+        <span class="zc-media wv${ready || S.shotsOff ? "" : " wait"}" data-wid="${esc(it.id)}">${wardMedia(it)}</span>
       </button>
       <button class="zc-wish" id="wfv-${esc(it.id)}" data-action="w-fav" data-id="${esc(it.id)}" aria-pressed="${!!it.fav}" aria-label="${it.fav ? "Retirer des favoris" : "Mettre en favori"} : ${esc(it.name)}">${ICON.heart}</button>
       <div class="zc-cap" aria-hidden="true"><p class="zc-name">${esc(it.name)}</p><p class="zc-meta"><span>${esc(line)}</span>${colorSquares(it)}</p></div>
@@ -4917,8 +5157,58 @@ function renderWardGrid() {
   if (!host) return;
   const f = S.wardF, list = wardPool(false).sort(WARD_SORT[f.sort] || WARD_SORT.cat);
   const filtered = f.q || f.state !== "all" || f.fav || f.shop || f.color || S.wardFilter !== "all";
-  host.innerHTML = `<p class="zs-count-l" aria-live="polite">${list.length} pièce${list.length > 1 ? "s" : ""}${f.q ? ` pour « ${esc(f.q)} »` : ""}</p>
-    ${list.length ? `<div class="zs-grid v${f.vue}">${list.map(wardCard).join("")}</div>` : `<div class="empty"><p>Aucune pièce ne correspond. Change de rayon, retire un filtre ou efface la recherche.</p>${filtered ? `<button class="btn ghost sm" id="ws-reset" data-action="ward-reset">Tout afficher</button>` : ""}</div>`}`;
+  const cnt = $("#ws-count");
+  if (cnt) cnt.textContent = `${list.length} pièce${list.length > 1 ? "s" : ""}${f.q ? ` pour « ${f.q} »` : ""}`;
+  host.innerHTML = list.length ? `<div class="zs-grid v${f.vue}">${list.map(wardCard).join("")}</div>` : `<div class="empty"><p>Aucune pièce ne correspond. Change de rayon, retire un filtre ou efface la recherche.</p>${filtered ? `<button class="btn ghost sm" id="ws-reset" data-action="ward-reset">Tout afficher</button>` : ""}</div>`;
+  shotQ.length = 0;
+  queueShots(list.map((it) => it.id));
+  queueShots([...S.items.keys()]);
+  shotProgress();
+}
+/* Fiche d’une pièce de la garde-robe, présentée comme une fiche produit */
+function openPiece(id) { if (!S.items.has(id)) return; S.pieceId = id; openSheet("piece"); queueShots([id], true); }
+function pieceSheetHtml() {
+  const it = S.items.get(S.pieceId);
+  if (!it) return `${sheetHead("Pièce introuvable")}<div class="sheet-body"><p class="hint">Cette pièce n’est plus dans ta garde-robe.</p></div>`;
+  const c = shotUrl(it, ":c"), fu = shotUrl(it, ":f");
+  const shopFirst = STILL.includes(it.sub) || (typeof it.shot === "string" && /^https:\/\//.test(it.shot));
+  const alone = `<div class="zp-shot"><span class="wv-b">${itemVisual(it)}</span></div>`;
+  const worn = (STILL.includes(it.sub) ? [fu] : [c, fu]).filter(Boolean).map((u) => `<div class="zp-shot"><img class="zimg" src="${esc(u)}" alt="" decoding="async"></div>`);
+  const wait = c || S.shotsOff ? [] : [`<div class="zp-shot pz-wait"><p>Photo portée en cours…</p></div>`];
+  const shots = shopFirst ? [alone, ...worn, ...wait] : [...worn, ...wait, alone];
+  const p = it.pid ? productById(it.pid) : null;
+  const sale = it.status === "sale";
+  const worn1 = typeof it.lastWorn === "string" && /^\d{4}-\d{2}-\d{2}$/.test(it.lastWorn) ? `Portée le ${fmtDay(it.lastWorn)}` : "Pas encore portée";
+  const styles = (it.styles || []).filter((s) => STY[s]).map((s) => STY[s].label).join(", ");
+  return `${sheetHead(esc(it.brand || "Ma garde-robe"))}
+  <div class="sheet-body zp">
+    <div class="zp-media">
+      <div class="zp-gal" id="zp-gal" tabindex="0" aria-label="Photos de la pièce">${shots.join("")}</div>
+      ${shots.length > 1 ? `<p class="zp-n" aria-hidden="true"><span id="zp-i">1</span> / ${shots.length}</p>` : ""}
+    </div>
+    <div class="zp-info">
+      <div class="zp-top"><h3 class="zp-name">${esc(it.name)}</h3><p class="pz-sub">${esc([it.brand, cap(it.sub || "")].filter(Boolean).join(" · "))}</p>
+        ${(it.colors || []).length ? `<p class="pz-cols">${(it.colors || []).filter((k) => COL[k]).map((k) => `<span><i style="--c:${colorHex(k)}"></i>${esc(COL[k].label)}</span>`).join("")}</p>` : ""}</div>
+      <dl class="sp-facts">
+        <dt>Rayon</dt><dd>${esc(CAT[it.cat] ? CAT[it.cat].label : "")}</dd>
+        <dt>Matière</dt><dd>${esc(cap(it.material || "non précisée"))}</dd>
+        ${styles ? `<dt>Style</dt><dd>${esc(styles)}</dd>` : ""}
+        <dt>Chaleur</dt><dd>${["", "Légère", "Moyenne", "Chaude"][Number(it.warmth) || 2]}${it.rainOk ? ", supporte la pluie" : ""}</dd>
+        <dt>Portée</dt><dd>${worn1}</dd>
+        <dt>État</dt><dd>${sale ? "Au sale : mise de côté dans les tenues" : "Propre, prête à porter"}</dd>
+      </dl>
+      <div class="sp-actions">
+        <button class="btn primary big wide" id="pz-wear" data-action="pz-wear" data-id="${esc(it.id)}"${sale ? " disabled" : ""}>${ICON.body} Porter aujourd’hui</button>
+        <div class="pz-row">
+          <button class="btn ghost big${it.fav ? " on" : ""}" id="pz-fav" data-action="pz-fav" aria-pressed="${!!it.fav}">${ICON.heart} ${it.fav ? "En favori" : "Favori"}</button>
+          <button class="btn ghost big" id="pz-sale" data-action="pz-sale" aria-pressed="${sale}">${ICON.wash} ${sale ? "Remettre propre" : "Au sale"}</button>
+        </div>
+        <button class="btn ghost big wide" id="pz-edit" data-action="pz-edit">Modifier la fiche</button>
+        ${p && p.url ? `<a class="btn ghost sm sp-bought" id="pz-site" href="${esc(p.url)}" target="_blank" rel="noopener">${ICON.ext} Revoir sur ${esc(shopName(p))}</a>` : ""}
+      </div>
+      <p class="shop-note">${c ? "Photo portée : ta pièce sur ton mannequin, réglé dans Silhouette." : S.shotsOff ? "Cet appareil ne permet pas les photos portées : la pièce est montrée seule." : "La photo portée se prépare : ta pièce sur ton mannequin, réglé dans Silhouette."}${shopFirst ? " Première photo : celle de la boutique." : ""}</p>
+    </div>
+  </div>`;
 }
 
 /* ---------------- Rendu : boutiques (photos réelles), envies, essayage ---------------- */
@@ -4969,19 +5259,32 @@ function zimg(p, src, cls, eager) {
   return `<img class="zimg ${p.fit === "contain" ? "contain" : ""} ${cls || ""}" src="${esc(src)}" alt="" ${eager ? "" : 'loading="lazy" '}decoding="async" referrerpolicy="no-referrer" data-pid="${esc(p.id)}">`;
 }
 const CAT_SHORT = {haut: "Hauts", bas: "Bas", piece: "Robes", veste: "Vestes et manteaux", chaussures: "Chaussures", accessoire: "Accessoires"};
+const SHOP_TABS = [["f", "Femme"], ["h", "Homme"], ["marques", "Marques"], ["envies", "Envies"]];
+const SHOP_CATS = ["veste", "haut", "bas", "piece", "chaussures", "accessoire"];
+const WARD_CATS = ["haut", "bas", "piece", "veste", "chaussures", "accessoire"];
+function setShopTab(t) {
+  const f = S.shopF;
+  f.tab = SHOP_TABS.some(([k]) => k === t) ? t : "f";
+  f.view = f.tab === "envies" ? "wishes" : "shops";
+  if (f.tab === "f" || f.tab === "h") { f.sex = f.tab; store.set("shopSex", f.tab); }
+  f.cat = "all"; f.brand = null; f.bsex = "all"; f.shop = "all"; f.color = null; f.open = false;
+}
 function shopPool(ignoreCat) {
   const f = S.shopF, q = fold(f.q).trim();
-  return CATALOG.filter((p) => (f.shop === "all" || p.shop === f.shop) && (f.sex === "all" || p.sex === "u" || p.sex === f.sex)
-    && (!f.color || colorwaysOf(p).includes(f.color) || p.colors.includes(f.color))
+  const sex = f.tab === "f" || f.tab === "h" ? f.tab : f.tab === "marques" && f.bsex !== "all" ? f.bsex : null;
+  return CATALOG.filter((p) => (!sex || p.sex === "u" || p.sex === sex)
+    && (f.tab !== "marques" || !f.brand || p.shop === f.brand)
+    && (f.tab === "marques" || f.shop === "all" || p.shop === f.shop)
+    && (f.tab === "marques" || !f.color || colorwaysOf(p).includes(f.color) || p.colors.includes(f.color))
     && (!q || fold(`${p.name} ${shopName(p)} ${p.sub} ${p.material} ${p.colors.map(colorLabel).join(" ")}`).includes(q))
-    && (ignoreCat || f.cat === "all" || p.cat === f.cat));
+    && (ignoreCat || f.cat === "all" || (f.cat === "promo" ? !!p.was : p.cat === f.cat)));
 }
 function shopCard(p, color) {
   const ph = photosFor(p, color || p.colors[0]);
   const w = S.wishes.has(p.id);
   return `<article class="zc">
       <button class="zc-link" id="sp-${esc(p.id)}" data-action="sp-open" data-id="${esc(p.id)}" aria-label="${esc(p.name)}, ${esc(shopName(p))}, ${esc(priceText(p))}">
-        <span class="zc-media">${zimg(p, ph[0], "a")}${ph[1] ? zimg(p, ph[1], "b") : ""}</span>
+        <span class="zc-media">${zimg(p, ph[0], "a")}${ph[1] ? zimg(p, ph[1], "b") : ""}${p.was ? `<span class="zc-tag">−${Math.round(100 - (100 * p.price) / p.was)} %</span>` : ""}</span>
       </button>
       <button class="zc-wish" id="zw-${esc(p.id)}" data-action="sp-wishq" data-id="${esc(p.id)}" aria-pressed="${w}" aria-label="${w ? "Retirer de mes envies" : "Ajouter à mes envies"} : ${esc(p.name)}">${ICON.heart}</button>
       <div class="zc-cap" aria-hidden="true"><p class="zc-name">${esc(p.name)}</p><p class="zc-meta"><span>${esc(shopName(p))}</span><span class="zc-price">${priceHtml(p)}</span></p></div>
@@ -4994,74 +5297,97 @@ function syncWishMarks() {
     b.setAttribute("aria-label", `${w ? "Retirer de mes envies" : "Ajouter à mes envies"}`);
   }
   const n = $("#zs-wn");
-  if (n) n.textContent = S.wishes.size ? String(S.wishes.size) : "0";
+  if (n) n.textContent = String(S.wishes.size);
 }
 function renderShop() {
   const root = $("#shop-root");
   if (!root) return;
   const f = S.shopF;
-  if (f.view === "wishes") { root.innerHTML = wishesHtml(); return; }
-  const all = shopPool(true);
-  const cats = CATS.filter((c) => all.some((p) => p.cat === c.key));
-  if (f.cat !== "all" && !cats.some((c) => c.key === f.cat)) f.cat = "all";
-  const nFilters = (f.shop !== "all") + (f.color ? 1 : 0);
-  const catBtn = (k, label, i) => `<li><button class="zs-cat" id="zcat-${k}" data-action="shop-cat" data-v="${k}" aria-current="${f.cat === k}"><span class="zs-num" aria-hidden="true">|${pad2(i)}|</span>${esc(label)}</button></li>`;
-  const txt = (act, k, label, on, id) => `<button class="zs-opt" id="${id}" data-action="${act}" data-v="${k}" aria-pressed="${on}">${esc(label)}</button>`;
+  if (!f.tab) setShopTab(f.view === "wishes" ? "envies" : f.sex === "h" || f.sex === "f" ? f.sex : S.body.sex === "h" ? "h" : "f");
+  else if (f.view === "wishes" && f.tab !== "envies") setShopTab("envies");
+  const act = document.activeElement && root.contains(document.activeElement) ? document.activeElement.id : null;
+  const tabs = SHOP_TABS.map(([k, l]) => `<button class="zs-tab" role="tab" id="ztab-${k}" data-action="shop-tab" data-v="${k}" aria-selected="${f.tab === k}" aria-controls="zs-panel" tabindex="${f.tab === k ? 0 : -1}">${l}${k === "envies" ? `<span class="zs-count" id="zs-wn">${S.wishes.size}</span>` : ""}</button>`).join("");
   root.innerHTML = `
     <header class="zs-top">
-      <div class="zs-brand"><h1 class="zs-title" id="t-shop">Boutiques</h1><p class="zs-sub">${CATALOG.length} pièces · ${SHOPS.length} boutiques · vraies photos</p></div>
-      <div class="zs-tools">
-        <label class="zs-search"><span class="sr">Rechercher une pièce</span><input id="zs-q" type="search" placeholder="RECHERCHER" value="${esc(f.q)}" autocomplete="off" spellcheck="false" enterkeyhint="search"></label>
-        <button class="zs-link" id="ss-wishes" data-action="shop-view" data-v="wishes">Mes envies <span class="zs-count" id="zs-wn">${S.wishes.size}</span></button>
-      </div>
+      <div class="zs-brand"><h1 class="zs-title" id="t-shop">Boutiques</h1><p class="zs-sub">${CATALOG.length} pièces · ${SHOPS.length} marques · vraies photos</p></div>
+      <div class="zs-tools"><label class="zs-search"><span class="sr">Rechercher une pièce</span><input id="zs-q" type="search" placeholder="RECHERCHER" value="${esc(f.q)}" autocomplete="off" spellcheck="false" enterkeyhint="search"></label></div>
     </header>
-    <div class="zs-layout">
-      <nav class="zs-nav" aria-label="Rayons des boutiques">
-        <ol class="zs-cats">${catBtn("all", "Tout voir", 1)}${cats.map((c, i) => catBtn(c.key, CAT_SHORT[c.key] || c.label, i + 2)).join("")}</ol>
-        <div class="zs-bar">
-          <button class="zs-opt zs-filt" id="zs-filt" data-action="shop-filters" aria-expanded="${!!f.open}">Filtres${nFilters ? ` (${nFilters})` : ""}</button>
-          <div class="zs-vue" role="group" aria-label="Vue"><span>Vue</span>${[1, 2, 3].map((n) => txt("shop-vue", n, String(n), f.vue === n, "zv-" + n)).join("")}</div>
-        </div>
-        <div class="zs-filters"${f.open ? "" : ' data-closed="1"'}>
-          <div class="zs-fg"><p class="zs-k">Rayon</p>${[["f", "Femme"], ["h", "Homme"], ["all", "Tout"]].map(([k, l]) => txt("shop-sex", k, l, f.sex === k, "sx-" + k)).join("")}</div>
-          <div class="zs-fg"><p class="zs-k">Boutiques</p>${[["all", "Toutes"], ...SHOPS.map((s) => [s.key, s.name])].map(([k, l]) => txt("shop-f", k, l, f.shop === k, "sf-" + k)).join("")}</div>
-          ${f.color && COL[f.color] ? `<div class="zs-fg"><p class="zs-k">Couleur</p><button class="zs-chip" id="zs-col-x" data-action="shop-color-clear"><i style="--c:${colorHex(f.color)}"></i>${esc(COL[f.color].label)} <span aria-hidden="true">×</span><span class="sr"> : retirer ce filtre</span></button></div>` : ""}
-        </div>
-      </nav>
-      <div class="zs-main">
-        <div class="zs-tiles" role="list">${cats.map((c) => { const p = all.find((x) => x.cat === c.key); return `<button class="zs-tile" role="listitem" id="zt-${c.key}" data-action="shop-cat" data-v="${c.key}" aria-pressed="${f.cat === c.key}"><span class="zs-tile-m">${zimg(p, photosFor(p, p.colors[0])[0], "")}</span><span class="zs-tile-l">${esc(CAT_SHORT[c.key] || c.label)}</span></button>`; }).join("")}</div>
-        <div id="zs-grid-wrap"></div>
-      </div>
-    </div>`;
+    <div class="zs-tabs" role="tablist" aria-label="Boutiques">${tabs}</div>
+    <div class="zs-panel" id="zs-panel" role="tabpanel" aria-labelledby="ztab-${f.tab}">${f.tab === "envies" ? `<div id="zs-grid-wrap"></div>` : f.tab === "marques" ? brandsHtml() : rayonHtml()}</div>`;
   renderShopGrid();
+  if (act) refocus(act);
+}
+function shopOpts(a, k, label, on, id) { return `<button class="zs-opt" id="${id}" data-action="${a}" data-v="${k}" aria-pressed="${on}">${esc(label)}</button>`; }
+function vueHtml() { return `<div class="zs-vue" role="group" aria-label="Vue"><span>Vue</span>${[1, 2, 3].map((n) => shopOpts("shop-vue", n, String(n), S.shopF.vue === n, "zv-" + n)).join("")}</div>`; }
+function rayonHtml() {
+  const f = S.shopF, pool = shopPool(true);
+  const cats = SHOP_CATS.filter((k) => pool.some((p) => p.cat === k));
+  const promo = pool.some((p) => p.was);
+  if ((f.cat === "promo" && !promo) || (f.cat !== "all" && f.cat !== "promo" && !cats.includes(f.cat))) f.cat = "all";
+  const sub = (k, l) => `<button class="zs-sub-b" id="zcat-${k}" data-action="shop-cat" data-v="${k}" aria-current="${f.cat === k}">${esc(l)}</button>`;
+  const nF = (f.shop !== "all" ? 1 : 0) + (f.color ? 1 : 0);
+  const sexPool = CATALOG.filter((p) => p.sex === "u" || p.sex === f.tab);
+  const brands = SHOPS.filter((s) => sexPool.some((p) => p.shop === s.key));
+  const order = Object.keys(COL);
+  const colors = [...new Set(sexPool.flatMap((p) => colorwaysOf(p).length ? colorwaysOf(p) : p.colors))].filter((k) => COL[k] && k !== "imprime").sort((a, b) => order.indexOf(a) - order.indexOf(b));
+  return `<div class="zs-subs" role="group" aria-label="Rayons">${sub("all", "Voir tout")}${cats.map((k) => sub(k, k === "bas" ? (f.tab === "h" ? "Pantalons" : "Pantalons et jupes") : CAT_SHORT[k] || CAT[k].label)).join("")}${promo ? sub("promo", "Promos") : ""}</div>
+    <div class="zb-bar"><button class="zs-opt zs-filt" id="zs-filt" data-action="shop-filters" aria-expanded="${!!f.open}" aria-controls="zs-fpanel">Filtres${nF ? ` (${nF})` : ""}</button><p class="zb-count" id="zs-count-l" aria-live="polite"></p>${vueHtml()}</div>
+    <div class="zf-panel" id="zs-fpanel"${f.open ? "" : " hidden"}>
+      <div class="zs-fg"><p class="zs-k">Marques</p>${[["all", "Toutes"], ...brands.map((s) => [s.key, s.name])].map(([k, l]) => shopOpts("shop-f", k, l, f.shop === k, "sf-" + k)).join("")}</div>
+      <div class="zs-fg"><p class="zs-k">Couleur${f.color && COL[f.color] ? ` : ${esc(COL[f.color].label)}` : ""}</p><div class="zs-sws" role="group" aria-label="Couleur">${colors.map((k) => `<button class="zs-sw" id="zsc-${k}" data-action="shop-color" data-v="${k}" aria-pressed="${f.color === k}" title="${esc(COL[k].label)}" style="--c:${colorHex(k)}"><span class="sr">${esc(COL[k].label)}</span></button>`).join("")}</div></div>
+      ${nF ? `<div class="zs-fg"><p class="zs-k">&nbsp;</p><button class="zs-opt zs-clear" id="zs-clear" data-action="shop-clear">Effacer les filtres</button></div>` : ""}
+    </div>
+    <div id="zs-grid-wrap"></div>`;
+}
+function brandsHtml() {
+  const f = S.shopF, sh = f.brand && SHOP[f.brand];
+  if (!sh) return `<p class="zs-lead">Les ${SHOPS.length} marques de la sélection. Touche une marque pour voir toutes ses pièces.</p><div id="zs-grid-wrap"></div>`;
+  const items = CATALOG.filter((p) => p.shop === sh.key);
+  const both = items.some((p) => p.sex === "f") && items.some((p) => p.sex === "h");
+  if (!both) f.bsex = "all";
+  return `<div class="zb-head"><button class="zs-link" id="zb-back" data-action="shop-brand" data-v="">${ICON.left} Toutes les marques</button>
+      <div class="zs-shophead"><p class="zs-sh-n">${esc(sh.name)}</p><p class="zs-sh-l">${esc(sh.line)}</p><a class="zs-sh-a" href="${esc(sh.site)}" target="_blank" rel="noopener">Ouvrir le site ${ICON.ext}</a></div></div>
+    ${both ? `<div class="zs-subs" role="group" aria-label="Rayon">${[["all", "Tout"], ["f", "Femme"], ["h", "Homme"]].map(([k, l]) => `<button class="zs-sub-b" id="zbs-${k}" data-action="shop-bsex" data-v="${k}" aria-current="${f.bsex === k}">${l}</button>`).join("")}</div>` : ""}
+    <div class="zb-bar"><span></span><p class="zb-count" id="zs-count-l" aria-live="polite"></p>${vueHtml()}</div>
+    <div id="zs-grid-wrap"></div>`;
+}
+function brandGrid() {
+  const q = fold(S.shopF.q).trim();
+  const list = SHOPS.filter((s) => !q || fold(s.name).includes(q) || CATALOG.some((p) => p.shop === s.key && fold(`${p.name} ${p.sub} ${p.material}`).includes(q)));
+  if (!list.length) return `<div class="empty"><p>Aucune marque ne correspond à ta recherche.</p></div>`;
+  return `<div class="zbr-grid">${list.map((s) => {
+    const items = CATALOG.filter((p) => p.shop === s.key), p = items.find((x) => x.fit !== "contain") || items[0];
+    return `<button class="zbr" id="zb-${s.key}" data-action="shop-brand" data-v="${s.key}"><span class="zbr-m">${p ? zimg(p, photosFor(p, p.colors[0])[0], "") : ""}</span><span class="zbr-n">${esc(s.name)}</span><span class="zbr-l">${esc(s.line)}</span><span class="zbr-c">${items.length} pièce${items.length > 1 ? "s" : ""}</span></button>`;
+  }).join("")}</div>`;
 }
 function renderShopGrid() {
   const host = $("#zs-grid-wrap");
   if (!host) return;
-  const f = S.shopF, list = shopPool(false);
-  const showHero = f.cat === "all" && !f.q && !f.color && f.shop === "all";
-  const hero = SHOP_HERO[f.sex === "f" ? "f" : f.sex === "h" ? "h" : (S.body.sex === "f" ? "f" : "h")];
-  const hp = hero && CAT_BY_ID.get(hero.pid);
-  const sh = f.shop !== "all" && SHOP[f.shop];
+  const f = S.shopF;
+  if (f.tab === "envies") { host.innerHTML = wishesHtml(); return; }
+  if (f.tab === "marques" && !f.brand) { host.innerHTML = brandGrid(); return; }
+  const list = shopPool(false);
+  const cnt = $("#zs-count-l");
+  if (cnt) cnt.textContent = `${list.length} pièce${list.length > 1 ? "s" : ""}${f.q ? ` pour « ${f.q} »` : ""}`;
+  const showHero = (f.tab === "f" || f.tab === "h") && f.cat === "all" && !f.q && !f.color && f.shop === "all";
+  const hero = SHOP_HERO[f.tab], hp = hero && CAT_BY_ID.get(hero.pid);
   host.innerHTML = `
     ${showHero && hp ? `<figure class="zs-hero"><button class="zs-hero-b" data-action="sp-open" data-id="${esc(hp.id)}" aria-label="${esc(hp.name)}, ${esc(shopName(hp))}">${zimg(hp, hero.src, "", true)}</button>
-      <figcaption><p class="zs-hk">Automne-hiver 26</p><p class="zs-ht">La sélection</p><p class="zs-hs">De vraies pièces de ${SHOPS.length} boutiques. Essaie-les sur ton mannequin avant d’acheter.</p></figcaption></figure>` : ""}
-    ${sh ? `<div class="zs-shophead"><p class="zs-sh-n">${esc(sh.name)}</p><p class="zs-sh-l">${esc(sh.line)}</p><a class="zs-sh-a" href="${esc(sh.site)}" target="_blank" rel="noopener">Ouvrir le site ${ICON.ext}</a></div>` : ""}
-    <p class="zs-count-l" aria-live="polite">${list.length} pièce${list.length > 1 ? "s" : ""}${f.q ? ` pour « ${esc(f.q)} »` : ""}</p>
-    ${list.length ? `<div class="zs-grid v${f.vue}">${list.map((p) => shopCard(p, (S.wishes.get(p.id) || {}).color || p.colors[0])).join("")}</div>` : `<div class="empty"><p>Aucune pièce ne correspond. Change de rayon ou efface la recherche.</p></div>`}
+      <figcaption><p class="zs-hk">${f.tab === "f" ? "Femme" : "Homme"} · automne-hiver 26</p><p class="zs-ht">La sélection</p><p class="zs-hs">De vraies pièces de ${SHOPS.length} marques. Essaie-les sur ton mannequin avant d’acheter.</p></figcaption></figure>` : ""}
+    ${list.length ? `<div class="zs-grid v${f.vue}">${list.map((p) => shopCard(p, (S.wishes.get(p.id) || {}).color || (f.color && colorwaysOf(p).includes(f.color) ? f.color : p.colors[0]))).join("")}</div>` : `<div class="empty"><p>Aucune pièce ne correspond. Change de rayon, retire un filtre ou efface la recherche.</p></div>`}
     <p class="shop-note">Prix relevés le ${fmtDay(SHOP_DATE)} sur les sites des marques : le site fait foi. Photos des marques, affichées depuis leurs sites. Aucune de ces boutiques n’est liée à l’appli.</p>`;
 }
 function wishesHtml() {
-  const head = `<header class="zs-top"><div class="zs-brand"><h1 class="zs-title" id="t-shop">Mes envies</h1><p class="zs-sub">Ta liste d’achats, séparée de ta garde-robe</p></div>
-    <div class="zs-tools"><button class="zs-link" id="ss-shops" data-action="shop-view" data-v="shops">${ICON.left} Retour aux boutiques</button></div></header>`;
-  if (!S.capsReady || (S.caps.db && !S.ready.wishes)) return head + `<div class="empty"><p>Chargement de tes envies…</p></div>`;
-  if (!S.caps.db) return head + `<div class="empty"><p>Tes envies s’enregistrent avec ton compte : ouvre l’appli dans Claude pour les garder.</p></div>`;
-  const ws = [...S.wishes.values()].filter(productOf).sort((a, b) => String(b.at).localeCompare(String(a.at)));
-  if (!ws.length) return head + `<div class="empty"><p>Pas encore d’envie. Touche le cœur sur une pièce pour la garder ici.</p><button class="btn primary" data-action="shop-view" data-v="shops">Voir les boutiques</button></div>`;
+  if (!S.capsReady || (S.caps.db && !S.ready.wishes)) return `<div class="empty"><p>Chargement de tes envies…</p></div>`;
+  if (!S.caps.db) return `<div class="empty"><p>Tes envies s’enregistrent avec ton compte : ouvre l’appli dans Claude pour les garder.</p></div>`;
+  const q = fold(S.shopF.q).trim();
+  const ws = [...S.wishes.values()].filter(productOf).filter((w) => { const p = productOf(w); return !q || fold(`${p.name} ${shopName(p)} ${p.sub}`).includes(q); }).sort((a, b) => String(b.at).localeCompare(String(a.at)));
+  if (!S.wishes.size) return `<div class="empty"><p>Pas encore d’envie. Touche le cœur sur une pièce pour la garder ici, avec le total de ta liste.</p><button class="btn primary" data-action="shop-tab" data-v="${S.shopF.sex === "h" ? "h" : "f"}">Voir les boutiques</button></div>`;
+  if (!ws.length) return `<div class="empty"><p>Aucune envie ne correspond à ta recherche.</p></div>`;
   const total = ws.reduce((t, w) => t + (Number(productOf(w).price) || 0), 0);
-  return head + `<div class="wish-sum"><span class="h">Total de ${ws.length} pièce${ws.length > 1 ? "s" : ""}</span><span class="ws-total">${euro(Math.round(total * 100) / 100)}</span></div>
+  return `<div class="wish-sum"><span class="h">Total de ${ws.length} pièce${ws.length > 1 ? "s" : ""}</span><span class="ws-total">${euro(Math.round(total * 100) / 100)}</span></div>
     <div class="zs-grid v${S.shopF.vue}">${ws.map((w) => shopCard(productOf(w), w.color)).join("")}</div>
-    <p class="shop-note">Touche une pièce pour l’essayer sur ton mannequin, la retrouver sur le site, ou la passer dans ta garde-robe une fois achetée.</p>`;
+    <p class="shop-note">Ta liste d’achats, séparée de ta garde-robe. Touche une pièce pour l’essayer sur ton mannequin ou l’acheter sur le site : à ton retour, l’appli te propose de la ranger dans ta garde-robe.</p>`;
 }
 function openShopItem(pid) {
   const p = productById(pid);
@@ -5355,7 +5681,7 @@ function renderSettings() {
     <div class="row-btns"><button class="btn ghost" id="s-export" data-action="export"${S.caps.downloads ? "" : " disabled"}>Exporter (JSON)</button>
       ${S.confirmAll ? `<span class="confirm"><span>Tout supprimer, sans retour possible ?</span><button class="btn danger sm" data-action="delete-all-yes"${S.deleting ? " disabled" : ""}>${S.deleting ? "Suppression…" : "Oui, tout supprimer"}</button><button class="btn ghost sm" data-action="delete-all-no">Annuler</button></span>` : `<button class="btn ghost danger-t" data-action="delete-all">Tout supprimer</button>`}</div>
   </div>
-  <p class="foot-note">Dressing du matin, version 10 · corps 3D MakeHuman (CC0), ombres et matières en temps réel · photos des boutiques · mode clair ou sombre</p>`;
+  <p class="foot-note">Dressing du matin, version 11 · corps 3D MakeHuman (CC0), ombres et matières en temps réel, photos portées · photos des boutiques · mode clair ou sombre</p>`;
 }
 
 /* ---------------- Feuilles (bottom sheet) ---------------- */
@@ -5365,20 +5691,20 @@ function renderSheet(first) {
   const body = el.querySelector(".sheet-body");
   const st = body ? body.scrollTop : 0;
   const act = document.activeElement && el.contains(document.activeElement) ? document.activeElement.id : null;
-  el.innerHTML = S.sheet === "item" ? itemSheetHtml() : S.sheet === "shop" ? shopSheetHtml() : S.sheet === "bought" ? boughtSheetHtml() : S.sheet === "trcol" ? trColSheetHtml() : S.sheet === "swap" ? swapSheetHtml() : S.sheet === "imposed" ? imposedSheetHtml() : "";
-  el.classList.toggle("is-zp", S.sheet === "shop");
+  el.innerHTML = S.sheet === "item" ? itemSheetHtml() : S.sheet === "shop" ? shopSheetHtml() : S.sheet === "piece" ? pieceSheetHtml() : S.sheet === "bought" ? boughtSheetHtml() : S.sheet === "trcol" ? trColSheetHtml() : S.sheet === "swap" ? swapSheetHtml() : S.sheet === "imposed" ? imposedSheetHtml() : "";
+  el.classList.toggle("is-zp", S.sheet === "shop" || S.sheet === "piece");
   el.hidden = false; $("#scrim").hidden = false; document.body.classList.add("locked");
   const nb = el.querySelector(".sheet-body");
   if (nb && !first) nb.scrollTop = st;
   if (S.sheet === "item") mountPhoto();
-  if (S.sheet === "shop") mountGallery();
+  if (S.sheet === "shop" || S.sheet === "piece") mountGallery();
   if (first) { const c = el.querySelector("#sheet-close"); if (c) c.focus({preventScroll: true}); }
   else if (act) { const n = document.getElementById(act); if (n) n.focus({preventScroll: true}); }
 }
 function closeSheet() {
   if (S.sheet === "bought") clearVisit();
   if (S.draft && S.draft.aiCtl) S.draft.aiCtl.abort();
-  S.draft = null; S.sheet = null; S.swap = null; S.shopSel = null; S.trCol = null; S.bought = null;
+  S.draft = null; S.sheet = null; S.swap = null; S.shopSel = null; S.trCol = null; S.bought = null; S.pieceId = null;
   $("#sheet").classList.remove("is-zp");
   $("#sheet").hidden = true; $("#sheet").innerHTML = ""; $("#scrim").hidden = true;
   document.body.classList.remove("locked");
@@ -6216,7 +6542,7 @@ function subscribe() {
     renderImposed();
     renderTrends();
     if (S.outfits.length || first) renderHistory();
-    if (S.sheet === "shop") renderSheet();
+    if (S.sheet === "shop" || S.sheet === "piece") renderSheet();
     if (first || !S.looks.length || S.looks.some((L) => mainParts(L).some((p) => !p.it.guest && !S.items.has(p.it.id))) || (S.imposed && !S.looks.some((L) => lookIds(L).includes(S.imposed)))) refreshLooks();
   }, onDbError);
   let firstW = true;
@@ -6297,16 +6623,27 @@ const ACTIONS = {
   "pick-imposed": () => openSheet("imposed"),
   "imposed-pick": (el) => { S.imposed = el.dataset.id; S.guest = null; closeSheet(); renderImposed(); scheduleRefresh(); },
   "imposed-clear": () => { S.imposed = null; S.guest = null; renderImposed(); scheduleRefresh(); },
-  "shop-view": (el) => { S.shopF.view = el.dataset.v === "wishes" ? "wishes" : "shops"; renderShop(); window.scrollTo(0, 0); refocus(S.shopF.view === "wishes" ? "ss-shops" : "ss-wishes"); },
+  "shop-view": (el) => { setShopTab(el.dataset.v === "wishes" ? "envies" : S.shopF.sex === "h" ? "h" : "f"); renderShop(); refocus("ztab-" + S.shopF.tab); },
+  "shop-tab": (el) => { S.shopF.touched = true; setShopTab(el.dataset.v); renderShop(); refocus("ztab-" + S.shopF.tab); },
+  "shop-brand": (el) => { const prev = S.shopF.brand; S.shopF.brand = SHOP[el.dataset.v] ? el.dataset.v : null; S.shopF.bsex = "all"; renderShop(); if (S.shopF.brand) { const r = $("#zs-panel"); if (r && r.getBoundingClientRect().top < 0) r.scrollIntoView({block: "start"}); } refocus(S.shopF.brand ? "zb-back" : "zb-" + prev); },
+  "shop-bsex": (el) => { S.shopF.bsex = ["f", "h"].includes(el.dataset.v) ? el.dataset.v : "all"; renderShop(); refocus("zbs-" + S.shopF.bsex); },
+  "shop-color": (el) => { const k = el.dataset.v; S.shopF.color = S.shopF.color === k || !COL[k] ? null : k; renderShop(); refocus("zsc-" + k); },
+  "shop-clear": () => { S.shopF.shop = "all"; S.shopF.color = null; renderShop(); refocus("zs-filt"); },
+  "piece-open": (el) => openPiece(el.dataset.id),
+  "pz-wear": (el) => { closeSheet(); ACTIONS["impose-go"](el); },
+  "pz-edit": () => { const id = S.pieceId; closeSheet(); openItem(id); },
+  "pz-fav": async () => { const it = S.items.get(S.pieceId), db = S.caps.db; if (!it || !db) return; try { await db.doc("items/" + it.id).update({fav: !it.fav}); toast(!it.fav ? `${it.name} en favori : il reviendra plus souvent dans tes tenues.` : "Retiré des favoris."); } catch (e) { dbErr(e); } },
+  "pz-sale": async () => { const it = S.items.get(S.pieceId), db = S.caps.db; if (!it || !db) return; const s = it.status === "sale" ? "ok" : "sale"; try { await db.doc("items/" + it.id).update({status: s}); toast(s === "sale" ? "Au sale : mise de côté dans les tenues." : "Propre : elle revient dans les tenues."); } catch (e) { dbErr(e); } },
+
   "shop-f": (el) => { S.shopF.shop = SHOP[el.dataset.v] ? el.dataset.v : "all"; renderShop(); refocus("sf-" + S.shopF.shop); },
-  "shop-cat": (el) => { S.shopF.cat = CAT[el.dataset.v] ? el.dataset.v : "all"; renderShop(); refocus((el.id && el.id.startsWith("zt-") ? "zt-" : "zcat-") + S.shopF.cat); },
+  "shop-cat": (el) => { const v = el.dataset.v; S.shopF.cat = v === "promo" || CAT[v] ? v : "all"; renderShop(); refocus("zcat-" + S.shopF.cat); },
   "shop-sex": (el) => { S.shopF.sex = ["f", "h"].includes(el.dataset.v) ? el.dataset.v : "all"; store.set("shopSex", S.shopF.sex); renderShop(); refocus("sx-" + S.shopF.sex); },
   "shop-vue": (el) => { const n = Number(el.dataset.v); S.shopF.vue = [1, 2, 3].includes(n) ? n : 2; store.set("shopVue", S.shopF.vue); renderShop(); refocus("zv-" + S.shopF.vue); },
   "shop-filters": () => { S.shopF.open = !S.shopF.open; renderShop(); refocus("zs-filt"); },
   "shop-color-clear": () => { S.shopF.color = null; renderShop(); refocus("zs-filt"); },
   "sp-wishq": (el) => { const p = productById(el.dataset.id); if (p) toggleWish(p.id, (S.wishes.get(p.id) || {}).color || p.colors[0]); },
   "tr-col": (el) => { if (!COL[el.dataset.v]) return; S.trCol = el.dataset.v; openSheet("trcol"); },
-  "tr-shop": (el) => { const k = el.dataset.v; closeSheet(); S.shopF = {...S.shopF, view: "shops", cat: "all", shop: "all", q: "", color: COL[k] ? k : null, open: true}; showTab("shop"); },
+  "tr-shop": (el) => { const k = el.dataset.v; closeSheet(); if (S.shopF.tab !== "f" && S.shopF.tab !== "h") setShopTab(S.shopF.sex === "h" || (S.shopF.sex !== "f" && S.body.sex === "h") ? "h" : "f"); Object.assign(S.shopF, {view: "shops", cat: "all", shop: "all", q: "", color: COL[k] ? k : null, open: true}); showTab("shop"); },
   "tc-impose": (el) => { closeSheet(); ACTIONS["impose-go"](el); },
   "sp-open": (el) => openShopItem(el.dataset.id),
   "sp-color": (el) => {
@@ -6521,6 +6858,11 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowDown" && opts.length) { e.preventDefault(); opts[Math.min(opts.length - 1, i + 1)].focus(); return; }
     if (e.key === "ArrowUp" && opts.length && i >= 0) { e.preventDefault(); if (i === 0) $("#wx-q").focus(); else opts[i - 1].focus(); return; }
     if (e.key === "Escape" && (S.wxSugg.length || S.wxNoHit)) { e.preventDefault(); wxCloseSugg(); $("#wx-q").focus(); return; }
+  }
+  if ((e.key === "ArrowRight" || e.key === "ArrowLeft") && e.target && e.target.classList && e.target.classList.contains("zs-tab")) {
+    const tabs = [...document.querySelectorAll(".zs-tab")], i = tabs.indexOf(e.target);
+    if (i >= 0) { e.preventDefault(); tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length].click(); }
+    return;
   }
   if (e.key === "Escape" && S.sheet) closeSheet();
 });
