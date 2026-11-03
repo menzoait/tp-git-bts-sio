@@ -867,6 +867,14 @@ body.is-ward .wrap{max-width:1480px}
 #day .rub-d{margin-top:-12px}
 #trends.card{border-top:0;padding-top:8px}
 .tr-head{gap:6px}
+
+/* v13 : aperçu sur le mannequin pour les pièces sans photo de marque */
+.psh{position:absolute;inset:0;display:block;background:var(--photo)}
+.psh > img.garment{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain}
+.psh.wait::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,var(--ink-3),transparent);background-size:50% 100%;background-repeat:no-repeat;animation:wait-bar 1.3s linear infinite;opacity:.6}
+.zimg.pshot{object-position:center center;animation:wshot-in .45s ease both}
+.zc-tag.pv{top:auto;bottom:6px;background:rgba(255,255,255,.86);font-weight:600;letter-spacing:.08em}
+@media (prefers-reduced-motion:reduce){.psh.wait::after,.zimg.pshot{animation:none}}
 </style>
 </head>
 <body>
@@ -1010,7 +1018,7 @@ body.is-ward .wrap{max-width:1480px}
 
   <section id="tab-settings" class="tab" aria-labelledby="t-set" hidden>
     <div class="intro">
-      <p class="eyebrow">Version 12</p>
+      <p class="eyebrow">Version 13</p>
       <h1 class="display" id="t-set"><em>Réglages</em></h1>
     </div>
     <div id="settings" class="tab" style="gap:14px"></div>
@@ -1132,6 +1140,8 @@ const SHOPS = [
   {key: "nike", name: "Nike", line: "Sneakers et sportswear.", site: "https://www.nike.com/fr/"},
   {key: "adidas", name: "Adidas", line: "Les classiques à trois bandes.", site: "https://www.adidas.fr/"},
   {key: "carhartt", name: "Carhartt", line: "Vêtements de travail en coutil, faits pour durer.", site: "https://www.carhartt.com/fr-fr"},
+  {key: "dior", name: "Dior", line: "La maison de couture de l’avenue Montaigne : maille, sweatshirts et sneakers.", site: "https://www.dior.com/fr_fr"},
+  {key: "louisvuitton", name: "Louis Vuitton", line: "Le malletier parisien depuis 1854 : sneakers, prêt-à-porter et manteaux.", site: "https://fr.louisvuitton.com/fra-fr/homepage"},
 ];
 const IMG = {
   uq: (c, k) => `https://image.uniqlo.com/UQ/ST3/eu/imagesgoods/${c}/item/eugoods_${k}_${c}_3x4.jpg?width=750`,
@@ -1223,6 +1233,27 @@ const CATALOG = [
     photos: [IMG.ch("EU_104053_BRN_AVB")]},
   {id: "ch-double", shop: "carhartt", sex: "h", name: "Pantalon double devant Rugged Flex", price: 74.99, was: 99.99, url: "https://www.carhartt.com/fr-fr/p/pantalon-de-travail-a-double-devant-decontracte-en-coutil-teint-rugged-flex/106595", cat: "bas", sub: "cargo", colors: ["beige"], material: "coutil de coton", styles: ["streetwear", "casual", "vintage"], warmth: 2, fit: "contain",
     photos: [IMG.ch("EU_106595_A16_AVB")], alt: {kaki: [IMG.ch("EU_106595_MOS_AVB")]}},
+  /* Dior (prix relevés le 3 novembre 2026 ; photos des marques à venir : aperçu sur le mannequin en attendant) */
+  {id: "di-cdicon", shop: "dior", sex: "h", seen: "2026-11-03", name: "Sweatshirt à capuche CD Icon", price: 1000, url: "https://www.dior.com/fr_fr/fashion/products/113J698A0531_C989", cat: "haut", sub: "hoodie", colors: ["noir"], material: "molleton de coton", styles: ["streetwear", "casual", "chic"], warmth: 2, photos: []},
+  {id: "di-abeille", shop: "dior", sex: "h", seen: "2026-11-03", name: "Sweatshirt à broderie abeille, coupe relax", price: 1200, url: "https://www.dior.com/fr_fr/fashion/products/713J616A3105_C089", cat: "haut", sub: "sweat", colors: ["blanc"], material: "jersey de coton", styles: ["casual", "chic", "minimaliste"], warmth: 2, photos: []},
+  {id: "di-zip", shop: "dior", sex: "h", seen: "2026-11-03", name: "Sweatshirt à col zippé, coupe relax", price: 1400, url: "https://www.dior.com/fr_fr/fashion/products/683J605A3035_C880", cat: "haut", sub: "sweat", colors: ["gris"], material: "molleton de coton", styles: ["casual", "smartcasual", "chic"], warmth: 2, photos: []},
+  {id: "di-mariniere", shop: "dior", sex: "h", seen: "2026-11-03", name: "Pull Dior Marinière, coupe regular", price: 1300, url: "https://www.dior.com/fr_fr/fashion/products/713M670A2043_C585", cat: "haut", sub: "pull", colors: ["bleu", "bleu-clair"], material: "maille de laine", styles: ["classique", "smartcasual", "chic"], warmth: 3, photos: []},
+  {id: "di-torsade", shop: "dior", sex: "h", seen: "2026-11-03", name: "Pull en maille torsadée Dior Icons", price: 2200, url: "https://www.dior.com/fr_fr/fashion/products/643M671A0014_C988", cat: "haut", sub: "pull", colors: ["noir"], material: "maille de cachemire", styles: ["chic", "classique", "minimaliste"], warmth: 3, photos: []},
+  {id: "di-macro", shop: "dior", sex: "f", seen: "2026-11-03", name: "Veste Macrocannage", price: 3100, url: "https://www.dior.com/fr_fr/fashion/products/424V53AM752_X9101", cat: "veste", sub: "blazer", colors: ["noir", "blanc"], material: "tweed de coton technique", styles: ["chic", "classique"], warmth: 2, photos: []},
+  /* Louis Vuitton (prix relevés le 3 novembre 2026 ; photos des marques à venir) */
+  {id: "vt-trainer", shop: "louisvuitton", sex: "h", seen: "2026-11-03", name: "Sneaker LV Trainer", price: 1090, url: "https://fr.louisvuitton.com/fra-fr/produits/sneaker-lv-trainer-nvprod5130012v/1ACP1K", cat: "chaussures", sub: "baskets", colors: ["blanc"], material: "cuir de veau grainé", styles: ["streetwear", "casual", "chic"], warmth: 1, photos: []},
+  {id: "vt-buttersoft", shop: "louisvuitton", sex: "h", seen: "2026-11-03", name: "Sneaker LV Buttersoft", price: 990, url: "https://fr.louisvuitton.com/fra-fr/produits/sneaker-lv-buttersoft-nvprod6500013v/1AIKDW", cat: "chaussures", sub: "baskets", colors: ["beige"], material: "cuir d’agneau et cuir de veau lisses", styles: ["casual", "chic", "minimaliste"], warmth: 1, photos: []},
+  {id: "vt-hoodie", shop: "louisvuitton", sex: "h", seen: "2026-11-03", name: "Sweatshirt à capuche en coton à signature embossée", price: 1000, url: "https://fr.louisvuitton.com/fra-fr/produits/sweat-a-capuche-et-lv-embosse-en-coton-nvprod6060049v/1AJRLS", cat: "haut", sub: "hoodie", colors: ["violet"], material: "jersey de coton épais", styles: ["streetwear", "casual"], warmth: 2, photos: []},
+  {id: "vt-tee", shop: "louisvuitton", sex: "h", seen: "2026-11-03", name: "Tee-shirt embossé LV", price: 590, url: "https://fr.louisvuitton.com/fra-fr/produits/tee-shirt-embosse-lv-nvprod3570121v/1AHUU1", cat: "haut", sub: "t-shirt", colors: ["bordeaux"], material: "coton biologique", styles: ["casual", "streetwear", "minimaliste"], warmth: 1, photos: []},
+  {id: "vt-manteau", shop: "louisvuitton", sex: "h", seen: "2026-11-03", name: "Manteau trois-quart double-face", price: 3200, url: "https://fr.louisvuitton.com/fra-fr/produits/manteau-trois-quart-double-face-nvprod7050077v/1AJBIV", cat: "veste", sub: "manteau", colors: ["marine"], material: "laine et soie", styles: ["chic", "classique", "minimaliste"], warmth: 3, photos: []},
+  /* Zara, nouvelles pièces (prix relevés le 3 novembre 2026 ; le lien ouvre le rayon) */
+  {id: "zr-sweat-capuche", shop: "zara", sex: "h", seen: "2026-11-03", name: "Sweat relaxed fit à capuche", price: 39.95, url: ZRP + "homme-sweats-blancs-l2551.html", cat: "haut", sub: "hoodie", colors: ["blanc"], material: "molleton", styles: ["casual", "streetwear", "minimaliste"], warmth: 2, photos: []},
+  {id: "zr-sweat-interlock", shop: "zara", sex: "h", seen: "2026-11-03", name: "Sweat interlock coupe décontractée", price: 29.95, url: ZRP + "homme-sweats-blancs-l2551.html", cat: "haut", sub: "sweat", colors: ["blanc"], material: "interlock de coton", styles: ["casual", "minimaliste"], warmth: 2, photos: []},
+  {id: "zr-jean-gris", shop: "zara", sex: "h", seen: "2026-11-03", name: "Jean slim basique", price: 29.95, url: ZRP + "homme-jeans-gris-l2529.html", cat: "bas", sub: "jean", colors: ["gris"], material: "denim", styles: ["casual", "streetwear", "smartcasual"], warmth: 2, photos: []},
+  /* Nike, nouvelles pièces (prix relevés le 3 novembre 2026) */
+  {id: "nk-windrunner", shop: "nike", sex: "h", seen: "2026-11-03", name: "Veste à zip en Fleece Windrunner Nike Tech", price: 83.99, was: 119.99, url: "https://www.nike.com/fr/t/veste-a-zip-en-fleece-windrunner-nike-tech-pour-homme-dSR1Tg/HV0949-100", cat: "haut", sub: "hoodie", colors: ["blanc"], material: "Tech Fleece", styles: ["sportswear", "streetwear"], warmth: 2, photos: []},
+  {id: "nk-jordan-crew", shop: "nike", sex: "h", seen: "2026-11-03", name: "Sweat à col ras-du-cou en Fleece Jordan Brooklyn", price: 64.99, url: "https://www.nike.com/fr/t/sweat-a-col-ras-du-cou-en-tissu-fleece-jordan-brooklyn-pour-homme-OOZ5pDpn/IM9854-133", cat: "haut", sub: "sweat", colors: ["blanc"], material: "molleton", styles: ["streetwear", "sportswear", "casual"], warmth: 2, photos: []},
+  {id: "nk-acg", shop: "nike", sex: "h", seen: "2026-11-03", name: "Sweat à col ras-du-cou Dri-FIT ACG Tuff Fleece", price: 114.99, url: "https://www.nike.com/fr/t/sweat-a-col-ras-du-cou-dri-fit-acg-tuff-fleece-pour-homme-YiedfwYP/IU8162-121", cat: "haut", sub: "sweat", colors: ["blanc"], material: "polaire", styles: ["sportswear", "casual"], warmth: 3, photos: []},
 ];
 const SHOP = Object.fromEntries(SHOPS.map((s) => [s.key, s]));
 const CAT_BY_ID = new Map(CATALOG.map((p) => [p.id, p]));
@@ -4723,6 +4754,7 @@ function showTab(k) {
   if (k === "body") { Atelier.attach($("#stage-host-2")); renderBodyStage(); syncMannequin(false); }
   if (k === "shop") { const f = S.shopF; if (!f.touched && (f.tab === "f" || f.tab === "h") && (S.body.sex === "f" || S.body.sex === "h") && S.body.sex !== f.tab) setShopTab(S.body.sex); renderShop(); }
   if (k === "wardrobe") { shotProgress(); pumpShots(); }
+  if (k === "shop" || k === "today") setTimeout(pumpShots, 0);
 }
 const currentLook = () => S.looks[S.lookIdx] || null;
 function lookParts(L) {
@@ -5059,9 +5091,9 @@ function shotFrame(it) {
       return {c: 0.56, k: 0.3, rot: 0.35};
   }
 }
-const shotKey = (it) => SHOT_V + ":" + hash36(JSON.stringify([it.cat, it.sub, it.colors || [], it.material || "", bodyParams()]));
+const shotKey = (it) => SHOT_V + ":" + hash36(JSON.stringify([it.cat, it.sub, it.colors || [], it.material || "", it.__body || bodyParams()]));
 const shotUrl = (it, w) => (it ? SHOT_URLS.get(shotKey(it) + w) || null : null);
-const shotsWanted = () => !S.shotsOff && (S.tab === "wardrobe" || S.sheet === "piece");
+const shotsWanted = () => !S.shotsOff;
 function queueShots(ids, front) {
   const want = ids.filter((id) => { const it = S.items.get(id); return it && !shotUrl(it, ":c"); });
   if (front) { for (let i = want.length - 1; i >= 0; i--) { const k = shotQ.indexOf(want[i]); if (k >= 0) shotQ.splice(k, 1); shotQ.unshift(want[i]); } }
@@ -5069,8 +5101,10 @@ function queueShots(ids, front) {
   pumpShots();
 }
 async function pumpShots() {
-  if (shotBusy || !shotQ.length || !shotsWanted()) { shotProgress(); return; }
-  const id = shotQ.shift(), it = S.items.get(id);
+  if (shotBusy || !shotsWanted()) { shotProgress(); return; }
+  const id = nextShotId();
+  if (!id) { shotProgress(); return; }
+  const it = shotSubject(id);
   if (!it || shotUrl(it, ":c")) { pumpShots(); return; }
   shotBusy = true;
   const key = shotKey(it);
@@ -5079,7 +5113,7 @@ async function pumpShots() {
     if (!c || !f) {
       const eng = studioEngine();
       if (!eng.ok) { S.shotsOff = true; return; }
-      const cv = await eng.snap({body: bodyParams(), items: shotOutfit(it), slotOf}, {w: SHOT_W, h: SHOT_H, ss: 2, frames: [shotFrame(it), SHOT_FULL]});
+      const cv = await eng.snap({body: it.__body || bodyParams(), items: shotOutfit(it), slotOf}, {w: SHOT_W, h: SHOT_H, ss: 2, frames: [shotFrame(it), SHOT_FULL]});
       if (!cv) { if (++shotFail > 3) S.shotsOff = true; return; }
       [c, f] = await Promise.all(cv.map((x) => new Promise((r) => { try { x.toBlob(r, "image/jpeg", 0.9); } catch (e) { r(null); } })));
       shotPut(key + ":c", c); shotPut(key + ":f", f);
@@ -5100,12 +5134,47 @@ function shotProgress() {
   if (on) el.innerHTML = `<span>Photos portées sur ton mannequin : ${done} / ${all.length}</span><i aria-hidden="true"><b style="width:${Math.round((100 * done) / all.length)}%"></b></i>`;
 }
 function paintShot(id) {
+  if (String(id).startsWith("shop:")) {
+    const pid = id.slice(5), p = productById(pid);
+    if (!p) return;
+    for (const el of document.querySelectorAll(`.psh[data-psh="${CSS.escape(pid)}"]`)) {
+      const cls = [...el.classList].filter((c) => c !== "psh" && c !== "wait").join(" ");
+      el.outerHTML = prodShotHtml(p, cls);
+    }
+    if (S.sheet === "shop" && S.shopSel && S.shopSel.pid === pid) renderSheet();
+    return;
+  }
   const it = S.items.get(id);
   if (!it) return;
   for (const el of document.querySelectorAll(`.wv[data-wid="${CSS.escape(id)}"]`)) { el.innerHTML = wardMedia(it); el.classList.remove("wait"); }
   if (S.sheet === "piece" && S.pieceId === id) renderSheet();
 }
 
+/* Pièces de boutique sans photo de la marque : aperçu studio sur le mannequin, au corps du rayon (femme, homme) */
+const prodQ = [];
+function prodGarment(p) {
+  const g = asGarment(p), b = bodyParams();
+  g.__body = {...b, sex: p.sex === "f" || p.sex === "h" ? p.sex : b.sex};
+  return g;
+}
+function shotSubject(id) {
+  if (String(id).startsWith("shop:")) { const p = productById(id.slice(5)); return p ? prodGarment(p) : null; }
+  return S.items.get(id) || null;
+}
+function queueProdShot(pid) { const id = "shop:" + pid; if (!prodQ.includes(id)) { prodQ.push(id); setTimeout(pumpShots, 0); } }
+function nextShotId() {
+  const wantW = S.tab === "wardrobe" || S.sheet === "piece";
+  const wantP = S.tab === "shop" || S.sheet === "shop" || S.sheet === "bought" || S.sheet === "trcol" || (S.tab === "today" && !!S.guest);
+  if (wantW && shotQ.length) return shotQ.shift();
+  if (wantP && prodQ.length) return prodQ.shift();
+  return null;
+}
+function prodShotHtml(p, cls) {
+  const g = prodGarment(p), u = shotUrl(g, ":c");
+  if (u) return `<img class="zimg pshot ${cls || ""}" src="${esc(u)}" alt="" decoding="async">`;
+  if (!S.shotsOff) queueProdShot(p.id);
+  return `<span class="psh ${cls || ""}${S.shotsOff ? "" : " wait"}" data-psh="${esc(p.id)}">${garmentSvg(g)}</span>`;
+}
 /* ---------------- Rendu : garde-robe ---------------- */
 const catOrder = (it) => CATS.findIndex((c) => c.key === it.cat);
 function colorDots(it) { return `<span class="cdots">${(it.colors || []).slice(0, 3).map((k) => `<span class="cdot" style="--c:${colorHex(k)}"></span>`).join("")}</span>`; }
@@ -5336,7 +5405,7 @@ function sanitizeSnap(v, id) {
 const ownedFrom = (pid) => [...S.items.values()].find((it) => it.pid === pid) || null;
 /* Une photo de boutique ; si elle ne se charge pas (hors ligne, site qui la refuse), l’appli remet son propre rendu */
 function zimg(p, src, cls, eager) {
-  if (!src) return garmentSvg(asGarment(p));
+  if (!src) return prodShotHtml(p, cls);
   return `<img class="zimg ${p.fit === "contain" ? "contain" : ""} ${cls || ""}" src="${esc(src)}" alt="" ${eager ? "" : 'loading="lazy" '}decoding="async" referrerpolicy="no-referrer" data-pid="${esc(p.id)}">`;
 }
 const CAT_SHORT = {haut: "Hauts", bas: "Bas", piece: "Robes", veste: "Vestes et manteaux", chaussures: "Chaussures", accessoire: "Accessoires"};
@@ -5366,7 +5435,7 @@ function shopCard(p, color, px) {
   const w = S.wishes.has(p.id);
   return `<article class="zc">
       <button class="zc-link" id="${px}sp-${esc(p.id)}" data-action="sp-open" data-id="${esc(p.id)}" aria-label="${esc(p.name)}, ${esc(shopName(p))}, ${esc(priceText(p))}">
-        <span class="zc-media">${zimg(p, ph[0], "a")}${ph[1] ? zimg(p, ph[1], "b") : ""}${p.was ? `<span class="zc-tag">−${Math.round(100 - (100 * p.price) / p.was)} %</span>` : ""}</span>
+        <span class="zc-media">${zimg(p, ph[0], "a")}${ph[1] ? zimg(p, ph[1], "b") : ""}${p.was ? `<span class="zc-tag">−${Math.round(100 - (100 * p.price) / p.was)} %</span>` : ""}${ph.length ? "" : `<span class="zc-tag pv" title="Photo de la marque à venir : la pièce est montrée sur ton mannequin">Aperçu</span>`}</span>
       </button>
       <button class="zc-wish" id="${px}zw-${esc(p.id)}" data-action="sp-wishq" data-id="${esc(p.id)}" aria-pressed="${w}" aria-label="${w ? "Retirer de mes envies" : "Ajouter à mes envies"} : ${esc(p.name)}">${ICON.heart}</button>
       <div class="zc-cap" aria-hidden="true"><p class="zc-name">${esc(p.name)}</p><p class="zc-meta"><span>${esc(shopName(p))}</span><span class="zc-price">${priceHtml(p)}</span></p></div>
@@ -5472,7 +5541,7 @@ function renderShopGrid() {
   const list = shopPool(false);
   const cnt = $("#zs-count-l");
   if (cnt) cnt.textContent = `${list.length} pièce${list.length > 1 ? "s" : ""}${f.q ? ` pour « ${f.q} »` : ""}`;
-  const note = `<p class="shop-note">Prix relevés le ${fmtDay(SHOP_DATE)} sur les sites des marques : le site fait foi. Photos des marques, affichées depuis leurs sites. Aucune de ces boutiques n’est liée à l’appli.</p>`;
+  const note = `<p class="shop-note">Prix relevés sur les sites des marques le 30 octobre et le 3 novembre 2026 : le site fait foi. Photos des marques, affichées depuis leurs sites ; une pièce marquée « Aperçu » est montrée sur ton mannequin en attendant sa photo. Aucune de ces boutiques n’est liée à l’appli.</p>`;
   if (shopHome()) {
     const hero = SHOP_HERO[f.tab], hp = hero && CAT_BY_ID.get(hero.pid);
     host.classList.add("is-home");
@@ -5510,7 +5579,7 @@ function shopSheetHtml() {
   return `${sheetHead(esc(shopName(p)))}
   <div class="sheet-body zp">
     <div class="zp-media">
-      <div class="zp-gal" id="zp-gal" tabindex="0" aria-label="Photos de la pièce">${ph.length ? ph.map((u, i) => `<div class="zp-shot">${zimg(p, u, "", i === 0)}</div>`).join("") : `<div class="zp-shot">${garmentSvg(g)}</div>`}</div>
+      <div class="zp-gal" id="zp-gal" tabindex="0" aria-label="Photos de la pièce">${ph.length ? ph.map((u, i) => `<div class="zp-shot">${zimg(p, u, "", i === 0)}</div>`).join("") : `<div class="zp-shot">${prodShotHtml(p, "")}</div>${(() => { const u = shotUrl(prodGarment(p), ":f"); return u ? `<div class="zp-shot"><img class="zimg pshot" src="${esc(u)}" alt="" decoding="async"></div>` : ""; })()}`}</div>
       ${ph.length > 1 ? `<p class="zp-n" aria-hidden="true"><span id="zp-i">1</span> / ${ph.length}</p>` : ""}
     </div>
     <div class="zp-info">
@@ -5529,7 +5598,7 @@ function shopSheetHtml() {
         ${own ? "" : `<p class="sp-tip">${ICON.hanger}<span>Tu l’achètes sur le site ? À ton retour dans l’appli, un geste suffit pour le ranger dans ta garde-robe.</span></p>`}
         ${own ? `<p class="sp-own">${ICON.hanger}<span>Déjà dans ta garde-robe.</span></p>` : `<button class="btn ghost sm sp-bought" id="sp-own" data-action="sp-own"${S.shopBusy ? " disabled" : ""}>${S.shopBusy ? "Ajout…" : "Je l’ai acheté : l’ajouter à ma garde-robe"}</button>`}
       </div>
-      <p class="shop-note">Prix relevé le ${fmtDay(SHOP_DATE)} : le site fait foi. Photos ${esc(shopName(p))}. L’essayage montre la coupe et la couleur sur ton mannequin 3D.</p>
+      <p class="shop-note">Prix relevé le ${fmtDay(p.seen || SHOP_DATE)} : le site fait foi. ${ph.length ? `Photos ${esc(shopName(p))}.` : "Photo de la marque à venir : en attendant, la pièce est montrée sur ton mannequin."} L’essayage montre la coupe et la couleur sur ton mannequin 3D.</p>
     </div>
   </div>`;
 }
@@ -5834,7 +5903,7 @@ function renderSettings() {
     <div class="row-btns"><button class="btn ghost" id="s-export" data-action="export"${S.caps.downloads ? "" : " disabled"}>Exporter (JSON)</button>
       ${S.confirmAll ? `<span class="confirm"><span>Tout supprimer, sans retour possible ?</span><button class="btn danger sm" data-action="delete-all-yes"${S.deleting ? " disabled" : ""}>${S.deleting ? "Suppression…" : "Oui, tout supprimer"}</button><button class="btn ghost sm" data-action="delete-all-no">Annuler</button></span>` : `<button class="btn ghost danger-t" data-action="delete-all">Tout supprimer</button>`}</div>
   </div>
-  <p class="foot-note">Dressing du matin, version 12 · corps 3D MakeHuman (CC0), ombres et matières en temps réel, photos portées · photos des boutiques · mode clair ou sombre</p>`;
+  <p class="foot-note">Dressing du matin, version 13 · corps 3D MakeHuman (CC0), ombres et matières en temps réel, photos portées · photos des boutiques · mode clair ou sombre</p>`;
 }
 
 /* ---------------- Feuilles (bottom sheet) ---------------- */
