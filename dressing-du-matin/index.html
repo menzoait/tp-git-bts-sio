@@ -3,6 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F0F10" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Dressing">
+<meta name="description" content="Ta garde-robe, la météo du jour et tes tenues sur ton mannequin 3D.">
 <style>
 :root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0;font:14px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
@@ -887,6 +897,44 @@ img.ph.sshot{position:absolute;inset:0;width:100%;height:100%;max-width:none;max
 .psh{background:linear-gradient(180deg,#EFEEEB 0%,#E8E6E2 62%,#DEDCD7 100%)}
 .ref-vis,.pc-vis,.hc-pc,.thumb,.tr-pc .ic-vis{overflow:hidden}
 @media (prefers-reduced-motion:reduce){img.ph.sshot{animation:none}.ph-wait::after{animation:none}}
+
+/* ===== v15 : premier lancement ===== */
+.onb .th-in{gap:14px}
+.onb-sex{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.onb-opt{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 10px 14px;border:1px solid var(--rule-2);font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.onb-opt svg{width:46px;height:auto}
+.onb-opt[aria-checked="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.onb-skin{display:flex;flex-direction:column;gap:8px}
+.onb-list{display:flex;flex-direction:column;border-top:1px solid var(--rule)}
+.onb-row{display:flex;align-items:center;gap:14px;padding:14px 2px;border-bottom:1px solid var(--rule);text-align:left}
+.onb-row .i{width:22px;height:22px}
+.onb-row span{display:flex;flex-direction:column;gap:2px;min-width:0}
+.onb-row b{font-size:14px;font-weight:600}
+.onb-row small{font-size:12.5px;color:var(--ink-2)}
+.onb-dots{display:flex;justify-content:center;gap:6px}
+.onb-dots i{width:18px;height:2px;background:var(--rule-2)}
+.onb-dots i.on{background:var(--ink)}
+/* ===== v15 : garde-robe en chiffres ===== */
+.st-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}
+.st{display:flex;flex-direction:column;gap:2px;padding-top:10px;border-top:1px solid var(--rule-2)}
+.st b{font-family:var(--font-display);font-weight:500;font-size:32px;line-height:1;font-variant-numeric:lining-nums tabular-nums}
+.st span{font-size:12.5px;line-height:1.35;color:var(--ink-2)}
+.st-cols{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.st-bar{display:flex;height:14px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.st-bar i{display:block;height:100%;background:var(--c)}
+.st-leg{margin:0;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--ink-2)}
+.st-leg span{display:inline-flex;align-items:center;gap:6px}
+.st-leg i{width:10px;height:10px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.st-top{margin:4px 0 0;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.st-top b{color:var(--ink);font-weight:600}
+@media (min-width:900px){.st-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* ===== v15 : partage ===== */
+.sh-prev{position:relative;aspect-ratio:4/5;max-height:58vh;margin:0 auto;width:100%;background:var(--photo);overflow:hidden}
+.sh-prev img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+/* ===== v15 : confidentialité ===== */
+.pv-doc{display:flex;flex-direction:column;gap:18px}
+.pv-doc h3{margin:0 0 6px;font-family:var(--font-display);font-weight:500;font-size:22px;line-height:1.1}
+.pv-doc p{margin:0;font-size:14px;line-height:1.6;color:var(--ink-2);max-width:60ch}
 </style>
 </head>
 <body>
@@ -1030,7 +1078,7 @@ img.ph.sshot{position:absolute;inset:0;width:100%;height:100%;max-width:none;max
 
   <section id="tab-settings" class="tab" aria-labelledby="t-set" hidden>
     <div class="intro">
-      <p class="eyebrow">Version 14</p>
+      <p class="eyebrow">Version 15</p>
       <h1 class="display" id="t-set"><em>Réglages</em></h1>
     </div>
     <div id="settings" class="tab" style="gap:14px"></div>
@@ -1065,6 +1113,8 @@ img.ph.sshot{position:absolute;inset:0;width:100%;height:100%;max-width:none;max
     <button class="btn primary big wide" id="th-go" data-action="th-go">Continuer</button>
   </div>
 </div>
+<div class="scrim" id="onb-scrim" hidden></div>
+<div class="sheet th-ask onb" id="onb" role="dialog" aria-modal="true" aria-labelledby="onb-t" hidden><div class="th-in" id="onb-in"></div></div>
 <div class="toast" id="toast" role="status" hidden></div>
 <input type="file" id="photo-input" accept="image/*" hidden>
 
@@ -1302,6 +1352,7 @@ const reduceMotion = () => { try { return matchMedia("(prefers-reduced-motion: r
 const svgI = (p) => `<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 const THUMB = "M7.5 10.5V20H4.5v-9.5h3Zm0 0L11 3.5c1.5 0 2.4 1.2 2.1 2.6l-.6 3.4h5.4c1.3 0 2.2 1.2 1.9 2.4l-1.5 6.2A2.4 2.4 0 0 1 16 20H7.5";
 const ICON = {
+  share: svgI('<path d="M12 3.5v11M8 7.5l4-4 4 4"/><path d="M7 10.5H5.5v9.5h13v-9.5H17"/>'),
   today: svgI('<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/>'),
   hanger: svgI('<path d="M10 6.8a2 2 0 1 1 3 1.7c-.6.4-1 1-1 1.8v.9l8.3 5.4c.9.6.5 2-.6 2H4.3c-1.1 0-1.5-1.4-.6-2L12 11.2"/>'),
   body: svgI('<circle cx="12" cy="4.8" r="2.3"/><path d="M8.2 21.5 9.6 14 7.8 12.6 9 8.4h6l1.2 4.2-1.8 1.4 1.4 7.5M12 14v7.5"/>'),
@@ -4177,15 +4228,18 @@ function themeAskDone() {
   $("#th-scrim").hidden = true; $("#theme-ask").hidden = true;
   if (!S.sheet) document.body.classList.remove("locked");
   renderSettings();
+  if (S.onbPending) { onbOpen(); return; }
   if (S.wxAskPending) { S.wxAskPending = false; wxAskOpen(); return; }
   if (themeAskFocus && themeAskFocus.focus && document.contains(themeAskFocus)) themeAskFocus.focus({preventScroll: true});
   toast(`Mode ${themeResolved(S.theme) === "dark" ? "sombre" : "clair"}${S.theme === "auto" ? ", comme ton appareil" : ""}. Modifiable dans Réglages.`);
 }
 function initTheme() {
+  S.onbPending = onbNeeded();
   const p = themePref();
   S.theme = p;
   applyTheme(p);
   if (!p && storageOk()) themeAskOpen();
+  else if (S.onbPending) setTimeout(() => { if (S.onbPending && !S.themeAsk) onbOpen(); }, 300);
 }
 
 function wxAskOpen() {
@@ -4197,6 +4251,7 @@ function wxAskOpen() {
 }
 function wxAskClose() {
   if ($("#wx-ask").hidden) return;
+  if (S.onbNext !== undefined) { const nx = S.onbNext; S.onbNext = undefined; setTimeout(() => onbGo(nx), 260); }
   $("#wx-scrim").hidden = true; $("#wx-ask").hidden = true;
   if (!S.sheet) document.body.classList.remove("locked");
   if (wxAskFocus && wxAskFocus.focus && document.contains(wxAskFocus)) wxAskFocus.focus({preventScroll: true});
@@ -4232,7 +4287,7 @@ async function initWeather() {
   if (perm === "denied" || !navigator.geolocation) { S.wxState = "need"; S.wxErr = "Recherche ta ville pour voir sa météo."; renderWxCard(); return; }
   S.wxState = "need"; S.wxErr = "Recherche ta ville ou utilise ta position.";
   renderWxCard();
-  if (S.themeAsk) S.wxAskPending = true; else wxAskOpen();
+  if (S.themeAsk || S.onb || S.onbPending) S.wxAskPending = true; else wxAskOpen();
 }
 
 /* rendu */
@@ -4765,7 +4820,7 @@ function showTab(k) {
   if (k === "today") { Atelier.attach($("#stage-host")); renderStage(); syncMannequin(false); setTimeout(onRubScroll, 0); }
   if (k === "body") { Atelier.attach($("#stage-host-2")); renderBodyStage(); syncMannequin(false); }
   if (k === "shop") { const f = S.shopF; if (!f.touched && (f.tab === "f" || f.tab === "h") && (S.body.sex === "f" || S.body.sex === "h") && S.body.sex !== f.tab) setShopTab(S.body.sex); renderShop(); }
-  if (k === "wardrobe") { shotProgress(); pumpShots(); }
+  if (k === "wardrobe") { renderWardrobe(); shotProgress(); pumpShots(); }
   if (k === "shop" || k === "today") setTimeout(pumpShots, 0);
 }
 const currentLook = () => S.looks[S.lookIdx] || null;
@@ -4896,6 +4951,7 @@ function renderLookPanel() {
         <button class="icon-btn" id="up" data-action="rate" data-o="${i}" data-v="1" aria-pressed="${L.rating === 1}" aria-label="J’aime">${ICON.up}</button>
         <button class="icon-btn" id="down" data-action="rate" data-o="${i}" data-v="-1" aria-pressed="${L.rating === -1}" aria-label="J’aime pas">${ICON.down}</button>
         <button class="icon-btn" id="fav" data-action="fav" data-o="${i}" aria-pressed="${!!L.fav}" aria-label="Favori">${ICON.heart}</button>
+        <button class="icon-btn" id="share" data-action="share-look" aria-label="Partager ta tenue en image">${ICON.share}</button>
       </div>
     </div>`}`;
   if (active) { const n = document.getElementById(active); if (n) n.focus({preventScroll: true}); }
@@ -5125,7 +5181,7 @@ async function pumpShots() {
     if (!c || !f) {
       const eng = studioEngine();
       if (!eng.ok) { S.shotsOff = true; return; }
-      const cv = await eng.snap({body: it.__body || bodyParams(), items: shotOutfit(it), slotOf}, {w: SHOT_W, h: SHOT_H, ss: 2, frames: [shotFrame(it), SHOT_FULL]});
+      const cv = await eng.snap({body: it.__body || bodyParams(), items: shotOutfit(it), slotOf}, {w: SHOT_W, h: SHOT_H, ss: 1.6, frames: [shotFrame(it), SHOT_FULL]});
       if (!cv) { if (++shotFail > 3) S.shotsOff = true; return; }
       [c, f] = await Promise.all(cv.map((x) => new Promise((r) => { try { x.toBlob(r, "image/jpeg", 0.9); } catch (e) { r(null); } })));
       shotPut(key + ":c", c); shotPut(key + ":f", f);
@@ -5222,6 +5278,241 @@ function paintGeneric(id) {
   const it = shotSubject(id), u = it && shotUrl(it, ":c");
   if (u) for (const el of els) el.outerHTML = sshotImg(u);
 }
+/* ---------------- Premier lancement guidé : ton mannequin, puis ta garde-robe ---------------- */
+const onbNeeded = () => !store.get("onb", false) && !S.body.sex && storageOk();
+let onbFocus = null;
+function onbFig(sex) { return `<svg viewBox="0 0 40 100" aria-hidden="true"><circle cx="20" cy="9" r="6.5" fill="currentColor" opacity=".85"/><path d="${sex === "f" ? "M12 19c5-2 11-2 16 0l3 30-4 1 4 30h-7l-2-26-2 26h-7l4-30-4-1z" : "M10 19c6-2.5 14-2.5 20 0l2 32-4 1-1 46h-6l-1-36-1 36h-6l-1-46-4-1z"}" fill="currentColor" opacity=".85"/></svg>`; }
+function renderOnb() {
+  const st = S.onbStep || 1, sex = S.body.sex;
+  const dots = `<div class="onb-dots" aria-hidden="true"><i class="${st === 1 ? "on" : ""}"></i><i class="${st === 2 ? "on" : ""}"></i></div>`;
+  if (st === 1) {
+    $("#onb-in").innerHTML = `${dots}<p class="th-k">Étape 1 sur 2</p><h2 class="th-t" id="onb-t">Ton mannequin</h2>
+      <p class="th-d">Il porte tes tenues en 3D et sert aux photos de ta garde-robe. Tes mesures restent sur cet appareil.</p>
+      <div class="onb-sex" role="radiogroup" aria-label="Base du mannequin">${[["f", "Femme"], ["h", "Homme"]].map(([k, l]) => `<button class="onb-opt" role="radio" id="onb-${k}" data-action="onb-sex" data-v="${k}" aria-checked="${sex === k}">${onbFig(k)}${l}</button>`).join("")}</div>
+      <div class="onb-skin"><span class="fl" id="onb-skin-l">Teint</span><div class="swatch-row" role="radiogroup" aria-labelledby="onb-skin-l">${SKINS.map(([l, c]) => `<button class="swb" role="radio" id="onbk-${c.slice(1)}" data-action="onb-skin" data-v="${c}" aria-checked="${(S.body.skin || "#D7DBE1") === c}" aria-label="${esc(l)}" title="${esc(l)}" style="--c:${c}"></button>`).join("")}</div></div>
+      <button class="btn primary big wide" id="onb-next" data-action="onb-next"${sex ? "" : " disabled"}>Continuer</button>
+      <button class="th-auto" id="onb-skip" data-action="onb-done" data-v="">Plus tard</button>`;
+  } else {
+    const ex = [...S.items.values()].filter((i) => i.example).length;
+    $("#onb-in").innerHTML = `${dots}<p class="th-k">Étape 2 sur 2</p><h2 class="th-t" id="onb-t">Ta garde-robe</h2>
+      <p class="th-d">Ajoute tes vêtements : chaque matin, tes tenues seront faites avec tes pièces.${ex ? ` ${ex} pièces d’exemple sont déjà là pour essayer.` : ""}</p>
+      <div class="onb-list">
+        <button class="onb-row" id="onb-add" data-action="onb-done" data-v="add">${ICON.camera}<span><b>Prendre une pièce en photo</b><small>Le fond est détouré tout seul.</small></span></button>
+        <button class="onb-row" id="onb-shop" data-action="onb-done" data-v="shop">${ICON.bag}<span><b>Piocher dans les boutiques</b><small>De vraies pièces à essayer sur ton mannequin.</small></span></button>
+        <button class="onb-row" id="onb-ex" data-action="onb-done" data-v="">${ICON.hanger}<span><b>${ex ? "Garder les exemples pour l’instant" : "Commencer"}</b><small>${ex ? "Tu pourras les supprimer d’un geste dans la garde-robe." : "Tu ajouteras tes pièces quand tu veux."}</small></span></button>
+      </div>`;
+  }
+}
+function onbOpen() {
+  if (!$("#onb").hidden) return;
+  onbFocus = document.activeElement;
+  S.onb = true; S.onbStep = S.onbStep || 1;
+  renderOnb();
+  $("#onb-scrim").hidden = false; $("#onb").hidden = false;
+  document.body.classList.add("locked");
+  const b = $("#onb-" + (S.body.sex || "f")); if (b) b.focus({preventScroll: true});
+}
+function onbDone(next) {
+  if ($("#onb").hidden) return;
+  S.onb = false; S.onbPending = false; store.set("onb", true);
+  $("#onb-scrim").hidden = true; $("#onb").hidden = true;
+  if (!S.sheet) document.body.classList.remove("locked");
+  if (S.wxAskPending) { S.wxAskPending = false; S.onbNext = next; wxAskOpen(); return; }
+  onbGo(next);
+}
+function onbGo(next) {
+  if (next === "add") ACTIONS.add();
+  else if (next === "shop") showTab("shop");
+  else if (onbFocus && onbFocus.focus && document.contains(onbFocus)) onbFocus.focus({preventScroll: true});
+}
+
+/* ---------------- Appli installable (site) ---------------- */
+const isStandalone = () => { try { return matchMedia("(display-mode: standalone)").matches || navigator.standalone === true; } catch (e) { return false; } };
+const isIOS = () => /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); S.installEvt = e; if (S.tab === "settings") renderSettings(); });
+window.addEventListener("appinstalled", () => { S.installEvt = null; toast("Dressing du matin est installée."); renderSettings(); });
+function installCardHtml() {
+  if (!S.local || !WX_LIVE) return "";
+  const done = isStandalone();
+  const how = done ? "L’appli est installée : elle s’ouvre en plein écran et marche même sans réseau (la météo attend la connexion)."
+    : S.installEvt ? "Ajoute Dressing du matin à ton écran d’accueil : elle s’ouvre en plein écran, comme une appli, et marche même sans réseau."
+    : isIOS() ? "Sur iPhone, dans Safari : touche le bouton Partager, puis « Sur l’écran d’accueil ». L’appli s’ouvre ensuite en plein écran et marche même sans réseau."
+    : "Dans le menu du navigateur, choisis « Installer l’appli » ou « Ajouter à l’écran d’accueil ». Elle s’ouvre ensuite en plein écran et marche même sans réseau.";
+  return `<div class="card set" id="s-install"><div><h2 class="set-t">${done ? "Appli installée" : "Installer l’appli"}</h2><p class="set-d">${how}</p></div>
+    ${!done && S.installEvt ? `<div class="row-btns"><button class="btn primary" id="s-install-go" data-action="install">${ICON.plus} Installer</button></div>` : ""}
+    ${done ? "" : `<p class="hint">Ta garde-robe reste dans le navigateur où tu l’as créée. Pour la retrouver dans l’appli installée : « Exporter » ici, puis « Importer une sauvegarde » dans l’appli.</p>`}</div>`;
+}
+
+/* ---------------- Importer une sauvegarde (le fichier JSON exporté) ---------------- */
+const isoOr = (v, d) => (typeof v === "string" && /^\d{4}-\d{2}-\d{2}/.test(v) ? v.slice(0, 30) : d);
+function cleanBackupItem(v) {
+  const it = cleanImport(v);
+  if (!it || !v.id || !/^[A-Za-z0-9_\-.~:@+]{1,120}$/.test(String(v.id))) return null;
+  const photo = typeof v.photo === "string" && (!S.local || PHOTO_URLS.has(v.photo)) ? v.photo : null;
+  return {...it, id: String(v.id), status: v.status === "sale" ? "sale" : "ok", fav: !!v.fav, example: !!v.example, photo, cutout: !!photo && !!v.cutout,
+    lastWorn: isoOr(v.lastWorn, null) ? String(v.lastWorn).slice(0, 10) : null, createdAt: isoOr(v.createdAt, new Date().toISOString()),
+    ...(typeof v.pid === "string" && v.pid.length < 60 ? {pid: v.pid} : {}),
+    ...(typeof v.shot === "string" && /^https:\/\//.test(v.shot) && v.shot.length < 600 ? {shot: v.shot, shotFit: v.shotFit === "contain" ? "contain" : ""} : {})};
+}
+function cleanBackupOutfit(o) {
+  if (!o || typeof o !== "object" || !o.id || !/^[A-Za-z0-9_\-.~:@+]{1,120}$/.test(String(o.id)) || !isoOr(o.date, null)) return null;
+  const w = o.weather && typeof o.weather === "object" ? o.weather : {};
+  return {id: String(o.id), date: String(o.date).slice(0, 10), at: isoOr(o.at, String(o.date).slice(0, 10)), items: (Array.isArray(o.items) ? o.items : []).filter((x) => typeof x === "string").slice(0, 12),
+    occasion: OCC[o.occasion] ? o.occasion : S.occ, style: STY[o.style] ? o.style : S.sty, weather: {am: Number(w.am) || 0, pm: Number(w.pm) || 0, rain: !!w.rain, wind: !!w.wind},
+    why: String(o.why || "").slice(0, 400), source: o.source === "ia" ? "ia" : "regles", rating: [1, -1].includes(o.rating) ? o.rating : 0, fav: !!o.fav, worn: !!o.worn};
+}
+function readBackup(file) {
+  const r = new FileReader();
+  r.onload = () => {
+    let d = null;
+    try { d = JSON.parse(String(r.result)); } catch (e) { d = null; }
+    if (!d || typeof d !== "object" || !Array.isArray(d.items)) { toast("Ce fichier n’est pas une sauvegarde de Dressing du matin."); return; }
+    const items = d.items.slice(0, 600).map(cleanBackupItem).filter(Boolean);
+    const outfits = (Array.isArray(d.outfits) ? d.outfits : []).slice(0, 2000).map(cleanBackupOutfit).filter(Boolean);
+    const wishes = (Array.isArray(d.wishes) ? d.wishes : []).slice(0, 200).map((w) => { const pid = String((w && w.pid) || ""); const snap = sanitizeSnap(w && w.snap, pid); return pid && (CAT_BY_ID.has(pid) || snap) ? {pid, color: COL[w.color] ? w.color : null, at: isoOr(w.at, new Date().toISOString()), snap} : null; }).filter(Boolean);
+    S.restore = {items, outfits, wishes, at: isoOr(d.exportedAt, null), busy: false};
+    openSheet("restore");
+  };
+  r.onerror = () => toast("Lecture du fichier impossible.");
+  r.readAsText(file);
+}
+function restoreSheetHtml() {
+  const R = S.restore || {items: [], outfits: [], wishes: []};
+  const newI = R.items.filter((it) => !S.items.has(it.id)), newO = R.outfits.filter((o) => !S.outfits.some((x) => x.id === o.id)), newW = R.wishes.filter((w) => !S.wishes.has(w.pid));
+  const n = newI.length + newO.length + newW.length;
+  const line = (k, all, fresh, one, many) => `<dt>${k}</dt><dd>${fresh.length} nouvelle${fresh.length > 1 ? "s" : ""} sur ${all.length} ${all.length > 1 ? many : one}</dd>`;
+  return `${sheetHead("Importer une sauvegarde")}<div class="sheet-body">
+    <p class="hint">Sauvegarde${R.at ? ` du ${esc(fmtDay(R.at.slice(0, 10)))}` : ""}. L’import ajoute ce qui manque ici, sans rien effacer ni créer de doublon.</p>
+    <dl class="sp-facts">${line("Pièces", R.items, newI, "pièce", "pièces")}${line("Tenues", R.outfits, newO, "tenue", "tenues")}${line("Envies", R.wishes, newW, "envie", "envies")}</dl>
+    ${S.local && R.items.some((it) => !it.photo) ? `<p class="hint">Les photos que tu avais prises restent sur l’appareil d’origine : ici, chaque pièce est montrée sur ton mannequin.</p>` : ""}
+    <div class="sp-actions"><button class="btn primary big wide" id="rs-go" data-action="restore-go"${n && !R.busy ? "" : " disabled"}>${R.busy ? "Import…" : n ? `Importer ${n} élément${n > 1 ? "s" : ""}` : "Tout est déjà là"}</button>
+      <button class="btn ghost big wide" data-action="close-sheet">Annuler</button></div></div>`;
+}
+async function restoreGo() {
+  const R = S.restore, db = S.caps.db;
+  if (!R || !db || R.busy) return;
+  R.busy = true; renderSheet();
+  let n = 0;
+  try {
+    for (const it of R.items) if (!S.items.has(it.id)) { const {id, ...body} = it; await db.doc("items/" + id).set(body); n++; }
+    for (const o of R.outfits) if (!S.outfits.some((x) => x.id === o.id)) { const {id, ...body} = o; await db.doc("outfits/" + id).set(body); n++; }
+    for (const w of R.wishes) if (!S.wishes.has(w.pid)) { await db.doc("wishes/" + w.pid).set(w); n++; }
+    toast(`${n} élément${n > 1 ? "s importés" : " importé"}.`);
+  } catch (e) { dbErr(e); }
+  finally { S.restore = null; closeSheet(); renderSettings(); }
+}
+
+/* ---------------- Garde-robe en chiffres ---------------- */
+function wearCounts() {
+  const m = new Map();
+  for (const o of S.outfits) if (o.worn) for (const id of o.items || []) m.set(id, (m.get(id) || 0) + 1);
+  return m;
+}
+function statsHtml(all) {
+  if (all.length < 3) return "";
+  const wc = wearCounts(), since = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+  const recent = new Set(); for (const o of S.outfits) if (o.worn && String(o.date) >= since) for (const id of o.items || []) recent.add(id);
+  const worn30 = all.filter((i) => recent.has(i.id) || (i.lastWorn && i.lastWorn >= since)).length;
+  const never = all.filter((i) => !i.lastWorn && !wc.get(i.id)).length;
+  const outfits = S.outfits.filter((o) => o.worn).length;
+  const cc = new Map(); for (const i of all) { const k = (i.colors || [])[0]; if (COL[k] && k !== "imprime") cc.set(k, (cc.get(k) || 0) + 1); }
+  const cols = [...cc.entries()].sort((a, b) => b[1] - a[1]), tot = cols.reduce((t, [, n]) => t + n, 0) || 1;
+  const top = all.map((i) => [i, wc.get(i.id) || 0]).filter(([, n]) => n > 0).sort((a, b) => b[1] - a[1])[0];
+  const pct = (n) => `${Math.round((100 * n) / tot)} %`;
+  return `<section class="rub band" aria-labelledby="wr-stats">${rubHead("wr-stats", "Ta garde-robe en chiffres", null)}
+    <div class="st-grid">
+      <div class="st"><b>${all.length}</b><span>pièces</span></div>
+      <div class="st"><b>${Math.round((100 * worn30) / all.length)} %</b><span>portées ces 30 derniers jours</span></div>
+      <div class="st"><b>${never}</b><span>jamais portée${never > 1 ? "s" : ""}</span></div>
+      <div class="st"><b>${outfits}</b><span>tenue${outfits > 1 ? "s" : ""} portée${outfits > 1 ? "s" : ""}</span></div>
+    </div>
+    ${cols.length ? `<div class="st-cols"><p class="zs-k">Tes couleurs</p><div class="st-bar" role="img" aria-label="${esc(cols.map(([k, n]) => `${COL[k].label} ${pct(n)}`).join(", "))}">${cols.map(([k, n]) => `<i style="--c:${colorHex(k)};flex:${n}"></i>`).join("")}</div>
+      <p class="st-leg">${cols.slice(0, 5).map(([k, n]) => `<span><i style="--c:${colorHex(k)}"></i>${esc(COL[k].label)} ${pct(n)}</span>`).join("")}</p></div>` : ""}
+    ${top ? `<p class="st-top">Ta pièce la plus portée : <b>${esc(top[0].name)}</b>, ${top[1]} fois.${top[0].pid && productById(top[0].pid) ? ` Coût par port : ${euro(Math.round((100 * productById(top[0].pid).price) / top[1]) / 100)}.` : ""}</p>` : `<p class="st-top">Note « Je porte ça » chaque matin : l’appli comptera tes pièces les plus portées.</p>`}
+  </section>`;
+}
+
+/* ---------------- Partager sa tenue en image ---------------- */
+const canShareFiles = () => { try { return !!(navigator.canShare && navigator.share && navigator.canShare({files: [new File(["x"], "x.jpg", {type: "image/jpeg"})]})); } catch (e) { return false; } };
+function spaced(x, text, cx, y, sp, align) {
+  const chars = [...text], w = chars.reduce((t, c) => t + x.measureText(c).width, 0) + sp * (chars.length - 1);
+  let px = align === "left" ? cx : cx - w / 2;
+  for (const c of chars) { x.fillText(c, px, y); px += x.measureText(c).width + sp; }
+}
+function wrapText(x, text, maxW) {
+  const words = String(text).split(/\s+/), lines = [];
+  let cur = "";
+  for (const w of words) { const t = cur ? cur + " " + w : w; if (x.measureText(t).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t; }
+  if (cur) lines.push(cur);
+  return lines;
+}
+async function makeLookImage(L) {
+  const eng = studioEngine();
+  if (!eng.ok) throw new Error("3d");
+  const W = 1080, H = 1350, items = lookParts(L).map((p) => p.it);
+  const cv = await eng.snap({body: bodyParams(), items, slotOf}, {w: 740, h: H, ss: 1.5, frames: [{c: 0.5, k: 0.55, rot: 0.25}]});
+  if (!cv) throw new Error("rendu");
+  const c = document.createElement("canvas"); c.width = W; c.height = H;
+  const x = c.getContext("2d");
+  const g = x.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "#EFEEEB"); g.addColorStop(0.62, "#E8E6E2"); g.addColorStop(1, "#DEDCD7");
+  x.fillStyle = g; x.fillRect(0, 0, W, H);
+  x.drawImage(cv[0], W - 740, 0);
+  try { await Promise.all(['500 56px "Bodoni Moda"', '500 24px "Hanken Grotesk"', '600 24px "Hanken Grotesk"'].map((f) => document.fonts.load(f))); } catch (e) { /* polices système */ }
+  const serif = '"Bodoni Moda","Bodoni 72",Didot,serif', sans = '"Hanken Grotesk","Helvetica Neue",Arial,sans-serif';
+  x.fillStyle = "#151515"; x.textBaseline = "alphabetic";
+  x.font = `500 46px ${serif}`; spaced(x, "DRESSING", 64, 118, 14, "left");
+  x.font = `500 21px ${sans}`; x.fillStyle = "#55544F";
+  const day = new Intl.DateTimeFormat("fr-FR", {weekday: "long", day: "numeric", month: "long"}).format(new Date());
+  spaced(x, `${day} · ${Math.round(S.W.am)}° / ${Math.round(S.W.pm)}°`.toUpperCase(), 64, 158, 3, "left");
+  const occ = S.sel ? S.sel.occ : S.occ, sty = S.sel ? S.sel.style : S.sty;
+  x.fillStyle = "#151515"; x.font = `500 58px ${serif}`;
+  x.fillText("Ma tenue", 64, 300); x.fillText("du jour", 64, 366);
+  x.font = `500 22px ${sans}`; x.fillStyle = "#55544F";
+  if (OCC[occ] && STY[sty]) wrapText(x, `${OCC[occ].label} · ${STY[sty].label}`, 330).forEach((l, k) => x.fillText(l, 64, 414 + k * 30));
+  let y = H - 64 - (items.length - 1) * 92;
+  for (const it of items) {
+    x.fillStyle = "#151515"; x.font = `600 21px ${sans}`;
+    const nm = wrapText(x, String(it.name || "").toUpperCase(), 330)[0] || "";
+    spaced(x, nm, 64, y - 26, 1.5, "left");
+    x.fillStyle = "#55544F"; x.font = `500 20px ${sans}`;
+    x.fillText(it.brand || cap(it.sub || ""), 64, y);
+    y += 92;
+  }
+  x.fillStyle = "#151515"; x.fillRect(64, H - 64 - items.length * 92 - 6, 40, 2);
+  return await new Promise((res, rej) => c.toBlob((b) => (b ? res(b) : rej(new Error("image"))), "image/jpeg", 0.92));
+}
+async function openShare() {
+  const L = currentLook();
+  if (!L) return;
+  if (S.share && S.share.url) URL.revokeObjectURL(S.share.url);
+  S.share = {busy: true};
+  openSheet("share");
+  try { const blob = await makeLookImage(L); S.share = {blob, url: URL.createObjectURL(blob)}; }
+  catch (e) { S.share = {err: true}; }
+  if (S.sheet === "share") renderSheet();
+}
+function shareSheetHtml() {
+  const s = S.share || {};
+  return `${sheetHead("Partager ta tenue")}<div class="sheet-body">
+    <div class="sh-prev">${s.url ? `<img src="${esc(s.url)}" alt="Ta tenue du jour, en image">` : `<span class="ph ph-wait${s.err ? " still" : ""}" aria-hidden="true"></span>`}</div>
+    ${s.err ? `<p class="hint">L’image n’a pas pu être préparée sur cet appareil.</p>` : s.busy ? `<p class="hint">Photo de ta tenue en cours…</p>` : ""}
+    <div class="sp-actions">${canShareFiles() ? `<button class="btn primary big wide" id="sh-go" data-action="share-go"${s.blob ? "" : " disabled"}>${ICON.share} Partager</button>` : ""}
+      <button class="btn ${canShareFiles() ? "ghost" : "primary"} big wide" id="sh-save" data-action="share-save"${s.blob && S.caps.downloads ? "" : " disabled"}>Enregistrer l’image</button></div>
+  </div>`;
+}
+
+/* ---------------- Confidentialité et mentions ---------------- */
+function privacySheetHtml() {
+  return `${sheetHead("Confidentialité et mentions")}<div class="sheet-body pv-doc">
+    <section><h3>Tes données</h3><p>${S.local ? "Ta garde-robe, tes photos de vêtements, tes tenues, tes envies et tes réglages sont enregistrés dans ce navigateur, sur cet appareil. Rien n’est envoyé sur un serveur de l’appli." : "Ta garde-robe, tes tenues et tes envies sont enregistrées sur ton compte Claude ; toi seul peux les voir et les modifier."} Tu peux tout exporter ou tout supprimer dans les réglages.</p></section>
+    <section><h3>Ta silhouette</h3><p>Taille, poids et morphologie restent sur cet appareil. Ils ne sont envoyés nulle part, ni au styliste IA. Aucune photo de toi n’est demandée.</p></section>
+    <section><h3>Les photos</h3><p>Les photos de tes vêtements servent à ta garde-robe et ne sont pas partagées. Les photos d’étiquette servent seulement à la lecture et ne sont pas gardées. Les photos portées sur ton mannequin sont calculées sur l’appareil.</p></section>
+    <section><h3>La météo</h3><p>Seule ta ville, ou ta position arrondie à 1 km environ, est envoyée à Open-Meteo et BigDataCloud pour connaître le temps. Ta position n’est enregistrée que sur cet appareil et s’oublie depuis les réglages.</p></section>
+    <section><h3>Les boutiques</h3><p>Les marques citées n’ont aucun lien avec l’appli. Les prix ont été relevés sur leurs sites : le site de la marque fait foi. Leurs photos restent hébergées chez elles et chaque pièce renvoie vers sa page d’origine.</p></section>
+    <section><h3>Crédits</h3><p>Corps 3D : MakeHuman (licence CC0). Polices : Bodoni Moda et Hanken Grotesk (licence OFL). Appli réalisée dans le cadre d’un projet de BTS SIO.</p></section>
+  </div>`;
+}
+
 /* ---------------- Rendu : garde-robe ---------------- */
 const catOrder = (it) => CATS.findIndex((c) => c.key === it.cat);
 function colorDots(it) { return `<span class="cdots">${(it.colors || []).slice(0, 3).map((k) => `<span class="cdot" style="--c:${colorHex(k)}"></span>`).join("")}</span>`; }
@@ -5342,10 +5633,13 @@ function wardHomeHtml(all) {
     const xs = all.filter((i) => i.cat === k).sort(WARD_SORT.cat);
     if (xs.length) sec("wr-" + k, CAT_SHORT[k] || CAT[k].label, xs, rubMore("wr-more-" + k, "wf", k));
   }
+  const forgot = all.filter((i) => !i.lastWorn && !i.example && i.status !== "sale").sort(WARD_SORT.cat);
+  if (forgot.length) sec("wr-forgot", "À redécouvrir", forgot, rubMore("wr-more-forgot", "ward-sort", "worn"), false, "r-");
   const fav = all.filter((i) => i.fav).sort(WARD_SORT.cat);
   if (fav.length) sec("wr-fav", "Tes favoris", fav, rubMore("wr-more-fav", "ward-fav", "1"), true, "f-");
   const sale = all.filter((i) => i.status === "sale").sort(WARD_SORT.cat);
   if (sale.length) sec("wr-sale", "Au sale", sale, `<button class="rub-more" id="wr-laundry" data-action="laundry"${S.busyBulk ? " disabled" : ""}>Lessive faite</button>`, !fav.length, "s-");
+  out.push(statsHtml(all));
   return {html: out.join(""), ids: [...new Set(shown.map((i) => i.id))]};
 }
 function renderWardGrid() {
@@ -5952,10 +6246,12 @@ function renderSettings() {
   </div>
   <div class="card set">
     <div><h2 class="set-t">Tes données</h2><p class="set-d">${S.local ? "Enregistrées dans ce navigateur, sur cet appareil. Pour la météo, seule ta ville, ou ta position arrondie à 1 km environ, est envoyée aux services Open-Meteo et BigDataCloud." : "Enregistrées sur ton compte Claude, modifiables par toi seul. Ta silhouette reste sur cet appareil."}</p></div>
-    <div class="row-btns"><button class="btn ghost" id="s-export" data-action="export"${S.caps.downloads ? "" : " disabled"}>Exporter (JSON)</button>
+    <div class="row-btns"><button class="btn ghost" id="s-export" data-action="export"${S.caps.downloads ? "" : " disabled"}>Exporter (JSON)</button><button class="btn ghost" id="s-import" data-action="import"${S.caps.db ? "" : " disabled"}>Importer une sauvegarde</button>
       ${S.confirmAll ? `<span class="confirm"><span>Tout supprimer, sans retour possible ?</span><button class="btn danger sm" data-action="delete-all-yes"${S.deleting ? " disabled" : ""}>${S.deleting ? "Suppression…" : "Oui, tout supprimer"}</button><button class="btn ghost sm" data-action="delete-all-no">Annuler</button></span>` : `<button class="btn ghost danger-t" data-action="delete-all">Tout supprimer</button>`}</div>
   </div>
-  <p class="foot-note">Dressing du matin, version 14 · corps 3D MakeHuman (CC0), ombres et matières en temps réel, photos portées · photos des boutiques · mode clair ou sombre</p>`;
+  ${installCardHtml()}
+  <div class="card set"><div class="set-row"><div><h2 class="set-t">Confidentialité et mentions</h2><p class="set-d">Ce qui est gardé, où, et pourquoi.</p></div><button class="btn ghost sm" id="s-privacy" data-action="privacy">Lire</button></div></div>
+  <p class="foot-note">Dressing du matin, version 15 · corps 3D MakeHuman (CC0), ombres et matières en temps réel, photos portées · photos des boutiques · mode clair ou sombre</p>`;
 }
 
 /* ---------------- Feuilles (bottom sheet) ---------------- */
@@ -5965,7 +6261,7 @@ function renderSheet(first) {
   const body = el.querySelector(".sheet-body");
   const st = body ? body.scrollTop : 0;
   const act = document.activeElement && el.contains(document.activeElement) ? document.activeElement.id : null;
-  el.innerHTML = S.sheet === "item" ? itemSheetHtml() : S.sheet === "shop" ? shopSheetHtml() : S.sheet === "piece" ? pieceSheetHtml() : S.sheet === "import" ? importSheetHtml() : S.sheet === "bought" ? boughtSheetHtml() : S.sheet === "trcol" ? trColSheetHtml() : S.sheet === "swap" ? swapSheetHtml() : S.sheet === "imposed" ? imposedSheetHtml() : "";
+  el.innerHTML = S.sheet === "item" ? itemSheetHtml() : S.sheet === "shop" ? shopSheetHtml() : S.sheet === "piece" ? pieceSheetHtml() : S.sheet === "restore" ? restoreSheetHtml() : S.sheet === "share" ? shareSheetHtml() : S.sheet === "privacy" ? privacySheetHtml() : S.sheet === "import" ? importSheetHtml() : S.sheet === "bought" ? boughtSheetHtml() : S.sheet === "trcol" ? trColSheetHtml() : S.sheet === "swap" ? swapSheetHtml() : S.sheet === "imposed" ? imposedSheetHtml() : "";
   el.classList.toggle("is-zp", S.sheet === "shop" || S.sheet === "piece");
   el.hidden = false; $("#scrim").hidden = false; document.body.classList.add("locked");
   const nb = el.querySelector(".sheet-body");
@@ -5979,7 +6275,7 @@ function closeSheet() {
   if (S.sheet === "bought") clearVisit();
   if (S.sheet === "import") S.importItems = null;
   if (S.draft && S.draft.aiCtl) S.draft.aiCtl.abort();
-  S.draft = null; S.sheet = null; S.swap = null; S.shopSel = null; S.trCol = null; S.bought = null; S.pieceId = null;
+  S.draft = null; S.sheet = null; S.swap = null; S.shopSel = null; S.trCol = null; S.bought = null; S.pieceId = null; S.restore = null; if (S.share && S.share.url) URL.revokeObjectURL(S.share.url); S.share = null;
   $("#sheet").classList.remove("is-zp");
   $("#sheet").hidden = true; $("#sheet").innerHTML = ""; $("#scrim").hidden = true;
   document.body.classList.remove("locked");
@@ -6836,6 +7132,7 @@ function subscribe() {
   }, onDbError);
   db.collection("outfits").orderBy("at", "desc").limit(300).onSnapshot((snap) => {
     S.outfits = snap.docs.map((d) => ({...d.data(), id: d.id}));
+    if (S.tab === "wardrobe") renderWardrobe();
     renderHistory();
   }, onDbError);
   db.doc("settings/main").onSnapshot((snap) => {
@@ -6906,6 +7203,21 @@ const ACTIONS = {
   "shop-clear": () => { S.shopF.shop = "all"; S.shopF.color = null; renderShop(); refocus("zs-filt"); },
   "shop-brand-go": (el) => { S.shopF.touched = true; setShopTab("marques"); S.shopF.brand = SHOP[el.dataset.v] ? el.dataset.v : null; renderShop(); window.scrollTo(0, 0); refocus("zb-back"); },
   "rub-go": (el) => { const t = document.getElementById(el.dataset.v); if (t) t.scrollIntoView({behavior: reduceMotion() ? "auto" : "smooth", block: "start"}); setRubNav(el.dataset.v); },
+  "onb-sex": (el) => { ACTIONS["b-sex"](el); renderOnb(); refocus("onb-" + el.dataset.v); },
+  "onb-skin": (el) => { S.body.skin = el.dataset.v; onBodyChange(); renderOnb(); refocus("onbk-" + el.dataset.v.slice(1)); },
+  "onb-next": () => { if (!S.body.sex) return; S.onbStep = 2; renderOnb(); refocus("onb-add"); },
+  "onb-done": (el) => onbDone(el.dataset.v || ""),
+  install: async () => { const e = S.installEvt; if (!e) return; S.installEvt = null; try { await e.prompt(); await e.userChoice; } catch (er) { /* annulé */ } renderSettings(); },
+  "import": () => {
+    let inp = $("#backup-input");
+    if (!inp) { inp = document.createElement("input"); inp.type = "file"; inp.accept = ".json,application/json"; inp.id = "backup-input"; inp.hidden = true; document.body.appendChild(inp); inp.addEventListener("change", () => { const f = inp.files && inp.files[0]; inp.value = ""; if (f) readBackup(f); }); }
+    inp.click();
+  },
+  "restore-go": () => restoreGo(),
+  privacy: () => openSheet("privacy"),
+  "share-look": () => openShare(),
+  "share-go": async () => { const s = S.share; if (!s || !s.blob) return; try { await navigator.share({files: [new File([s.blob], `ma-tenue-${today()}.jpg`, {type: "image/jpeg"})], title: "Ma tenue du jour"}); } catch (e) { /* partage annulé */ } },
+  "share-save": async () => { const s = S.share, dl = S.caps.downloads; if (!s || !s.blob || !dl) return; try { await dl.save({filename: `ma-tenue-${today()}.jpg`, data: s.blob}); toast("Image enregistrée."); } catch (e) { if (!e || e.code !== "declined") toast("Enregistrement impossible pour l’instant."); } },
   "piece-open": (el) => openPiece(el.dataset.id),
   "imp-yes": async () => {
     const db = S.caps.db, items = S.importItems;
@@ -7130,6 +7442,12 @@ document.addEventListener("change", (e) => {
   if (t.id === "s-city") saveSettings({city: t.value.trim().slice(0, 60)});
 });
 document.addEventListener("keydown", (e) => {
+  const ob = $("#onb");
+  if (ob && !ob.hidden) {
+    if (e.key === "Escape") { e.preventDefault(); onbDone(""); return; }
+    if (e.key === "Tab") { const f = [...ob.querySelectorAll("button:not([disabled])")]; const i = f.indexOf(document.activeElement); if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); } }
+    return;
+  }
   const th = $("#theme-ask");
   if (th && !th.hidden) {
     if (e.key === "Escape") { e.preventDefault(); themeAskDone(); return; }
@@ -7328,6 +7646,7 @@ const localDownloads = {
     initWeather();
     resumeVisit();
     readImportLink();
+    if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) navigator.serviceWorker.register("sw.js").catch(() => {});
     return;
   }
   const names = ["db", "assets", "sample", "downloads"];

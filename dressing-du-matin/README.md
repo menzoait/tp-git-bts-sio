@@ -6,6 +6,7 @@ Application personnelle de garde-robe : elle propose chaque matin des tenues sel
 
 ## Ce qu’elle fait
 
+- **Premier lancement guidé** : choix de l’éclairage, puis du mannequin (base et teint), puis de la façon de commencer sa garde-robe (photo, boutiques ou exemples), puis de la météo.
 - **Éclairage** : au premier lancement, l’appli demande le mode clair ou le mode sombre (ou de suivre l’appareil). Le choix se change à tout moment dans les réglages, et le studio 3D adapte sa lumière.
 - **Garde-robe** : hauts, bas, pièces uniques, vestes et manteaux, chaussures, accessoires, présentés comme un catalogue de marque. Chaque pièce est photographiée portée sur ton mannequin 3D, en studio et cadrée sur elle, comme les photos de mannequins des boutiques en ligne ; la pièce seule s’affiche au survol. Vue d’ensemble rangée en rubriques (ajoutées récemment, un rayon par rubrique, favoris, au sale), rayons en onglets, recherche, vue à 1, 2 ou 3 colonnes, filtres (propres ou au sale, favoris, achetées en boutique, couleur), tri (par rayon, récentes, moins portées) et cœur pour les favoris. Chaque pièce s’ouvre sur une fiche façon fiche produit : galerie de photos, matière, style, chaleur, dernière fois portée, et les gestes « Porter aujourd’hui », « Favori », « Au sale » et « Modifier la fiche ». Ajout par photo (fond détouré automatiquement), par capture d’écran de la fiche produit, par marque et référence, ou par un lien d’ajout (une adresse qui se termine par `#ajout=…` : l’appli montre les pièces et demande confirmation avant de les ranger). Lecture d’étiquette pour la marque, la référence et la matière.
 - **Météo du jour** : à l’ouverture, l’appli propose d’utiliser la localisation ; sinon, une barre de recherche permet de saisir sa ville. La carte météo s’anime selon le temps (soleil, nuages, pluie, neige, orage, brouillard, vent, nuit) et donne le ressenti du matin et de l’après-midi, la pluie et le vent. Les valeurs restent ajustables à la main.
@@ -14,6 +15,8 @@ Application personnelle de garde-robe : elle propose chaque matin des tenues sel
 - **Boutiques** : une sélection de vraies pièces chez Uniqlo, Zara, Decathlon, Levi’s, Dr. Martens, Nike, Adidas, Carhartt, Dior et Louis Vuitton, avec leurs vraies photos (une pièce dont la photo de marque n’est pas encore ajoutée est marquée « Aperçu » et montrée sur le mannequin, en studio), rangée en onglets : **Femme** et **Homme** (avec leurs rayons en sous-onglets : vestes et manteaux, hauts, pantalons, robes, chaussures, accessoires, promos), **Marques** (une page par marque) et **Envies**. L’accueil de chaque rayon est rangé en rubriques (vestes et manteaux, hauts, pantalons, robes, chaussures, accessoires, promos, les marques), chacune avec sa rangée de pièces et « Tout voir ». Grande image, recherche, vue à 1, 2 ou 3 colonnes, filtres par marque et par couleur. Chaque pièce s’essaie sur le mannequin : l’appli construit des looks autour d’elle avec les vêtements de ta garde-robe. On choisit le coloris, on garde les pièces qui plaisent dans une liste d’envies (avec le total) et on achète sur le site de la boutique. Au retour dans l’appli, elle demande « Tu l’as acheté ? » : un geste, et la pièce arrive dans la garde-robe avec sa photo (l’appli ne voit pas ce qui se passe sur le site de la boutique, c’est pourquoi elle pose la question).
 - **Tendances** : couleurs et pièces de la saison, expliquées dans l’appli (ce que c’est, à quoi sert le badge « Tendance », ce que veut dire la coche). Chaque couleur s’ouvre : avec quoi la porter, tes pièces de cette couleur et celles des boutiques.
 - **Photos partout** : chaque vêtement est montré en photo, jamais en dessin : ta photo, la photo de la boutique, ou à défaut une photo studio de la pièce portée sur ton mannequin (dans la garde-robe, sur l’accueil, dans la vue « À plat », les tendances et l’historique).
+- **Garde-robe en chiffres** : pièces portées ces 30 derniers jours, pièces jamais portées (rubrique « À redécouvrir »), couleurs dominantes, pièce la plus portée et son coût par port.
+- **Partager sa tenue** : une image de la tenue du jour (mannequin en studio, pièces, météo) à partager ou enregistrer.
 - **Historique** : tenues portées et notées. L’appli évite de reproposer la tenue de la veille et apprend tes goûts.
 
 ## Fonctionnement
@@ -22,11 +25,14 @@ L’appli tient dans un seul fichier, `index.html`, sans dépendance à installe
 
 **Sur le site (GitHub Pages)**, pour tout le monde :
 
+- l’appli s’installe sur l’écran d’accueil (iPhone : Safari → Partager → « Sur l’écran d’accueil ») ; elle s’ouvre en plein écran et marche même sans réseau (`manifest.webmanifest`, `sw.js`) ;
+
 - la garde-robe, les photos de vêtements, la liste d’envies, l’historique, les réglages et le choix d’éclairage sont enregistrés dans le navigateur de l’appareil (localStorage pour les fiches, IndexedDB pour les photos) ;
 - chaque personne a sa propre garde-robe, rien n’est envoyé en ligne ;
 - les fiches se remplissent à la main et les captures de fiche produit se recadrent avec les curseurs ;
 - la météo vient d’Open-Meteo (prévisions et recherche de ville, sans clé) et de BigDataCloud (nom de la ville à partir de la position) ;
-- l’export JSON est disponible dans les réglages.
+- l’export JSON et l’import de cette sauvegarde sont disponibles dans les réglages (pour changer d’appareil ou passer du navigateur à l’appli installée) ;
+- une page « Confidentialité et mentions » explique ce qui est gardé, où et pourquoi.
 
 **Dans Claude**, comme artefact :
 
