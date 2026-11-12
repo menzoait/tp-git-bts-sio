@@ -1221,7 +1221,10 @@ const IMG = {
   /* Louis Vuitton : vue portée en carré (recadrée sur le mannequin), vue produit en 2:3 sur fond blanc */
   vt: (s, r, v) => `https://fr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-${s}--${r}_${v}%20view.jpg?wid=${/Worn|Cropped/.test(v) ? "900&hei=900" : "800&hei=1200"}`,
   jd: (c, l) => `https://i8.amplience.net/i/jpl/jd_${c}_${l}?w=750&qlt=85&fmt=auto`,
-  he: (r, v) => `https://assets.hermes.com/is/image/hermesproduct/${r}_${v}?extend=0,0,0,0&align=0,0&wid=800&hei=1200&fit=fit,1&$product_default_bg$`,
+  /* JD Sports, chaussures : photo en paysage complétée en 2:3 avec le gris du studio JD */
+  jdp: (c, l) => `https://i8.amplience.net/i/jpl/jd_${c}_${l}?w=750&h=1125&sm=CM&bg=rgb(237,237,237)&qlt=85&fmt=auto`,
+  /* Hermès : vue portée au format d’origine (3:4), vue produit complétée en 2:3 sur le fond beige de la maison */
+  he: (r, v) => `https://assets.hermes.com/is/image/hermesproduct/${r}_${v}?extend=0,0,0,0&align=0,0&wid=900&hei=${/worn/.test(v) ? 1200 : 1350}&fit=fit,1&$product_default_bg$`,
 };
 const UQP = "https://www.uniqlo.com/fr/fr/products/";
 const ZRP = "https://www.zara.com/fr/fr/";
@@ -1337,10 +1340,10 @@ const CATALOG = [
     photos: [IMG.jd("720252", "c"), IMG.jd("720252", "b"), IMG.jd("720252", "e")]},
   {id: "jd-stack", shop: "jdsports", sex: "h", seen: "2026-11-12", name: "adidas Originals Sweat à capuche Stack", price: 70, url: "https://www.jdsports.fr/product/gris-adidas-originals-sweat--capuche-stack/19756286_jdsportsfr/", cat: "haut", sub: "hoodie", colors: ["gris"], material: "molleton", styles: ["casual", "streetwear", "sportswear"], warmth: 2,
     photos: [IMG.jd("810816", "b"), IMG.jd("810816", "c"), IMG.jd("810816", "f")]},
-  {id: "jd-xt6", shop: "jdsports", sex: "h", seen: "2026-11-12", name: "Salomon XT-6", price: 180, url: "https://www.jdsports.fr/product/marron-salomon-xt-6/19724519_jdsportsfr/", cat: "chaussures", sub: "baskets", colors: ["marron"], material: "mesh et renforts synthétiques", styles: ["streetwear", "sportswear", "casual"], warmth: 2, fit: "contain",
-    photos: [IMG.jd("762556", "a"), IMG.jd("762556", "b"), IMG.jd("762556", "c")]},
-  {id: "jd-gelnyc", shop: "jdsports", sex: "h", seen: "2026-11-12", name: "ASICS GEL-NYC", price: 160, url: "https://www.jdsports.fr/product/gris-asics-gel-nyc/19687499_jdsportsfr/", cat: "chaussures", sub: "baskets", colors: ["blanc", "gris"], material: "mesh et cuir", styles: ["streetwear", "sportswear", "casual"], warmth: 2, fit: "contain",
-    photos: [IMG.jd("729151", "a"), IMG.jd("729151", "b"), IMG.jd("729151", "c")]},
+  {id: "jd-xt6", shop: "jdsports", sex: "h", seen: "2026-11-12", name: "Salomon XT-6", price: 180, url: "https://www.jdsports.fr/product/marron-salomon-xt-6/19724519_jdsportsfr/", cat: "chaussures", sub: "baskets", colors: ["marron"], material: "mesh et renforts synthétiques", styles: ["streetwear", "sportswear", "casual"], warmth: 2,
+    photos: [IMG.jdp("762556", "a"), IMG.jdp("762556", "b"), IMG.jdp("762556", "c")]},
+  {id: "jd-gelnyc", shop: "jdsports", sex: "h", seen: "2026-11-12", name: "ASICS GEL-NYC", price: 160, url: "https://www.jdsports.fr/product/gris-asics-gel-nyc/19687499_jdsportsfr/", cat: "chaussures", sub: "baskets", colors: ["blanc", "gris"], material: "mesh et cuir", styles: ["streetwear", "sportswear", "casual"], warmth: 2,
+    photos: [IMG.jdp("729151", "a"), IMG.jdp("729151", "b"), IMG.jdp("729151", "c")]},
   {id: "jd-dome-f", shop: "jdsports", sex: "f", seen: "2026-11-12", name: "The North Face Doudoune Dome", price: 260, url: "https://www.jdsports.fr/product/noir-the-north-face-doudoune-dome/19713563_jdsportsfr/", cat: "veste", sub: "doudoune", colors: ["noir"], material: "matelassé léger", styles: ["casual", "streetwear", "sportswear"], warmth: 3,
     photos: [IMG.jd("756677", "a"), IMG.jd("756677", "c"), IMG.jd("756677", "b")]},
   {id: "jd-teddy-f", shop: "jdsports", sex: "f", seen: "2026-11-12", name: "adidas Originals Veste zippée Teddy", price: 75, url: "https://www.jdsports.fr/product/marron-adidas-originals-veste-zippe-teddy/19768166_jdsportsfr/", cat: "haut", sub: "sweat", colors: ["marron"], material: "polaire teddy", styles: ["casual", "streetwear"], warmth: 3,
@@ -1349,12 +1352,12 @@ const CATALOG = [
     photos: [IMG.jd("797973", "c"), IMG.jd("797973", "a"), IMG.jd("797973", "b")]},
   {id: "jd-trefoilpant-f", shop: "jdsports", sex: "f", seen: "2026-11-12", name: "adidas Originals Pantalon de jogging Trefoil", price: 70, url: "https://www.jdsports.fr/product/rouge-adidas-originals-pantalon-de-jogging-trefoil/19763575_jdsportsfr/", cat: "bas", sub: "jogging", colors: ["bordeaux"], material: "maille douce", styles: ["casual", "streetwear", "sportswear"], warmth: 2,
     photos: [IMG.jd("800771", "c"), IMG.jd("800771", "b"), IMG.jd("800771", "e")]},
-  {id: "jd-samba-f", shop: "jdsports", sex: "f", seen: "2026-11-12", name: "adidas Originals Samba OG Femme", price: 120, url: "https://www.jdsports.fr/product/crme-adidas-originals-samba-og-femme/19767830_jdsportsfr/", cat: "chaussures", sub: "baskets", colors: ["blanc", "beige"], material: "cuir", styles: ["casual", "streetwear", "vintage"], warmth: 2, fit: "contain",
-    photos: [IMG.jd("812098", "a"), IMG.jd("812098", "b"), IMG.jd("812098", "d")]},
-  {id: "jd-nb530-f", shop: "jdsports", sex: "f", seen: "2026-11-12", name: "New Balance 530 Femme", price: 120, url: "https://www.jdsports.fr/product/beige-new-balance-530-femme/19760165_jdsportsfr/", cat: "chaussures", sub: "baskets", colors: ["beige"], material: "mesh et synthétique", styles: ["casual", "streetwear", "sportswear"], warmth: 2, fit: "contain",
-    photos: [IMG.jd("802451", "a"), IMG.jd("802451", "b"), IMG.jd("802451", "c")]},
-  {id: "jd-ugg-f", shop: "jdsports", sex: "f", seen: "2026-11-12", name: "UGG Bottes Classic Ultra Mini Femme", price: 180, url: "https://www.jdsports.fr/product/marron-ugg-bottes-classic-ultra-mini-femme/19767862_jdsportsfr/", cat: "chaussures", sub: "bottes", colors: ["marron"], material: "peau de mouton", styles: ["casual", "minimaliste"], warmth: 3, fit: "contain",
-    photos: [IMG.jd("801934", "a"), IMG.jd("801934", "b"), IMG.jd("801934", "c")]},
+  {id: "jd-samba-f", shop: "jdsports", sex: "f", seen: "2026-11-12", name: "adidas Originals Samba OG Femme", price: 120, url: "https://www.jdsports.fr/product/crme-adidas-originals-samba-og-femme/19767830_jdsportsfr/", cat: "chaussures", sub: "baskets", colors: ["blanc", "beige"], material: "cuir", styles: ["casual", "streetwear", "vintage"], warmth: 2,
+    photos: [IMG.jdp("812098", "a"), IMG.jdp("812098", "b"), IMG.jdp("812098", "d")]},
+  {id: "jd-nb530-f", shop: "jdsports", sex: "f", seen: "2026-11-12", name: "New Balance 530 Femme", price: 120, url: "https://www.jdsports.fr/product/beige-new-balance-530-femme/19760165_jdsportsfr/", cat: "chaussures", sub: "baskets", colors: ["beige"], material: "mesh et synthétique", styles: ["casual", "streetwear", "sportswear"], warmth: 2,
+    photos: [IMG.jdp("802451", "a"), IMG.jdp("802451", "b"), IMG.jdp("802451", "c")]},
+  {id: "jd-ugg-f", shop: "jdsports", sex: "f", seen: "2026-11-12", name: "UGG Bottes Classic Ultra Mini Femme", price: 180, url: "https://www.jdsports.fr/product/marron-ugg-bottes-classic-ultra-mini-femme/19767862_jdsportsfr/", cat: "chaussures", sub: "bottes", colors: ["marron"], material: "peau de mouton", styles: ["casual", "minimaliste"], warmth: 3,
+    photos: [IMG.jdp("801934", "a"), IMG.jdp("801934", "b"), IMG.jdp("801934", "c")]},
   /* Hermès (prix et photos relevés le 12 novembre 2026) */
   {id: "he-etriviere", shop: "hermes", sex: "h", seen: "2026-11-12", name: "Pull col roulé « H Etrivière »", price: 1800, url: "https://www.hermes.com/fr/fr/product/pull-col-roule-h-etriviere-H667125HA82/", cat: "haut", sub: "pull", colors: ["gris"], material: "cachemire et soie", styles: ["chic", "classique", "minimaliste"], warmth: 3,
     photos: [IMG.he("667125HA82", "worn_101"), IMG.he("667125HA82", "worn_102"), IMG.he("667125HA82", "worn_103")]},
