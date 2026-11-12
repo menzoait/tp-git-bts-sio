@@ -935,6 +935,137 @@ img.ph.sshot{position:absolute;inset:0;width:100%;height:100%;max-width:none;max
 .pv-doc{display:flex;flex-direction:column;gap:18px}
 .pv-doc h3{margin:0 0 6px;font-family:var(--font-display);font-weight:500;font-size:22px;line-height:1.1}
 .pv-doc p{margin:0;font-size:14px;line-height:1.6;color:var(--ink-2);max-width:60ch}
+
+/* ===== v16 : toute l’appli façon Boutiques ===== */
+/* Chaque onglet s’ouvre comme la boutique : grand titre à gauche et sa ligne en capitales, onglets soulignés,
+   barre d’options en texte, grande image pleine largeur, pièces en fiches produit. Même largeur sur ordinateur. */
+.wrap{max-width:1480px}
+.tab{gap:0}
+.tab > .zs-top{padding-bottom:14px}
+.zs-top .zs-sub span + span:not([hidden])::before{content:" · "}
+
+/* En-tête d’Aujourd’hui : la météo à la place de la recherche */
+#tab-today .zs-top{flex-wrap:nowrap;gap:12px}
+#tab-today .zs-brand{flex:1 1 auto}
+#tab-today .zs-tools{flex:0 0 auto}
+@media (max-width:440px){#tab-today .zs-title{font-size:clamp(26px,8.2vw,34px)}}
+.zs-tools .cl-wx{position:static;top:auto;right:auto;gap:6px;padding:0;cursor:pointer}
+.zs-tools .wx-mini{width:32px;height:32px}
+.zs-tools .cl-wx:empty{display:none}
+
+/* Sommaire d’Aujourd’hui = onglets de la boutique */
+.rub-nav{gap:28px;margin:0 calc(-1 * max(16px,env(safe-area-inset-right,0px))) 0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+.rub-nb{padding:12px 0 11px;font-size:13.5px;letter-spacing:.12em;text-transform:uppercase}
+.rub-nb[hidden]{display:none}
+
+/* Barre du look = barre « Filtres · nombre · Vue » de la boutique */
+.td-bar{margin-top:0;border-top:0;padding:2px 0}
+.td-bar .pager{margin-left:-11px}
+.td-bar .pg{width:38px;height:38px}
+.td-bar .pager-n{min-width:38px;font-size:11.5px;font-weight:500;letter-spacing:.1em}
+.td-bar .zs-opt{min-height:38px;padding:6px 0}
+.td-bar .zs-opt:disabled{opacity:.35}
+.zs-opt[aria-checked="true"]{color:var(--ink);font-weight:700}
+
+/* Le studio = la grande image de la boutique */
+.cover{margin-top:14px;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px))) calc(-1 * max(16px,env(safe-area-inset-right,0px)));height:clamp(430px,calc(100vh - 292px),720px);height:clamp(430px,calc(100svh - 292px),720px)}
+.cover.sm{height:clamp(440px,calc(100vh - 172px),680px);height:clamp(440px,calc(100svh - 172px),680px)}
+.cover-lines{left:18px;right:72px;bottom:20px;max-width:none;gap:8px}
+.cl-look{order:2}
+.cl-occ{order:1;margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;line-height:1.4;color:var(--ink-2)}
+.cl-occ em{display:inline}
+.cl-occ em::before{content:" · "}
+.cl-n{font-family:var(--font-display);font-weight:500;font-size:44px;line-height:1;letter-spacing:.02em;text-transform:uppercase;font-variation-settings:"opsz" 40}
+.sticker{top:16px;left:16px}
+.stage-bottom{left:auto;right:16px;bottom:16px;justify-content:flex-end}
+.flat-host{top:28px;bottom:118px}
+.body-lines{bottom:20px;gap:0}
+.body-lines .cl-of{order:-1;margin:0 0 8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.body-lines .cl-row{gap:6px}
+.body-lines .cl-row b{font-family:var(--font-display);font-size:40px;font-weight:500;line-height:1.02;font-variant-numeric:lining-nums}
+.body-lines .cl-row small{font-size:11px}
+
+/* Aujourd’hui et Silhouette : la grande image, puis le contenu */
+.td-grid{display:flex;flex-direction:column;min-width:0}
+.td-media{min-width:0}
+.td-main{display:flex;flex-direction:column;gap:28px;min-width:0;padding-top:30px}
+
+/* Les pièces du look = fiches produit de la boutique */
+.strip{gap:6px}
+.pc{flex:0 0 43%;gap:8px}
+.pc-vis{aspect-ratio:2/3;background:var(--photo)}
+.pc-name{display:block;padding:0 4px;font-size:11.5px;letter-spacing:.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc-slot{padding:0 4px;margin-top:-5px;font-size:11.5px;letter-spacing:.06em}
+.pc-vis .sw-ic{width:30px;height:30px;color:#151515;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.pc-vis .sw-ic .i{width:15px;height:15px}
+[data-scheme="dark"] .pc-vis{--garment-line:var(--photo-line)}
+
+/* Ta journée : bandeau comme « Les marques », occasion et style comme les rayons */
+#day.card{margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px))) calc(-1 * max(16px,env(safe-area-inset-right,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
+#occ,#sty{gap:20px}
+#occ .chip,#sty .chip{min-height:36px;padding:6px 0;border:0;border-bottom:1px solid transparent;background:none;font-size:11.5px;font-weight:500;letter-spacing:.09em;color:var(--ink-2)}
+#occ .chip[aria-checked="true"],#sty .chip[aria-checked="true"]{background:none;color:var(--ink);font-weight:700;border-bottom-color:var(--ink)}
+
+/* Choix à options (éclairage, base, cheveux…) : en texte, comme « Vue 1 2 3 » */
+.seg{border:0;padding:0;gap:4px 22px;flex-wrap:wrap}
+.seg-b{flex:0 0 auto;min-height:38px;padding:6px 0;font-size:12px;font-weight:500;letter-spacing:.09em;color:var(--ink-3);border-bottom:1px solid transparent;background:none}
+.seg-b[aria-checked="true"]{background:none;color:var(--ink);font-weight:700;border-bottom-color:var(--ink)}
+
+/* Historique : chaque tenue est une rubrique, ses pièces en fiches produit */
+.hist{display:flex;flex-direction:column;gap:0;border-top:0}
+.hist > .rub:first-child{padding-top:24px}
+.hrub-h{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:2px 12px}
+.hrub-h .rub-t{min-width:0}
+.hrub-h .rub-more{margin-left:0;justify-self:end}
+.hc-actions{display:flex;gap:2px;align-items:center;margin-right:-8px}
+.hc-ic{width:38px;height:38px;display:grid;place-items:center;color:var(--ink)}
+.hc-ic .i{width:18px;height:18px}
+.hc-ic[aria-pressed="true"] .fillable{fill:currentColor}
+.hrub .confirm{padding:2px 0}
+.hist-empty{border-top:0;padding-top:24px}
+#taste:not(:empty){margin-top:40px}
+#taste .rub.band{padding-top:30px}
+.zc-media.ic-vis{aspect-ratio:2/3}
+.taste .tr-colors{max-width:560px}
+
+/* Réglages : rubriques à titre, lignes séparées par un filet, comme une fiche produit */
+.set-wrap{display:flex;flex-direction:column;min-width:0}
+.set-sec .set{gap:14px}
+.set-sec .set:has(> .set-row){gap:0}
+.set-sec .set-row{padding:15px 0;border-bottom:1px solid var(--rule);gap:10px 18px}
+.set-sec .set-row:last-child{border-bottom:0}
+.set-sec .set > .hint{margin:-4px 0 0;padding:0 0 14px;border-bottom:1px solid var(--rule)}
+.set-sec .set-d{margin-top:3px}
+.set-sec .set > .set-d{margin:0;max-width:60ch}
+.set-wrap > .foot-note{margin-top:34px;line-height:1.6}
+
+/* Aperçu du premier lancement, au nouveau gabarit */
+.tp-top{display:flex;flex-direction:column;gap:4px;padding:9% 9% 6%;border-bottom:1px solid var(--r)}
+.tp-mh{position:static;text-align:left;font-size:11px;letter-spacing:.04em;padding:0;text-transform:uppercase;line-height:1}
+.tp-sub{display:block;width:44%;height:3px;background:var(--i3);opacity:.55}
+.tp-lines{padding-top:8%}
+
+@media (min-width:900px){
+  .rub-nav{margin-inline:0;padding-inline:0;gap:40px}
+  .rub-nb{font-size:14px}
+  .td-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:0 56px;align-items:start}
+  .td-media{position:sticky;top:46px;z-index:1}
+  .td-media .cover{margin-inline:0;height:clamp(460px,calc(100vh - 272px),880px)}
+  .td-main{padding-top:26px}
+  .td-main .rail{margin-inline:0}
+  .td-main .strip{padding-inline:0;scroll-padding-inline:0}
+  .pc{flex-basis:calc((100% - 12px) / 3)}
+  #day.card{margin-inline:0;padding:34px 28px 36px}
+  #tab-body .td-media{top:18px}
+  #tab-body .td-media .cover{margin-top:22px;height:clamp(460px,calc(100vh - 196px),880px)}
+  #tab-body .td-main{padding-top:22px;max-width:620px}
+  .cl-n{font-size:56px}
+  .set-wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 72px;align-items:start}
+  .set-wrap > .rub:first-child{grid-row:span 3}
+  .set-wrap > .rub:nth-child(2){border-top:0;margin-top:0}
+  .set-wrap > .foot-note{grid-column:1 / -1}
+  .hist > .rub:first-child{padding-top:30px}
+}
 </style>
 </head>
 <body>
@@ -947,39 +1078,46 @@ img.ph.sshot{position:absolute;inset:0;width:100%;height:100%;max-width:none;max
   <p id="banner" class="banner" hidden></p>
 
   <section id="tab-today" class="tab" aria-labelledby="t-today">
+    <header class="zs-top">
+      <div class="zs-brand"><h1 class="zs-title" id="t-today">Aujourd’hui<span class="sr"> : qu’est-ce que je mets ?</span></h1><p class="zs-sub"><span id="today-date">Aujourd’hui</span><span id="issue-n" hidden></span></p></div>
+      <div class="zs-tools"><button class="cl-wx" id="wx-pill" data-action="goto-day"></button></div>
+    </header>
+    <nav class="rub-nav" id="rub-nav" aria-label="Rubriques de la page">
+      <button class="rub-nb" id="rnb-look" data-action="rub-go" data-v="rub-look" aria-current="true">Ta tenue</button>
+      <button class="rub-nb" id="rnb-day" data-action="rub-go" data-v="day" aria-current="false">Ta journée</button>
+      <button class="rub-nb" id="rnb-trends" data-action="rub-go" data-v="trends" aria-current="false">Tendances</button>
+    </nav>
+
+    <div class="td-grid">
+    <div class="td-media">
+    <div class="zb-bar td-bar">
+      <div class="pager" role="group" aria-label="Choisir le look">
+        <button class="pg" id="pg-prev" data-action="look" data-d="-1" aria-label="Look précédent"></button>
+        <span class="pager-n" id="pager-n">1 / 3</span>
+        <button class="pg" id="pg-next" data-action="look" data-d="1" aria-label="Look suivant"></button>
+      </div>
+      <p class="zb-count" id="td-count" aria-hidden="true"></p>
+      <div class="zs-vue" role="radiogroup" aria-label="Affichage"><span aria-hidden="true">Vue</span>
+        <button class="zs-opt" role="radio" id="view-3d" data-action="view" data-v="3d" aria-checked="true">3D</button>
+        <button class="zs-opt" role="radio" id="view-flat" data-action="view" data-v="flat" aria-checked="false">À plat</button>
+      </div>
+    </div>
     <div class="cover" id="stage" data-issue="0">
-      <div class="cover-meta"><span id="today-date">Aujourd’hui</span><span id="issue-n"></span></div>
-      <h1 class="masthead" id="t-today"><span class="mh-l" aria-hidden="true"><span class="ml" style="--d:0">D</span><span class="ml" style="--d:1">r</span><span class="ml" style="--d:2">e</span><span class="ml" style="--d:3">s</span><span class="ml" style="--d:4">s</span><span class="ml" style="--d:5">i</span><span class="ml" style="--d:6">n</span><span class="ml" style="--d:7">g</span></span><span class="sr">Dressing du matin : qu’est-ce que je mets ?</span></h1>
       <div class="stage-host" id="stage-host" data-k="0.71" data-c="0.43"></div>
       <div class="flat-host" id="flat-host" hidden></div>
       <div class="cover-lines">
         <p class="cl-look" aria-live="polite"><span class="cl-n" id="look-n">Look 1</span></p>
         <p class="cl-occ" id="cover-occ"></p>
       </div>
-      <button class="cl-wx" id="wx-pill" data-action="goto-day"></button>
       <p class="sticker" id="sticker" hidden>Tendance</p>
       <div class="stage-bottom">
-        <div class="pager glass" role="group" aria-label="Choisir le look">
-          <button class="pg" id="pg-prev" data-action="look" data-d="-1" aria-label="Look précédent"></button>
-          <span class="pager-n" id="pager-n">1 / 3</span>
-          <button class="pg" id="pg-next" data-action="look" data-d="1" aria-label="Look suivant"></button>
-        </div>
-        <div class="tools">
-          <div class="viewseg glass" role="radiogroup" aria-label="Affichage">
-            <button role="radio" id="view-3d" data-action="view" data-v="3d" aria-checked="true">3D</button>
-            <button role="radio" id="view-flat" data-action="view" data-v="flat" aria-checked="false">À plat</button>
-          </div>
-          <button class="round glass" id="spin" data-action="spin" aria-pressed="false" aria-label="Rotation automatique"></button>
-        </div>
+        <button class="round glass" id="spin" data-action="spin" aria-pressed="false" aria-label="Rotation automatique"></button>
       </div>
       <div class="stage-msg" id="stage-msg" hidden></div>
     </div>
+    </div>
 
-    <nav class="rub-nav" id="rub-nav" aria-label="Rubriques de la page">
-      <button class="rub-nb" id="rnb-look" data-action="rub-go" data-v="rub-look" aria-current="true">Ta tenue</button>
-      <button class="rub-nb" id="rnb-day" data-action="rub-go" data-v="day" aria-current="false">Ta journée</button>
-      <button class="rub-nb" id="rnb-trends" data-action="rub-go" data-v="trends" aria-current="false">Tendances</button>
-    </nav>
+    <div class="td-main">
     <header class="rub-h look" id="rub-look"><h2 class="rub-t">Ta tenue du jour</h2><p class="rub-d">Les pièces du look, l’avis du styliste et ton verdict.</p></header>
     <article class="card look-panel" id="look-panel" aria-label="Détail du look"></article>
 
@@ -1042,6 +1180,8 @@ img.ph.sshot{position:absolute;inset:0;width:100%;height:100%;max-width:none;max
     </article>
 
     <article class="card trends" id="trends" aria-label="Tendances de la saison" hidden></article>
+    </div>
+    </div>
   </section>
 
   <section id="tab-wardrobe" class="tab" aria-labelledby="t-ward" hidden>
@@ -1053,35 +1193,42 @@ img.ph.sshot{position:absolute;inset:0;width:100%;height:100%;max-width:none;max
   </section>
 
   <section id="tab-body" class="tab" aria-labelledby="t-body" hidden>
+    <header class="zs-top">
+      <div class="zs-brand"><h1 class="zs-title" id="t-body">Silhouette</h1><p class="zs-sub">Ton mannequin · reste sur cet appareil</p></div>
+    </header>
+    <div class="zs-tabs" aria-hidden="true"></div>
+    <div class="td-grid">
+    <div class="td-media">
     <div class="cover sm" id="stage2" data-issue="1">
-      <div class="cover-meta"><span>Ton mannequin</span></div>
-      <h1 class="masthead" id="t-body"><span class="mh-l" aria-hidden="true"><span class="ml" style="--d:0">S</span><span class="ml" style="--d:1">i</span><span class="ml" style="--d:2">l</span><span class="ml" style="--d:3">h</span><span class="ml" style="--d:4">o</span><span class="ml" style="--d:5">u</span><span class="ml" style="--d:6">e</span><span class="ml" style="--d:7">t</span><span class="ml" style="--d:8">t</span><span class="ml" style="--d:9">e</span></span><span class="sr">Silhouette</span></h1>
       <div class="stage-host" id="stage-host-2" data-k="0.72" data-c="0.44"></div>
       <div class="cover-lines body-lines" id="body-lines" aria-hidden="true"></div>
-      <div class="stage-bottom" style="justify-content:flex-end">
+      <div class="stage-bottom">
         <button class="round glass" id="spin2" data-action="spin" aria-pressed="false" aria-label="Rotation automatique"></button>
       </div>
       <div class="stage-msg" id="stage-msg-2" hidden></div>
     </div>
+    </div>
+    <div class="td-main">
     <div class="card bform" id="body-form"></div>
+    </div>
+    </div>
   </section>
 
   <section id="tab-history" class="tab" aria-labelledby="t-hist" hidden>
-    <div class="intro">
-      <p class="eyebrow" id="hist-count">Tenues portées et notées</p>
-      <h1 class="display" id="t-hist"><em>Historique</em></h1>
-    </div>
-    <div id="taste"></div>
-    <div class="ward-filters" id="hist-filters" role="group" aria-label="Filtrer l’historique"></div>
+    <header class="zs-top">
+      <div class="zs-brand"><h1 class="zs-title" id="t-hist">Historique</h1><p class="zs-sub" id="hist-count">Tenues portées et notées</p></div>
+    </header>
+    <div class="zs-tabs" id="hist-filters" role="tablist" aria-label="Filtrer l’historique"></div>
     <div id="hist-list" class="hist"></div>
+    <div id="taste"></div>
   </section>
 
   <section id="tab-settings" class="tab" aria-labelledby="t-set" hidden>
-    <div class="intro">
-      <p class="eyebrow">Version 15</p>
-      <h1 class="display" id="t-set"><em>Réglages</em></h1>
-    </div>
-    <div id="settings" class="tab" style="gap:14px"></div>
+    <header class="zs-top">
+      <div class="zs-brand"><h1 class="zs-title" id="t-set">Réglages</h1><p class="zs-sub">Version 16</p></div>
+    </header>
+    <div class="zs-tabs" aria-hidden="true"></div>
+    <div id="settings" class="set-wrap"></div>
   </section>
 </div>
 
@@ -4277,7 +4424,7 @@ if (THEME_MQ) {
 }
 const TP_FIG = `<svg class="tp-fig" viewBox="0 0 60 150" aria-hidden="true"><path d="M23.5 9c0-5 3-8 6.5-8s6.5 3 6.5 8c0 2-.3 3.5-.8 4.6-.3-3-2.6-5-5.7-5s-5.4 2-5.7 5c-.5-1.1-.8-2.6-.8-4.6z" fill="#2A211C"/><ellipse cx="30" cy="13.5" rx="6.2" ry="7.6" fill="#C8987A"/><rect x="27" y="19.5" width="6" height="7" fill="#B98A6C"/><path d="M17 29c4-3.2 8.5-4.2 13-4.2s9 1 13 4.2l4.6 51-6.2 1.4-1.3 15.6H19.9l-1.3-15.6-6.2-1.4z" fill="#B48A60"/><path d="M30 25.2v71.6" stroke="#8E6A47" stroke-width=".8"/><circle cx="14.6" cy="84" r="2.6" fill="#C8987A"/><circle cx="45.4" cy="84" r="2.6" fill="#C8987A"/><path d="M21 96h18l-1.4 43.5h-5.6L30 104l-2 35.5h-5.6z" fill="#2C3140"/><path d="M21.6 139h7.2l.6 4.6h-9.2zm9.6 0h7.2l1.4 4.6h-9.2z" fill="#151515"/></svg>`;
 function themeMock(dark) {
-  return `<span class="tp${dark ? " dk" : ""}" aria-hidden="true"><span class="tp-stage"><span class="tp-mh">DRESSING</span>${TP_FIG}<span class="tp-sh"></span></span><span class="tp-lines"><i></i><i></i><i></i></span><span class="tp-bar"><i></i><i></i><i></i><i></i></span></span>`;
+  return `<span class="tp${dark ? " dk" : ""}" aria-hidden="true"><span class="tp-top"><span class="tp-mh">Aujourd’hui</span><i class="tp-sub"></i></span><span class="tp-stage">${TP_FIG}<span class="tp-sh"></span></span><span class="tp-lines"><i></i><i></i><i></i></span><span class="tp-bar"><i></i><i></i><i></i><i></i></span></span>`;
 }
 function renderThemeAsk() {
   const p = S.theme || themeResolved(null);
@@ -4925,6 +5072,7 @@ function renderStage() {
   $("#sticker").textContent = tryL ? "Essayage" : "Tendance";
   $("#sticker").hidden = !(tryL || (L && trendMatch(L).badge));
   $("#pager-n").textContent = n ? `${S.lookIdx + 1} / ${n}` : "0 / 0";
+  $("#td-count").textContent = n ? `${n} look${n > 1 ? "s" : ""}` : "";
   $("#pg-prev").innerHTML = ICON.left; $("#pg-next").innerHTML = ICON.right;
   $("#pg-prev").disabled = S.lookIdx <= 0;
   $("#pg-next").disabled = S.lookIdx >= n - 1;
@@ -5123,10 +5271,10 @@ function renderTaste() {
   const likedCols = Object.entries(taste.color).filter(([, val]) => val > 0).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([k]) => k).filter((k) => COL[k]);
   const forgotten = [...S.items.values()].filter((it) => isForgotten(it, t)).slice(0, 6);
   if ((!S.ready.items && S.caps.db) || (!likedCols.length && !forgotten.length)) { el.innerHTML = ""; return; }
-  el.innerHTML = `<div class="card taste"><h2 class="tr-title">Ce que l’appli a retenu</h2>
+  el.innerHTML = `<section class="rub band taste" aria-labelledby="taste-t"><header class="rub-h"><h2 class="rub-t" id="taste-t">Ce que l’appli a retenu</h2><p class="rub-d">Tes notes, tes favoris et ce que tu portes affinent les looks proposés.</p></header>
     ${likedCols.length ? `<div class="group"><h3 class="h">Tes couleurs préférées</h3><div class="tr-colors">${likedCols.map((k) => `<span class="tr-col"><span class="dot" style="--c:${colorHex(k)}"></span>${esc(COL[k].label)}</span>`).join("")}</div></div>` : ""}
-    ${forgotten.length ? `<div class="group"><h3 class="h">Pas encore portées</h3><div class="tr-mine">${forgotten.map((it) => `<button class="tr-pc" id="fg-${esc(it.id)}" data-action="impose-go" data-id="${esc(it.id)}" aria-label="${esc(it.name)} : construire un look autour"><span class="ic-vis">${itemVisual(it)}</span><span class="ic-name" aria-hidden="true">${esc(it.name)}</span></button>`).join("")}</div></div>` : ""}
-  </div>`;
+    ${forgotten.length ? `<div class="group"><h3 class="h">Pas encore portées</h3>${rubRow(forgotten.map((it) => `<article class="zc"><button class="zc-link" id="fg-${esc(it.id)}" data-action="impose-go" data-id="${esc(it.id)}" aria-label="${esc(it.name)} : construire un look autour"><span class="zc-media ic-vis">${itemVisual(it)}</span></button><div class="zc-cap" aria-hidden="true"><p class="zc-name">${esc(it.name)}</p><p class="zc-meta"><span>Construire un look</span></p></div></article>`).join(""), "Pas encore portées")}</div>` : ""}
+  </section>`;
 }
 
 /* ---------------- Rendu : silhouette ---------------- */
@@ -5413,9 +5561,9 @@ function installCardHtml() {
     : S.installEvt ? "Ajoute Dressing du matin à ton écran d’accueil : elle s’ouvre en plein écran, comme une appli, et marche même sans réseau."
     : isIOS() ? "Sur iPhone, dans Safari : touche le bouton Partager, puis « Sur l’écran d’accueil ». L’appli s’ouvre ensuite en plein écran et marche même sans réseau."
     : "Dans le menu du navigateur, choisis « Installer l’appli » ou « Ajouter à l’écran d’accueil ». Elle s’ouvre ensuite en plein écran et marche même sans réseau.";
-  return `<div class="card set" id="s-install"><div><h2 class="set-t">${done ? "Appli installée" : "Installer l’appli"}</h2><p class="set-d">${how}</p></div>
+  return `<section class="rub set-sec" id="s-install" aria-labelledby="s-h-inst"><header class="rub-h"><h2 class="rub-t" id="s-h-inst">${done ? "Appli installée" : "Installer l’appli"}</h2></header><div class="set"><p class="set-d">${how}</p>
     ${!done && S.installEvt ? `<div class="row-btns"><button class="btn primary" id="s-install-go" data-action="install">${ICON.plus} Installer</button></div>` : ""}
-    ${done ? "" : `<p class="hint">Ta garde-robe reste dans le navigateur où tu l’as créée. Pour la retrouver dans l’appli installée : « Exporter » ici, puis « Importer une sauvegarde » dans l’appli.</p>`}</div>`;
+    ${done ? "" : `<p class="hint">Ta garde-robe reste dans le navigateur où tu l’as créée. Pour la retrouver dans l’appli installée : « Exporter » ici, puis « Importer une sauvegarde » dans l’appli.</p>`}</div></section>`;
 }
 
 /* ---------------- Importer une sauvegarde (le fichier JSON exporté) ---------------- */
@@ -6266,36 +6414,37 @@ function renderHistory() {
   const all = S.outfits;
   const f = S.histFilter === "fav" ? "fav" : "all";
   const list = all.filter((o) => (f === "fav" ? o.fav : true));
-  $("#hist-count").textContent = "Les tenues que tu as portées ou notées.";
-  $("#hist-filters").innerHTML = [["all", "Tout"], ["fav", "Favoris"]]
-    .map(([k, l]) => `<button class="wf" id="hf-${k}" data-action="hf" data-v="${k}" aria-pressed="${f === k}">${l}</button>`).join("");
+  const nFav = all.filter((o) => o.fav).length, nWorn = all.filter((o) => o.worn).length;
+  $("#hist-count").textContent = all.length ? `${all.length} tenue${all.length > 1 ? "s" : ""}${nWorn ? ` · ${nWorn} portée${nWorn > 1 ? "s" : ""}` : ""}${nFav ? ` · ${nFav} favori${nFav > 1 ? "s" : ""}` : ""}` : "Tenues portées et notées";
+  $("#hist-filters").innerHTML = [["all", "Tout", all.length], ["fav", "Favoris", nFav]]
+    .map(([k, l, n]) => `<button class="zs-tab" role="tab" id="hf-${k}" data-action="hf" data-v="${k}" aria-selected="${f === k}" tabindex="${f === k ? 0 : -1}">${l}<span class="zs-count">${n}</span></button>`).join("");
   const el = $("#hist-list");
   if (!list.length) {
-    el.innerHTML = `<div class="empty"><p>${f === "fav" ? "Aucun favori. Touche le cœur sous un look." : "Rien pour l’instant. Touche « Je porte ça » sous un look du jour."}</p></div>`;
+    el.innerHTML = `<div class="empty hist-empty"><p>${f === "fav" ? "Aucun favori. Touche le cœur sous un look." : "Rien pour l’instant. Touche « Je porte ça » sous un look du jour."}</p>${f === "fav" ? "" : `<button class="btn ghost sm" data-action="tab" data-tab="today">Voir les looks du jour</button>`}</div>`;
     return;
   }
   const t = today();
   el.innerHTML = list.map((o) => {
     const L = lookFromIds(o.items);
-    const parts = ["outer", "top", "piece", "bottom", "shoes"].map((k) => L[k]).filter(Boolean).concat(L.acc || []).map((p) => p.it);
+    const slots = ["outer", "top", "piece", "bottom", "shoes"].filter((k) => L[k]).map((k) => [k, L[k].it]).concat((L.acc || []).map((p) => ["acc", p.it]));
     const has = mainParts(L).length > 0;
     const id = esc(o.id);
-    const dp = fmtParts(o.date || t);
     const status = o.worn ? (o.date === t ? "Portée aujourd’hui" : "Portée") : o.rating === -1 ? "Pas aimée" : o.fav ? "En favori" : "Aimée";
     const ctxLine = [(OCC[o.occasion] || {}).label, ((STY[o.style] || {}).label || "").toLowerCase()].filter(Boolean).join(", ");
-    return `<article class="hcard" aria-label="${esc(cap(fmtLong(o.date || t)))}">
-      <div class="hdate" aria-hidden="true"><span class="d">${dp.d}</span><span class="m">${esc(dp.m)}</span></div>
-      <div class="hc-main">
-        <p class="hc-day"><span class="hc-st">${status}</span>${ctxLine ? `<span class="hc-ctx">${esc(ctxLine)}</span>` : ""}</p>
-        <div class="hc-pieces">${parts.length ? parts.map((it) => `<span class="hc-pc" title="${esc(it.name)}">${itemVisual(it)}</span>`).join("") : `<span class="hint">Pièces supprimées de la garde-robe</span>`}</div>
+    const card = ([slot, it]) => `<article class="zc"><button class="zc-link" id="hp-${id}-${esc(it.id)}" data-action="piece-open" data-id="${esc(it.id)}" aria-label="${esc(it.name)}"><span class="zc-media ic-vis">${itemVisual(it)}</span></button><div class="zc-cap" aria-hidden="true"><p class="zc-name">${esc(it.name)}</p><p class="zc-meta"><span>${esc(SLOT_LABEL[slot] || cap(it.sub || ""))}</span></p></div></article>`;
+    return `<section class="rub hrub" aria-labelledby="ht-${id}">
+      <header class="rub-h hrub-h">
+        <h2 class="rub-t" id="ht-${id}">${esc(cap(fmtLong(o.date || t)))}</h2>
         <div class="hc-actions">
-          <button class="icon-btn" id="hv-${id}" data-action="h-fav" data-id="${id}" aria-pressed="${!!o.fav}" aria-label="Favori">${ICON.heart}</button>
-          ${has && !(o.worn && o.date === t) ? `<button class="btn ghost sm" id="hw-${id}" data-action="h-wear" data-id="${id}" aria-label="La remettre aujourd’hui">${ICON.repeat} La remettre</button>` : ""}
-          <button class="icon-btn" id="hx-${id}" data-action="h-del" data-id="${id}" aria-label="Supprimer de l’historique">${ICON.trash}</button>
+          <button class="hc-ic" id="hv-${id}" data-action="h-fav" data-id="${id}" aria-pressed="${!!o.fav}" aria-label="Favori">${ICON.heart}</button>
+          <button class="hc-ic" id="hx-${id}" data-action="h-del" data-id="${id}" aria-label="Supprimer de l’historique">${ICON.trash}</button>
         </div>
-        ${S.histConfirm === o.id ? `<div class="confirm"><span>Supprimer cette tenue ?</span><button class="btn danger sm" data-action="h-del-yes" data-id="${id}">Supprimer</button><button class="btn ghost sm" data-action="h-del-no">Annuler</button></div>` : ""}
-      </div>
-    </article>`;
+        <span class="rub-n">${esc(status)}${ctxLine ? ` · ${esc(ctxLine)}` : ""}</span>
+        ${has && !(o.worn && o.date === t) ? `<button class="rub-more" id="hw-${id}" data-action="h-wear" data-id="${id}" aria-label="La remettre aujourd’hui">La remettre</button>` : ""}
+      </header>
+      ${S.histConfirm === o.id ? `<div class="confirm"><span>Supprimer cette tenue ?</span><button class="btn danger sm" data-action="h-del-yes" data-id="${id}">Supprimer</button><button class="btn ghost sm" data-action="h-del-no">Annuler</button></div>` : ""}
+      ${slots.length ? rubRow(slots.map(card).join(""), "Pièces de la tenue") : `<p class="hint">Pièces supprimées de la garde-robe.</p>`}
+    </section>`;
   }).join("");
 }
 
@@ -6304,29 +6453,35 @@ function renderSettings() {
   const s = S.settings;
   if (document.activeElement && document.activeElement.id === "s-city") return;
   $("#settings").innerHTML = `
-  <div class="card set">
-    <div class="set-row"><div><h2 class="set-t" id="s-th-l">Éclairage</h2><p class="set-d">${(S.theme || "auto") === "auto" ? `Suit ton appareil : mode ${themeResolved("auto") === "dark" ? "sombre" : "clair"} en ce moment.` : `Mode ${S.theme === "dark" ? "sombre" : "clair"} pour toute l’appli.`}</p></div>
+  <section class="rub set-sec" aria-labelledby="s-h-pref"><header class="rub-h"><h2 class="rub-t" id="s-h-pref">Préférences</h2></header>
+  <div class="set">
+    <div class="set-row"><div><h3 class="set-t" id="s-th-l">Éclairage</h3><p class="set-d">${(S.theme || "auto") === "auto" ? `Suit ton appareil : mode ${themeResolved("auto") === "dark" ? "sombre" : "clair"} en ce moment.` : `Mode ${S.theme === "dark" ? "sombre" : "clair"} pour toute l’appli.`}</p></div>
       <div class="seg" role="radiogroup" aria-labelledby="s-th-l">${[["light", "Clair"], ["dark", "Sombre"], ["auto", "Auto"]].map(([k, l]) => `<button class="seg-b" role="radio" id="st-${k}" aria-checked="${(S.theme || "auto") === k}" data-action="set-theme" data-v="${k}">${l}</button>`).join("")}</div></div>
-    <div class="set-row"><div><h2 class="set-t" id="s-cold-l">Sensibilité au froid</h2><p class="set-d">Pour ajouter une couche plus tôt, ou plus tard.</p></div>
+    <div class="set-row"><div><h3 class="set-t" id="s-cold-l">Sensibilité au froid</h3><p class="set-d">Pour ajouter une couche plus tôt, ou plus tard.</p></div>
       <div class="seg" role="radiogroup" aria-labelledby="s-cold-l">${[["frileux", "Frileux"], ["normal", "Normal"], ["chaud", "Jamais froid"]].map(([k, l]) => `<button class="seg-b" role="radio" id="sc-${k}" aria-checked="${s.cold === k}" data-action="set-cold" data-v="${k}">${l}</button>`).join("")}</div></div>
-    <div class="set-row"><div><h2 class="set-t" id="s-ai-l">Styliste IA</h2><p class="set-d">Remplit les fiches et explique les tenues, avec ton compte Claude.</p></div>
+    <div class="set-row"><div><h3 class="set-t" id="s-ai-l">Styliste IA</h3><p class="set-d">Remplit les fiches et explique les tenues, avec ton compte Claude.</p></div>
       <button class="switch bare" id="s-ai" data-action="set-ai" aria-pressed="${s.ai !== false && !!S.caps.sample}" aria-labelledby="s-ai-l"${S.caps.sample ? "" : " disabled"}><span class="knob"></span></button></div>
     ${S.capsReady && !S.caps.sample ? `<p class="hint">${S.local ? "Le styliste IA fonctionne seulement dans la version Claude de l’appli." : "Le styliste IA n’est pas disponible dans cette vue : ouvre l’appli dans Claude."}</p>` : ""}
-    <div class="set-row"><div><h2 class="set-t" id="s-tr-l">Tendances de la saison</h2><p class="set-d">Favorise les looks de la saison.</p></div>
+    <div class="set-row"><div><h3 class="set-t" id="s-tr-l">Tendances de la saison</h3><p class="set-d">Favorise les looks de la saison.</p></div>
       <button class="switch bare" id="s-tr" data-action="set-trends" aria-pressed="${s.trends !== false}" aria-labelledby="s-tr-l"><span class="knob"></span></button></div>
-    <div class="set-row"><div><h2 class="set-t" id="s-mi-l">Pièces de saison qui me manquent</h2><p class="set-d">Les affiche dans les tendances.</p></div>
+    <div class="set-row"><div><h3 class="set-t" id="s-mi-l">Pièces de saison qui me manquent</h3><p class="set-d">Les affiche dans les tendances.</p></div>
       <button class="switch bare" id="s-mi" data-action="set-missing" aria-pressed="${!!s.missing}" aria-labelledby="s-mi-l"><span class="knob"></span></button></div>
-    ${WX_LIVE ? `<div class="set-row"><div><h2 class="set-t">Météo</h2><p class="set-d">${S.place && S.place.name ? `${S.place.mode === "geo" ? "Ta position" : "Ta ville"} : ${esc(S.place.name)}` : "Aucune ville choisie."}</p></div>${S.place && S.place.name ? `<button class="btn ghost sm" data-action="wx-forget">Oublier</button>` : `<button class="btn ghost sm" data-action="wx-locate">Ma position</button>`}</div>` : ""}
+    ${WX_LIVE ? `<div class="set-row"><div><h3 class="set-t">Météo</h3><p class="set-d">${S.place && S.place.name ? `${S.place.mode === "geo" ? "Ta position" : "Ta ville"} : ${esc(S.place.name)}` : "Aucune ville choisie."}</p></div>${S.place && S.place.name ? `<button class="btn ghost sm" data-action="wx-forget">Oublier</button>` : `<button class="btn ghost sm" data-action="wx-locate">Ma position</button>`}</div>` : ""}
     ${S.local ? "" : `<label class="set-row col" for="s-city"><span class="set-t">Ville</span><span class="set-d">Pour la météo automatique.</span><input class="in" id="s-city" value="${esc(s.city || "")}" placeholder="ex. Cergy" autocomplete="address-level2"></label>`}
   </div>
-  <div class="card set">
-    <div><h2 class="set-t">Tes données</h2><p class="set-d">${S.local ? "Enregistrées dans ce navigateur, sur cet appareil. Pour la météo, seule ta ville, ou ta position arrondie à 1 km environ, est envoyée aux services Open-Meteo et BigDataCloud." : "Enregistrées sur ton compte Claude, modifiables par toi seul. Ta silhouette reste sur cet appareil."}</p></div>
+  </section>
+  <section class="rub set-sec" aria-labelledby="s-h-data"><header class="rub-h"><h2 class="rub-t" id="s-h-data">Tes données</h2></header>
+  <div class="set">
+    <p class="set-d">${S.local ? "Enregistrées dans ce navigateur, sur cet appareil. Pour la météo, seule ta ville, ou ta position arrondie à 1 km environ, est envoyée aux services Open-Meteo et BigDataCloud." : "Enregistrées sur ton compte Claude, modifiables par toi seul. Ta silhouette reste sur cet appareil."}</p>
     <div class="row-btns"><button class="btn ghost" id="s-export" data-action="export"${S.caps.downloads ? "" : " disabled"}>Exporter (JSON)</button><button class="btn ghost" id="s-import" data-action="import"${S.caps.db ? "" : " disabled"}>Importer une sauvegarde</button>
       ${S.confirmAll ? `<span class="confirm"><span>Tout supprimer, sans retour possible ?</span><button class="btn danger sm" data-action="delete-all-yes"${S.deleting ? " disabled" : ""}>${S.deleting ? "Suppression…" : "Oui, tout supprimer"}</button><button class="btn ghost sm" data-action="delete-all-no">Annuler</button></span>` : `<button class="btn ghost danger-t" data-action="delete-all">Tout supprimer</button>`}</div>
   </div>
+  </section>
   ${installCardHtml()}
-  <div class="card set"><div class="set-row"><div><h2 class="set-t">Confidentialité et mentions</h2><p class="set-d">Ce qui est gardé, où, et pourquoi.</p></div><button class="btn ghost sm" id="s-privacy" data-action="privacy">Lire</button></div></div>
-  <p class="foot-note">Dressing du matin, version 15 · corps 3D MakeHuman (CC0), ombres et matières en temps réel, photos portées · photos des boutiques · mode clair ou sombre</p>`;
+  <section class="rub set-sec" aria-labelledby="s-h-priv"><header class="rub-h"><h2 class="rub-t" id="s-h-priv">Confidentialité</h2></header>
+  <div class="set"><div class="set-row"><div><h3 class="set-t">Confidentialité et mentions</h3><p class="set-d">Ce qui est gardé, où, et pourquoi.</p></div><button class="zs-link" id="s-privacy" data-action="privacy">Lire ${ICON.right}</button></div></div>
+  </section>
+  <p class="foot-note">Dressing du matin, version 16 · corps 3D MakeHuman (CC0), ombres et matières en temps réel, photos portées · photos des boutiques · mode clair ou sombre</p>`;
 }
 
 /* ---------------- Feuilles (bottom sheet) ---------------- */
@@ -7544,7 +7699,7 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && (S.wxSugg.length || S.wxNoHit)) { e.preventDefault(); wxCloseSugg(); $("#wx-q").focus(); return; }
   }
   if ((e.key === "ArrowRight" || e.key === "ArrowLeft") && e.target && e.target.classList && e.target.classList.contains("zs-tab")) {
-    const tabs = [...document.querySelectorAll(".zs-tab")], i = tabs.indexOf(e.target);
+    const tabs = [...(e.target.closest(".zs-tabs") || document).querySelectorAll(".zs-tab")], i = tabs.indexOf(e.target);
     if (i >= 0) { e.preventDefault(); tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length].click(); }
     return;
   }

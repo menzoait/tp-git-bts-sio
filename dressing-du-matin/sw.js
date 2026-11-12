@@ -1,5 +1,5 @@
 /* Dressing du matin : l’appli s’ouvre même sans réseau. La page est rechargée depuis le réseau quand il est là (mises à jour), sinon depuis le cache. */
-const CACHE = "dm-v16";
+const CACHE = "dm-v17";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icons/icon-192.png", "./icons/icon-512.png", "./icons/apple-touch-icon.png", "./icons/favicon-32.png"];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
